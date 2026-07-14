@@ -1,0 +1,40 @@
+{"id": "eval_001", "query": "paracetamol dose child 5 years fever", "query_ne": "५ वर्षे बच्चालाई प्यारासिटामोल खुराक", "expected_drug_ids": ["drug_001"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_002", "query": "amoxicillin typhoid nepal", "query_ne": "टाइफाइड अमोक्सिसिलिन", "expected_drug_ids": ["drug_003", "drug_007"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_003", "query": "metformin kidney problem safe", "query_ne": "मेटफर्मिन मृगौला", "expected_drug_ids": ["drug_013"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_004", "query": "ORS diarrhea child zinc", "query_ne": "झाडापखाला ORS जिंक", "expected_drug_ids": ["drug_011", "drug_012"], "type": "drug_lookup", "locale": "ne"}
+{"id": "eval_005", "query": "TB DOTS regimen rifampicin isoniazid", "query_ne": "क्षयरोग औषधि", "expected_drug_ids": ["drug_026", "drug_027", "drug_028", "drug_029"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_006", "query": "dengue fever medicine avoid aspirin", "query_ne": "डेङ्गु एस्पिरिन", "expected_guideline_ids": ["guide_002"], "type": "guideline_search", "locale": "en"}
+{"id": "eval_007", "query": "snake bite first aid antivenom", "query_ne": "सर्प टोकाइ उपचार", "expected_drug_ids": ["drug_049"], "expected_guideline_ids": ["guide_004"], "type": "guideline_search", "locale": "ne"}
+{"id": "eval_008", "query": "malaria terai ACT", "query_ne": "मलेरिया औषधि", "expected_drug_ids": ["drug_030"], "expected_guideline_ids": ["guide_006"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_009", "query": "ibuprofen aspirin together stomach bleed", "query_ne": null, "expected_interaction_ids": ["int_001"], "type": "interaction_check", "locale": "en"}
+{"id": "eval_010", "query": "rifampicin warfarin INR", "query_ne": null, "expected_interaction_ids": ["int_004"], "type": "interaction_check", "locale": "en"}
+{"id": "eval_011", "query": "azithromycin ciprofloxacin QT", "query_ne": null, "expected_interaction_ids": ["int_022"], "type": "interaction_check", "locale": "en"}
+{"id": "eval_012", "query": "metformin ibuprofen diabetes", "query_ne": null, "expected_interaction_ids": ["int_013"], "type": "interaction_check", "locale": "en"}
+{"id": "eval_013", "query": "salbutamol atenolol asthma", "query_ne": null, "expected_interaction_ids": ["int_025"], "type": "interaction_check", "locale": "en"}
+{"id": "eval_014", "query": "prednisolone tuberculosis cough", "query_ne": null, "expected_interaction_ids": ["int_021"], "expected_guideline_ids": ["guide_003"], "type": "interaction_check", "locale": "en"}
+{"id": "eval_015", "query": "glibenclamide cheap diabetes nepal", "query_ne": "सस्तो मधुमेह औषधि", "expected_drug_ids": ["drug_014"], "expected_guideline_ids": ["guide_008"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_016", "query": "enalapril pregnancy hypertension", "query_ne": "गर्भवती उच्च रक्तचाप", "expected_drug_ids": ["drug_017"], "expected_guideline_ids": ["guide_007"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_017", "query": "albendazole worm dose child", "query_ne": "कृमि औषधि", "expected_drug_ids": ["drug_009"], "expected_guideline_ids": ["guide_013"], "type": "drug_lookup", "locale": "ne"}
+{"id": "eval_018", "query": "magnesium sulfate eclampsia", "query_ne": "एक्लेम्प्सिया", "expected_drug_ids": ["drug_045"], "expected_guideline_ids": ["guide_010"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_019", "query": "adrenaline anaphylaxis dose IM", "query_ne": "एनाफाइल्याक्सिस एड्रेनालिन", "expected_drug_ids": ["drug_046"], "expected_guideline_ids": ["guide_012"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_020", "query": "ceftriaxone typhoid severe", "query_ne": "सेफ्ट्रियाक्सोन टाइफाइड", "expected_drug_ids": ["drug_007"], "expected_guideline_ids": ["guide_001"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_021", "query": "Nepalol paracetamol brand", "query_ne": "नेपालोल", "expected_drug_ids": ["drug_001"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_022", "query": "Coartem malaria dose", "query_ne": null, "expected_drug_ids": ["drug_030"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_023", "query": "iron tablet PPI omeprazole timing", "query_ne": null, "expected_interaction_ids": ["int_018"], "type": "interaction_check", "locale": "en"}
+{"id": "eval_024", "query": "HACE dexamethasone altitude", "query_ne": "उचाई रोग", "expected_drug_ids": ["drug_035"], "expected_guideline_ids": ["guide_011"], "type": "guideline_search", "locale": "en"}
+{"id": "eval_025", "query": "misoprostol postpartum hemorrhage", "query_ne": "रक्तश्राव", "expected_drug_ids": ["drug_043", "drug_044"], "expected_guideline_ids": ["guide_010"], "type": "drug_lookup", "locale": "ne"}
+{"id": "eval_026", "query": "phenobarbitone epilepsy rural", "query_ne": "मिर्गी औषधि", "expected_drug_ids": ["drug_036"], "expected_guideline_ids": ["guide_015"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_027", "query": "vitamin D deficiency rickets nepal", "query_ne": "भिटामिन डी", "expected_drug_ids": ["drug_041", "drug_040"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_028", "query": "antivenom adrenaline anaphylaxis snake", "query_ne": null, "expected_interaction_ids": ["int_027"], "type": "interaction_check", "locale": "en"}
+{"id": "eval_029", "query": "amoxicillin clavulanate dog bite", "query_ne": "कुकुर टोकाइ", "expected_drug_ids": ["drug_004"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_030", "query": "cetirizine allergy rhinitis", "query_ne": "एलर्जी", "expected_drug_ids": ["drug_050"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_031", "query": "rifampicin INH hepatotoxicity monitor", "query_ne": null, "expected_interaction_ids": ["int_003"], "type": "interaction_check", "locale": "en"}
+{"id": "eval_032", "query": "fever child kathmandu no malaria RDT", "query_ne": "ज्वरो बच्चा", "expected_guideline_ids": ["guide_017"], "type": "guideline_search", "locale": "en"}
+{"id": "eval_033", "query": "antibiotic cold flu should not give", "query_ne": "रोगी लाई एन्टिबायोटिक", "expected_guideline_ids": ["guide_018"], "type": "guideline_search", "locale": "ne"}
+{"id": "eval_034", "query": "warfarin aspirin clopidogrel bleeding", "query_ne": null, "expected_interaction_ids": ["int_012"], "type": "interaction_check", "locale": "en"}
+{"id": "eval_035", "query": "salbutamol inhaler spacer technique", "query_ne": "दमा इन्हेलर", "expected_drug_ids": ["drug_024"], "expected_guideline_ids": ["guide_009"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_036", "query": "metronidazole amoebiasis giardia", "query_ne": "एमेबियासिस", "expected_drug_ids": ["drug_008"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_037", "query": "ceftriaxone calcium neonate danger", "query_ne": null, "expected_interaction_ids": ["int_034"], "type": "interaction_check", "locale": "en"}
+{"id": "eval_038", "query": "iron folic acid pregnancy nepal ANC", "query_ne": "गर्भवती आयरन", "expected_drug_ids": ["drug_038", "drug_039"], "expected_guideline_ids": ["guide_010"], "type": "drug_lookup", "locale": "ne"}
+{"id": "eval_039", "query": "diazepam status epilepticus dose", "query_ne": "मिर्गी दौरा", "expected_drug_ids": ["drug_048"], "expected_guideline_ids": ["guide_015"], "type": "drug_lookup", "locale": "en"}
+{"id": "eval_040", "query": "amlodipine 5mg hypertension start", "query_ne": "उच्च रक्तचाप औषधि", "expected_drug_ids": ["drug_016"], "expected_guideline_ids": ["guide_007"], "type": "drug_lookup", "locale": "ne"}

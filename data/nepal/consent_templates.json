@@ -1,0 +1,43 @@
+{
+  "version": "1.0.0",
+  "region": "NP",
+  "effective_date": "2026-07-01",
+  "consent_version": "np-pilot-1.0",
+  "languages": ["en", "ne"],
+  "templates": {
+    "onboarding_title": {
+      "en": "Help improve clinical AI for Nepal",
+      "ne": "नेपालका लागि क्लिनिकल AI सुधार गर्न मद्दत गर्नुहोस्"
+    },
+    "onboarding_body": {
+      "en": "This app works fully offline. You can optionally share de-identified questions and answers to improve the model for Nepali clinicians. We remove names, phone numbers, and addresses on your phone before anything is sent. Default is OFF.",
+      "ne": "यो एप अफलाइन चल्छ। तपाईंले चाहनु भएमा, पहिचान नहुने प्रश्न-उत्तर साझा गर्न सक्नुहुन्छ। नाम, फोन र ठेगाना तपाईंको फोनबाट मेटिन्छ। पूर्वनिर्धारित: बन्द।"
+    },
+    "scope_model_improvement": {
+      "en": "Use my de-identified interactions to improve the local AI model",
+      "ne": "मेरो पहिचान नखुलेका प्रश्नहरू AI मोडेल सुधारका लागि प्रयोग गर्नुहोस्"
+    },
+    "scope_analytics": {
+      "en": "Anonymous usage statistics (no clinical content)",
+      "ne": "गुमनाम प्रयोग तथ्याङ्क (क्लिनिकल सामग्री बिना)"
+    },
+    "data_transparency": {
+      "en": "You can view, export, or delete all data associated with your device at any time in Settings → My Data.",
+      "ne": "सेटिङ → मेरो डाटामा जुनसुकै बेला हेर्न, निर्यात वा मेटाउन सक्नुहुन्छ।"
+    },
+    "wifi_only_notice": {
+      "en": "Data uploads only on Wi-Fi unless you change this in Settings.",
+      "ne": "डाटा Wi-Fi मा मात्र पठाइन्छ (सेटिङमा परिवर्तन गर्न सकिन्छ)।"
+    },
+    "prohibited_uses": {
+      "en": "We do not sell data to life insurers or employers. Data is not used for automated diagnosis.",
+      "ne": "जीवन बीमा वा रोजगारदातालाई डाटा बेचिँदैन। स्वचालित निदानका लागि प्रयोग हुँदैन।"
+    }
+  },
+  "dummy_consent_records": [
+    {"id": "consent_001", "clinician_id": "clin_001", "scope": ["model_improvement"], "granted": 1, "consent_version": "np-pilot-1.0", "granted_at": "2026-06-20T10:00:00+05:45"},
+    {"id": "consent_002", "clinician_id": "clin_002", "scope": ["model_improvement", "analytics"], "granted": 1, "consent_version": "np-pilot-1.0", "granted_at": "2026-06-18T14:30:00+05:45"},
+    {"id": "consent_003", "clinician_id": "clin_003", "scope": [], "granted": 0, "consent_version": "np-pilot-1.0", "granted_at": null},
+    {"id": "consent_004", "clinician_id": "clin_004", "scope": ["model_improvement"], "granted": 1, "consent_version": "np-pilot-1.0", "granted_at": "2026-06-25T09:00:00+05:45"}
+  ]
+}

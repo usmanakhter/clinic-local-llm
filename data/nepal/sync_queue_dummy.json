@@ -1,0 +1,125 @@
+{
+  "version": "0.1.0",
+  "region": "NP",
+  "note": "Post-scrub de-identified payloads ready for ingest-api. No PHI fields present.",
+  "queue_count": 8,
+  "items": [
+    {
+      "id": "sync_001",
+      "session_id": "sess_001",
+      "scrubbed_at": "2026-07-08T09:16:00+05:45",
+      "status": "synced",
+      "payload": {
+        "query_type": "drug_lookup",
+        "input_deid": "paracetamol pediatric dose 5 year old",
+        "output_deid": "15mg/kg q6h; syrup formulation referenced",
+        "feedback": "up",
+        "locale": "en",
+        "region": "NP",
+        "device_tier": "T1"
+      }
+    },
+    {
+      "id": "sync_002",
+      "session_id": "sess_002",
+      "scrubbed_at": "2026-07-08T10:31:00+05:45",
+      "status": "synced",
+      "payload": {
+        "query_type": "interaction_check",
+        "input_deid": "ibuprofen + aspirin",
+        "output_deid": "Major severity GI bleed risk",
+        "feedback": "up",
+        "locale": "en",
+        "region": "NP",
+        "interaction_severity": "major"
+      }
+    },
+    {
+      "id": "sync_003",
+      "session_id": "sess_003",
+      "scrubbed_at": "2026-07-08T11:01:00+05:45",
+      "status": "synced",
+      "payload": {
+        "query_type": "guideline_search",
+        "input_deid": "dengue fever treatment",
+        "output_deid": "Avoid NSAIDs; paracetamol; monitor warning signs",
+        "feedback": "up",
+        "locale": "en",
+        "region": "NP",
+        "guideline_topic": "infectious_disease"
+      }
+    },
+    {
+      "id": "sync_004",
+      "session_id": "sess_005",
+      "scrubbed_at": "2026-07-08T15:46:00+05:45",
+      "status": "pending",
+      "payload": {
+        "query_type": "interaction_check",
+        "input_deid": "rifampicin warfarin",
+        "output_deid": "Major — reduced INR expected",
+        "feedback": "up",
+        "locale": "en",
+        "region": "NP"
+      }
+    },
+    {
+      "id": "sync_005",
+      "session_id": "sess_009",
+      "scrubbed_at": "2026-07-09T09:31:00+05:45",
+      "status": "synced",
+      "payload": {
+        "query_type": "interaction_check",
+        "input_deid": "azithromycin ciprofloxacin",
+        "output_deid": "Contraindicated QT prolongation",
+        "feedback": "up",
+        "locale": "en",
+        "region": "NP"
+      }
+    },
+    {
+      "id": "sync_006",
+      "session_id": "sess_010",
+      "scrubbed_at": "2026-07-09T11:01:00+05:45",
+      "status": "synced",
+      "payload": {
+        "query_type": "drug_lookup",
+        "input_deid": "phenobarbitone epilepsy dose adult",
+        "output_deid": "60-180mg HS dosing range",
+        "feedback": "down",
+        "locale": "en",
+        "region": "NP"
+      }
+    },
+    {
+      "id": "sync_007",
+      "session_id": "sess_011",
+      "scrubbed_at": "2026-07-09T11:46:00+05:45",
+      "status": "failed",
+      "payload": {
+        "query_type": "drug_lookup",
+        "input_deid": "TB DOTS intensive phase drugs",
+        "output_deid": "HRZE 2 months standard regimen",
+        "feedback": "up",
+        "locale": "en",
+        "region": "NP"
+      },
+      "error": "WiFi unavailable — retry scheduled"
+    },
+    {
+      "id": "sync_008",
+      "session_id": "sess_013",
+      "scrubbed_at": "2026-07-09T14:01:00+05:45",
+      "status": "rejected",
+      "payload": {
+        "query_type": "guideline_search",
+        "input_deid": "diarrhea child ORS",
+        "output_deid": "Plan B 75ml/kg + zinc",
+        "feedback": "up",
+        "locale": "ne",
+        "region": "NP"
+      },
+      "error": "Scrubber validation failed — residual phone pattern detected in input (dev test)"
+    }
+  ]
+}

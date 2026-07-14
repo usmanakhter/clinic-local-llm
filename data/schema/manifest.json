@@ -1,0 +1,31 @@
+{
+  "dataset": "clinical-ai-mvp-nepal",
+  "version": "0.1.0",
+  "region": "NP",
+  "locale_primary": "ne-NP",
+  "locale_secondary": "en-NP",
+  "pilot_target_clinicians": 30,
+  "created": "2026-07-09",
+  "files": {
+    "schema": "schema/mvp_schema.sql",
+    "drugs": "nepal/drugs.json",
+    "interactions": "nepal/interactions.json",
+    "guidelines": "nepal/guideline_chunks.json",
+    "eval_queries": "nepal/eval_queries.jsonl",
+    "clinical_sessions": "nepal/clinical_sessions_dummy.json",
+    "sync_queue": "nepal/sync_queue_dummy.json",
+    "consent": "nepal/consent_templates.json",
+    "pilot_clinicians": "nepal/pilot_clinicians.json",
+    "pii_tests": "nepal/pii_scrubber_test_cases.json",
+    "note_samples": "nepal/note_drafter_samples.json"
+  },
+  "counts": {
+    "drugs": 50,
+    "interactions": 35,
+    "guideline_chunks": 18,
+    "eval_queries": 40,
+    "clinical_sessions": 15,
+    "pilot_clinicians": 28,
+    "pii_test_cases": 30
+  }
+}

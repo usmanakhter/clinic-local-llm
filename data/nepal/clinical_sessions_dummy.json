@@ -1,0 +1,23 @@
+{
+  "version": "0.1.0",
+  "region": "NP",
+  "note": "Dummy local session logs. Raw PHI versions exist only in dev fixtures — production sessions scrub before sync.",
+  "session_count": 15,
+  "sessions": [
+    {"id": "sess_001", "created_at": "2026-07-08T09:15:00+05:45", "query_type": "drug_lookup", "clinician_id": "clin_001", "input_summary": "paracetamol pediatric dose 5 year old", "output_summary": "15mg/kg q6h; Nepalol 125mg/5ml syrup", "feedback": "up", "drug_ids": ["drug_001"]},
+    {"id": "sess_002", "created_at": "2026-07-08T10:30:00+05:45", "query_type": "interaction_check", "clinician_id": "clin_002", "input_summary": "ibuprofen + aspirin", "output_summary": "Major — GI bleed risk; avoid combination", "feedback": "up", "interaction_ids": ["int_001"]},
+    {"id": "sess_003", "created_at": "2026-07-08T11:00:00+05:45", "query_type": "guideline_search", "clinician_id": "clin_004", "input_summary": "dengue fever treatment nepal", "output_summary": "No NSAIDs; paracetamol only; watch warning signs", "feedback": "up", "guideline_ids": ["guide_002"]},
+    {"id": "sess_004", "created_at": "2026-07-08T14:20:00+05:45", "query_type": "drug_lookup", "clinician_id": "clin_005", "input_summary": "misoprostol PPH dose", "output_summary": "600mcg sublingual; source guide_010", "feedback": "up", "drug_ids": ["drug_043"]},
+    {"id": "sess_005", "created_at": "2026-07-08T15:45:00+05:45", "query_type": "interaction_check", "clinician_id": "clin_008", "input_summary": "rifampicin warfarin", "output_summary": "Major — INR drop; avoid if possible", "feedback": "up", "interaction_ids": ["int_004"]},
+    {"id": "sess_006", "created_at": "2026-07-09T08:10:00+05:45", "query_type": "note_draft", "clinician_id": "clin_003", "input_summary": "fever cough 3 days child — OPD note", "output_summary": "Draft SOAP note saved locally (not synced)", "feedback": null, "drug_ids": []},
+    {"id": "sess_007", "created_at": "2026-07-09T09:00:00+05:45", "query_type": "drug_lookup", "clinician_id": "clin_009", "input_summary": "ACT malaria weight 60kg", "output_summary": "Artemether-lumefantrine 4 tabs BD x3 days with food", "feedback": "up", "drug_ids": ["drug_030"]},
+    {"id": "sess_008", "created_at": "2026-07-09T09:30:00+05:45", "query_type": "guideline_search", "clinician_id": "clin_014", "input_summary": "snakebite krait neurotoxic", "output_summary": "20WBCT; antivenom if signs; adrenaline ready", "feedback": "up", "guideline_ids": ["guide_004"]},
+    {"id": "sess_009", "created_at": "2026-07-09T10:15:00+05:45", "query_type": "interaction_check", "clinician_id": "clin_011", "input_summary": "azithromycin ciprofloxacin", "output_summary": "Contraindicated — QT risk", "feedback": "up", "interaction_ids": ["int_022"]},
+    {"id": "sess_010", "created_at": "2026-07-09T11:00:00+05:45", "query_type": "drug_lookup", "clinician_id": "clin_016", "input_summary": "phenobarbitone epilepsy dose adult", "output_summary": "60-180mg HS; folate in pregnancy", "feedback": "down", "drug_ids": ["drug_036"]},
+    {"id": "sess_011", "created_at": "2026-07-09T11:45:00+05:45", "query_type": "drug_lookup", "clinician_id": "clin_020", "input_summary": "TB DOTS intensive phase drugs", "output_summary": "HRZE 2 months per guide_003", "feedback": "up", "drug_ids": ["drug_026", "drug_027", "drug_028", "drug_029"]},
+    {"id": "sess_012", "created_at": "2026-07-09T13:00:00+05:45", "query_type": "interaction_check", "clinician_id": "clin_007", "input_summary": "metformin ibuprofen", "output_summary": "Moderate AKI risk — prefer paracetamol", "feedback": "up", "interaction_ids": ["int_013"]},
+    {"id": "sess_013", "created_at": "2026-07-09T14:00:00+05:45", "query_type": "guideline_search", "clinician_id": "clin_017", "input_summary": "diarrhea child ORS plan B", "output_summary": "75ml/kg ORS over 4h + zinc 10 days", "feedback": "up", "guideline_ids": ["guide_005"]},
+    {"id": "sess_014", "created_at": "2026-07-09T15:30:00+05:45", "query_type": "drug_lookup", "clinician_id": "clin_019", "input_summary": "amlodipine start dose HTN", "output_summary": "5mg OD; target <140/90", "feedback": null, "drug_ids": ["drug_016"]},
+    {"id": "sess_015", "created_at": "2026-07-09T16:00:00+05:45", "query_type": "note_draft", "clinician_id": "clin_024", "input_summary": "UTI symptoms adult female — draft note nepali", "output_summary": "Bilingual draft; saved local encrypted", "feedback": "up", "drug_ids": ["drug_003"]}
+  ]
+}
