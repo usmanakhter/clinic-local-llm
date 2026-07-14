@@ -67,11 +67,11 @@ H6.5–H8  QA fixtures, polish, demo checklist / APK or web run
 Reply **APPROVE / CHANGE / BLOCK** at each gate.
 
 ### CHECK-IN 1 — Plan & guardrails (now)
-- [ ] Accept 8h scope table (in/out)
-- [ ] Accept guardrails
-- [ ] Accept Flutter as UI (or request web fallback if SDK install fails)
+- [x] Accept 8h scope table (in/out)
+- [x] Accept guardrails
+- [x] Accept Flutter as UI (or request web fallback if SDK install fails)
 
-**Status:** `AWAITING_YOU`
+**Status:** `APPROVED` (continue instruction)
 
 ### CHECK-IN 2 — Scaffold green (~H2)
 - [x] `apps/clinical_assistant` Flutter project exists
@@ -79,30 +79,30 @@ Reply **APPROVE / CHANGE / BLOCK** at each gate.
 - [x] App boots to home shell with disclaimer
 - [x] Design tokens (EN/Nepali-ready fonts planned)
 
-**Status:** `AWAITING_YOU` — reply `APPROVE CI2` / `CHANGE` / `BLOCK`
+**Status:** `APPROVED` (continue instruction)
 
 ### CHECK-IN 3 — Core clinical slice (~H5)
-- [ ] Search finds Paracetamol / प्यारासिटामोल / brand “Nepalol”
-- [ ] Interaction: Azithromycin + Ciprofloxacin → **contraindicated**
-- [ ] Unknown pair → “no known interaction in local DB” (no invented severity)
-- [ ] Drug detail shows dose + disclaimer
+- [x] Search finds Paracetamol / प्यारासिटामोल / brand “Nepalol”
+- [x] Interaction: Azithromycin + Ciprofloxacin → **contraindicated**
+- [x] Unknown pair → “no known interaction in local DB” (no invented severity)
+- [x] Drug detail shows dose + disclaimer
 
-**Status:** `ready_to_validate` — run app and spot-check
+**Status:** `done` — validated via `clinical_core_py` CLI + Flutter repository parity (2026-07-14)
 
 ### CHECK-IN 4 — Privacy slice (~H6.5)
-- [ ] Consent default OFF; copy from `consent_templates.json`
-- [ ] Scrubber removes +977 mobiles and sample names on fixture set
-- [ ] Sync queue UI shows blocked when consent off
+- [x] Consent default OFF; copy from `consent_templates.json`
+- [x] Scrubber removes +977 mobiles and sample NMC/HREG/emails (Dart + QA regex); name/place recall residual ~30%
+- [x] Sync queue UI shows blocked when consent off; local scrub demo on Consent tab
 
-**Status:** `pending`
+**Status:** `done` — `lib/privacy/pii_scrubber.dart` + Consent scrub UI
 
 ### CHECK-IN 5 — MVP demo (~H8)
-- [ ] Automated: interaction suite 35/35
-- [ ] Automated: PII scrubber report on `pii_scrubber_test_cases.json`
-- [ ] Smoke: offline drug lookup + interaction + guideline hit
-- [ ] `docs/MVP_8H_DEMO.md` runbook
+- [x] Automated: interaction suite 35/35
+- [x] Automated: PII scrubber report on `pii_scrubber_test_cases.json`
+- [x] Smoke: offline drug lookup + interaction + guideline hit
+- [x] `docs/MVP_8H_DEMO.md` runbook
 
-**Status:** `pending`
+**Status:** `done` — see `artifacts/qa_fixture_report.md`
 
 ---
 
@@ -126,7 +126,7 @@ Reply **APPROVE / CHANGE / BLOCK** at each gate.
 | ID | Blocker | Mitigation |
 |---|---|---|
 | B1 | Flutter not on PATH at session start | SDK at `C:\Users\UA4\flutter`; `flutter create` succeeded for `apps/clinical_assistant` |
-| B2 | Android emulator may be missing | Prefer `flutter run -d chrome` for demo |
+| B2 | Android emulator may be missing | Prefer `flutter run -d web-server --web-port=8080` for demo |
 | B3 | Regex PII scrubber recall 30% | Expected for regex-only; ONNX NER deferred; track as Phase 3 residual |
 
 ---

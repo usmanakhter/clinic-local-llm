@@ -15,80 +15,21 @@ PII scrubber recall is reported but does not fail the process when <99%.
 from __future__ import annotations
 
 import json
-import re
 import sys
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "packages"))
+from clinical_core_py.pii_scrubber import scrub_text  # noqa: E402
+
 NEPAL = ROOT / "data" / "nepal"
 ARTIFACTS = ROOT / "artifacts"
 REPORT_PATH = ARTIFACTS / "qa_fixture_report.md"
 
 ALLOWED_SEVERITIES = frozenset({"minor", "moderate", "major", "contraindicated"})
 
-# Simple regex scrubber — phones (+977), 98xxxxxxxx (incl. Devanagari digits),
-# emails, NMC-IDs, passport-like, hospital registration / related ID patterns.
-PHONE_ASCII = re.compile(
-    r"(?:\+?977[\s\-]*)?(?:98|97)\d{8}\b"
-)
-PHONE_PLUS977 = re.compile(
-    r"\+977[\s\-]?\d{8,10}\b"
-)
-PHONE_DEVANAGARI = re.compile(
-    r"[९८][०-९]{9}"
-)
-EMAIL = re.compile(
-    r"\b[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}\b"
-)
-NMC_ID = re.compile(
-    r"\bNMC[\-\s]?\d{4}[\-\s]?\d{4,}\b",
-    re.IGNORECASE,
-)
-PASSPORT_LIKE = re.compile(
-    r"\b[A-Z]\d{7}\b"
-)
-HOSPITAL_REG = re.compile(
-    r"\bHREG[\-\s]?\d{4}[\-\s]?\d{3,}\b",
-    re.IGNORECASE,
-)
-# Extra structural IDs often present in the same fixture set
-INSURANCE_LIKE = re.compile(
-    r"\bHP[\-\s]?\d{4}[\-\s]?\d{4,}\b",
-    re.IGNORECASE,
-)
-NP_HEALTH_ID = re.compile(
-    r"\bNP[\-\s]?[A-Z]{2,4}[\-\s]?\d{9,}\b",
-    re.IGNORECASE,
-)
-CITIZENSHIP_ASCII = re.compile(
-    r"\b\d{2,4}/\d{2,4}[\-\s]?\d{6,}\b"
-)
-CITIZENSHIP_DEV = re.compile(
-    r"[०-९]{2,4}/[०-९]{2,4}[\-\s]?[०-९]{6,}"
-)
-VOTER_DEV = re.compile(
-    r"[०-९]{2}[\-\s][०-९]{2}[\-\s][०-९]{2}[\-\s][०-९]{6,}"
-)
-PIN_CODE = re.compile(
-    r"\b\d{5}\b"
-)
-
-SCRUB_PATTERNS: list[re.Pattern[str]] = [
-    PHONE_PLUS977,
-    PHONE_ASCII,
-    PHONE_DEVANAGARI,
-    EMAIL,
-    NMC_ID,
-    PASSPORT_LIKE,
-    HOSPITAL_REG,
-    INSURANCE_LIKE,
-    NP_HEALTH_ID,
-    CITIZENSHIP_ASCII,
-    CITIZENSHIP_DEV,
-    VOTER_DEV,
-]
 
 
 def load_json(path: Path) -> dict:
@@ -184,17 +125,6 @@ def eval_interactions(data: dict) -> dict:
         "severity_counts": dict(severity_counts),
         "issues": issues,
     }
-
-
-def scrub_text(text: str) -> str:
-    out = text
-    for pat in SCRUB_PATTERNS:
-        out = pat.sub("[REDACTED]", out)
-    # PIN only when clearly labeled elsewhere is fragile; keep as optional weak signal
-    # Prefer not to blindly redact all 5-digit runs in clinical text — skip PIN_CODE
-    # unless paired with "PIN" context (handled via expected_removed recall only).
-    _ = PIN_CODE  # pattern available for extension; unused in baseline
-    return out
 
 
 def token_removed(scrubbed: str, token: str) -> bool:

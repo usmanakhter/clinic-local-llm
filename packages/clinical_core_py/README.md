@@ -13,6 +13,7 @@ Portable Nepal clinical MVP **domain logic** in Python. The Flutter team can mir
 | `search.py` | FTS5 search with LIKE fallback; ranked results |
 | `interactions.py` | Bidirectional pair lookup; **never invents severity** |
 | `guidelines.py` | Keyword search over `guideline_chunks` |
+| `pii_scrubber.py` | Regex PII scrub (phones/emails/IDs); mirrors Dart |
 | `cli_demo.py` | CLI: `search` / `interact` / `guide` |
 
 ## Setup
