@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/repositories.dart';
 import '../models/models.dart';
 import '../theme/app_theme.dart';
+import '../widgets/citation_card.dart';
 
 class InteractionScreen extends StatefulWidget {
   const InteractionScreen({super.key, required this.repository});
@@ -18,6 +19,7 @@ class _InteractionScreenState extends State<InteractionScreen> {
   Drug? _drugA;
   Drug? _drugB;
   Interaction? _result;
+  List<GuidelineChunk> _suggestions = [];
   bool _checked = false;
   bool _loading = false;
   String? _error;
@@ -40,6 +42,7 @@ class _InteractionScreenState extends State<InteractionScreen> {
         _error = 'Select two different drugs.';
         _checked = false;
         _result = null;
+        _suggestions = [];
       });
       return;
     }
@@ -52,9 +55,21 @@ class _InteractionScreenState extends State<InteractionScreen> {
         _drugA!.id,
         _drugB!.id,
       );
+      var suggestions = <GuidelineChunk>[];
+      if (ix == null) {
+        final q =
+            '${_drugA!.genericName} ${_drugB!.genericName} interaction safety';
+        suggestions = await widget.repository.searchGuidelines(q, limit: 3);
+      }
+      await widget.repository.logSession(
+        queryType: 'interaction_check',
+        inputSummary: '${_drugA!.id}+${_drugB!.id}',
+        outputSummary: ix?.id ?? 'none',
+      );
       if (!mounted) return;
       setState(() {
         _result = ix;
+        _suggestions = suggestions;
         _checked = true;
         _loading = false;
       });
@@ -95,6 +110,7 @@ class _InteractionScreenState extends State<InteractionScreen> {
             _drugA = d;
             _checked = false;
             _result = null;
+            _suggestions = [];
           }),
         ),
         const SizedBox(height: 12),
@@ -106,6 +122,7 @@ class _InteractionScreenState extends State<InteractionScreen> {
             _drugB = d;
             _checked = false;
             _result = null;
+            _suggestions = [];
           }),
         ),
         const SizedBox(height: 16),
@@ -126,6 +143,7 @@ class _InteractionScreenState extends State<InteractionScreen> {
             _NullResultCard(
               a: _drugA!.genericName,
               b: _drugB!.genericName,
+              suggestions: _suggestions,
             )
           else
             _InteractionCard(interaction: _result!),
@@ -174,41 +192,66 @@ class _DrugDropdown extends StatelessWidget {
 }
 
 class _NullResultCard extends StatelessWidget {
-  const _NullResultCard({required this.a, required this.b});
+  const _NullResultCard({
+    required this.a,
+    required this.b,
+    required this.suggestions,
+  });
 
   final String a;
   final String b;
+  final List<GuidelineChunk> suggestions;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.slate100,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppColors.slate200),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: AppColors.slate100,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: AppColors.slate200),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'No known interaction in local DB',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.slate700,
+                    ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'No curated row for $a ↔ $b. This is not an all-clear — '
+                'absence of data must not be treated as safety. '
+                'No severity is invented.',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppColors.slate700,
+                      height: 1.4,
+                    ),
+              ),
+            ],
+          ),
+        ),
+        if (suggestions.isNotEmpty) ...[
+          const SizedBox(height: 16),
           Text(
-            'No known interaction in local DB',
+            'Related guideline citations (retrieval only)',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w700,
-                  color: AppColors.slate700,
                 ),
           ),
           const SizedBox(height: 8),
-          Text(
-            'No curated row for $a ↔ $b. This is not an all-clear — '
-            'absence of data must not be treated as safety.',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: AppColors.slate700,
-                  height: 1.4,
-                ),
-          ),
+          ...suggestions.map((g) => Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: CitationCard(chunk: g),
+              )),
         ],
-      ),
+      ],
     );
   }
 }

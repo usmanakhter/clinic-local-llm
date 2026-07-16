@@ -87,17 +87,20 @@ class ClinicalRepository {
     final q = query.trim();
     if (q.isEmpty) return [];
 
-    List<Drug> candidates;
+    final byId = <String, Drug>{};
     if (!AppDatabase.isWebMemory && await ftsAvailable()) {
       try {
-        candidates = await _searchFts(q, limit);
+        for (final d in await _searchFts(q, limit)) {
+          byId[d.id] = d;
+        }
       } catch (_) {
-        candidates = await _searchLike(q, limit);
+        // LIKE path below
       }
-    } else {
-      candidates = await _searchLike(q, limit);
     }
-    return _rankDrugs(candidates, q, limit);
+    for (final d in await _searchLike(q, limit)) {
+      byId[d.id] = d;
+    }
+    return _rankDrugs(byId.values.toList(), q, limit);
   }
 
   Future<List<Drug>> _searchFts(String query, int limit) async {
@@ -116,32 +119,48 @@ LIMIT ?
   }
 
   Future<List<Drug>> _searchLike(String query, int limit) async {
-    final pattern = '%${query.trim()}%';
+    final tokens = _searchTokens(query);
     if (AppDatabase.isWebMemory) {
-      final q = query.trim().toLowerCase();
-      return AppDatabase.webDrugs
-          .map(Drug.fromMap)
-          .where((d) {
-            final brands = d.brandNames.map((b) => b.name.toLowerCase()).join(' ');
-            return d.genericName.toLowerCase().contains(q) ||
-                (d.genericNameNe ?? '').toLowerCase().contains(q) ||
-                brands.contains(q) ||
-                d.ragText.toLowerCase().contains(q);
-          })
-          .take(limit * 3)
-          .toList();
+      final drugs = AppDatabase.webDrugs.map(Drug.fromMap).toList();
+      final hits = <String, Drug>{};
+      for (final tok in tokens) {
+        final q = tok.toLowerCase();
+        for (final d in drugs) {
+          final brands =
+              d.brandNames.map((b) => b.name.toLowerCase()).join(' ');
+          final hay = [
+            d.genericName.toLowerCase(),
+            (d.genericNameNe ?? '').toLowerCase(),
+            brands,
+            d.ragText.toLowerCase(),
+            d.indications.map((e) => e.toLowerCase()).join(' '),
+          ].join(' ');
+          if (hay.contains(q)) hits[d.id] = d;
+        }
+      }
+      return hits.values.take(limit * 5).toList();
     }
-    final rows = await AppDatabase.db.rawQuery(
-      '''
+    final seen = <String, Drug>{};
+    for (final tok in tokens) {
+      final pattern = '%$tok%';
+      final rows = await AppDatabase.db.rawQuery(
+        '''
 SELECT * FROM drugs
 WHERE generic_name LIKE ? COLLATE NOCASE
    OR generic_name_ne LIKE ?
    OR brand_names LIKE ?
+   OR rag_text LIKE ? COLLATE NOCASE
+   OR indications LIKE ?
 LIMIT ?
 ''',
-      [pattern, pattern, pattern, limit * 3],
-    );
-    return rows.map(Drug.fromMap).toList();
+        [pattern, pattern, pattern, pattern, pattern, limit * 3],
+      );
+      for (final row in rows) {
+        final d = Drug.fromMap(row);
+        seen[d.id] = d;
+      }
+    }
+    return seen.values.take(limit * 5).toList();
   }
 
   Future<List<GuidelineChunk>> searchGuidelines(
@@ -150,25 +169,52 @@ LIMIT ?
   }) async {
     final q = query.trim();
     if (q.isEmpty) return [];
-    final pattern = '%$q%';
+    final tokens = _searchTokens(q);
 
-    List<GuidelineChunk> chunks;
+    final byId = <String, GuidelineChunk>{};
     if (AppDatabase.isWebMemory) {
-      final lower = q.toLowerCase();
-      chunks = AppDatabase.webGuidelines
-          .map(GuidelineChunk.fromMap)
-          .where((c) {
-            return c.title.toLowerCase().contains(lower) ||
-                (c.titleNe ?? '').toLowerCase().contains(lower) ||
-                (c.topic ?? '').toLowerCase().contains(lower) ||
-                c.chunkText.toLowerCase().contains(lower) ||
-                (c.chunkTextNe ?? '').toLowerCase().contains(lower) ||
-                c.source.toLowerCase().contains(lower);
-          })
-          .toList();
+      final all = AppDatabase.webGuidelines.map(GuidelineChunk.fromMap);
+      for (final tok in tokens) {
+        final lower = tok.toLowerCase();
+        for (final c in all) {
+          final hay = [
+            c.title,
+            c.titleNe ?? '',
+            c.topic ?? '',
+            c.chunkText,
+            c.chunkTextNe ?? '',
+            c.source,
+          ].join(' ').toLowerCase();
+          if (hay.contains(lower)) byId[c.id] = c;
+        }
+      }
     } else {
-      final rows = await AppDatabase.db.rawQuery(
-        '''
+      // Prefer guideline FTS when present; always merge token LIKE hits.
+      if (await _guidelineFtsAvailable()) {
+        try {
+          final match = _ftsMatchQuery(q);
+          final rows = await AppDatabase.db.rawQuery(
+            '''
+SELECT guideline_chunks.*
+FROM guidelines_fts
+JOIN guideline_chunks ON guideline_chunks.rowid = guidelines_fts.rowid
+WHERE guidelines_fts MATCH ?
+LIMIT ?
+''',
+            [match, limit * 5],
+          );
+          for (final row in rows) {
+            final c = GuidelineChunk.fromMap(row);
+            byId[c.id] = c;
+          }
+        } catch (_) {
+          // fall through to LIKE
+        }
+      }
+      for (final tok in tokens) {
+        final pattern = '%$tok%';
+        final rows = await AppDatabase.db.rawQuery(
+          '''
 SELECT * FROM guideline_chunks
 WHERE title LIKE ? COLLATE NOCASE
    OR title_ne LIKE ?
@@ -179,13 +225,17 @@ WHERE title LIKE ? COLLATE NOCASE
 ORDER BY priority DESC
 LIMIT ?
 ''',
-        [pattern, pattern, pattern, pattern, pattern, pattern, limit * 3],
-      );
-      chunks = rows.map(GuidelineChunk.fromMap).toList();
+          [pattern, pattern, pattern, pattern, pattern, pattern, limit * 3],
+        );
+        for (final row in rows) {
+          final c = GuidelineChunk.fromMap(row);
+          byId[c.id] = c;
+        }
+      }
     }
 
     final ranked = <({GuidelineChunk chunk, double score})>[];
-    for (final chunk in chunks) {
+    for (final chunk in byId.values) {
       final score = _scoreGuideline(chunk, q);
       if (score <= 0) continue;
       ranked.add((chunk: chunk, score: score));
@@ -196,6 +246,34 @@ LIMIT ?
       return a.chunk.title.toLowerCase().compareTo(b.chunk.title.toLowerCase());
     });
     return ranked.take(limit).map((e) => e.chunk).toList();
+  }
+
+  Future<bool> _guidelineFtsAvailable() async {
+    if (AppDatabase.isWebMemory) return false;
+    try {
+      final n = Sqflite.firstIntValue(
+            await AppDatabase.db.rawQuery(
+              'SELECT COUNT(*) AS n FROM guidelines_fts',
+            ),
+          ) ??
+          0;
+      return n > 0;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /// Scrub structural PII then persist a local clinical session (never synced here).
+  Future<void> logSession({
+    required String queryType,
+    required String inputSummary,
+    String? outputSummary,
+  }) async {
+    await AppDatabase.insertSession(
+      queryType: queryType,
+      inputSummary: inputSummary,
+      outputSummary: outputSummary,
+    );
   }
 
   Future<void> upsertConsentRecord({
@@ -221,11 +299,30 @@ LIMIT ?
   }
 }
 
-String _ftsMatchQuery(String query) {
-  final tokens = RegExp(r'[\w\u0900-\u097F]+', unicode: true)
+const _stopwords = {
+  'a', 'an', 'the', 'and', 'or', 'of', 'for', 'to', 'in', 'on', 'with', 'no',
+  'not', 'dose', 'child', 'years', 'year', 'safe', 'problem', 'together',
+  'should', 'give', 'first', 'aid', 'cheap', 'start', 'rural', 'nepal',
+  'medicine', 'fever', 'avoid', 'cold', 'flu',
+};
+
+List<String> _searchTokens(String query) {
+  final raw = RegExp(r'[\w\u0900-\u097F]+', unicode: true)
       .allMatches(query)
       .map((m) => m.group(0)!)
       .toList();
+  final out = <String>[];
+  for (final t in raw) {
+    final tl = t.toLowerCase();
+    if (tl.length < 2 || _stopwords.contains(tl)) continue;
+    out.add(t);
+  }
+  if (out.isEmpty) return raw.isEmpty ? [query.trim()] : raw;
+  return out;
+}
+
+String _ftsMatchQuery(String query) {
+  final tokens = _searchTokens(query);
   if (tokens.isEmpty) return query.trim();
   final parts = tokens.map((t) {
     final ascii = RegExp(r'^[\x00-\x7F]+$').hasMatch(t);
@@ -235,12 +332,11 @@ String _ftsMatchQuery(String query) {
 }
 
 List<Drug> _rankDrugs(List<Drug> drugs, String query, int limit) {
-  final q = query.trim().toLowerCase();
   final seen = <String>{};
   final ranked = <({Drug drug, double score})>[];
   for (final drug in drugs) {
     if (!seen.add(drug.id)) continue;
-    final score = _scoreDrug(drug, q);
+    final score = _scoreDrug(drug, query);
     if (score <= 0) continue;
     ranked.add((drug: drug, score: score));
   }
@@ -254,28 +350,40 @@ List<Drug> _rankDrugs(List<Drug> drugs, String query, int limit) {
   return ranked.take(limit).map((e) => e.drug).toList();
 }
 
-double _scoreDrug(Drug drug, String q) {
-  if (q.isEmpty) return 0;
+double _scoreDrug(Drug drug, String query) {
+  final qFull = query.trim().toLowerCase();
+  if (qFull.isEmpty) return 0;
   final gn = drug.genericName.toLowerCase();
   final gnNe = (drug.genericNameNe ?? '').toLowerCase();
   final brands = drug.brandNames.map((b) => b.name.toLowerCase()).toList();
   final brandHay = brands.join(' ');
+  final rag = drug.ragText.toLowerCase();
+  final indications = drug.indications.map((e) => e.toLowerCase()).join(' ');
 
-  if (gn == q) return 100;
-  if (brands.any((b) => b == q)) return 95;
-  if (gnNe == q) return 92;
-  if (gn.startsWith(q)) return 85;
-  if (brands.any((b) => b.startsWith(q))) return 80;
-  if (gn.contains(q)) return 70;
-  if (brandHay.contains(q)) return 65;
-  if (gnNe.contains(q)) return 60;
-  if (drug.ragText.toLowerCase().contains(q)) return 40;
-  return 10;
+  double scoreOne(String q) {
+    if (gn == q) return 100;
+    if (brands.any((b) => b == q)) return 95;
+    if (gnNe == q) return 92;
+    if (gn.startsWith(q)) return 85;
+    if (brands.any((b) => b.startsWith(q))) return 80;
+    if (gn.contains(q)) return 70;
+    if (brandHay.contains(q)) return 65;
+    if (gnNe.contains(q)) return 60;
+    if (rag.contains(q) || indications.contains(q)) return 40;
+    return 0;
+  }
+
+  var best = scoreOne(qFull);
+  for (final tok in _searchTokens(query)) {
+    final s = scoreOne(tok.toLowerCase());
+    if (s > best) best = s;
+  }
+  return best > 0 ? best : 10;
 }
 
 double _scoreGuideline(GuidelineChunk chunk, String query) {
-  final q = query.trim().toLowerCase();
-  if (q.isEmpty) return 0;
+  final qFull = query.trim().toLowerCase();
+  if (qFull.isEmpty) return 0;
   final title = chunk.title.toLowerCase();
   final titleNe = (chunk.titleNe ?? '').toLowerCase();
   final topic = (chunk.topic ?? '').toLowerCase();
@@ -284,12 +392,27 @@ double _scoreGuideline(GuidelineChunk chunk, String query) {
   final source = chunk.source.toLowerCase();
   final p = chunk.priority.toDouble();
 
-  if (title == q || topic == q) return 100 + p;
-  if (title.contains(q)) return 80 + p;
-  if (topic.contains(q)) return 70 + p;
-  if (titleNe.contains(q)) return 65 + p;
-  if (body.contains(q)) return 50 + p;
-  if (bodyNe.contains(q)) return 45 + p;
-  if (source.contains(q)) return 30 + p;
-  return 0;
+  double scoreOne(String q) {
+    if (title == q || topic == q) return 100 + p;
+    if (title.contains(q)) return 80 + p;
+    if (topic.contains(q)) return 70 + p;
+    if (titleNe.contains(q)) return 65 + p;
+    if (body.contains(q)) return 50 + p;
+    if (bodyNe.contains(q)) return 45 + p;
+    if (source.contains(q)) return 30 + p;
+    return 0;
+  }
+
+  var best = scoreOne(qFull);
+  var bonus = 0.0;
+  for (final tok in _searchTokens(query)) {
+    final s = scoreOne(tok.toLowerCase());
+    if (s > best) {
+      best = s;
+    } else if (s > 0) {
+      bonus += 5;
+    }
+  }
+  if (best <= 0) return 0;
+  return best + (bonus > 20 ? 20 : bonus);
 }

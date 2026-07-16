@@ -14,6 +14,7 @@ Portable Nepal clinical MVP **domain logic** in Python. The Flutter team can mir
 | `interactions.py` | Bidirectional pair lookup; **never invents severity** |
 | `guidelines.py` | Keyword search over `guideline_chunks` |
 | `pii_scrubber.py` | Regex PII scrub (phones/emails/IDs); mirrors Dart |
+| `llm_smoke.py` | Optional Ollama `/v1/chat/completions` smoke (skips if down) |
 | `cli_demo.py` | CLI: `search` / `interact` / `guide` |
 
 ## Setup

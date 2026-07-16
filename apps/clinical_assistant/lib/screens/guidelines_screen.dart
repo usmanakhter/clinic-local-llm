@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../data/repositories.dart';
 import '../models/models.dart';
 import '../theme/app_theme.dart';
+import '../widgets/citation_card.dart';
 
 class GuidelinesScreen extends StatefulWidget {
   const GuidelinesScreen({super.key, required this.repository});
@@ -34,6 +35,13 @@ class _GuidelinesScreenState extends State<GuidelinesScreen> {
     }
     setState(() => _loading = true);
     final hits = await widget.repository.searchGuidelines(q);
+    await widget.repository.logSession(
+      queryType: 'guideline_search',
+      inputSummary: q,
+      outputSummary: hits.isEmpty
+          ? 'no hits'
+          : hits.take(3).map((g) => g.id).join(','),
+    );
     if (!mounted) return;
     setState(() {
       _results = hits;
@@ -69,7 +77,7 @@ class _GuidelinesScreenState extends State<GuidelinesScreen> {
                 ? 'Try: typhoid, dengue, TB, snakebite, diarrhea'
                 : (_loading
                     ? 'Searching…'
-                    : '${_results.length} guideline chunk(s)'),
+                    : '${_results.length} citation(s) — source + excerpt'),
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color: AppColors.slate500,
                 ),
@@ -89,62 +97,10 @@ class _GuidelinesScreenState extends State<GuidelinesScreen> {
                 : ListView.separated(
                     itemCount: _results.length,
                     separatorBuilder: (_, _) => const SizedBox(height: 10),
-                    itemBuilder: (context, i) {
-                      final g = _results[i];
-                      return Material(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          side: const BorderSide(color: AppColors.slate200),
-                        ),
-                        child: ExpansionTile(
-                          title: Text(g.title),
-                          subtitle: Text(
-                            [
-                              if (g.titleNe != null) g.titleNe!,
-                              g.source,
-                              if (g.topic != null) g.topic!,
-                            ].join(' · '),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          childrenPadding: const EdgeInsets.fromLTRB(
-                            16,
-                            0,
-                            16,
-                            16,
-                          ),
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                g.chunkText,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(height: 1.45),
-                              ),
-                            ),
-                            if (g.chunkTextNe != null) ...[
-                              const SizedBox(height: 10),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  g.chunkTextNe!,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.copyWith(
-                                        height: 1.45,
-                                        color: AppColors.slate700,
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ],
-                        ),
-                      );
-                    },
+                    itemBuilder: (context, i) => CitationCard(
+                      chunk: _results[i],
+                      initiallyExpanded: i == 0,
+                    ),
                   ),
           ),
         ],

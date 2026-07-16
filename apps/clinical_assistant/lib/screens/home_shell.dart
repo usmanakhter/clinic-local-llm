@@ -7,6 +7,7 @@ import 'consent_screen.dart';
 import 'drug_search_screen.dart';
 import 'guidelines_screen.dart';
 import 'interaction_screen.dart';
+import 'note_drafter_screen.dart';
 
 class HomeShell extends StatefulWidget {
   const HomeShell({
@@ -29,7 +30,13 @@ class HomeShell extends StatefulWidget {
 class _HomeShellState extends State<HomeShell> {
   int _index = 0;
 
-  static const _titles = ['Drug Search', 'Interactions', 'Guidelines', 'Consent'];
+  static const _titles = [
+    'Drug Search',
+    'Interactions',
+    'Guidelines',
+    'Note Draft',
+    'Consent',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +44,7 @@ class _HomeShellState extends State<HomeShell> {
       DrugSearchScreen(repository: widget.repository),
       InteractionScreen(repository: widget.repository),
       GuidelinesScreen(repository: widget.repository),
+      NoteDrafterScreen(repository: widget.repository),
       ConsentScreen(
         embedded: true,
         onChanged: widget.onOpenConsent,
@@ -100,6 +108,11 @@ class _HomeShellState extends State<HomeShell> {
             icon: Icon(Icons.menu_book_outlined),
             selectedIcon: Icon(Icons.menu_book),
             label: 'Guidelines',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.note_alt_outlined),
+            selectedIcon: Icon(Icons.note_alt),
+            label: 'Notes',
           ),
           NavigationDestination(
             icon: Icon(Icons.privacy_tip_outlined),

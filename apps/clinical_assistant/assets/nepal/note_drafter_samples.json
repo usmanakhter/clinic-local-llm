@@ -1,0 +1,67 @@
+{
+  "version": "0.1.0",
+  "region": "NP",
+  "note": "Dummy note-drafter inputs/outputs for LLM eval. No real patient data.",
+  "samples": [
+    {
+      "id": "note_001",
+      "locale": "en",
+      "structured_input": {
+        "chief_complaint": "Fever and cough 4 days",
+        "history": "Adult in 30s, no chronic illness, no travel",
+        "examination": "Temp 38.5C, throat erythema, chest clear",
+        "assessment": "Likely viral URTI — not bacterial pneumonia",
+        "plan": "Paracetamol, fluids, return if breathless"
+      },
+      "draft_output": "CC: Fever and cough x4 days.\nHPC: Patient reports intermittent fever up to 38.5°C and dry cough. No dyspnea, chest pain, or hemoptysis. No known comorbidities.\nO/E: Febrile, alert. Oropharynx erythematous. Chest auscultation clear.\nImpression: Acute viral upper respiratory tract infection.\nPlan: Paracetamol 500mg q6h PRN. Oral fluids. Safety-net: return if worsening breathlessness, persistent fever >5 days, or SpO2 concern."
+    },
+    {
+      "id": "note_002",
+      "locale": "ne",
+      "structured_input": {
+        "chief_complaint": "झाडापखाला २ दिन",
+        "history": "५ वर्षे बच्चा, सक्रिय, पानी पिउँछ",
+        "examination": "सामान्य hydration, no sunken eyes",
+        "assessment": "Plan A dehydration — no blood",
+        "plan": "ORS, zinc 20mg x10 days"
+      },
+      "draft_output": "मुख्य गुनासो: झाडापखाला २ दिनदेखि।\nइतिहास: ५ वर्षे बच्चा, सक्रिय, पानी पिउँछ। रक्त मिश्रित नभएको।\nजाँच: सामान्य hydration, आँखा गडेको छैन।\nनिष्कर्ष: योजना A — हल्का निर्जलीकरण।\nयोजना: ORS प्रत्येक पखाला पछि। जिंक 20mg दैनिक १० दिन। फर्कनुहोस् यदि बान्ता, रक्त, वा मूर्छा।"
+    },
+    {
+      "id": "note_003",
+      "locale": "en",
+      "structured_input": {
+        "chief_complaint": "Snakebite 2 hours ago",
+        "history": "Rice field, uncertain snake, local bite marks",
+        "examination": "No ptosis, no bleeding, 20WBCT clots normally",
+        "assessment": "Dry bite or non-envenomed — observe",
+        "plan": "Observe 24h, educate return criteria, tetanus"
+      },
+      "draft_output": "CC: Snakebite to left foot ~2 hours ago.\nHPC: Bite while working in rice field. Snake not clearly identified. No systemic symptoms yet.\nO/E: Two fang marks local swelling only. No ptosis, fasciculations, or bleeding diathesis. 20-minute whole blood clotting test: clots normally.\nImpression: Probable dry bite / no current envenomation.\nPlan: Observe minimum 24 hours with serial neurovital checks. Wound care. Tetanus prophylaxis if indicated. Return immediately if ptosis, bleeding, or neuro symptoms."
+    },
+    {
+      "id": "note_004",
+      "locale": "mixed",
+      "structured_input": {
+        "chief_complaint": "ज्वरो ५ दिन — typhoid suspected",
+        "history": "Adult 40s, headache, relative bradycardia",
+        "examination": "Temp 39C, mild hepatomegaly",
+        "assessment": "Enteric fever suspected — do not use fluoroquinolone empirically if resistance concern",
+        "plan": "Ceftriaxone if severe; blood culture; ORS"
+      },
+      "draft_output": "CC: Fever x5 days with headache (ज्वरो).\nHPC: Stepwise fever, anorexia, headache. Relative bradycardia noted. No rash.\nO/E: Temp 39°C. Mild hepatomegaly. Chest clear.\nImpression: Suspected enteric fever (टाइफाइड) — confirm with blood culture where possible.\nPlan: If uncomplicated and outpatient: consider azithromycin per local resistance pattern OR admit for ceftriaxone if toxic/unable to tolerate oral. Avoid empiric ciprofloxacin monotherapy where resistance high. Hydration with ORS. Follow-up 48h."
+    },
+    {
+      "id": "note_005",
+      "locale": "en",
+      "structured_input": {
+        "chief_complaint": "BP follow-up",
+        "history": "Known HTN on amlodipine 5mg",
+        "examination": "BP 138/88, otherwise well",
+        "assessment": "Near target",
+        "plan": "Continue amlodipine, lifestyle, review 4 weeks"
+      },
+      "draft_output": "CC: Hypertension follow-up.\nHPC: On amlodipine 5mg OD. Compliant. No headache, chest pain, or edema.\nO/E: BP 138/88 mmHg. CVS otherwise unremarkable.\nImpression: Hypertension — near target (<140/90).\nPlan: Continue amlodipine 5mg OD. Salt reduction and walking counsel. Recheck BP in 4 weeks."
+    }
+  ]
+}

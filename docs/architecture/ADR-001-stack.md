@@ -19,6 +19,7 @@
 | On-device LLM | **None in 8h MVP** | No llama.cpp / GGUF; deterministic DB lookups only |
 | PII | **Regex scrubber now; ONNX NER later** | Fixture-evaluated against `pii_scrubber_test_cases.json` |
 | Sync / backend | **Deferred** | Consent default OFF; queue local-only / UI-blocked |
+| Note drafting LLM | **Deferred to ADR-002** (localhost sidecar POC) | Not part of 8h slice |
 
 ---
 
@@ -39,7 +40,8 @@ EMR patient records, Play Store release, production PHI, cloud ingest-api, certi
 
 ## References
 
-- `docs/MVP_8H_CHECKPOINTS.md`
+- `docs/STATUS.md` (running development checklist)
 - `docs/security/threat-model-v0.1.md`
 - `data/schema/mvp_schema.sql`
-- `clinical-llm-technical-architecture.md` (target state; this ADR freezes the 8h subset)
+- `clinical-llm-technical-architecture.md` (target state; this ADR froze the 8h subset)
+- `docs/architecture/ADR-002-local-llm-poc.md` (note-drafter LLM exception)

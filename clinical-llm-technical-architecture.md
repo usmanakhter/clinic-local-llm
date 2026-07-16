@@ -2,6 +2,7 @@
 
 **Date:** July 9, 2026  
 **Companion to:** `clinical-llm-venture-analysis.md`  
+**Current build status (checklist):** [`docs/STATUS.md`](docs/STATUS.md) — use that for shipped work and next backlog; this file is the long-horizon architecture target.  
 **Scope:** MVP architecture, EMR expansion path, specialized agent system, daily epic/sprint cycles  
 **Pilot market:** Nepal first — **<30 clinicians** before India scale-up  
 **Dummy data:** `data/nepal/` (see `data/README.md`)

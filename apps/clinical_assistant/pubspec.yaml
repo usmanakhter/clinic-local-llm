@@ -15,6 +15,7 @@ dependencies:
   path_provider: ^2.1.5
   google_fonts: ^6.2.1
   shared_preferences: ^2.5.3
+  http: ^1.6.0
 
 dev_dependencies:
   flutter_test:
@@ -28,3 +29,4 @@ flutter:
     - assets/nepal/interactions.json
     - assets/nepal/guideline_chunks.json
     - assets/nepal/consent_templates.json
+    - assets/nepal/note_drafter_samples.json

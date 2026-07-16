@@ -56,6 +56,13 @@ class _DrugSearchScreenState extends State<DrugSearchScreen> {
     setState(() => _loading = true);
     try {
       final hits = await widget.repository.searchDrugs(q);
+      await widget.repository.logSession(
+        queryType: 'drug_lookup',
+        inputSummary: q,
+        outputSummary: hits.isEmpty
+            ? 'no hits'
+            : hits.take(3).map((d) => d.id).join(','),
+      );
       if (!mounted) return;
       setState(() {
         _results = hits;

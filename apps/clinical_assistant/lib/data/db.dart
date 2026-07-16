@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../models/models.dart';
+import '../privacy/pii_scrubber.dart';
 
 /// Opens local SQLite (native) or an in-memory store (web), then seeds from assets.
 class AppDatabase {
@@ -17,6 +18,7 @@ class AppDatabase {
   static final List<Map<String, dynamic>> _webDrugs = [];
   static final List<Map<String, dynamic>> _webInteractions = [];
   static final List<Map<String, dynamic>> _webGuidelines = [];
+  static final List<Map<String, dynamic>> _webSessions = [];
   static ConsentTemplate? consentTemplate;
 
   static bool get isWebMemory => _webMemory;
@@ -35,6 +37,8 @@ class AppDatabase {
       List.unmodifiable(_webInteractions);
   static List<Map<String, dynamic>> get webGuidelines =>
       List.unmodifiable(_webGuidelines);
+  static List<Map<String, dynamic>> get webSessions =>
+      List.unmodifiable(_webSessions);
 
   static Future<void> init() async {
     consentTemplate = await _loadConsentTemplate();
@@ -49,16 +53,52 @@ class AppDatabase {
     final path = p.join(dir.path, 'nepal_mvp.db');
     _db = await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onConfigure: (database) async {
         await database.execute('PRAGMA foreign_keys = ON');
       },
       onCreate: (database, version) async {
         await _createSchema(database);
       },
+      onUpgrade: (database, oldVersion, newVersion) async {
+        if (oldVersion < 2) {
+          await _ensureSessionsAndGuidelineFts(database);
+        }
+      },
     );
 
     await _seedIfEmpty(_db!);
+    await _ensureSessionsAndGuidelineFts(_db!);
+  }
+
+  static Future<void> insertSession({
+    required String queryType,
+    required String inputSummary,
+    String? outputSummary,
+  }) async {
+    final scrubbedIn = PiiScrubber.scrub(inputSummary);
+    final scrubbedOut =
+        outputSummary == null ? null : PiiScrubber.scrub(outputSummary);
+    final id = 'sess_${DateTime.now().millisecondsSinceEpoch}';
+    final row = {
+      'id': id,
+      'created_at': DateTime.now().toIso8601String(),
+      'query_type': queryType,
+      'input_summary': scrubbedIn,
+      'output_summary': scrubbedOut,
+      'feedback': null,
+      'patient_id': null,
+      'device_id': 'local',
+    };
+    if (_webMemory) {
+      _webSessions.insert(0, row);
+      return;
+    }
+    await db.insert(
+      'clinical_sessions',
+      row,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
   static Future<ConsentTemplate> _loadConsentTemplate() async {
@@ -188,12 +228,45 @@ CREATE TABLE IF NOT EXISTS consent_records (
 )
 ''');
 
+    await _ensureSessionsAndGuidelineFts(database);
+
     await database.execute(
       'CREATE INDEX IF NOT EXISTS idx_drugs_generic ON drugs(generic_name)',
     );
     await database.execute(
       'CREATE INDEX IF NOT EXISTS idx_interactions_drugs ON interactions(drug_a_id, drug_b_id)',
     );
+  }
+
+  static Future<void> _ensureSessionsAndGuidelineFts(Database database) async {
+    await database.execute('''
+CREATE TABLE IF NOT EXISTS clinical_sessions (
+    id              TEXT PRIMARY KEY,
+    created_at      TEXT NOT NULL,
+    query_type      TEXT NOT NULL,
+    input_summary   TEXT,
+    output_summary  TEXT,
+    feedback        TEXT,
+    patient_id      TEXT,
+    device_id       TEXT
+)
+''');
+    try {
+      await database.execute('''
+CREATE VIRTUAL TABLE IF NOT EXISTS guidelines_fts USING fts5(
+    title,
+    title_ne,
+    topic,
+    chunk_text,
+    chunk_text_ne,
+    source,
+    content='guideline_chunks',
+    content_rowid='rowid'
+)
+''');
+    } catch (_) {
+      // FTS optional
+    }
   }
 
   static Future<void> _seedIfEmpty(Database database) async {
@@ -222,6 +295,7 @@ CREATE TABLE IF NOT EXISTS consent_records (
     }
     await batch.commit(noResult: true);
     await _rebuildFts(database);
+    await _rebuildGuidelineFts(database);
   }
 
   static Future<void> _rebuildFts(Database database) async {
@@ -230,6 +304,18 @@ CREATE TABLE IF NOT EXISTS consent_records (
       await database.execute('''
 INSERT INTO drugs_fts(rowid, generic_name, generic_name_ne, brand_names, rag_text)
 SELECT rowid, generic_name, generic_name_ne, brand_names, rag_text FROM drugs
+''');
+    } catch (_) {
+      // FTS not available.
+    }
+  }
+
+  static Future<void> _rebuildGuidelineFts(Database database) async {
+    try {
+      await database.delete('guidelines_fts');
+      await database.execute('''
+INSERT INTO guidelines_fts(rowid, title, title_ne, topic, chunk_text, chunk_text_ne, source)
+SELECT rowid, title, title_ne, topic, chunk_text, chunk_text_ne, source FROM guideline_chunks
 ''');
     } catch (_) {
       // FTS not available.
