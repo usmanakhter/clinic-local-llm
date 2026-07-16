@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Clinical reference tokens — medical teal / slate (no purple AI cliché).
+/// Uses platform fonts so web works offline (no Google Fonts CDN).
 class AppColors {
   static const Color teal = Color(0xFF0D7377);
   static const Color tealDark = Color(0xFF095456);
@@ -23,10 +23,13 @@ class AppColors {
 }
 
 class AppTheme {
+  static const String _fontFamily = 'Segoe UI';
+
   static ThemeData light() {
     final base = ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
+      fontFamily: _fontFamily,
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.teal,
         primary: AppColors.teal,
@@ -37,9 +40,10 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.surface,
     );
 
-    final textTheme = GoogleFonts.notoSansTextTheme(base.textTheme).apply(
+    final textTheme = base.textTheme.apply(
       bodyColor: AppColors.slate900,
       displayColor: AppColors.slate900,
+      fontFamily: _fontFamily,
     );
 
     return base.copyWith(
@@ -49,7 +53,7 @@ class AppTheme {
         foregroundColor: Colors.white,
         elevation: 0,
         centerTitle: false,
-        titleTextStyle: GoogleFonts.notoSans(
+        titleTextStyle: textTheme.titleMedium?.copyWith(
           color: Colors.white,
           fontSize: 18,
           fontWeight: FontWeight.w600,
@@ -60,8 +64,9 @@ class AppTheme {
         indicatorColor: AppColors.tealSoft,
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
-          return GoogleFonts.notoSans(
-            fontSize: 12,
+          return TextStyle(
+            fontFamily: _fontFamily,
+            fontSize: 11,
             fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
             color: selected ? AppColors.tealDark : AppColors.slate500,
           );

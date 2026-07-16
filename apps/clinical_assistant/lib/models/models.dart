@@ -255,3 +255,72 @@ class ConsentTemplate {
     return templates[key]?[lang] ?? templates[key]?['en'] ?? key;
   }
 }
+
+/// Local activity log row — scrubbed before persist; queued for future sync.
+class ClinicalSession {
+  const ClinicalSession({
+    required this.id,
+    required this.createdAt,
+    required this.queryType,
+    this.inputSummary,
+    this.outputSummary,
+    this.payloadJson,
+    this.syncStatus = 'local_only',
+    this.deviceId = 'local',
+  });
+
+  final String id;
+  final DateTime createdAt;
+  final String queryType;
+  final String? inputSummary;
+  final String? outputSummary;
+  final String? payloadJson;
+  final String syncStatus;
+  final String? deviceId;
+
+  factory ClinicalSession.fromMap(Map<String, dynamic> map) {
+    return ClinicalSession(
+      id: map['id'] as String,
+      createdAt: DateTime.tryParse(map['created_at'] as String? ?? '') ??
+          DateTime.now(),
+      queryType: map['query_type'] as String? ?? 'unknown',
+      inputSummary: map['input_summary'] as String?,
+      outputSummary: map['output_summary'] as String?,
+      payloadJson: map['payload_json'] as String?,
+      syncStatus: map['sync_status'] as String? ?? 'local_only',
+      deviceId: map['device_id'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'created_at': createdAt.toIso8601String(),
+      'query_type': queryType,
+      'input_summary': inputSummary,
+      'output_summary': outputSummary,
+      'payload_json': payloadJson,
+      'sync_status': syncStatus,
+      'device_id': deviceId,
+      'feedback': null,
+      'patient_id': null,
+    };
+  }
+
+  String get typeLabel {
+    switch (queryType) {
+      case 'drug_lookup':
+        return 'Drug search';
+      case 'interaction_check':
+        return 'Interaction';
+      case 'guideline_search':
+        return 'Guideline';
+      case 'note_draft':
+        return 'Note';
+      case 'chat':
+        return 'Chat';
+      default:
+        return queryType;
+    }
+  }
+}

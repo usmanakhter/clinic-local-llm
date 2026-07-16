@@ -1,6 +1,6 @@
 # QA Fixture Report — Nepal Clinical AI MVP
 
-- Generated: `2026-07-15 17:48:12 UTC`
+- Generated: `2026-07-16 05:36:58 UTC`
 - Agent: A9
 - Fixtures: `data/nepal/`
 - Runner: `qa/run_fixture_evals.py`
@@ -8,12 +8,12 @@
 ## Interaction catalog integrity
 
 - Status: **PASS**
-- Loaded pairs: `35` (declared `35`)
-- Forward lookups OK: `35/35`
-- Reverse (b→a) lookups OK: `35/35`
-- Severity distribution: `{'major': 12, 'moderate': 20, 'minor': 2, 'contraindicated': 1}`
+- Loaded pairs: `40` (declared `40`)
+- Forward lookups OK: `40/40`
+- Reverse (b→a) lookups OK: `40/40`
+- Severity distribution: `{'major': 14, 'moderate': 23, 'minor': 2, 'contraindicated': 1}`
 
-All 35 pairs resolve with exact severity in both id orders.
+All 40 pairs resolve with exact severity in both id orders.
 
 ## PII scrubber baseline (simple regex)
 
@@ -48,9 +48,9 @@ All 35 pairs resolve with exact severity in both id orders.
 
 ## Eval queries inventory
 
-- Total queries: `40`
-- By type: `{'drug_lookup': 24, 'guideline_search': 5, 'interaction_check': 11}`
-- By locale: `{'en': 33, 'ne': 7}`
+- Total queries: `50`
+- By type: `{'drug_lookup': 27, 'guideline_search': 9, 'interaction_check': 14}`
+- By locale: `{'en': 42, 'ne': 8}`
 
 ## Exit policy
 

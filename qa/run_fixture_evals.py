@@ -61,7 +61,12 @@ def eval_interactions(data: dict) -> dict:
             f"interaction_count={declared} but loaded {len(interactions)} rows"
         )
 
-    if len(interactions) != 35:
+    if declared is None and len(interactions) < 1:
+        issues.append("expected interactions, got 0")
+    if declared is not None and len(interactions) != declared:
+        pass  # already recorded above
+    elif declared is None and len(interactions) != 35:
+        # legacy default when manifest omits count
         issues.append(f"expected 35 interactions, got {len(interactions)}")
 
     ids = [row["id"] for row in interactions]
@@ -217,7 +222,9 @@ def write_report(
             lines.append(f"- ... and {len(interaction['issues']) - 50} more")
         lines.append("")
     else:
-        lines.append("All 35 pairs resolve with exact severity in both id orders.")
+        lines.append(
+            f"All {interaction['count']} pairs resolve with exact severity in both id orders."
+        )
         lines.append("")
 
     lines.extend(

@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
   "region": "NP",
-  "interaction_count": 35,
+  "interaction_count": 40,
   "interactions": [
     {"id": "int_001", "drug_a_id": "drug_002", "drug_b_id": "drug_021", "severity": "major", "mechanism": "Additive antiplatelet + GI mucosal injury", "clinical_effect": "Increased GI bleeding risk", "recommendation": "Avoid combination if possible. If required, add PPI and monitor for melena.", "source": "Drug interaction database (dummy)"},
     {"id": "int_002", "drug_a_id": "drug_003", "drug_b_id": "drug_026", "severity": "moderate", "mechanism": "Rifampicin induces metabolism of amoxicillin (minor)", "clinical_effect": "Reduced amoxicillin levels", "recommendation": "Monitor clinical response in co-treated infections. Prefer standard TB regimen timing.", "source": "TB treatment guidelines"},
@@ -37,6 +37,11 @@
     {"id": "int_032", "drug_a_id": "drug_008", "drug_b_id": "drug_048", "severity": "moderate", "mechanism": "CNS depression", "clinical_effect": "Excessive sedation", "recommendation": "Warn against alcohol. Reduce diazepam dose if co-prescribed.", "source": "Clinical pharmacology"},
     {"id": "int_033", "drug_a_id": "drug_045", "drug_b_id": "drug_020", "severity": "moderate", "mechanism": "Magnesium + loop diuretic", "clinical_effect": "Additive magnesium loss", "recommendation": "Monitor magnesium levels in eclampsia patients on continuing diuretics.", "source": "Obstetric guidelines"},
     {"id": "int_034", "drug_a_id": "drug_007", "drug_b_id": "drug_040", "severity": "major", "mechanism": "Ceftriaxone-calcium precipitation (neonates)", "clinical_effect": "Fatal precipitates in lungs/kidneys", "recommendation": "Never mix ceftriaxone with calcium-containing IV in neonates. Separate by 48h in all ages if same line.", "source": "Medicines safety alert"},
-    {"id": "int_035", "drug_a_id": "drug_013", "drug_b_id": "drug_032", "severity": "minor", "mechanism": "No significant interaction", "clinical_effect": "Commonly co-prescribed", "recommendation": "Safe to combine for diabetic patients with GERD.", "source": "Clinical practice"}
+    {"id": "int_035", "drug_a_id": "drug_013", "drug_b_id": "drug_032", "severity": "minor", "mechanism": "No significant interaction", "clinical_effect": "Commonly co-prescribed", "recommendation": "Safe to combine for diabetic patients with GERD.", "source": "Clinical practice"},
+    {"id": "int_036", "drug_a_id": "drug_052", "drug_b_id": "drug_005", "severity": "major", "mechanism": "Additive QT prolongation", "clinical_effect": "Arrhythmia risk", "recommendation": "Avoid domperidone with macrolides when possible. Prefer short courses and ECG if cardiac risk.", "source": "Medicines safety"},
+    {"id": "int_037", "drug_a_id": "drug_053", "drug_b_id": "drug_005", "severity": "moderate", "mechanism": "QT prolongation risk", "clinical_effect": "Potential arrhythmia", "recommendation": "Use caution combining ondansetron and azithromycin in high-risk patients.", "source": "Medicines safety"},
+    {"id": "int_038", "drug_a_id": "drug_057", "drug_b_id": "drug_017", "severity": "major", "mechanism": "Nephrotoxicity + reduced GFR from ACE-I", "clinical_effect": "Acute kidney injury risk", "recommendation": "Monitor creatinine. Hold ACE-I if acute illness/dehydration while on gentamicin.", "source": "Nephrology practice"},
+    {"id": "int_039", "drug_a_id": "drug_056", "drug_b_id": "drug_023", "severity": "moderate", "mechanism": "Gut flora / vitamin K pathway effects", "clinical_effect": "INR may rise", "recommendation": "Monitor INR if doxycycline co-prescribed with warfarin.", "source": "Anticoagulation guidance"},
+    {"id": "int_040", "drug_a_id": "drug_055", "drug_b_id": "drug_038", "severity": "moderate", "mechanism": "Raised gastric pH reduces iron absorption", "clinical_effect": "Reduced iron efficacy", "recommendation": "Separate pantoprazole and iron by several hours; prefer iron with food/vitamin C guidance.", "source": "Obstetric / pharmacy practice"}
   ]
 }

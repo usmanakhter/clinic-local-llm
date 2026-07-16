@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../models/models.dart';
 import 'db.dart';
+import 'session_store.dart';
 
 /// Mirrors packages/clinical_core_py repository + search + interactions rules.
 class ClinicalRepository {
@@ -263,18 +264,53 @@ LIMIT ?
     }
   }
 
-  /// Scrub structural PII then persist a local clinical session (never synced here).
-  Future<void> logSession({
+  /// Scrub structural PII then persist locally; queued for future consent-gated sync.
+  Future<ClinicalSession> logSession({
     required String queryType,
     required String inputSummary,
     String? outputSummary,
+    Map<String, dynamic>? metadata,
   }) async {
-    await AppDatabase.insertSession(
+    return SessionStore.insert(
       queryType: queryType,
       inputSummary: inputSummary,
       outputSummary: outputSummary,
+      metadata: metadata,
     );
   }
+
+  /// Persist a clinician-edited note draft (full structured fields + body).
+  Future<ClinicalSession> saveNoteDraft({
+    required String chiefComplaint,
+    required String history,
+    required String examination,
+    required String assessment,
+    required String plan,
+    required String draftText,
+    bool fromModel = false,
+  }) async {
+    return SessionStore.insert(
+      queryType: 'note_draft',
+      inputSummary: chiefComplaint,
+      outputSummary: 'saved_locally',
+      metadata: {
+        'action': 'save',
+        'chief_complaint': chiefComplaint,
+        'history': history,
+        'examination': examination,
+        'assessment': assessment,
+        'plan': plan,
+        'draft_text': draftText,
+        'from_model': fromModel,
+      },
+    );
+  }
+
+  Future<List<ClinicalSession>> listSessions({int limit = 100}) {
+    return SessionStore.list(limit: limit);
+  }
+
+  Future<int> pendingSyncCount() => SessionStore.pendingSyncCount();
 
   Future<void> upsertConsentRecord({
     required bool granted,

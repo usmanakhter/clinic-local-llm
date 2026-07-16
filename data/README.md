@@ -12,10 +12,10 @@ data/
 │   ├── mvp_schema.sql      # SQLite tables + seed loader notes
 │   └── manifest.json       # Dataset versions and file index
 └── nepal/
-    ├── drugs.json            # 50 NNLEM-style essential medicines (dummy)
-    ├── interactions.json     # 35 drug-drug interaction pairs
-    ├── guideline_chunks.json # 18 RAG chunks (WHO + Nepal-relevant)
-    ├── eval_queries.jsonl    # 40 gold test queries for QA
+    ├── drugs.json            # 60 NNLEM-style essential medicines (dummy)
+    ├── interactions.json     # 40 drug-drug interaction pairs
+    ├── guideline_chunks.json # 24 RAG chunks (WHO + Nepal-relevant)
+    ├── eval_queries.jsonl    # 50 gold test queries for QA
     ├── clinical_sessions_dummy.json
     ├── sync_queue_dummy.json # De-identified sync payloads (post-scrub)
     ├── consent_templates.json
@@ -36,7 +36,7 @@ data/
 
 | Item | MVP choice |
 |---|---|
-| Formulary | NNLEM 2021-style subset (50 drugs) |
+| Formulary | NNLEM 2021-style subset (60 drugs) |
 | Languages | English + Nepali (Devanagari) |
 | Consent UI | EN + नेपाली |
 | PII patterns | +977 mobiles, Nepali names, fictional NMC IDs |

@@ -30,6 +30,8 @@ class _NoteDrafterScreenState extends State<NoteDrafterScreen> {
   bool _loading = false;
   String? _status;
   bool _fromModel = false;
+  bool _saving = false;
+  String? _saveMessage;
 
   @override
   void initState() {
@@ -106,7 +108,13 @@ class _NoteDrafterScreenState extends State<NoteDrafterScreen> {
       await widget.repository.logSession(
         queryType: 'note_draft',
         inputSummary: _cc.text,
-        outputSummary: text.length > 160 ? '${text.substring(0, 160)}…' : text,
+        outputSummary: 'generated',
+        metadata: {
+          'action': 'generate',
+          'from_model': true,
+          'draft_preview':
+              text.length > 300 ? '${text.substring(0, 300)}…' : text,
+        },
       );
       if (!mounted) return;
       setState(() {
@@ -140,6 +148,7 @@ class _NoteDrafterScreenState extends State<NoteDrafterScreen> {
       queryType: 'note_draft',
       inputSummary: _cc.text,
       outputSummary: 'fixture_fallback',
+      metadata: const {'action': 'generate', 'from_model': false},
     );
     if (!mounted) return;
     setState(() {
@@ -147,6 +156,39 @@ class _NoteDrafterScreenState extends State<NoteDrafterScreen> {
       _fromModel = false;
       _status = message;
     });
+  }
+
+  Future<void> _saveLocally() async {
+    if (_draft.text.trim().isEmpty) {
+      setState(() => _saveMessage = 'Generate or enter a draft before saving.');
+      return;
+    }
+    setState(() {
+      _saving = true;
+      _saveMessage = null;
+    });
+    try {
+      await widget.repository.saveNoteDraft(
+        chiefComplaint: _cc.text,
+        history: _hx.text,
+        examination: _exam.text,
+        assessment: _assess.text,
+        plan: _plan.text,
+        draftText: _draft.text,
+        fromModel: _fromModel,
+      );
+      if (!mounted) return;
+      setState(() {
+        _saving = false;
+        _saveMessage = 'Saved locally — view in Activity tab.';
+      });
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _saving = false;
+        _saveMessage = 'Save failed: $e';
+      });
+    }
   }
 
   @override
@@ -219,6 +261,24 @@ class _NoteDrafterScreenState extends State<NoteDrafterScreen> {
             alignLabelWithHint: true,
           ),
         ),
+        const SizedBox(height: 10),
+        OutlinedButton.icon(
+          onPressed: _saving ? null : _saveLocally,
+          icon: const Icon(Icons.save_outlined),
+          label: Text(_saving ? 'Saving…' : 'Save locally'),
+        ),
+        if (_saveMessage != null) ...[
+          const SizedBox(height: 8),
+          Text(
+            _saveMessage!,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: _saveMessage!.startsWith('Save failed')
+                  ? AppColors.danger
+                  : AppColors.tealDark,
+            ),
+          ),
+        ],
       ],
     );
   }

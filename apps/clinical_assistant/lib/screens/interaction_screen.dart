@@ -63,8 +63,21 @@ class _InteractionScreenState extends State<InteractionScreen> {
       }
       await widget.repository.logSession(
         queryType: 'interaction_check',
-        inputSummary: '${_drugA!.id}+${_drugB!.id}',
-        outputSummary: ix?.id ?? 'none',
+        inputSummary: '${_drugA!.genericName} + ${_drugB!.genericName}',
+        outputSummary: ix == null
+            ? 'no curated row'
+            : '${ix.severity} · ${ix.id}',
+        metadata: {
+          'drug_a_id': _drugA!.id,
+          'drug_b_id': _drugB!.id,
+          'drug_a_name': _drugA!.genericName,
+          'drug_b_name': _drugB!.genericName,
+          'result': ix == null ? 'none' : 'found',
+          if (ix != null) 'severity': ix.severity,
+          if (ix != null) 'interaction_id': ix.id,
+          'guideline_suggestion_ids':
+              suggestions.map((g) => g.id).toList(),
+        },
       );
       if (!mounted) return;
       setState(() {

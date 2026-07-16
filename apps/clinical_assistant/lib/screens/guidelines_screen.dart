@@ -40,7 +40,12 @@ class _GuidelinesScreenState extends State<GuidelinesScreen> {
       inputSummary: q,
       outputSummary: hits.isEmpty
           ? 'no hits'
-          : hits.take(3).map((g) => g.id).join(','),
+          : hits.take(3).map((g) => g.title).join(', '),
+      metadata: {
+        'hit_count': hits.length,
+        'chunk_ids': hits.take(5).map((g) => g.id).toList(),
+        'titles': hits.take(5).map((g) => g.title).toList(),
+      },
     );
     if (!mounted) return;
     setState(() {

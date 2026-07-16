@@ -61,7 +61,12 @@ class _DrugSearchScreenState extends State<DrugSearchScreen> {
         inputSummary: q,
         outputSummary: hits.isEmpty
             ? 'no hits'
-            : hits.take(3).map((d) => d.id).join(','),
+            : hits.take(3).map((d) => d.genericName).join(', '),
+        metadata: {
+          'hit_count': hits.length,
+          'top_drug_ids': hits.take(5).map((d) => d.id).toList(),
+          'top_drug_names': hits.take(5).map((d) => d.genericName).toList(),
+        },
       );
       if (!mounted) return;
       setState(() {

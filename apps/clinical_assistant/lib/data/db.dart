@@ -7,7 +7,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../models/models.dart';
-import '../privacy/pii_scrubber.dart';
 
 /// Opens local SQLite (native) or an in-memory store (web), then seeds from assets.
 class AppDatabase {
@@ -22,6 +21,9 @@ class AppDatabase {
   static ConsentTemplate? consentTemplate;
 
   static bool get isWebMemory => _webMemory;
+
+  /// Mutable web session store — persisted via [SessionStore] + SharedPreferences.
+  static List<Map<String, dynamic>> get webSessionsInternal => _webSessions;
 
   static Database get db {
     final d = _db;
@@ -53,7 +55,7 @@ class AppDatabase {
     final path = p.join(dir.path, 'nepal_mvp.db');
     _db = await openDatabase(
       path,
-      version: 2,
+      version: 3,
       onConfigure: (database) async {
         await database.execute('PRAGMA foreign_keys = ON');
       },
@@ -64,41 +66,30 @@ class AppDatabase {
         if (oldVersion < 2) {
           await _ensureSessionsAndGuidelineFts(database);
         }
+        if (oldVersion < 3) {
+          await _migrateV3(database);
+        }
       },
     );
 
     await _seedIfEmpty(_db!);
     await _ensureSessionsAndGuidelineFts(_db!);
+    await _ensureSyncQueue(_db!);
   }
 
-  static Future<void> insertSession({
-    required String queryType,
-    required String inputSummary,
-    String? outputSummary,
-  }) async {
-    final scrubbedIn = PiiScrubber.scrub(inputSummary);
-    final scrubbedOut =
-        outputSummary == null ? null : PiiScrubber.scrub(outputSummary);
-    final id = 'sess_${DateTime.now().millisecondsSinceEpoch}';
-    final row = {
-      'id': id,
-      'created_at': DateTime.now().toIso8601String(),
-      'query_type': queryType,
-      'input_summary': scrubbedIn,
-      'output_summary': scrubbedOut,
-      'feedback': null,
-      'patient_id': null,
-      'device_id': 'local',
-    };
-    if (_webMemory) {
-      _webSessions.insert(0, row);
-      return;
-    }
-    await db.insert(
-      'clinical_sessions',
-      row,
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+  static Future<void> _migrateV3(Database database) async {
+    try {
+      await database.execute(
+        "ALTER TABLE clinical_sessions ADD COLUMN payload_json TEXT",
+      );
+    } catch (_) {}
+    try {
+      await database.execute(
+        "ALTER TABLE clinical_sessions ADD COLUMN sync_status TEXT "
+        "NOT NULL DEFAULT 'pending_sync'",
+      );
+    } catch (_) {}
+    await _ensureSyncQueue(database);
   }
 
   static Future<ConsentTemplate> _loadConsentTemplate() async {
@@ -246,11 +237,14 @@ CREATE TABLE IF NOT EXISTS clinical_sessions (
     query_type      TEXT NOT NULL,
     input_summary   TEXT,
     output_summary  TEXT,
+    payload_json    TEXT,
+    sync_status     TEXT NOT NULL DEFAULT 'pending_sync',
     feedback        TEXT,
     patient_id      TEXT,
     device_id       TEXT
 )
 ''');
+    await _ensureSyncQueue(database);
     try {
       await database.execute('''
 CREATE VIRTUAL TABLE IF NOT EXISTS guidelines_fts USING fts5(
@@ -267,6 +261,19 @@ CREATE VIRTUAL TABLE IF NOT EXISTS guidelines_fts USING fts5(
     } catch (_) {
       // FTS optional
     }
+  }
+
+  static Future<void> _ensureSyncQueue(Database database) async {
+    await database.execute('''
+CREATE TABLE IF NOT EXISTS sync_queue (
+    id              TEXT PRIMARY KEY,
+    session_id      TEXT,
+    payload_json    TEXT NOT NULL,
+    scrubbed_at     TEXT NOT NULL,
+    status          TEXT NOT NULL DEFAULT 'pending',
+    created_at      TEXT
+)
+''');
   }
 
   static Future<void> _seedIfEmpty(Database database) async {

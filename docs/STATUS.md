@@ -2,7 +2,41 @@
 
 **Last updated:** 2026-07-16  
 **Single source of truth** for what’s shipped, how to run it, and what’s next.  
-Long-term design target: [`clinical-llm-technical-architecture.md`](../clinical-llm-technical-architecture.md).
+Long-term design target: [`clinical-llm-technical-architecture.md`](../clinical-llm-technical-architecture.md).  
+Venture context: [`clinical-llm-venture-analysis.md`](../clinical-llm-venture-analysis.md).
+
+**Backlog order:** Near-term → Retrieval/RAG → Chat agent → **Consent/scrub pipeline** → **Sync & data flywheel** → LLM packaging / model enhancement → EMR.
+
+---
+
+## Strategic thesis (why the plan looks like this)
+
+**Product wedge (trust):** Offline clinical reference + grounded chat/notes so clinicians actually use the app in Nepal OPD settings.
+
+**Economic moat (later):** Consented, de-identified clinical interaction data from an underserved market → improve retrieval corpus and (later) model adapters → optional **data products** and/or **model products**.
+
+| Priority | Implication |
+|---|---|
+| Capture every useful local interaction | Instrument sessions/chat/notes early; make logging complete and scrubbed |
+| Consent is the asset gate | Default OFF stays; scopes must be explicit |
+| Scrubbing is revenue-critical | Weak regex is fine for demo; production flywheel needs high-recall de-id **before** upload |
+| RAG/corpus first, fine-tune second | Consented usage mostly improves **Nepal knowledge base + evals** |
+| Don’t sell raw PHI | Monetize aggregates / licensed de-id corpora / fine-tuned weights |
+| Trust = opt-in rate | Clinicians must believe the free tool helps them |
+
+**Device reality:** Ollama sidecar is a **PC/dev POC**. Majority South Asia Android phones run **FTS/RAG (+ optional tiny GGUF later)** — not Ollama-in-APK.
+
+**Not changed:** Interaction severity stays DB-deterministic. Demo/repo stays synthetic until a real pilot consent path exists.
+
+```text
+Clinician use (search / interact / notes / chat)
+    → local scrubbed session log
+    → opt-in sync (Wi‑Fi, scoped consent)
+    → ingest → curated Nepal corpus + gold evals
+    → better retrieval (primary) + optional adapter/fine-tune (secondary)
+    → OTA improved index/model back to devices
+    → later: licensed data / model SKUs (B2B)
+```
 
 ---
 
@@ -10,35 +44,40 @@ Long-term design target: [`clinical-llm-technical-architecture.md`](../clinical-
 
 | Area | Status | Notes |
 |---|---|---|
-| Flutter clinical reference UI | **Shipped** | Search, Interact, Guidelines, Notes, Consent |
-| Offline Nepal fixtures (50 drugs / 35 interactions / 18 guidelines) | **Shipped** | `data/nepal/` + app assets |
+| Flutter clinical reference UI | **Shipped** | Search, Interact, Guidelines, **Chat**, Notes, Consent |
+| Offline Nepal fixtures | **Shipped** | **60** drugs / **40** interactions / **24** guidelines / **50** gold evals |
 | Deterministic interaction severity | **Shipped** | DB only; never invented |
-| Gold eval (`eval_queries.jsonl`) | **Shipped** | 40/40 pass (`artifacts/eval_gold_report.md`) |
-| Interaction catalog integrity | **Shipped** | 35/35 bidirectional (`qa/run_fixture_evals.py`) |
-| Consent default OFF + sync blocked UI | **Shipped** | No real network sync |
-| Regex PII scrubber (Dart + Python) | **Shipped** | ~30% name/place recall; NER deferred |
-| Local clinical session log (scrubbed) | **Shipped** | Web: in-memory; native: SQLite |
-| Guideline citations / unknown-pair retrieval | **Shipped** | FTS native + token search |
-| Local LLM note-drafter POC | **Shipped (code)** | Ollama sidecar + CORS proxy + fixture fallback; **Ollama not installed on this machine yet** |
-| Master status doc | **Shipped** | This file; old sprint checkpoint/demo runbooks removed |
-| SQLCipher / encrypted DB | **Not started** | Deprioritized |
+| Gold eval | **Shipped** | **50/50** pass (`artifacts/eval_gold_report.md`) |
+| Interaction catalog integrity | **Shipped** | **40/40** bidirectional |
+| Consent default OFF + sync blocked UI | **Shipped** | UI only — no real ingest yet |
+| Regex PII scrubber | **Shipped** | ~30% name/place recall — insufficient for production upload |
+| Local clinical session log | **Shipped** | All interactions saved on-device; web persists via SharedPreferences |
+| Activity history + note save | **Shipped** | Activity tab; full note drafts; sync_queue rows pending consent |
+| Shared retrieve API | **Shipped** | `clinical_core_py.retrieve` + Dart `ClinicalRetriever` |
+| Guideline citations / unknown-pair retrieval | **Shipped** | FTS + token search |
+| Local LLM note-drafter POC | **Shipped (code)** | PC Ollama sidecar; fixture fallback; **not field-phone ready** |
+| Chat agent (RAG-first) | **Shipped (v0)** | Retrieve → cite/refuse; optional LLM if Ollama up (ADR-003) |
+| CI stub (fixture + gold evals) | **Shipped** | `.github/workflows/qa-fixtures.yml` |
+| Consent → scrub → sync → ingest flywheel | **Partial** | Local `sync_queue` stub; upload blocked until consent ON |
+| SQLCipher / encrypted DB | **Not started** | |
 | Cloud sync / ingest / OTA | **Not started** | |
-| On-device JNI llama.cpp in APK | **Not started** | ADR-002 uses localhost first |
-| EMR patient UI | **Not started** | Schema stubs only in SQL seed |
+| On-device JNI llama.cpp | **Not started** | Field path after sidecar POC |
+| EMR patient UI | **Not started** | |
 | Play Store / closed testing | **Not started** | |
 
-**Working demo URL (typical):** `http://localhost:8080` (or `:8081` if 8080 is busy).
+**Working demo URL (typical):** `http://localhost:8080` (or `:8081` if busy).
 
 ---
 
 ## Guardrails (always)
 
-1. Synthetic Nepal fixtures only — no real PHI in repo or demos  
-2. Permanent “not for clinical use” disclaimer  
-3. Consent default **OFF**; no clinical upload without opt-in  
+1. Synthetic Nepal fixtures only in repo/demos until pilot legal path is live  
+2. Permanent “not for clinical use” disclaimer until regulatory posture changes  
+3. Consent default **OFF**; no clinical upload without explicit scoped opt-in  
 4. Interaction severity **only** from local DB  
-5. Note drafter = **draft only** (not diagnosis / prescribing authority)  
+5. Note/chat = **draft / grounded assist**, not diagnosis or prescribing authority  
 6. LLM must not invent interaction severity  
+7. No sale or training use of **identifiable** clinical content — scrub + consent + contract first  
 
 ---
 
@@ -46,115 +85,127 @@ Long-term design target: [`clinical-llm-technical-architecture.md`](../clinical-
 
 ### App (Flutter web)
 
+**Most reliable on this machine (release build — avoids blank debug `web-server` page):**
+
 ```powershell
 $env:PATH = "C:\Users\UA4\flutter\bin;$env:PATH"
 cd c:\Users\UA4\Desktop\clinic-local-llm\apps\clinical_assistant
-flutter pub get
-flutter run -d web-server --web-port=8080
-# open http://localhost:8080
+flutter build web --release
+cd build\web
+python -m http.server 8090
 ```
+
+Open **http://localhost:8090** (hard refresh Ctrl+Shift+R).
+
+**Debug (often blank with `web-server`):** prefer Edge if Chrome won’t launch:
+
+```powershell
+flutter run -d edge
+```
+
+Avoid relying on `flutter run -d web-server --web-port=8080` unless the Dart Debug Chrome extension is connected — it commonly shows a blue bar then a blank page.
 
 ### Automated checks
 
 ```powershell
 cd c:\Users\UA4\Desktop\clinic-local-llm
-python qa\run_fixture_evals.py      # interactions + PII report
-python qa\run_eval_queries.py       # gold top-k (≥70% gate; currently 100%)
+python data\scripts\seed_nepal_db.py
+python qa\run_fixture_evals.py
+python qa\run_eval_queries.py
 python packages\clinical_core_py\smoke_test.py
+python packages\clinical_core_py\retrieve_smoke.py
 ```
 
 ### Spot-check (UI)
 
 1. Banner: not-for-clinical-use + offline  
-2. Search: `Paracetamol` / `प्यारासिटामोल` / `Nepalol`  
-3. Interact: Azithromycin + Ciprofloxacin → **contraindicated**  
-4. Interact: unrelated pair → no known interaction + **guideline citations**  
-5. Guidelines: `diarrhea` / `TB` → citation cards  
-6. Consent: default OFF; sync blocked; scrub demo  
-7. Notes: sample → Generate (fixture or live model)
+2. Search: `Paracetamol` / `Nepalol` / `doxycycline`  
+3. Interact: Azithromycin + Ciprofloxacin → contraindicated  
+4. Chat: `scrub typhus` → citations; nonsense query → refuse  
+5. Consent: default OFF  
+6. Notes: sample → Generate (fixture or live model on PC)
 
-### Local LLM (optional live tokens)
+### Local LLM (optional — PC only)
 
 ```powershell
-# Install Ollama: https://ollama.com
 ollama pull qwen2.5:1.5b
 ollama serve
-
-# Flutter web needs CORS proxy (browser cannot call :11434 directly):
-python tools\ollama_cors_proxy.py   # :8765 → Ollama :11434
-
+python tools\ollama_cors_proxy.py   # web CORS
 python packages\clinical_core_py\llm_smoke.py
 ```
-
-Then **Notes** tab → Generate draft. Amber status = fixture fallback.
 
 ---
 
 ## Shipped changelog (condensed)
 
 ### Slice A — 8h Nepal MVP (2026-07-14)
-- Flutter shell + disclaimer; drug search / detail; interaction checker; guidelines; consent  
-- Python domain mirror + seed + fixture QA  
-- Regex PII scrubber in app + QA; ADR-001 stack lock  
+- Flutter shell; search / interact / guidelines / consent; PII scrub POC; ADR-001  
 
 ### Slice B — Quality + Retrieval + LLM POC (2026-07-15)
-- Multi-token search; gold eval runner (40/40)  
-- Clinical sessions log with scrub  
-- Guideline FTS + `CitationCard`; unknown-pair retrieval  
-- Notes tab + `LocalLlmClient` (ADR-002); CORS proxy tool  
-- Eval/reports under `artifacts/`  
+- Gold eval 40/40; sessions log; citations; Notes + Ollama sidecar; CORS proxy  
 
-### Docs cleanup (2026-07-16)
-- Consolidated runbooks/checkpoints into this file  
-- Removed `MVP_8H_*` and `SPRINT_QUALITY_LLM_*` docs  
-- App README points here; architecture header links here  
+### Docs + flywheel thesis (2026-07-16)
+- Master `STATUS.md`; data/model flywheel backlog reorder  
+
+### Slice C — Corpus + retrieve + Chat v0 + CI (2026-07-16)
+- Corpus → 60/40/24; gold evals → 50/50  
+- Shared retrieve API (Python + Dart)  
+- Chat tab (RAG-first, refuse-if-empty, ADR-003)  
+- GitHub Actions QA workflow  
 
 ---
 
 ## Planned next (ordered backlog)
 
-Update checkboxes as work lands. Prefer small vertical slices over parallel open-ended work.
-
 ### Near-term (product demo strength)
-- [ ] Install/prove live Ollama draft on this machine (web via CORS proxy or Windows device)
-- [x] Replace Flutter app README boilerplate with pointer to this file
-- [x] Consolidate docs into `docs/STATUS.md`; remove old sprint checkpoint/demo files
-- [x] Commit + push Slice B / docs cleanup to `main`
-- [ ] Expand formulary / interactions only when eval coverage stays green
-- [ ] CI stub: run `run_fixture_evals.py` + `run_eval_queries.py` on PR
+- [ ] Install/prove live Ollama draft on this machine (PC POC only)
+- [x] CI stub: `run_fixture_evals.py` + `run_eval_queries.py` on PR
+- [x] Expand formulary / interactions / guidelines + eval suite (60/40/24 / 50 queries)
+- [ ] Further corpus growth toward Nepal coverage % (track via eval dashboards)
+- [x] Replace Flutter app README; consolidate docs; commit/push Slice B
 
-### Retrieval / RAG
-- [ ] sqlite-vec or embedding hybrid for guidelines (after FTS proves insufficient)
-- [ ] Grounded “summarize these citations” path using local LLM (no severity invention)
-- [ ] Eval: guideline recall dashboard over time
+### Retrieval / RAG (coverage engine → 90% Nepal situations)
+- [x] Shared retrieve API for Interact / Guidelines / Chat / future training exports
+- [ ] Grow curated local corpus further (NTC/WHO-adapted + OPD vignettes)
+- [ ] sqlite-vec or embedding hybrid when FTS plateaus
+- [ ] Eval: coverage + recall dashboards (beyond 50 smoke queries)
 
-### Privacy / hardening (was deprioritized)
-- [ ] SQLCipher + key management ADR (ADR-003 path)
-- [ ] ONNX / NER scrubber toward >99% fixture recall
-- [ ] Threat-model refresh when sync exists
+### Chat agent
+- [x] ADR-003 chat scope (cite-or-refuse, no severity invention)
+- [x] Chat tab v0 + retrieve-then-answer + citations + refuse path
+- [ ] Discuss past scrubbed notes / sessions in context
+- [ ] Structured feedback (up/down + reason codes)
+- [ ] Stronger grounded LLM prompt path (not note-drafter reuse)
+- [ ] Eval smoke on synthetic chat vignettes
 
-### LLM packaging
-- [ ] Device-tier detection; model download WiFi-only
-- [ ] JNI llama.cpp path for offline Android (post–localhost POC)
-- [ ] Signed model manifests / OTA (P4 architecture)
+### Consent + scrub pipeline (flywheel gate)
+- [ ] Consent scopes v2 + production scrubber (>99% recall) + SQLCipher  
+- [ ] Reject-to-queue rules; threat-model + lawyer review  
 
-### Sync / backend / EMR (later)
-- [ ] Consent-gated sync queue → India-region APIs
-- [ ] EMR-ready patient registry UI (schema already stubbed in SQL)
-- [ ] Play internal testing track  
+### Sync & data flywheel
+- [ ] sync_queue → ingest-api → curated corpus → transparency UI  
+
+### LLM packaging & model enhancement
+- [ ] Device-tier detection; optional on-device GGUF for capable phones  
+- [ ] Fine-tune/adapters only after consented scrubbed corpora  
+- [ ] JNI llama.cpp; signed OTA  
+
+### EMR / distribution (later)
+- [ ] Patient registry; Play internal testing; India scale-up  
 
 ---
 
-## Doc map (what to keep reading)
+## Doc map
 
 | Doc | Role |
 |---|---|
-| **This file** | Current status + run + backlog |
-| [`docs/architecture/ADR-001-stack.md`](architecture/ADR-001-stack.md) | Stack lock (Flutter, SQLite, FTS-first) |
-| [`docs/architecture/ADR-002-local-llm-poc.md`](architecture/ADR-002-local-llm-poc.md) | Local sidecar LLM for notes |
-| [`docs/security/threat-model-v0.1.md`](security/threat-model-v0.1.md) | Offline MVP threats |
-| [`qa/test-plan-p0.md`](../qa/test-plan-p0.md) | Detailed P0/P1 test cases |
-| [`clinical-llm-technical-architecture.md`](../clinical-llm-technical-architecture.md) | Full 36-week / EMR target architecture |
-| [`clinical-llm-venture-analysis.md`](../clinical-llm-venture-analysis.md) | Business / venture context |
+| **This file** | Current status + run + backlog + flywheel thesis |
+| [`docs/architecture/ADR-001-stack.md`](architecture/ADR-001-stack.md) | Stack lock |
+| [`docs/architecture/ADR-002-local-llm-poc.md`](architecture/ADR-002-local-llm-poc.md) | Local sidecar LLM (PC) |
+| [`docs/architecture/ADR-003-chat-rag.md`](architecture/ADR-003-chat-rag.md) | Chat RAG-first |
+| [`docs/security/threat-model-v0.1.md`](security/threat-model-v0.1.md) | Offline threats |
+| [`qa/test-plan-p0.md`](../qa/test-plan-p0.md) | Detailed test cases |
+| [`clinical-llm-technical-architecture.md`](../clinical-llm-technical-architecture.md) | Long-horizon architecture |
+| [`clinical-llm-venture-analysis.md`](../clinical-llm-venture-analysis.md) | Venture context |
 
-**Do not recreate** per-sprint checkpoint or duplicate demo runbooks — update **this** file instead.
+**Do not recreate** per-sprint checkpoint runbooks — update **this** file instead.

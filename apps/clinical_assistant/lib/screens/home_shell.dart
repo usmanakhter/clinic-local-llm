@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import '../data/repositories.dart';
 import '../theme/app_theme.dart';
 import '../widgets/disclaimer_banner.dart';
+import 'chat_screen.dart';
 import 'consent_screen.dart';
 import 'drug_search_screen.dart';
 import 'guidelines_screen.dart';
 import 'interaction_screen.dart';
 import 'note_drafter_screen.dart';
+import 'activity_screen.dart';
 
 class HomeShell extends StatefulWidget {
   const HomeShell({
@@ -34,7 +36,9 @@ class _HomeShellState extends State<HomeShell> {
     'Drug Search',
     'Interactions',
     'Guidelines',
+    'Chat',
     'Note Draft',
+    'Activity',
     'Consent',
   ];
 
@@ -44,7 +48,9 @@ class _HomeShellState extends State<HomeShell> {
       DrugSearchScreen(repository: widget.repository),
       InteractionScreen(repository: widget.repository),
       GuidelinesScreen(repository: widget.repository),
+      ChatScreen(repository: widget.repository),
       NoteDrafterScreen(repository: widget.repository),
+      ActivityScreen(repository: widget.repository),
       ConsentScreen(
         embedded: true,
         onChanged: widget.onOpenConsent,
@@ -107,12 +113,22 @@ class _HomeShellState extends State<HomeShell> {
           NavigationDestination(
             icon: Icon(Icons.menu_book_outlined),
             selectedIcon: Icon(Icons.menu_book),
-            label: 'Guidelines',
+            label: 'Guides',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.chat_outlined),
+            selectedIcon: Icon(Icons.chat),
+            label: 'Chat',
           ),
           NavigationDestination(
             icon: Icon(Icons.note_alt_outlined),
             selectedIcon: Icon(Icons.note_alt),
             label: 'Notes',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.history_outlined),
+            selectedIcon: Icon(Icons.history),
+            label: 'Activity',
           ),
           NavigationDestination(
             icon: Icon(Icons.privacy_tip_outlined),

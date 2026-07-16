@@ -1,0 +1,33 @@
+name: qa-fixtures
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  python-evals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Seed SQLite from Nepal fixtures
+        run: python data/scripts/seed_nepal_db.py
+      - name: Interaction + PII fixture evals
+        run: python qa/run_fixture_evals.py
+      - name: Gold eval queries (≥70% gate)
+        run: python qa/run_eval_queries.py
+      - name: Domain smoke
+        run: python packages/clinical_core_py/smoke_test.py
+      - name: Retrieve API smoke
+        run: python packages/clinical_core_py/retrieve_smoke.py
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-reports
+          path: artifacts/
+          if-no-files-found: ignore
