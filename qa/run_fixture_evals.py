@@ -270,8 +270,8 @@ def write_report(
         [
             "## Exit policy",
             "",
-            "- Process exit **0** iff interaction catalog integrity PASS.",
-            "- Scrubber recall is informational until NER/on-device scrub lands.",
+            "- Process exit **0** iff interaction catalog integrity PASS **and** scrubber recall ≥99%.",
+            "- Production sync requires scrub gate before upload.",
             "",
         ]
     )
@@ -327,7 +327,7 @@ def main() -> int:
         f"tokens={pii['tokens_removed']}/{pii['tokens_expected']} "
         f"cases_pass={pii['cases_pass']}/{pii['case_count']}"
     )
-    _safe_print("(scrubber score reported only -- does not fail exit)")
+    _safe_print("(scrubber recall must be >= 99% for exit 0)")
 
     if queries:
         _safe_print("=== Eval queries ===")
@@ -335,7 +335,8 @@ def main() -> int:
 
     _safe_print(f"Report written: {REPORT_PATH}")
 
-    return 0 if interaction["ok"] else 1
+    scrub_ok = pii["recall_pct"] >= 99.0
+    return 0 if interaction["ok"] and scrub_ok else 1
 
 
 if __name__ == "__main__":

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../data/repositories.dart';
+import '../data/sync_worker.dart';
 import '../theme/app_theme.dart';
 import '../widgets/disclaimer_banner.dart';
-import 'activity_screen.dart';
 import 'chat_screen.dart';
 import 'drug_search_screen.dart';
 import 'guidelines_screen.dart';
 import 'interaction_screen.dart';
 import 'note_drafter_screen.dart';
 import 'patients_screen.dart';
+import 'sync_transparency_screen.dart';
 
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key, required this.repository});
@@ -28,10 +29,16 @@ class _HomeShellState extends State<HomeShell> {
     'Interactions',
     'Guidelines',
     'Chat',
-    'Note Draft',
+    'Notes',
     'Patients',
-    'Past Notes',
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    // Sync is on after Terms — best-effort upload of pending scrubbed queue.
+    SyncWorker.flushPending();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,18 +49,28 @@ class _HomeShellState extends State<HomeShell> {
       ChatScreen(repository: widget.repository),
       NoteDrafterScreen(repository: widget.repository),
       PatientsScreen(repository: widget.repository),
-      ActivityScreen(repository: widget.repository),
     ];
 
     return Scaffold(
       appBar: AppBar(
         title: Text(_titles[_index]),
         actions: [
+          IconButton(
+            tooltip: 'Sync transparency',
+            icon: const Icon(Icons.cloud_queue_outlined),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => const SyncTransparencyScreen(),
+                ),
+              );
+            },
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 12),
             child: Center(
               child: Text(
-                'Terms accepted · sync allowed',
+                'Terms accepted · sync on',
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       color: Colors.white70,
                     ),
@@ -117,11 +134,6 @@ class _HomeShellState extends State<HomeShell> {
             icon: Icon(Icons.people_outline),
             selectedIcon: Icon(Icons.people),
             label: 'Patients',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.notes_outlined),
-            selectedIcon: Icon(Icons.notes),
-            label: 'Past Notes',
           ),
         ],
       ),

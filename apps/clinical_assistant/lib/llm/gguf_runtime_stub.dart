@@ -24,12 +24,12 @@ class _WebGgufRuntime implements GgufLlamaRuntime {
 
   @override
   String? get lastError =>
-      'No local model found. Neural Chat requires Windows or Android '
+      'No local model found. Neural Chat requires Linux, Windows, or Android '
       'with a GGUF file — Flutter web is not supported in this build.';
 
   @override
   Future<String> expectedModelsPathHint() async =>
-      'native Windows/Android Documents/$relativeModelsDir/';
+      'native Linux/Windows/Android Documents/$relativeModelsDir/';
 
   @override
   Future<String?> resolveModelPath() async => null;

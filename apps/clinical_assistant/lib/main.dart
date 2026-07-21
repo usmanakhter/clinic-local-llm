@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'data/db.dart';
+import 'data/desktop_sqlite_stub.dart'
+    if (dart.library.io) 'data/desktop_sqlite_io.dart' as desktop_sqlite;
 import 'data/patient_store.dart';
 import 'data/repositories.dart';
 import 'data/session_store.dart';
@@ -12,6 +14,7 @@ import 'theme/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  desktop_sqlite.initDesktopSqlite();
 
   FlutterError.onError = (details) {
     FlutterError.presentError(details);
@@ -73,8 +76,8 @@ class _BootAppState extends State<_BootApp> {
             padding: const EdgeInsets.all(24),
             child: SelectableText(
               'App failed to start.\n\n$_error\n\n'
-              'Try: flutter run -d chrome\n'
-              'Then hard-refresh (Ctrl+Shift+R).',
+              'Try: flutter run -d linux (or chrome for web).\n'
+              'Web: hard-refresh (Ctrl+Shift+R).',
             ),
           ),
         ),

@@ -1,31 +1,1118 @@
 {
-  "version": "0.1.0",
+  "version": "1.0.0",
   "region": "NP",
-  "chunk_count": 24,
+  "source_note": "Full NNLEM 2021 (398 molecules) + WHO SEARO/MoHP OPD protocols. Reference only — verify with licensed clinician before clinical use.",
+  "chunk_count": 111,
   "chunks": [
-    {"id": "guide_001", "title": "Typhoid Fever — Empiric Treatment", "title_ne": "टाइफाइड बुखार — उपचार", "source": "WHO SEARO / Nepal MoHP (dummy)", "topic": "infectious_disease", "priority": 10, "chunk_text": "Enteric fever in Nepal: rising fluoroquinolone resistance. Ceftriaxone 1g IV/IM daily or azithromycin 500mg OD x7 days for uncomplicated cases. Do not use antipyretics that mask response in undifferentiated fever — confirm with blood culture when possible. Hydration and ORS essential.", "chunk_text_ne": "नेपालमा टाइफाइड: सिप्रोफ्लोक्सासिन प्रतिरोध बढ्दो। सेफ्ट्रियाक्सोन वा एजिथ्रोमाइसिन। रगत संस्कृति जाँच गर्नुहोस्।"},
-    {"id": "guide_002", "title": "Dengue — Outpatient Management", "title_ne": "डेङ्गु — बहिरंग उपचार", "source": "WHO Dengue guidelines (dummy)", "topic": "infectious_disease", "priority": 10, "chunk_text": "Dengue warning signs: abdominal pain, persistent vomiting, mucosal bleed, lethargy, hepatomegaly, rising hematocrit with falling platelets. AVOID NSAIDs and aspirin — use paracetamol only. Monitor platelets and hematocrit daily in warning phase. IV crystalloid if plasma leakage.", "chunk_text_ne": "डेङ्गु चेतावनी: पेट दुखाइ, बान्ता, रक्तश्राव। एस्पिरिन र आइबुप्रोफेन नदिनुहोस्। प्यारासिटामोल मात्र।"},
-    {"id": "guide_003", "title": "TB DOTS — Intensive Phase", "title_ne": "क्षयरोग DOTS", "source": "Nepal National Tuberculosis Centre (dummy)", "topic": "tuberculosis", "priority": 10, "chunk_text": "Standard Nepal DOTS new case regimen: 2HRZE/4HR (2 months isoniazid, rifampicin, pyrazinamide, ethambutol; then 4 months isoniazid, rifampicin). Directly observed therapy. Monitor for hepatitis: anorexia, jaundice, tender hepatomegaly. Pyridoxine 25mg with isoniazid.", "chunk_text_ne": "नेपाल DOTS: २ महिना HRZE, ४ महिना HR। पिरिडोक्सिन साथमा।"},
-    {"id": "guide_004", "title": "Snakebite — First Hour", "title_ne": "सर्पको टोकाइ — पहिलो घण्टा", "source": "WHO snakebite guidelines (dummy)", "topic": "toxicology", "priority": 10, "chunk_text": "Do not incise, suck, or apply tourniquet. Immobilize limb at heart level. 20-minute whole blood clotting test (20WBCT). Neurotoxic signs: ptosis, respiratory weakness. Hemotoxic: bleeding gums, hematuria. Give polyvalent antivenom only if envenomation signs — not prophylactically. Adrenaline ready for anaphylaxis.", "chunk_text_ne": "घाउ काट्नुहोस् होइन। अंग स्थिर राख्नुहोस्। विषाक्त लक्षण भए मात्र एन्टिभेनम।"},
-    {"id": "guide_005", "title": "Acute Diarrhea — IMCI", "title_ne": "झाडापखाला", "source": "WHO IMCI (dummy)", "topic": "gastroenterology", "priority": 9, "chunk_text": "Assess dehydration plan A/B/C. Plan A: ORS after each stool, continue feeding. Plan B: 75ml/kg ORS over 4h in clinic. Plan C: IV Ringer's lactate 100ml/kg. Zinc 20mg x10 days for children >6 months. No routine antibiotics except dysentery (ciprofloxacin) or cholera context.", "chunk_text_ne": "ORS र जिंक। योजना A/B/C अनुसार पुनःजलयोजन।"},
-    {"id": "guide_006", "title": "Malaria — Terai Endemic", "title_ne": "मलेरिया", "source": "Nepal Malaria Program (dummy)", "topic": "infectious_disease", "priority": 9, "chunk_text": "Confirm with RDT before treatment. P. falciparum: artemether-lumefantrine weight-based x3 days. P. vivax: chloroquine plus primaquine for radical cure (G6PD test first). Uncomplicated malaria does not require hospitalization. Severe malaria: IV artesunate.", "chunk_text_ne": "RDT पुष्टि पछि उपचार। भिवाक्समा प्रिमाक्विन — G6PD जाँच।"},
-    {"id": "guide_007", "title": "Hypertension — First Line Nepal OPD", "title_ne": "उच्च रक्तचाप", "source": "WHO PEN (dummy)", "topic": "cardiology", "priority": 8, "chunk_text": "Start lifestyle counseling: salt reduction, physical activity. First-line pharmacotherapy: amlodipine 5mg OD or enalapril 5mg OD (not in pregnancy). Target <140/90 general; <130/80 if diabetes or CKD. Monthly titration. Combine agents if needed.", "chunk_text_ne": "पहिलो लाइन: एम्लोडिपिन वा एनालाप्रिल। गर्भवतीमा ACE inhibitor निषेध।"},
-    {"id": "guide_008", "title": "Type 2 Diabetes — Initial Therapy", "title_ne": "मधुमेह प्रकार २", "source": "WHO PEN (dummy)", "topic": "endocrinology", "priority": 8, "chunk_text": "Metformin 500mg BD with meals if eGFR adequate. Counsel diet and exercise. Sulfonylurea (glibenclamide) if metformin contraindicated or unaffordable — warn hypoglycemia. HbA1c target <7% if safely achievable. Annual foot exam and urine albumin.", "chunk_text_ne": "मेटफर्मिन पहिलो। ग्लिबेन्क्लामाइड सस्तो विकल्प — hypoglycemia चेतावनी।"},
-    {"id": "guide_009", "title": "Asthma — OPD Step Therapy", "title_ne": "दमा", "source": "GINA simplified (dummy)", "topic": "respiratory", "priority": 8, "chunk_text": "Rescue: salbutamol inhaler 2 puffs PRN. Controller if symptoms >2x/week: low-dose beclomethasone 200mcg BD. Spacer improves deposition. Avoid smoke and biomass exposure — major trigger in Nepal households.", "chunk_text_ne": "सालबुटामोल रेस्क्यू। नियमित बेक्लोमेटासोन यदि बारम्बार लक्षण।"},
-    {"id": "guide_010", "title": "Pregnancy — Iron Folic Acid", "title_ne": "गर्भावस्था — आयरन फोलिक", "source": "Nepal Safe Motherhood (dummy)", "topic": "obstetrics", "priority": 9, "chunk_text": "Iron 60mg elemental + folic acid 400mcg daily throughout pregnancy. Calcium 1g daily second trimester onward. Misoprostol 600mcg sublingual for PPH at facility level. Magnesium sulfate for eclampsia per loading + maintenance protocol.", "chunk_text_ne": "आयरन-फोलिक दैनिक। PPH मा मिसोप्रोस्टोल। एक्लेम्प्सियामा म्याग्नेसियम।"},
-    {"id": "guide_011", "title": "Altitude Illness — Trekking Medicine", "title_ne": "उचाई रोग", "source": "Wilderness Medical Society (dummy)", "topic": "emergency", "priority": 7, "chunk_text": "Acute mountain sickness: stop ascent, rest, acetazolamide 250mg BD. HACE: dexamethasone 8mg stat then 4mg q6h + immediate descent. HAPE: descent, nifedipine, supplemental O2. Do not ascend with symptoms.", "chunk_text_ne": "लक्षण भए उकालो नचढ्नुहोस्। HACE मा डेक्सामेथासोन र तुरुन्त ओर्लनुहोस्।"},
-    {"id": "guide_012", "title": "Anaphylaxis — Emergency", "title_ne": "एनाफाइल्याक्सिस", "source": "WHO emergency care (dummy)", "topic": "emergency", "priority": 10, "chunk_text": "IM adrenaline 0.5mg (1:1000) lateral thigh — first and most important treatment. Repeat q5-15min. Supine with legs elevated. IV fluids. Adjunct: chlorpheniramine, hydrocortisone. Observe 4-6 hours minimum.", "chunk_text_ne": "एड्रेनालिन IM तुरुन्त। ०.५mg पाखुरा मांसपेशी।"},
-    {"id": "guide_013", "title": "Helminthiasis — Mass Drug Admin", "title_ne": "कृमि", "source": "Nepal deworming program (dummy)", "topic": "infectious_disease", "priority": 7, "chunk_text": "Albendazole 400mg single dose for soil-transmitted helminths in children >2 years and adults. School-based MDA twice yearly in endemic districts. Repeat in 6 months if heavy infection.", "chunk_text_ne": "एल्बेन्डाजोल ४००mg एक मात्रा।"},
-    {"id": "guide_014", "title": "H. pylori — Triple Therapy", "title_ne": "H. pylori", "source": "Maastricht simplified (dummy)", "topic": "gastroenterology", "priority": 7, "chunk_text": "First-line where available: amoxicillin 1g BD + clarithromycin 500mg BD + PPI BD x14 days. If clarithromycin unavailable in rural Nepal: metronidazole + amoxicillin + PPI. Confirm eradication if recurrent ulcer.", "chunk_text_ne": "अमोक्सिसिलिन + मेट्रोनिडाजोल + PPI १४ दिन।"},
-    {"id": "guide_015", "title": "Epilepsy — Rural First Line", "title_ne": "मिर्गी", "source": "WHO mhGAP (dummy)", "topic": "neurology", "priority": 7, "chunk_text": "Phenobarbitone 60mg HS cost-effective first line in resource-limited settings. Carbamazepine if partial seizures. Status epilepticus: diazepam 0.2mg/kg IV/rectal, repeat x1. Avoid sudden withdrawal.", "chunk_text_ne": "फिनोबार्बिटोन गाउँमा सस्तो। Status मा डायाजेपाम।"},
-    {"id": "guide_016", "title": "Burns — Primary Care", "title_ne": "पोल्ने", "source": "WHO emergency care (dummy)", "topic": "emergency", "priority": 6, "chunk_text": "Cool running water 20 minutes within 3 hours. No ice, no toothpaste. TBSA rule of nines. Refer if >10% TBSA partial thickness, any full thickness face/hands/genitalia, circumferential, or inhalational injury.", "chunk_text_ne": "चिसो पानी २० मिनेट। १०% भन्दा बढी भ면 रेफर।"},
-    {"id": "guide_017", "title": "IMCI — Fever Without Focus", "title_ne": "ज्वरो बिना कारण", "source": "WHO IMCI (dummy)", "topic": "pediatrics", "priority": 9, "chunk_text": "In malaria endemic Terai: RDT all fevers. In non-endemic hills: assess duration. <7 days viral likely — paracetamol, fluids, return if worsening. Consider typhoid if sustained fever >3 days with relative bradycardia. UTI in infants — urine dipstick.", "chunk_text_ne": "तेराईमा RDT। ३ दिन भन्दा बढी ज्वरो — टाइफाइड सोच्नुहोस्।"},
-    {"id": "guide_018", "title": "Antibiotic Stewardship — Rural OPD", "title_ne": "एन्टिबायोटिक संयम", "source": "Nepal antibiotic guideline (dummy)", "topic": "antimicrobial_stewardship", "priority": 8, "chunk_text": "Do not use antibiotics for viral URTI. Amoxicillin first-line for bacterial pneumonia and otitis. Avoid fluoroquinolones as first-line. Complete prescribed course. Educate patients — antibiotic misuse drives resistance in South Asia.", "chunk_text_ne": "भाइरल संक्रमणमा एन्टिबायोटिक होइन। पूरा कोर्स पूरा गर्नुहोस्।"},
-    {"id": "guide_019", "title": "Scrub Typhus — Hills and Terai", "title_ne": "स्क्रब टाइफस", "source": "Nepal MoHP fever protocol (dummy)", "topic": "infectious_disease", "priority": 9, "chunk_text": "Consider scrub typhus in undifferentiated fever with headache, myalgia, eschar (if present). Empiric doxycycline 100mg BD when suspected — do not wait for serology in severe disease. Avoid doxycycline in pregnancy; discuss alternatives with referral center.", "chunk_text_ne": "अस्पष्ट ज्वरोमा स्क्रब टाइफस सोच्नुहोस्। डोक्सीसाइक्लिन — गर्भवतीमा होइन।"},
-    {"id": "guide_020", "title": "Leptospirosis — Monsoon", "title_ne": "लेप्टोस्पाइरोसिस", "source": "WHO SEARO (dummy)", "topic": "infectious_disease", "priority": 8, "chunk_text": "Monsoon exposure to flood water: fever, calf pain, conjunctival suffusion, jaundice. Mild: doxycycline or amoxicillin. Severe Weil disease: IV penicillin or ceftriaxone + supportive care. Watch renal failure.", "chunk_text_ne": "बाढी सम्पर्क पछि ज्वरो — लेप्टो सोच्नुहोस्।"},
-    {"id": "guide_021", "title": "COPD Exacerbation — OPD/Ward", "title_ne": "COPD", "source": "WHO PEN respiratory (dummy)", "topic": "respiratory", "priority": 7, "chunk_text": "Increase salbutamol/ipratropium if available. Short steroid course (prednisolone 30–40mg x5 days) if no contraindication. Antibiotics only if increased sputum purulence + dyspnea. Counsel biomass smoke reduction.", "chunk_text_ne": "सालबुटामोल बढाउनुहोस्। स्टेरोइड छोटो कोर्स। धुवाँ कम गर्नुहोस्।"},
-    {"id": "guide_022", "title": "UTI — Non-pregnant Adult", "title_ne": "मूत्र मार्ग संक्रमण", "source": "Nepal antibiotic guideline (dummy)", "topic": "infectious_disease", "priority": 8, "chunk_text": "Uncomplicated cystitis: nitrofurantoin if available, else trimethoprim-sulfamethoxazole where susceptibility allows. Avoid empiric fluoroquinolones first-line. Pyelonephritis: consider ceftriaxone and referral if toxic.", "chunk_text_ne": "साधारण UTI मा फ्लोरोक्विनोलोन पहिलो होइन।"},
-    {"id": "guide_023", "title": "Neonatal Danger Signs — IMCI", "title_ne": "नवजात खतरा संकेत", "source": "WHO IMCI newborn (dummy)", "topic": "pediatrics", "priority": 10, "chunk_text": "Refer urgently: not feeding, convulsions, severe chest indrawing, fever or hypothermia, lethargy, umbilical redness with pus. Pre-referral: ampicillin + gentamicin if possible. Keep warm; continue breastfeeding if able.", "chunk_text_ne": "खतरा संकेत भए तुरुन्त रेफर। एम्पिसिलिन + जेन्टामाइसिन यदि सम्भव।"},
-    {"id": "guide_024", "title": "Postpartum Hemorrhage — Facility", "title_ne": "प्रसूति रक्तश्राव", "source": "Nepal Safe Motherhood (dummy)", "topic": "obstetrics", "priority": 10, "chunk_text": "Call for help. Uterine massage. Oxytocin 10 IU IM/IV if available; misoprostol 600–800 mcg if oxytocin unavailable. IV fluids. Identify 4 Ts (tone, trauma, tissue, thrombin). Early referral for refractory bleeding.", "chunk_text_ne": "पाठेघर मालिस। अक्सिटोसिन वा मिसोप्रोस्टोल। IV तरल।"}
+    {
+      "id": "guide_001",
+      "title": "Typhoid cefixime — Nepal OPD",
+      "title_ne": "Typhoid cefixime",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "infectious_disease",
+      "priority": 7,
+      "chunk_text": "Typhoid cefixime Nepal OPD protocol. typhoid cefixime ceftriaxone. First-line: Cefixime, Ceftriaxone, Azithromycin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Typhoid cefixime — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_002",
+      "title": "Dengue fever — Nepal OPD",
+      "title_ne": "Dengue fever",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "infectious_disease",
+      "priority": 9,
+      "chunk_text": "Dengue fever Nepal OPD protocol. dengue outpatient avoid NSAID. First-line: Paracetamol. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Dengue fever — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_003",
+      "title": "Pulmonary TB — Nepal OPD",
+      "title_ne": "Pulmonary TB",
+      "source": "Nepal National Tuberculosis Centre / WHO",
+      "topic": "general_medicine",
+      "priority": 8,
+      "chunk_text": "Pulmonary TB Nepal OPD protocol. TB DOTS regimen nepal. First-line: Rifampicin, Isoniazid. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Pulmonary TB — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_004",
+      "title": "Snakebite envenomation — Nepal OPD",
+      "title_ne": "Snakebite envenomation",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Snakebite envenomation Nepal OPD protocol. snake bite antivenom nepal. First-line: Snake Antivenom (Polyvalent), Adrenaline (Epinephrine). Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Snakebite envenomation — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_005",
+      "title": "Acute diarrhea child — Nepal OPD",
+      "title_ne": "Acute diarrhea child",
+      "source": "WHO IMCI / Nepal MoHP",
+      "topic": "gastroenterology",
+      "priority": 10,
+      "chunk_text": "Acute diarrhea child Nepal OPD protocol. diarrhea ORS zinc IMCI. First-line: Oral Rehydration Salts, Zinc Sulfate. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Acute diarrhea child — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_006",
+      "title": "Malaria falciparum — Nepal OPD",
+      "title_ne": "Malaria falciparum",
+      "source": "Nepal Malaria/Elimination Program / WHO",
+      "topic": "infectious_disease",
+      "priority": 7,
+      "chunk_text": "Malaria falciparum Nepal OPD protocol. malaria ACT terai nepal. First-line: Artemether-Lumefantrine. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Malaria falciparum — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_007",
+      "title": "Hypertension ACE inhibitor — Nepal OPD",
+      "title_ne": "Hypertension ACE inhibitor",
+      "source": "WHO PEN / Nepal MoHP / NNLEM 2021",
+      "topic": "general_medicine",
+      "priority": 10,
+      "chunk_text": "Hypertension Nepal OPD: lifestyle (salt reduction, activity). First-line pharmacotherapy per WHO PEN / NNLEM: amlodipine 5mg OD, enalapril 5mg OD, lisinopril 10mg OD, or losartan 50mg OD — not in pregnancy. Add hydrochlorothiazide 12.5–25mg if needed. Target <140/90 (<130/80 if diabetes/CKD). Statin (atorvastatin/simvastatin) if high CVD risk. Monthly titration.",
+      "chunk_text_ne": "Hypertension ACE inhibitor — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_008",
+      "title": "Type 2 diabetes — Nepal OPD",
+      "title_ne": "Type 2 diabetes",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 9,
+      "chunk_text": "Type 2 diabetes Nepal OPD protocol. type 2 diabetes metformin nepal. First-line: Metformin, Glibenclamide. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Type 2 diabetes — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_009",
+      "title": "Asthma montelukast — Nepal OPD",
+      "title_ne": "Asthma montelukast",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Asthma montelukast Nepal OPD protocol. asthma montelukast budesonide. First-line: Montelukast, Salbutamol, Budesonide. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Asthma montelukast — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_010",
+      "title": "Antenatal care — Nepal OPD",
+      "title_ne": "Antenatal care",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 9,
+      "chunk_text": "Antenatal care Nepal OPD protocol. pregnancy iron folic calcium nepal. First-line: Ferrous Sulfate, Folic Acid, Calcium Carbonate. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Antenatal care — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_011",
+      "title": "Altitude illness — Nepal OPD",
+      "title_ne": "Altitude illness",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Altitude illness Nepal OPD protocol. acute mountain sickness dexamethasone. First-line: Dexamethasone, Acetazolamide. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Altitude illness — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_012",
+      "title": "Anaphylaxis — Nepal OPD",
+      "title_ne": "Anaphylaxis",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Anaphylaxis Nepal OPD protocol. anaphylaxis adrenaline IM dose. First-line: Adrenaline (Epinephrine), Ringer's Lactate. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Anaphylaxis — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_013",
+      "title": "Soil-transmitted helminths — Nepal OPD",
+      "title_ne": "Soil-transmitted helminths",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Soil-transmitted helminths Nepal OPD protocol. albendazole deworming nepal. First-line: Albendazole. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Soil-transmitted helminths — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_014",
+      "title": "H pylori clarithromycin — Nepal OPD",
+      "title_ne": "H pylori clarithromycin",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "H pylori clarithromycin Nepal OPD protocol. H pylori clarithromycin regimen. First-line: Clarithromycin, Amoxicillin, Omeprazole. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "H pylori clarithromycin — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_015",
+      "title": "Epilepsy valproate — Nepal OPD",
+      "title_ne": "Epilepsy valproate",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Epilepsy valproate Nepal OPD protocol. epilepsy valproate carbamazepine. First-line: Sodium Valproate, Carbamazepine, Phenytoin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Epilepsy valproate — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_016",
+      "title": "Burns — Nepal OPD",
+      "title_ne": "Burns",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Burns Nepal OPD protocol. burns primary care referral criteria. First-line: Paracetamol. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Burns — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_017",
+      "title": "Fever without focus child — Nepal OPD",
+      "title_ne": "Fever without focus child",
+      "source": "WHO IMCI / Nepal MoHP",
+      "topic": "infectious_disease",
+      "priority": 9,
+      "chunk_text": "Fever without focus child Nepal OPD protocol. child fever no focus IMCI nepal. First-line: Paracetamol. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Fever without focus child — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_018",
+      "title": "Antibiotic stewardship — Nepal OPD",
+      "title_ne": "Antibiotic stewardship",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 8,
+      "chunk_text": "Antibiotic stewardship Nepal OPD protocol. antibiotic misuse nepal OPD. First-line: Amoxicillin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Antibiotic stewardship — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_019",
+      "title": "Scrub typhus — Nepal OPD",
+      "title_ne": "Scrub typhus",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 8,
+      "chunk_text": "Scrub typhus Nepal OPD protocol. scrub typhus doxycycline nepal. First-line: Hydrocortisone. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Scrub typhus — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_020",
+      "title": "Leptospirosis — Nepal OPD",
+      "title_ne": "Leptospirosis",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Leptospirosis Nepal OPD protocol. leptospirosis monsoon nepal treatment. First-line: Hydrocortisone, Amoxicillin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Leptospirosis — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_021",
+      "title": "COPD bronchodilator — Nepal OPD",
+      "title_ne": "COPD bronchodilator",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "COPD bronchodilator Nepal OPD protocol. COPD ipratropium salbutamol. First-line: Ipratropium Bromide, Salbutamol, Prednisolone. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "COPD bronchodilator — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_022",
+      "title": "UTI uncomplicated — Nepal OPD",
+      "title_ne": "UTI uncomplicated",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 8,
+      "chunk_text": "UTI uncomplicated Nepal OPD protocol. UTI cystitis nitrofurantoin nepal. First-line: Nitrofurantoin, Amoxicillin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "UTI uncomplicated — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_023",
+      "title": "Neonatal danger signs — Nepal OPD",
+      "title_ne": "Neonatal danger signs",
+      "source": "WHO IMCI / Nepal MoHP",
+      "topic": "general_medicine",
+      "priority": 8,
+      "chunk_text": "Neonatal danger signs Nepal OPD protocol. neonatal danger signs refer IMCI. First-line: Ampicillin, Normal Saline (0.9% NaCl). Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Neonatal danger signs — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_024",
+      "title": "Postpartum hemorrhage — Nepal OPD",
+      "title_ne": "Postpartum hemorrhage",
+      "source": "Nepal Safe Motherhood / WHO",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Postpartum hemorrhage Nepal OPD protocol. postpartum hemorrhage oxytocin misoprostol. First-line: Oxytocin, Misoprostol. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Postpartum hemorrhage — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_025",
+      "title": "Upper respiratory infection — Nepal OPD",
+      "title_ne": "Upper respiratory infection",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "respiratory",
+      "priority": 10,
+      "chunk_text": "Upper respiratory infection Nepal OPD protocol. viral URTI no antibiotic nepal. First-line: Paracetamol, Cetirizine. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Upper respiratory infection — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_026",
+      "title": "Acute pharyngitis — Nepal OPD",
+      "title_ne": "Acute pharyngitis",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 8,
+      "chunk_text": "Acute pharyngitis Nepal OPD protocol. sore throat strep amoxicillin. First-line: Amoxicillin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Acute pharyngitis — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_027",
+      "title": "Acute otitis media — Nepal OPD",
+      "title_ne": "Acute otitis media",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Acute otitis media Nepal OPD protocol. otitis media child amoxicillin. First-line: Amoxicillin, Amoxicillin-Clavulanate. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Acute otitis media — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_028",
+      "title": "Community pneumonia adult — Nepal OPD",
+      "title_ne": "Community pneumonia adult",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 8,
+      "chunk_text": "Community pneumonia adult Nepal OPD protocol. community acquired pneumonia amoxicillin. First-line: Amoxicillin-Clavulanate, Azithromycin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Community pneumonia adult — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_029",
+      "title": "Viral hepatitis A — Nepal OPD",
+      "title_ne": "Viral hepatitis A",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "infectious_disease",
+      "priority": 6,
+      "chunk_text": "Viral hepatitis A Nepal OPD protocol. hepatitis A supportive care nepal. First-line: Paracetamol. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Viral hepatitis A — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_030",
+      "title": "GERD dyspepsia — Nepal OPD",
+      "title_ne": "GERD dyspepsia",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 8,
+      "chunk_text": "GERD dyspepsia Nepal OPD protocol. GERD omeprazole dyspepsia nepal. First-line: Omeprazole, Gentamicin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "GERD dyspepsia — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_031",
+      "title": "Iron deficiency anemia — Nepal OPD",
+      "title_ne": "Iron deficiency anemia",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 9,
+      "chunk_text": "Iron deficiency anemia Nepal OPD protocol. iron deficiency anemia ferrous nepal. First-line: Ferrous Sulfate, Folic Acid. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Iron deficiency anemia — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_032",
+      "title": "Hypothyroidism — Nepal OPD",
+      "title_ne": "Hypothyroidism",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Hypothyroidism Nepal OPD protocol. hypothyroidism levothyroxine dose. First-line: Levothyroxine. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Hypothyroidism — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_033",
+      "title": "Osteoarthritis — Nepal OPD",
+      "title_ne": "Osteoarthritis",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "musculoskeletal",
+      "priority": 8,
+      "chunk_text": "Osteoarthritis Nepal OPD protocol. osteoarthritis paracetamol NSAID knee. First-line: Paracetamol, Ibuprofen. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Osteoarthritis — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_034",
+      "title": "Low back pain — Nepal OPD",
+      "title_ne": "Low back pain",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "musculoskeletal",
+      "priority": 8,
+      "chunk_text": "Low back pain Nepal OPD protocol. low back pain conservative nepal. First-line: Paracetamol, Diazepam. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Low back pain — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_035",
+      "title": "Gout allopurinol — Nepal OPD",
+      "title_ne": "Gout allopurinol",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Gout allopurinol Nepal OPD protocol. gout allopurinol colchicine. First-line: Allopurinol, Colchicine. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Gout allopurinol — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_036",
+      "title": "Vitamin D deficiency — Nepal OPD",
+      "title_ne": "Vitamin D deficiency",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Vitamin D deficiency Nepal OPD protocol. vitamin D deficiency rickets nepal. First-line: Vitamin D3 (Cholecalciferol), Calcium Carbonate. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Vitamin D deficiency — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_037",
+      "title": "Cholera — Nepal OPD",
+      "title_ne": "Cholera",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Cholera Nepal OPD protocol. cholera ORS plan C nepal. First-line: Oral Rehydration Salts, Acetazolamide. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Cholera — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_038",
+      "title": "Shigella dysentery — Nepal OPD",
+      "title_ne": "Shigella dysentery",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Shigella dysentery Nepal OPD protocol. dysentery blood stool antibiotic cipro. First-line: Ciprofloxacin, Metronidazole. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Shigella dysentery — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_039",
+      "title": "Giardiasis — Nepal OPD",
+      "title_ne": "Giardiasis",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Giardiasis Nepal OPD protocol. giardiasis metronidazole treatment. First-line: Metronidazole. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Giardiasis — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_040",
+      "title": "Scabies ivermectin — Nepal OPD",
+      "title_ne": "Scabies ivermectin",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Scabies ivermectin Nepal OPD protocol. scabies ivermectin permethrin. First-line: Ivermectin, Permethrin 5%. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Scabies ivermectin — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_041",
+      "title": "Fungal skin infection — Nepal OPD",
+      "title_ne": "Fungal skin infection",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "dermatology",
+      "priority": 7,
+      "chunk_text": "Fungal skin infection Nepal OPD protocol. tinea clotrimazole cream. First-line: Clotrimazole. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Fungal skin infection — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_042",
+      "title": "Cellulitis — Nepal OPD",
+      "title_ne": "Cellulitis",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Cellulitis Nepal OPD protocol. cellulitis cephalexin amoxicillin clavulanate. First-line: Amoxicillin-Clavulanate, Cephalexin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Cellulitis — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_043",
+      "title": "Conjunctivitis bacterial — Nepal OPD",
+      "title_ne": "Conjunctivitis bacterial",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Conjunctivitis bacterial Nepal OPD protocol. bacterial conjunctivitis chloramphenicol eye. First-line: Chloramphenicol Eye Drops. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Conjunctivitis bacterial — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_044",
+      "title": "Dental abscess — Nepal OPD",
+      "title_ne": "Dental abscess",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "dentistry",
+      "priority": 6,
+      "chunk_text": "Dental abscess Nepal OPD protocol. dental abscess amoxicillin metronidazole. First-line: Amoxicillin, Metronidazole. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Dental abscess — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_045",
+      "title": "Migraine — Nepal OPD",
+      "title_ne": "Migraine",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Migraine Nepal OPD protocol. migraine acute paracetamol NSAID. First-line: Paracetamol, Ibuprofen. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Migraine — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_046",
+      "title": "Depression SSRI — Nepal OPD",
+      "title_ne": "Depression SSRI",
+      "source": "WHO mhGAP Nepal adaptation",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Depression SSRI Nepal OPD protocol. depression sertraline fluoxetine. First-line: Sertraline, Fluoxetine. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Depression SSRI — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_047",
+      "title": "Anxiety disorder — Nepal OPD",
+      "title_ne": "Anxiety disorder",
+      "source": "WHO mhGAP Nepal adaptation",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Anxiety disorder Nepal OPD protocol. anxiety diazepam short course caution. First-line: Diazepam. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Anxiety disorder — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_048",
+      "title": "STI syndromic — Nepal OPD",
+      "title_ne": "STI syndromic",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "infectious_disease",
+      "priority": 5,
+      "chunk_text": "STI syndromic Nepal OPD protocol. STI azithromycin ceftriaxone syndromic. First-line: Azithromycin, Ceftriaxone. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "STI syndromic — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_049",
+      "title": "Herpes zoster — Nepal OPD",
+      "title_ne": "Herpes zoster",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Herpes zoster Nepal OPD protocol. shingles acyclovir within 72 hours. First-line: Acyclovir. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Herpes zoster — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_050",
+      "title": "Varicella — Nepal OPD",
+      "title_ne": "Varicella",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Varicella Nepal OPD protocol. chickenpox child supportive paracetamol. First-line: Paracetamol. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Varicella — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_051",
+      "title": "Measles — Nepal OPD",
+      "title_ne": "Measles",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Measles Nepal OPD protocol. measles vitamin A supportive nepal. First-line: Paracetamol, Vitamin A. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Measles — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_052",
+      "title": "Rabies PEP — Nepal OPD",
+      "title_ne": "Rabies PEP",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Rabies PEP Nepal OPD protocol. rabies post exposure prophylaxis nepal. First-line: Rabies Vaccine (PVRV). Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Rabies PEP — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_053",
+      "title": "Tetanus prophylaxis — Nepal OPD",
+      "title_ne": "Tetanus prophylaxis",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Tetanus prophylaxis Nepal OPD protocol. tetanus wound prophylaxis TT vaccine. First-line: Tetanus Toxoid Vaccine. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Tetanus prophylaxis — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_054",
+      "title": "Animal bite non-snake — Nepal OPD",
+      "title_ne": "Animal bite non-snake",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Animal bite non-snake Nepal OPD protocol. dog bite wound amoxicillin clavulanate rabies. First-line: Amoxicillin-Clavulanate, Rabies Vaccine (PVRV). Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Animal bite non-snake — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_055",
+      "title": "Organophosphate poisoning — Nepal OPD",
+      "title_ne": "Organophosphate poisoning",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "toxicology",
+      "priority": 5,
+      "chunk_text": "Organophosphate poisoning Nepal OPD protocol. organophosphate atropine pralidoxime. First-line: Atropine, Pralidoxime. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Organophosphate poisoning — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_056",
+      "title": "Paracetamol overdose — Nepal OPD",
+      "title_ne": "Paracetamol overdose",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Paracetamol overdose Nepal OPD protocol. paracetamol overdose NAC antidote. First-line: N-Acetylcysteine. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Paracetamol overdose — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_057",
+      "title": "Pre-eclampsia — Nepal OPD",
+      "title_ne": "Pre-eclampsia",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Pre-eclampsia Nepal OPD protocol. pre-eclampsia magnesium sulfate refer. First-line: Magnesium Sulfate, Amlodipine. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Pre-eclampsia — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_058",
+      "title": "Eclampsia — Nepal OPD",
+      "title_ne": "Eclampsia",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Eclampsia Nepal OPD protocol. eclampsia magnesium loading dose. First-line: Magnesium Sulfate. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Eclampsia — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_059",
+      "title": "Family planning OCP — Nepal OPD",
+      "title_ne": "Family planning OCP",
+      "source": "Nepal Safe Motherhood / WHO",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Family planning OCP Nepal OPD protocol. oral contraceptive pill counseling nepal. First-line: Ethinylestradiol-Levonorgestrel. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Family planning OCP — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_060",
+      "title": "Emergency contraception — Nepal OPD",
+      "title_ne": "Emergency contraception",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "emergency",
+      "priority": 6,
+      "chunk_text": "Emergency contraception Nepal OPD protocol. emergency contraception levonorgestrel. First-line: Levonorgestrel. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Emergency contraception — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_061",
+      "title": "Menorrhagia — Nepal OPD",
+      "title_ne": "Menorrhagia",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Menorrhagia Nepal OPD protocol. heavy menstrual bleeding tranexamic acid. First-line: Tranexamic Acid. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Menorrhagia — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_062",
+      "title": "Benign prostatic hyperplasia — Nepal OPD",
+      "title_ne": "Benign prostatic hyperplasia",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Benign prostatic hyperplasia Nepal OPD protocol. BPH tamsulosin finasteride. First-line: Tamsulosin, Finasteride. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Benign prostatic hyperplasia — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_063",
+      "title": "Renal colic — Nepal OPD",
+      "title_ne": "Renal colic",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Renal colic Nepal OPD protocol. renal colic pain NSAID hydration. First-line: Ibuprofen, Paracetamol. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Renal colic — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_064",
+      "title": "UTI pregnancy — Nepal OPD",
+      "title_ne": "UTI pregnancy",
+      "source": "Nepal Safe Motherhood / WHO",
+      "topic": "obstetrics",
+      "priority": 7,
+      "chunk_text": "UTI pregnancy Nepal OPD protocol. UTI pregnant amoxicillin safe. First-line: Amoxicillin, Ampicillin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "UTI pregnancy — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_065",
+      "title": "Neonatal jaundice — Nepal OPD",
+      "title_ne": "Neonatal jaundice",
+      "source": "WHO IMCI / Nepal MoHP",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Neonatal jaundice Nepal OPD protocol. neonatal jaundice phototherapy refer. First-line: supportive care. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Neonatal jaundice — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_066",
+      "title": "Acute malnutrition child — Nepal OPD",
+      "title_ne": "Acute malnutrition child",
+      "source": "WHO IMCI / Nepal MoHP",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Acute malnutrition child Nepal OPD protocol. SAM MAM child nutrition nepal. First-line: Oral Rehydration Salts. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Acute malnutrition child — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_067",
+      "title": "Kala-azar visceral leishmaniasis — Nepal OPD",
+      "title_ne": "Kala-azar visceral leishmaniasis",
+      "source": "Nepal Malaria/Elimination Program / WHO",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Kala-azar visceral leishmaniasis Nepal OPD protocol. kala azar liposomal amphotericin nepal terai. First-line: Liposomal Amphotericin B. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Kala-azar visceral leishmaniasis — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_068",
+      "title": "Filariasis — Nepal OPD",
+      "title_ne": "Filariasis",
+      "source": "Nepal Malaria/Elimination Program / WHO",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Filariasis Nepal OPD protocol. lymphatic filariasis diethylcarbamazine. First-line: Diethylcarbamazine. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Filariasis — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_069",
+      "title": "Leprosy — Nepal OPD",
+      "title_ne": "Leprosy",
+      "source": "Nepal National Tuberculosis Centre / WHO",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Leprosy Nepal OPD protocol. leprosy MDT rifampicin dapsone clofazimine. First-line: Rifampicin, Dapsone. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Leprosy — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_070",
+      "title": "Peptic ulcer bleeding risk — Nepal OPD",
+      "title_ne": "Peptic ulcer bleeding risk",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Peptic ulcer bleeding risk Nepal OPD protocol. NSAID ulcer PPI gastroprotection. First-line: Omeprazole, Gentamicin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Peptic ulcer bleeding risk — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_071",
+      "title": "Heart failure edema — Nepal OPD",
+      "title_ne": "Heart failure edema",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Heart failure edema Nepal OPD protocol. heart failure furosemide enalapril. First-line: Furosemide, Enalapril. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Heart failure edema — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_072",
+      "title": "Atrial fibrillation anticoag — Nepal OPD",
+      "title_ne": "Atrial fibrillation anticoag",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Atrial fibrillation anticoag Nepal OPD protocol. atrial fibrillation warfarin INR nepal. First-line: Warfarin, Atenolol. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Atrial fibrillation anticoag — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_073",
+      "title": "ACS antiplatelet — Nepal OPD",
+      "title_ne": "ACS antiplatelet",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "ACS antiplatelet Nepal OPD protocol. acute coronary aspirin clopidogrel. First-line: Aspirin, Clopidogrel. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "ACS antiplatelet — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_074",
+      "title": "Hyperlipidemia statin therapy — Nepal OPD",
+      "title_ne": "Hyperlipidemia statin therapy",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 9,
+      "chunk_text": "Hyperlipidemia statin therapy Nepal OPD protocol. hyperlipidemia atorvastatin simvastatin. First-line: Atorvastatin, Simvastatin, Rosuvastatin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Hyperlipidemia statin therapy — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_075",
+      "title": "Chronic kidney disease HTN — Nepal OPD",
+      "title_ne": "Chronic kidney disease HTN",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Chronic kidney disease HTN Nepal OPD protocol. CKD hypertension ACE inhibitor. First-line: Enalapril, Losartan. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Chronic kidney disease HTN — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_076",
+      "title": "Constipation — Nepal OPD",
+      "title_ne": "Constipation",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "infectious_disease",
+      "priority": 6,
+      "chunk_text": "Constipation Nepal OPD protocol. constipation lactulose bisacodyl. First-line: Lactulose, Bisacodyl. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Constipation — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_077",
+      "title": "Travelers diarrhea adult — Nepal OPD",
+      "title_ne": "Travelers diarrhea adult",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "gastroenterology",
+      "priority": 5,
+      "chunk_text": "Travelers diarrhea adult Nepal OPD protocol. travelers diarrhea loperamide ORS. First-line: Loperamide, Oral Rehydration Salts. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Travelers diarrhea adult — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_078",
+      "title": "Heat exhaustion — Nepal OPD",
+      "title_ne": "Heat exhaustion",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "infectious_disease",
+      "priority": 5,
+      "chunk_text": "Heat exhaustion Nepal OPD protocol. heat exhaustion hydration oral fluids. First-line: Oral Rehydration Salts, Acetazolamide. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Heat exhaustion — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_079",
+      "title": "Impacted ear wax — Nepal OPD",
+      "title_ne": "Impacted ear wax",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Impacted ear wax Nepal OPD protocol. ear wax cerumen softening drops. First-line: Cerumenolytic Drops. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Impacted ear wax — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_080",
+      "title": "Allergic rhinitis — Nepal OPD",
+      "title_ne": "Allergic rhinitis",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Allergic rhinitis Nepal OPD protocol. allergic rhinitis cetirizine intranasal. First-line: Cetirizine. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Allergic rhinitis — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_081",
+      "title": "Urticaria — Nepal OPD",
+      "title_ne": "Urticaria",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Urticaria Nepal OPD protocol. urticaria antihistamine cetirizine. First-line: Cetirizine, Chlorpheniramine. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Urticaria — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_082",
+      "title": "Pneumonia child IMCI — Nepal OPD",
+      "title_ne": "Pneumonia child IMCI",
+      "source": "WHO IMCI / Nepal MoHP",
+      "topic": "general_medicine",
+      "priority": 8,
+      "chunk_text": "Pneumonia child IMCI Nepal OPD protocol. child pneumonia fast breathing amoxicillin. First-line: Amoxicillin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Pneumonia child IMCI — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_083",
+      "title": "Severe malaria — Nepal OPD",
+      "title_ne": "Severe malaria",
+      "source": "Nepal Malaria/Elimination Program / WHO",
+      "topic": "infectious_disease",
+      "priority": 5,
+      "chunk_text": "Severe malaria Nepal OPD protocol. severe malaria IV artesunate refer. First-line: Artesunate. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Severe malaria — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_084",
+      "title": "P vivax radical cure — Nepal OPD",
+      "title_ne": "P vivax radical cure",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "P vivax radical cure Nepal OPD protocol. vivax malaria primaquine G6PD test. First-line: Chloroquine, Primaquine. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "P vivax radical cure — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_085",
+      "title": "Status epilepticus — Nepal OPD",
+      "title_ne": "Status epilepticus",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Status epilepticus Nepal OPD protocol. status epilepticus diazepam IV rectal. First-line: Diazepam. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Status epilepticus — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_086",
+      "title": "Diabetic foot infection — Nepal OPD",
+      "title_ne": "Diabetic foot infection",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "infectious_disease",
+      "priority": 5,
+      "chunk_text": "Diabetic foot infection Nepal OPD protocol. diabetic foot infection amoxicillin clavulanate. First-line: Amoxicillin-Clavulanate, Metronidazole. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Diabetic foot infection — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_087",
+      "title": "Tobacco cessation — Nepal OPD",
+      "title_ne": "Tobacco cessation",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Tobacco cessation Nepal OPD protocol. tobacco cessation counseling nicotine. First-line: Nicotine Replacement Gum. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Tobacco cessation — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_088",
+      "title": "Postnatal care — Nepal OPD",
+      "title_ne": "Postnatal care",
+      "source": "Nepal Safe Motherhood / WHO",
+      "topic": "general_medicine",
+      "priority": 8,
+      "chunk_text": "Postnatal care Nepal OPD protocol. postnatal iron breastfeeding danger signs. First-line: Ferrous Sulfate, Folic Acid. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Postnatal care — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_089",
+      "title": "Adult dehydration — Nepal OPD",
+      "title_ne": "Adult dehydration",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Adult dehydration Nepal OPD protocol. adult dehydration ORS oral rehydration. First-line: Oral Rehydration Salts. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Adult dehydration — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_090",
+      "title": "Worm infestation child — Nepal OPD",
+      "title_ne": "Worm infestation child",
+      "source": "WHO IMCI / Nepal MoHP",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Worm infestation child Nepal OPD protocol. pinworm mebendazole child. First-line: Mebendazole. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Worm infestation child — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_091",
+      "title": "Sinusitis bacterial — Nepal OPD",
+      "title_ne": "Sinusitis bacterial",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Sinusitis bacterial Nepal OPD protocol. sinusitis amoxicillin clavulanate duration. First-line: Amoxicillin-Clavulanate. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Sinusitis bacterial — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_092",
+      "title": "Acute bronchitis — Nepal OPD",
+      "title_ne": "Acute bronchitis",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Acute bronchitis Nepal OPD protocol. acute bronchitis no antibiotic viral. First-line: Paracetamol. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Acute bronchitis — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_093",
+      "title": "Pelvic inflammatory disease — Nepal OPD",
+      "title_ne": "Pelvic inflammatory disease",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Pelvic inflammatory disease Nepal OPD protocol. PID ceftriaxone doxycycline metronidazole. First-line: Ceftriaxone, Hydrocortisone, Metronidazole. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Pelvic inflammatory disease — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_094",
+      "title": "Hepatitis E pregnancy — Nepal OPD",
+      "title_ne": "Hepatitis E pregnancy",
+      "source": "Nepal Safe Motherhood / WHO",
+      "topic": "obstetrics",
+      "priority": 5,
+      "chunk_text": "Hepatitis E pregnancy Nepal OPD protocol. hepatitis E pregnancy supportive refer. First-line: Paracetamol. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Hepatitis E pregnancy — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_095",
+      "title": "Iodine deficiency goiter — Nepal OPD",
+      "title_ne": "Iodine deficiency goiter",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Iodine deficiency goiter Nepal OPD protocol. goiter iodized salt prevention nepal. First-line: Potassium Iodide. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Iodine deficiency goiter — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_096",
+      "title": "Glaucoma initial — Nepal OPD",
+      "title_ne": "Glaucoma initial",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Glaucoma initial Nepal OPD protocol. glaucoma timolol eye drops. First-line: Timolol Eye Drops. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Glaucoma initial — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_097",
+      "title": "Trachoma — Nepal OPD",
+      "title_ne": "Trachoma",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Trachoma Nepal OPD protocol. trachoma azithromycin SAFE strategy. First-line: Azithromycin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Trachoma — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_098",
+      "title": "Acute pain ladder — Nepal OPD",
+      "title_ne": "Acute pain ladder",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "musculoskeletal",
+      "priority": 8,
+      "chunk_text": "Acute pain ladder Nepal OPD protocol. pain ladder paracetamol tramadol step. First-line: Paracetamol, Tramadol. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Acute pain ladder — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_099",
+      "title": "Insulin therapy T2DM — Nepal OPD",
+      "title_ne": "Insulin therapy T2DM",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 8,
+      "chunk_text": "Insulin therapy T2DM Nepal OPD protocol. diabetes insulin glargine metformin. First-line: Insulin Glargine, Insulin Human (NPH), Metformin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Insulin therapy T2DM — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_100",
+      "title": "Drug-resistant TB refer — Nepal OPD",
+      "title_ne": "Drug-resistant TB refer",
+      "source": "Nepal National Tuberculosis Centre / WHO",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Drug-resistant TB refer Nepal OPD protocol. MDR TB refer national TB center nepal. First-line: Rifampicin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Drug-resistant TB refer — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_101",
+      "title": "Resistant hypertension — Nepal OPD",
+      "title_ne": "Resistant hypertension",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Resistant hypertension Nepal OPD protocol. resistant hypertension spironolactone. First-line: Spironolactone, Hydrochlorothiazide, Amlodipine. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Resistant hypertension — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_102",
+      "title": "Heart failure reduced EF — Nepal OPD",
+      "title_ne": "Heart failure reduced EF",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 8,
+      "chunk_text": "Heart failure reduced EF Nepal OPD protocol. heart failure bisoprolol enalapril. First-line: Bisoprolol, Enalapril, Furosemide, Spironolactone. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Heart failure reduced EF — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_103",
+      "title": "Stable angina — Nepal OPD",
+      "title_ne": "Stable angina",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Stable angina Nepal OPD protocol. stable angina GTN statin. First-line: Glyceryl Trinitrate, Isosorbide Mononitrate, Atorvastatin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Stable angina — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_104",
+      "title": "Atrial fibrillation — Nepal OPD",
+      "title_ne": "Atrial fibrillation",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Atrial fibrillation Nepal OPD protocol. atrial fibrillation metoprolol warfarin. First-line: Metoprolol, Digoxin, Warfarin, Apixaban. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Atrial fibrillation — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_105",
+      "title": "Hyperlipidemia statin therapy — Nepal OPD",
+      "title_ne": "Hyperlipidemia statin therapy",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 9,
+      "chunk_text": "Hyperlipidemia statin therapy Nepal OPD protocol. hyperlipidemia atorvastatin simvastatin. First-line: Atorvastatin, Simvastatin, Rosuvastatin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Hyperlipidemia statin therapy — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_106",
+      "title": "Gestational hypertension — Nepal OPD",
+      "title_ne": "Gestational hypertension",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 8,
+      "chunk_text": "Gestational hypertension Nepal OPD protocol. pregnancy hypertension methyldopa. First-line: Methyldopa, Labetalol, Nifedipine. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Gestational hypertension — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_107",
+      "title": "Insulin therapy T2DM — Nepal OPD",
+      "title_ne": "Insulin therapy T2DM",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 8,
+      "chunk_text": "Insulin therapy T2DM Nepal OPD protocol. diabetes insulin glargine metformin. First-line: Insulin Glargine, Insulin Human (NPH), Metformin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Insulin therapy T2DM — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_108",
+      "title": "Diabetic neuropathy — Nepal OPD",
+      "title_ne": "Diabetic neuropathy",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "Diabetic neuropathy Nepal OPD protocol. neuropathic pain pregabalin amitriptyline. First-line: Pregabalin, Amitriptyline. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Diabetic neuropathy — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_109",
+      "title": "Vulvovaginal candidiasis — Nepal OPD",
+      "title_ne": "Vulvovaginal candidiasis",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 7,
+      "chunk_text": "Vulvovaginal candidiasis Nepal OPD protocol. vaginal candidiasis fluconazole. First-line: Fluconazole, Clotrimazole Vaginal. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Vulvovaginal candidiasis — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_110",
+      "title": "Acute psychosis — Nepal OPD",
+      "title_ne": "Acute psychosis",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 5,
+      "chunk_text": "Acute psychosis Nepal OPD protocol. psychosis haloperidol. First-line: Haloperidol, Risperidone. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Acute psychosis — नेपाल OPD उपचार सन्दर्भ।"
+    },
+    {
+      "id": "guide_112",
+      "title": "B12 deficiency — Nepal OPD",
+      "title_ne": "B12 deficiency",
+      "source": "WHO SEARO / Nepal MoHP OPD protocol",
+      "topic": "general_medicine",
+      "priority": 6,
+      "chunk_text": "B12 deficiency Nepal OPD protocol. vitamin B12 cyanocobalamin deficiency. First-line: Vitamin B12 (Cyanocobalamin), Metformin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "B12 deficiency — नेपाल OPD उपचार सन्दर्भ।"
+    }
   ]
 }

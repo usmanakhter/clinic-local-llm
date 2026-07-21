@@ -1,0 +1,2686 @@
+{
+  "version": "2021.6",
+  "region": "NP",
+  "molecule_count": 446,
+  "target_count": 398,
+  "source": "National List of Essential Medicines Nepal, Sixth revision (2021), DDA/MoHP",
+  "source_url": "https://cdn.who.int/media/docs/default-source/nepal-documents/hss_nepal/national-list-of-essential-medicines-nepal-sixth-revision-2021.pdf",
+  "molecules": [
+    {
+      "generic_name": "Acetazolamide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Acetylsalicylic Acid (Aspirin)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Acid",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Activated Charcoal",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Acyclovir",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Albendazole",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Albumin (Human)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Alcohol Based Hand",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "All-Trans Retinoic Acid",
+      "category": "Antineoplastic",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Allopurinol",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Amidotrizoate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Amikacin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Aminophylline",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Amiodarone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Amlodipine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Amoebiasis",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Amoxicillin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Amoxicillin-Clavulanate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ampicillin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Anaphylaxis",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Apixaban",
+      "category": "DOAC",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Artemether",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Atazanavir-Ritonavir",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Atorvastatin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Atovaquone-Proguanil",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Atracurium",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Atropine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Azathioprine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Azithromycin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Bacterial Dysentery",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Beclometasone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Bendamustine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Benzathine Benzylpenicillin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Benzocaine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Benzoic Acid + Salicylic Acid",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Benzoyl Peroxide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Benzylpenicillin (Penicillin G)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Besylate)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Betamethasone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Bicalutamide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Bicarbonate Solution.",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Bisacodyl",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Bisoprolol",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Bleomycin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Blue)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Bottle",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Budesonide",
+      "category": "Inhaled corticosteroid",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Bupivacaine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Caffeine Base/ Ml)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Calamine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Calcium",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Calcium Folinate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Calcium Gluconate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Capecitabine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Captopril",
+      "category": "Antihypertensive (ACE-I)",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Carbamazepine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Carboplatin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Carvedilol",
+      "category": "Beta-blocker",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Cefixime",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Cefpodoxime",
+      "category": "Antibiotic",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Cephalexin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Cetirizine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Chlorambucil",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Chloramphenicol",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Chlordiazepoxide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Chlorhexidine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Chloride",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Chlorine-Based Hand Rub",
+      "category": "Disinfectant",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Chlorpromazine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Chlorthalidone",
+      "category": "Diuretic",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Ciprofloxacin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Cisplatin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Clarithromycin",
+      "category": "Antibiotic",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Clindamycin",
+      "category": "Antibiotic",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Clofazimine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Clomifene",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Clopidogrel",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Clotrimazole",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Clotrimazole Vaginal",
+      "category": "Antifungal",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Cloxacillin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Codeine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Colchicine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Colistin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Composition)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Copper IUD",
+      "category": "Contraceptive",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Cyanocobalamin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Cyclophosphamide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Cycloserine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Cytarabine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Dacarbazine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Dactinomycin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Dapsone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Daunorubicin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Deferasirox",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Deferiprone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Deferoxamine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Deoxycholate or Liposomal Complex)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Deoxyxholate or Liposomal Complex)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Dexamethasone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Dextrose (Glucose)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Dialysis Solution",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Diarrhoea/ Dysentery",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Diazepam",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Diclofenac",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Diethylcarbamazine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Digoxin",
+      "category": "Cardiac glycoside",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Dihydroartemisinin-Piperaquine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Dimercaprol",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Diphtheria Antitoxin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Disoproxil)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Disulfiram",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Dobutamine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Docetaxel",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Dolutegravir Lamivudine + Tenofovir",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Domperidone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Dopamine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Doxorubicin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Dried",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Drotaverine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Edetate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Efavirenz Lamivudine + Tenofovir",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Emergence of Drug Resistance.",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Emtricitabine₸",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Enalapril",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Enoxaparin",
+      "category": "Anticoagulant",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Entecavir",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ephedrine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Epinephrine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Epirubicin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Erythromycin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Essential Hypertension Is Not Recommended",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Established Support Programme.",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ethambutol",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ethambutol + Isoniazid",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ethambutol Isoniazid + Rifampicin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ethanol (rectified",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ethinylestradiol",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ethinylestradiol Levonorgestrel",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ethinylestradiol Norethisterone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ethionamide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Etoposide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Fenofibrate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ferrous Salt + Folic",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ferrous Sulfate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Fexofenadine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Filgrastim",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Fluconazole",
+      "category": "Antifungal",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Flucytosine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Fludrocortisone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Fluorescein",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Fluorouracil",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Fluphenazine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Fomipezole",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "For Other Convulsant Disorders",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "For Use In Spinal",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Form",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Form For Patent Ductus Arteriosus)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Furosemide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Fusidic Acid",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ganciclovir",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Gefitinib",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Gemcitabine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Gentamicin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Gliclazide",
+      "category": "Antidiabetic",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Glipizide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Glucose with Sodium",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Glutaraldehyde",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Glycerin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Glyceryl Trinitrate",
+      "category": "Antianginal",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Glycopyrrolate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Haloperidol",
+      "category": "Antipsychotic",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Halothane",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Hexacyanoferrate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Hydralazine",
+      "category": "Vasodilator",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Hydrochloride",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Hydrochloride or Hyclate)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Hydrochlorothiazide",
+      "category": "Diuretic (thiazide)",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Hydrocortisone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Hydrogen Maleate)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Hydroxychloroquine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Hydroxyurea",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Hyoscine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Hyperbilirubinemia",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Hyperimmune Serum",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ifosfamide + Mesna",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Imatinib",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Immunoglobulin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "In Multi-dose Dispenser",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "In View of The Evidence of Greater Efficacy and",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Infection",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Infection Aged 18 Years and Above.",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Infections",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Infections (mild To",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Infections (mild To Moderate)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Infections(severe)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Influenza (seasonal)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Influenza Virus Infection In Critically Ill",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Influenzae Type B",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Injection: 2% (as Hydrochloride or Sulfate)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Insulin (soluble)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Insulin Glargine",
+      "category": "Insulin basal",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Insulin Zinc Suspension or Isophane Insulin)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Intermediate Acting",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Intraabdominal",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Intraabdominal Infections",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Intraperitoneal",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Intrauterine Device",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Iodine)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Iohexol",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ipratropium Bromide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Iron Dextran",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Isoflurane",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Isoniazid",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Isoniazid Pyrazinamide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Isoniazid-Rifampicin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Isoprenaline",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Isosorbide Dinitrate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Isosorbide Mononitrate",
+      "category": "Antianginal",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Ispaghula Husk",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Itraconazole",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ivermectin",
+      "category": "Antiparasitic",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Japanese Encephalitis",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ketamine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "L-asparaginase",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Labetalol",
+      "category": "Antihypertensive",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Lamivudine Nevirapine + Zidovudine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Lamivudine Tenofovir",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Lamivudine Zidovudine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Lamotrigine",
+      "category": "Antiepileptic",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Ledipasvir Sofosbuvir",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Lenalidomide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Levocetirizine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Levofloxacin",
+      "category": "Antibiotic",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Levonorgestrel",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Levonorgestrelreleasing Implant",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Levothyroxine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Lidocaine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Lidocaine (lignocaine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Lidocaine + Epinephrine",
+      "category": "Local anaesthetic",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Linezolid",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Lisinopril",
+      "category": "Antihypertensive (ACE-I)",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Lithium Carbonate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Lopinavir + Ritonavir",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Lorazepam",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Losartan",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Magnesium",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Magnesium Sulfate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Male Condom",
+      "category": "Contraceptive",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Management of Pregnancy Induced",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Management of Severe Pregnancy-induced",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Measles",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Mebendazole",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Medical Gases",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Medication",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Medicines",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Medicines and",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Medicines Used In",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Medroxyprogesterone Acetate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Meglumine Iotroxate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Melphalan",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Meningitis",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Meningococcal",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Mercaptopurine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Meropenem",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Mesna",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Methadone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Methotrexate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Methyldopa",
+      "category": "Antihypertensive",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Methylergometrine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Methylprednisolone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Methylthioninium",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Metoprolol",
+      "category": "Beta-blocker",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Metronidazole",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Midazolam",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Miltefosine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Miscarriage",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Mitomycin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ml As Drops",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Moderate)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Montelukast",
+      "category": "Antiasthmatic",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Morphine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Moxifloxacin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Mumps",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Mupirocin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "N-Acetylcysteine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Nalidixic Acid",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Naloxone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Naproxen",
+      "category": "NSAID",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Natamycin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Neostigmine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Niclosamide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Nicotine Replacement",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Nifedipine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Nitrofurantoin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Nitrous Oxide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Norepinephrine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Norethisterone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Nystatin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Occurrence of Neural Tube Defects",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "of Sodium Lactate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ofloxacin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Olanzapine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Olmesartan",
+      "category": "Antihypertensive (ARB)",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Omeprazole",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Only In Listed Sites.",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Oral Rehydration",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Oral Rehydration Salts",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Oxygen",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Oxytocin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "P-aminosalicylic Acid",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Paclitaxel",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Paracetamol",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Paracoccidiodomycosis, Mycoses Caused By",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Paromomycin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Patterns and Clinical Trials of Antiretrovirals.",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Perioperatve",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Permethrin 5%",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Pertussis, Hepatitis",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Pethidine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Pheniramine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Phenobarbitone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Phenoxymethylpenicillin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Phenytoin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Pilocarpine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Piperacillin Tazobactam",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Pneumococcal",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Pneumonia (mild To",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Pneumonia (severe)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Podophyllotoxin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Poliomyelitis",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Poliomyelitis (oral)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Polygeline",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Polyvenom Antisnake Serum",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Potassium Chloride",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Potassium Ferric",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Potassium Salt),",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Povidone Iodine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Pralidoxime",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Pravastatin",
+      "category": "Statin",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Praziquantel",
+      "category": "Anthelmintic",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Prazosin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Prednisolone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Preferred In Neonates",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Pregabalin",
+      "category": "Neuropathic pain",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Pregnancy or In Children Below 5 Kg Weight",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Pregnancy)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Preservative Free)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Prevent Hypotension",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Procaine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Promethazine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Proparacaine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Prophylaxis of Histoplasmosis and Infections",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Prophylaxis.",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Propofol",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Propranolol",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Prostatitis (mild To",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Protease Inhibitors.",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Protein Derivative",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Pyrazinamide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ramipril",
+      "category": "Antihypertensive (ACE-I)",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Ranitidine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Recommended Formula)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Release)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Resistance",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Rifampicin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Ring Pessary",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Risperidone",
+      "category": "Antipsychotic",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Ritonavir",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Rosuvastatin",
+      "category": "Statin",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Rotavirus",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Rubella",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Safer",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Safety of Other Medicines.",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Salbutamol",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Salicylic Acid",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Salmeterol",
+      "category": "LABA",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Salt)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Secnidazole",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Sertraline",
+      "category": "SSRI",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Sevoflurane",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Silicon Ring Pessary",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Simvastatin",
+      "category": "Statin",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Slurry)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Sodium",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Sodium Bicarbonate",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Sodium Calcium",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Sodium Chloride",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Sodium Nitrite",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Sodium Nitroprusside",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Sodium Valproate",
+      "category": "Antiepileptic",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Sofosbuvir",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Sofosbuvir Velpatasvir",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Spirit)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Spironolactone",
+      "category": "Diuretic",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Strength Available",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Streptokinase",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Sulfadoxine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Sulfadoxine-Pyrimethamine",
+      "category": "Antimalarial",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Sulfasalazine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Suxamethonium",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Tablet: 30 Mg + 50 Mg + 60 Mg [c], 150 Mg",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Tamoxifen",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Telmisartan",
+      "category": "Antihypertensive (ARB)",
+      "nelm_tier": "complementary",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Tenofovir Disoproxil",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Terbutaline",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Testosterone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Tetanus Antitoxin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Tetanus Diphtheria",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Tetanus Toxoid",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Tetracycline",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Their Effectiveness.",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Thiopental",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Timolol Eye Drops",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Tinidazole",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "To Lack of Proven Benefit To That Effect.",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "To Prevent Hypotension",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Tranexamic Acid",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Treatment Guidelines.",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Treatment of The Diseases.",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Treatment Protocol",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Trihexyphenidyl",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Trimethoprim-Sulfamethoxazole",
+      "category": "Antibiotic",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 curated supplement"
+    },
+    {
+      "generic_name": "Tropicamide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Tuberculin, Purified",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Typhoid",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Urinary Tract Infection",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Used As An Adjunct To Oral Rehydration Salts",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Valproate)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Valproic Acid (sodium",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Vancomycin",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Verapamil",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Vial",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Vinblastine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Vincristine",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Vitamin A",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Vitamin B1 (Thiamine)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Vitamin B2 (Riboflavin)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Vitamin B6 (Pyridoxine)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Vitamin C (Ascorbic Acid)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Vitamin K1 (Phytomenadione)",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Water for Injection",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "with Doxycycline",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "with Progesterone",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Yellow Fever",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Zinc Oxide",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    },
+    {
+      "generic_name": "Zoledronic Acid",
+      "category": "NNLEM 2021",
+      "nelm_tier": "core",
+      "nnlem_source": "NNLEM 2021 PDF (DDA/MoHP)"
+    }
+  ]
+}

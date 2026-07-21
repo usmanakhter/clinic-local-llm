@@ -113,7 +113,7 @@ All cases below use **synthetic** drugs, IDs, names, phones, and vignettes. Not 
 |---|---|---|---|
 | PI-01 | `pii_001`, `pii_006`, `pii_008`, `pii_013`, `pii_020`, `pii_027` | All `expected_removed` gone; `expected_retained` kept | Regex recall reported |
 | PI-02 | `pii_017`, `pii_024`, `pii_030` (no PHI) | No over-scrub of clinical terms | Retained clinical tokens intact |
-| PI-03 | Sync reject path | `sync_008` style residual phone → reject | Documented in sync fixtures |
+| PI-03 | Sync reject path | residual → `blocked_residual_pii` (not legacy `rejected`); excluded from pending flush | Dart: `test/pii_scrubber_test.dart`; fixture `sync_queue_dummy.json` sync_008 |
 
 **Target:** recall **>99%** on all `expected_removed` tokens for production scrubber. Fixture script prints score separately.
 

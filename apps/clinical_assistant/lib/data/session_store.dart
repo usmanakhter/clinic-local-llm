@@ -19,6 +19,14 @@ class SessionStore {
   static const _webSyncQueueKey = 'nepal_sync_queue_v1';
   static const _maxSessions = 500;
 
+  /// Sync-queue status when the on-device scrub gate blocks upload.
+  static const statusBlockedResidualPii = 'blocked_residual_pii';
+  static const statusPending = 'pending';
+
+  /// Maps scrub-gate result → sync_queue status (never upload blocked rows).
+  static String statusForScrubGate(SyncScrubResult gate) =>
+      gate.allowed ? statusPending : statusBlockedResidualPii;
+
   static SharedPreferences? _prefs;
 
   static Future<void> initWebPersistence(SharedPreferences prefs) async {
@@ -124,7 +132,6 @@ class SessionStore {
     return n;
   }
 
-  /// Pending [sync_queue] rows for an explicit debug flush (network OFF by default).
   static Future<List<Map<String, dynamic>>> listPendingSync({
     int limit = 50,
   }) async {
@@ -151,6 +158,196 @@ class SessionStore {
       limit: limit,
     );
     return rows.map((e) => Map<String, dynamic>.from(e)).toList();
+  }
+
+  /// All sync_queue rows for transparency UI (any status).
+  static Future<List<Map<String, dynamic>>> listSyncQueue({
+    int limit = 100,
+  }) async {
+    if (kIsWeb || AppDatabase.isWebMemory) {
+      final raw = _prefs?.getString(_webSyncQueueKey);
+      if (raw == null || raw.isEmpty) return [];
+      try {
+        final list = jsonDecode(raw) as List<dynamic>;
+        return list
+            .whereType<Map>()
+            .map((e) => Map<String, dynamic>.from(e))
+            .take(limit)
+            .toList();
+      } catch (_) {
+        return [];
+      }
+    }
+    final rows = await AppDatabase.db.query(
+      'sync_queue',
+      orderBy: 'created_at DESC',
+      limit: limit,
+    );
+    return rows.map((e) => Map<String, dynamic>.from(e)).toList();
+  }
+
+  /// Structured chat feedback — updates local session + sync payload metadata.
+  static Future<void> updateFeedback({
+    required String sessionId,
+    required String feedback,
+    String? reason,
+  }) async {
+    if (feedback != 'up' && feedback != 'down') {
+      throw ArgumentError('feedback must be up or down');
+    }
+    if (kIsWeb || AppDatabase.isWebMemory) {
+      for (final row in AppDatabase.webSessionsInternal) {
+        if (row['id'] == sessionId) {
+          row['feedback'] = feedback;
+          row['feedback_reason'] = reason;
+          break;
+        }
+      }
+      await _persistWeb();
+      await _refreshSyncFeedback(sessionId, feedback, reason);
+      return;
+    }
+    await AppDatabase.db.update(
+      'clinical_sessions',
+      {'feedback': feedback, 'feedback_reason': reason},
+      where: 'id = ?',
+      whereArgs: [sessionId],
+    );
+    await _refreshSyncFeedback(sessionId, feedback, reason);
+  }
+
+  /// Update an existing saved note draft (local history + re-enqueue scrubbed sync).
+  static Future<ClinicalSession> updateNoteDraft({
+    required String sessionId,
+    required String chiefComplaint,
+    required String history,
+    required String examination,
+    required String assessment,
+    required String plan,
+    required String draftText,
+    bool fromModel = false,
+    String? patientId,
+  }) async {
+    final metadata = {
+      'action': 'save',
+      'patient_id': patientId,
+      'chief_complaint': chiefComplaint,
+      'history': history,
+      'examination': examination,
+      'assessment': assessment,
+      'plan': plan,
+      'draft_text': draftText,
+      'from_model': fromModel,
+      'edited_at': DateTime.now().toIso8601String(),
+    };
+    final row = {
+      'input_summary': chiefComplaint,
+      'output_summary': 'saved_locally',
+      'payload_json': jsonEncode(metadata),
+      'patient_id':
+          (patientId == null || patientId.trim().isEmpty) ? null : patientId.trim(),
+      'sync_status': 'pending_sync',
+    };
+
+    if (kIsWeb || AppDatabase.isWebMemory) {
+      Map<String, dynamic>? existing;
+      for (final s in AppDatabase.webSessionsInternal) {
+        if (s['id'] == sessionId) {
+          existing = s;
+          break;
+        }
+      }
+      if (existing == null) {
+        throw StateError('Note session not found: $sessionId');
+      }
+      existing.addAll(row);
+      await _persistWeb();
+      await _enqueueWeb(sessionId, Map<String, dynamic>.from(existing));
+      return ClinicalSession.fromMap(existing);
+    }
+
+    final existingRows = await AppDatabase.db.query(
+      'clinical_sessions',
+      where: 'id = ?',
+      whereArgs: [sessionId],
+      limit: 1,
+    );
+    if (existingRows.isEmpty) {
+      throw StateError('Note session not found: $sessionId');
+    }
+    await AppDatabase.db.update(
+      'clinical_sessions',
+      row,
+      where: 'id = ?',
+      whereArgs: [sessionId],
+    );
+    final updated = {
+      ...existingRows.first,
+      ...row,
+      'id': sessionId,
+    };
+    await _enqueueNative(sessionId, updated);
+    return ClinicalSession.fromMap(updated);
+  }
+
+  static Future<void> _refreshSyncFeedback(
+    String sessionId,
+    String feedback,
+    String? reason,
+  ) async {
+    final syncId = 'sync_$sessionId';
+    if (kIsWeb || AppDatabase.isWebMemory) {
+      final prefs = _prefs;
+      if (prefs == null) return;
+      final raw = prefs.getString(_webSyncQueueKey);
+      if (raw == null) return;
+      try {
+        final list = (jsonDecode(raw) as List<dynamic>)
+            .whereType<Map>()
+            .map((e) => Map<String, dynamic>.from(e))
+            .toList();
+        for (final row in list) {
+          if (row['session_id'] == sessionId || row['id'] == syncId) {
+            var payload = row['payload_json'];
+            Map<String, dynamic> map;
+            if (payload is String) {
+              map = jsonDecode(payload) as Map<String, dynamic>;
+            } else if (payload is Map) {
+              map = Map<String, dynamic>.from(payload);
+            } else {
+              map = {};
+            }
+            map['feedback'] = feedback;
+            if (reason != null) map['feedback_reason'] = reason;
+            row['payload_json'] = jsonEncode(map);
+            break;
+          }
+        }
+        await prefs.setString(_webSyncQueueKey, jsonEncode(list));
+      } catch (_) {}
+      return;
+    }
+    try {
+      final rows = await AppDatabase.db.query(
+        'sync_queue',
+        where: 'session_id = ? OR id = ?',
+        whereArgs: [sessionId, syncId],
+        limit: 1,
+      );
+      if (rows.isEmpty) return;
+      final row = rows.first;
+      final payloadRaw = row['payload_json'] as String?;
+      if (payloadRaw == null) return;
+      final map = jsonDecode(payloadRaw) as Map<String, dynamic>;
+      map['feedback'] = feedback;
+      if (reason != null) map['feedback_reason'] = reason;
+      await AppDatabase.db.update(
+        'sync_queue',
+        {'payload_json': jsonEncode(map)},
+        where: 'id = ?',
+        whereArgs: [row['id']],
+      );
+    } catch (_) {}
   }
 
   static Future<void> markSynced(String syncId) =>
@@ -188,10 +385,11 @@ class SessionStore {
       }
       return;
     }
-    // Native schema has no note column; status is enough for the stub.
+    final values = <String, Object?>{'status': status};
+    if (note != null) values['scrub_note'] = note;
     await AppDatabase.db.update(
       'sync_queue',
-      {'status': status},
+      values,
       where: 'id = ?',
       whereArgs: [syncId],
     );
@@ -255,7 +453,7 @@ class SessionStore {
       'session_id': sessionId,
       'payload_json': jsonEncode(scrubbed),
       'scrubbed_at': DateTime.now().toIso8601String(),
-      'status': gate.allowed ? 'pending' : 'blocked_residual_pii',
+      'status': statusForScrubGate(gate),
       'scrub_note': gate.reason,
       'created_at': DateTime.now().toIso8601String(),
     });
@@ -279,7 +477,8 @@ class SessionStore {
           'session_id': sessionId,
           'payload_json': jsonEncode(scrubbed),
           'scrubbed_at': DateTime.now().toIso8601String(),
-          'status': gate.allowed ? 'pending' : 'blocked_residual_pii',
+          'status': statusForScrubGate(gate),
+          'scrub_note': gate.reason,
           'created_at': DateTime.now().toIso8601String(),
         },
         conflictAlgorithm: ConflictAlgorithm.replace,

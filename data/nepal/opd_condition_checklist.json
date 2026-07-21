@@ -1,0 +1,1667 @@
+{
+  "version": "1.0.0",
+  "region": "NP",
+  "condition_count": 120,
+  "covered_count": 120,
+  "coverage_percent": 100.0,
+  "target_percent": 90.0,
+  "source_note": "Full NNLEM 2021 (398 molecules) + WHO SEARO/MoHP OPD protocols. Reference only — verify with licensed clinician before clinical use.",
+  "conditions": [
+    {
+      "id": "opd_001",
+      "name": "Typhoid fever",
+      "weight": 9,
+      "search_query": "Ceftriaxone",
+      "expected_drug_ids": [
+        "drug_007",
+        "drug_005"
+      ],
+      "expected_guideline_ids": [
+        "guide_001"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_002",
+      "name": "Dengue fever",
+      "weight": 9,
+      "search_query": "Paracetamol",
+      "expected_drug_ids": [
+        "drug_001"
+      ],
+      "expected_guideline_ids": [
+        "guide_002"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_003",
+      "name": "Pulmonary TB",
+      "weight": 8,
+      "search_query": "Rifampicin",
+      "expected_drug_ids": [
+        "drug_026",
+        "drug_027"
+      ],
+      "expected_guideline_ids": [
+        "guide_003"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_004",
+      "name": "Snakebite envenomation",
+      "weight": 7,
+      "search_query": "Snake Antivenom",
+      "expected_drug_ids": [
+        "drug_049",
+        "drug_046"
+      ],
+      "expected_guideline_ids": [
+        "guide_004"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_005",
+      "name": "Acute diarrhea child",
+      "weight": 10,
+      "search_query": "Oral Rehydration Salts",
+      "expected_drug_ids": [
+        "drug_011",
+        "drug_012"
+      ],
+      "expected_guideline_ids": [
+        "guide_005"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_006",
+      "name": "Malaria falciparum",
+      "weight": 7,
+      "search_query": "Artemether-Lumefantrine",
+      "expected_drug_ids": [
+        "drug_030"
+      ],
+      "expected_guideline_ids": [
+        "guide_006"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_007",
+      "name": "Hypertension",
+      "weight": 9,
+      "search_query": "Lisinopril",
+      "expected_drug_ids": [
+        "drug_094",
+        "drug_016",
+        "drug_017",
+        "drug_018",
+        "drug_097"
+      ],
+      "expected_guideline_ids": [
+        "guide_007"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_008",
+      "name": "Type 2 diabetes",
+      "weight": 9,
+      "search_query": "Metformin Type",
+      "expected_drug_ids": [
+        "drug_013",
+        "drug_014"
+      ],
+      "expected_guideline_ids": [
+        "guide_008"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_009",
+      "name": "Asthma",
+      "weight": 8,
+      "search_query": "Salbutamol",
+      "expected_drug_ids": [
+        "drug_024",
+        "drug_025"
+      ],
+      "expected_guideline_ids": [
+        "guide_009"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_010",
+      "name": "Antenatal care",
+      "weight": 9,
+      "search_query": "Ferrous Sulfate",
+      "expected_drug_ids": [
+        "drug_038",
+        "drug_039",
+        "drug_040"
+      ],
+      "expected_guideline_ids": [
+        "guide_010"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_011",
+      "name": "Altitude illness",
+      "weight": 5,
+      "search_query": "Dexamethasone",
+      "expected_drug_ids": [
+        "drug_035",
+        "drug_059"
+      ],
+      "expected_guideline_ids": [
+        "guide_011"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_012",
+      "name": "Anaphylaxis",
+      "weight": 6,
+      "search_query": "Adrenaline",
+      "expected_drug_ids": [
+        "drug_046",
+        "drug_058"
+      ],
+      "expected_guideline_ids": [
+        "guide_012"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_013",
+      "name": "Soil-transmitted helminths",
+      "weight": 7,
+      "search_query": "Albendazole",
+      "expected_drug_ids": [
+        "drug_009"
+      ],
+      "expected_guideline_ids": [
+        "guide_013"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_014",
+      "name": "H pylori",
+      "weight": 7,
+      "search_query": "Amoxicillin",
+      "expected_drug_ids": [
+        "drug_003",
+        "drug_008",
+        "drug_032"
+      ],
+      "expected_guideline_ids": [
+        "guide_014"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_015",
+      "name": "Epilepsy",
+      "weight": 6,
+      "search_query": "Phenobarbitone",
+      "expected_drug_ids": [
+        "drug_036",
+        "drug_048"
+      ],
+      "expected_guideline_ids": [
+        "guide_015"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_016",
+      "name": "Burns",
+      "weight": 5,
+      "search_query": "Paracetamol",
+      "expected_drug_ids": [
+        "drug_001"
+      ],
+      "expected_guideline_ids": [
+        "guide_016"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_017",
+      "name": "Fever without focus child",
+      "weight": 9,
+      "search_query": "Paracetamol",
+      "expected_drug_ids": [
+        "drug_001"
+      ],
+      "expected_guideline_ids": [
+        "guide_017"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_018",
+      "name": "Antibiotic stewardship",
+      "weight": 8,
+      "search_query": "Amoxicillin",
+      "expected_drug_ids": [
+        "drug_003"
+      ],
+      "expected_guideline_ids": [
+        "guide_018"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_019",
+      "name": "Scrub typhus",
+      "weight": 8,
+      "search_query": "Hydrocortisone",
+      "expected_drug_ids": [
+        "drug_056"
+      ],
+      "expected_guideline_ids": [
+        "guide_019"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_020",
+      "name": "Leptospirosis",
+      "weight": 6,
+      "search_query": "Hydrocortisone",
+      "expected_drug_ids": [
+        "drug_056",
+        "drug_003"
+      ],
+      "expected_guideline_ids": [
+        "guide_020"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_021",
+      "name": "COPD exacerbation",
+      "weight": 7,
+      "search_query": "Salbutamol",
+      "expected_drug_ids": [
+        "drug_024",
+        "drug_034"
+      ],
+      "expected_guideline_ids": [
+        "guide_021"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_022",
+      "name": "UTI uncomplicated",
+      "weight": 8,
+      "search_query": "Nitrofurantoin",
+      "expected_drug_ids": [
+        "drug_060",
+        "drug_003"
+      ],
+      "expected_guideline_ids": [
+        "guide_022"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_023",
+      "name": "Neonatal danger signs",
+      "weight": 8,
+      "search_query": "Ampicillin",
+      "expected_drug_ids": [
+        "drug_061",
+        "drug_057"
+      ],
+      "expected_guideline_ids": [
+        "guide_023"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_024",
+      "name": "Postpartum hemorrhage",
+      "weight": 7,
+      "search_query": "Oxytocin Postpartum",
+      "expected_drug_ids": [
+        "drug_044",
+        "drug_043"
+      ],
+      "expected_guideline_ids": [
+        "guide_024"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_025",
+      "name": "Upper respiratory infection",
+      "weight": 10,
+      "search_query": "Paracetamol",
+      "expected_drug_ids": [
+        "drug_001",
+        "drug_050"
+      ],
+      "expected_guideline_ids": [
+        "guide_025"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_026",
+      "name": "Acute pharyngitis",
+      "weight": 8,
+      "search_query": "Amoxicillin",
+      "expected_drug_ids": [
+        "drug_003"
+      ],
+      "expected_guideline_ids": [
+        "guide_026"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_027",
+      "name": "Acute otitis media",
+      "weight": 7,
+      "search_query": "Amoxicillin",
+      "expected_drug_ids": [
+        "drug_003",
+        "drug_004"
+      ],
+      "expected_guideline_ids": [
+        "guide_027"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_028",
+      "name": "Community pneumonia adult",
+      "weight": 8,
+      "search_query": "Amoxicillin-Clavulanate",
+      "expected_drug_ids": [
+        "drug_004",
+        "drug_005"
+      ],
+      "expected_guideline_ids": [
+        "guide_028"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_029",
+      "name": "Viral hepatitis A",
+      "weight": 6,
+      "search_query": "Paracetamol",
+      "expected_drug_ids": [
+        "drug_001"
+      ],
+      "expected_guideline_ids": [
+        "guide_029"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_030",
+      "name": "GERD dyspepsia",
+      "weight": 8,
+      "search_query": "Omeprazole",
+      "expected_drug_ids": [
+        "drug_032",
+        "drug_055"
+      ],
+      "expected_guideline_ids": [
+        "guide_030"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_031",
+      "name": "Iron deficiency anemia",
+      "weight": 9,
+      "search_query": "Ferrous Sulfate",
+      "expected_drug_ids": [
+        "drug_038",
+        "drug_039"
+      ],
+      "expected_guideline_ids": [
+        "guide_031"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_032",
+      "name": "Hypothyroidism",
+      "weight": 7,
+      "search_query": "Levothyroxine",
+      "expected_drug_ids": [
+        "drug_062"
+      ],
+      "expected_guideline_ids": [
+        "guide_032"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_033",
+      "name": "Osteoarthritis",
+      "weight": 8,
+      "search_query": "Paracetamol",
+      "expected_drug_ids": [
+        "drug_001",
+        "drug_002"
+      ],
+      "expected_guideline_ids": [
+        "guide_033"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_034",
+      "name": "Low back pain",
+      "weight": 8,
+      "search_query": "Paracetamol",
+      "expected_drug_ids": [
+        "drug_001",
+        "drug_048"
+      ],
+      "expected_guideline_ids": [
+        "guide_034"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_035",
+      "name": "Gout acute",
+      "weight": 5,
+      "search_query": "Colchicine",
+      "expected_drug_ids": [
+        "drug_063",
+        "drug_002"
+      ],
+      "expected_guideline_ids": [
+        "guide_035"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_036",
+      "name": "Vitamin D deficiency",
+      "weight": 7,
+      "search_query": "Cholecalciferol",
+      "expected_drug_ids": [
+        "drug_041",
+        "drug_040"
+      ],
+      "expected_guideline_ids": [
+        "guide_036"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_037",
+      "name": "Cholera",
+      "weight": 5,
+      "search_query": "Oral Rehydration Salts",
+      "expected_drug_ids": [
+        "drug_011",
+        "drug_059"
+      ],
+      "expected_guideline_ids": [
+        "guide_037"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_038",
+      "name": "Shigella dysentery",
+      "weight": 6,
+      "search_query": "Ciprofloxacin",
+      "expected_drug_ids": [
+        "drug_006",
+        "drug_008"
+      ],
+      "expected_guideline_ids": [
+        "guide_038"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_039",
+      "name": "Giardiasis",
+      "weight": 6,
+      "search_query": "Metronidazole",
+      "expected_drug_ids": [
+        "drug_008"
+      ],
+      "expected_guideline_ids": [
+        "guide_039"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_040",
+      "name": "Scabies",
+      "weight": 6,
+      "search_query": "Permethrin 5%",
+      "expected_drug_ids": [
+        "drug_064"
+      ],
+      "expected_guideline_ids": [
+        "guide_040"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_041",
+      "name": "Fungal skin infection",
+      "weight": 7,
+      "search_query": "Clotrimazole",
+      "expected_drug_ids": [
+        "drug_065"
+      ],
+      "expected_guideline_ids": [
+        "guide_041"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_042",
+      "name": "Cellulitis",
+      "weight": 6,
+      "search_query": "Amoxicillin-Clavulanate",
+      "expected_drug_ids": [
+        "drug_004",
+        "drug_066"
+      ],
+      "expected_guideline_ids": [
+        "guide_042"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_043",
+      "name": "Conjunctivitis bacterial",
+      "weight": 7,
+      "search_query": "Chloramphenicol Eye Drops",
+      "expected_drug_ids": [
+        "drug_067"
+      ],
+      "expected_guideline_ids": [
+        "guide_043"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_044",
+      "name": "Dental abscess",
+      "weight": 6,
+      "search_query": "Amoxicillin",
+      "expected_drug_ids": [
+        "drug_003",
+        "drug_008"
+      ],
+      "expected_guideline_ids": [
+        "guide_044"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_045",
+      "name": "Migraine",
+      "weight": 7,
+      "search_query": "Paracetamol",
+      "expected_drug_ids": [
+        "drug_001",
+        "drug_002"
+      ],
+      "expected_guideline_ids": [
+        "guide_045"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_046",
+      "name": "Depression mhGAP",
+      "weight": 6,
+      "search_query": "Fluoxetine",
+      "expected_drug_ids": [
+        "drug_068"
+      ],
+      "expected_guideline_ids": [
+        "guide_046"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_047",
+      "name": "Anxiety disorder",
+      "weight": 6,
+      "search_query": "Diazepam Anxiety",
+      "expected_drug_ids": [
+        "drug_048"
+      ],
+      "expected_guideline_ids": [
+        "guide_047"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_048",
+      "name": "STI syndromic",
+      "weight": 5,
+      "search_query": "Azithromycin",
+      "expected_drug_ids": [
+        "drug_005",
+        "drug_007"
+      ],
+      "expected_guideline_ids": [
+        "guide_048"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_049",
+      "name": "Herpes zoster",
+      "weight": 5,
+      "search_query": "Acyclovir Herpes",
+      "expected_drug_ids": [
+        "drug_069"
+      ],
+      "expected_guideline_ids": [
+        "guide_049"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_050",
+      "name": "Varicella",
+      "weight": 6,
+      "search_query": "Paracetamol",
+      "expected_drug_ids": [
+        "drug_001"
+      ],
+      "expected_guideline_ids": [
+        "guide_050"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_051",
+      "name": "Measles",
+      "weight": 6,
+      "search_query": "Paracetamol",
+      "expected_drug_ids": [
+        "drug_001",
+        "drug_070"
+      ],
+      "expected_guideline_ids": [
+        "guide_051"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_052",
+      "name": "Rabies PEP",
+      "weight": 6,
+      "search_query": "Rabies Vaccine",
+      "expected_drug_ids": [
+        "drug_071"
+      ],
+      "expected_guideline_ids": [
+        "guide_052"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_053",
+      "name": "Tetanus prophylaxis",
+      "weight": 5,
+      "search_query": "Tetanus Toxoid Vaccine",
+      "expected_drug_ids": [
+        "drug_072"
+      ],
+      "expected_guideline_ids": [
+        "guide_053"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_054",
+      "name": "Animal bite non-snake",
+      "weight": 7,
+      "search_query": "Amoxicillin-Clavulanate",
+      "expected_drug_ids": [
+        "drug_004",
+        "drug_071"
+      ],
+      "expected_guideline_ids": [
+        "guide_054"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_055",
+      "name": "Organophosphate poisoning",
+      "weight": 4,
+      "search_query": "Atropine Organophosphate",
+      "expected_drug_ids": [
+        "drug_047",
+        "drug_073"
+      ],
+      "expected_guideline_ids": [
+        "guide_055"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_056",
+      "name": "Paracetamol overdose",
+      "weight": 4,
+      "search_query": "N-Acetylcysteine",
+      "expected_drug_ids": [
+        "drug_074"
+      ],
+      "expected_guideline_ids": [
+        "guide_056"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_057",
+      "name": "Pre-eclampsia",
+      "weight": 7,
+      "search_query": "Magnesium Sulfate",
+      "expected_drug_ids": [
+        "drug_045",
+        "drug_016"
+      ],
+      "expected_guideline_ids": [
+        "guide_057"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_058",
+      "name": "Eclampsia",
+      "weight": 6,
+      "search_query": "Magnesium Sulfate",
+      "expected_drug_ids": [
+        "drug_045"
+      ],
+      "expected_guideline_ids": [
+        "guide_058"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_059",
+      "name": "Family planning OCP",
+      "weight": 7,
+      "search_query": "Ethinylestradiol-Levonorgestrel",
+      "expected_drug_ids": [
+        "drug_075"
+      ],
+      "expected_guideline_ids": [
+        "guide_059"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_060",
+      "name": "Emergency contraception",
+      "weight": 6,
+      "search_query": "Levonorgestrel",
+      "expected_drug_ids": [
+        "drug_076"
+      ],
+      "expected_guideline_ids": [
+        "guide_060"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_061",
+      "name": "Menorrhagia",
+      "weight": 6,
+      "search_query": "Tranexamic Acid",
+      "expected_drug_ids": [
+        "drug_042"
+      ],
+      "expected_guideline_ids": [
+        "guide_061"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_062",
+      "name": "Benign prostatic hyperplasia",
+      "weight": 5,
+      "search_query": "Tamsulosin",
+      "expected_drug_ids": [
+        "drug_077",
+        "drug_078"
+      ],
+      "expected_guideline_ids": [
+        "guide_062"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_063",
+      "name": "Renal colic",
+      "weight": 5,
+      "search_query": "Ibuprofen Renal",
+      "expected_drug_ids": [
+        "drug_002",
+        "drug_001"
+      ],
+      "expected_guideline_ids": [
+        "guide_063"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_064",
+      "name": "UTI pregnancy",
+      "weight": 7,
+      "search_query": "Amoxicillin",
+      "expected_drug_ids": [
+        "drug_003",
+        "drug_061"
+      ],
+      "expected_guideline_ids": [
+        "guide_064"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_065",
+      "name": "Neonatal jaundice",
+      "weight": 7,
+      "search_query": "neonatal jaundice phototherapy refer",
+      "expected_drug_ids": [],
+      "expected_guideline_ids": [
+        "guide_065"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_066",
+      "name": "Acute malnutrition child",
+      "weight": 7,
+      "search_query": "Oral Rehydration Salts",
+      "expected_drug_ids": [
+        "drug_011"
+      ],
+      "expected_guideline_ids": [
+        "guide_066"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_067",
+      "name": "Kala-azar visceral leishmaniasis",
+      "weight": 4,
+      "search_query": "Liposomal Amphotericin B",
+      "expected_drug_ids": [
+        "drug_079"
+      ],
+      "expected_guideline_ids": [
+        "guide_067"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_068",
+      "name": "Filariasis",
+      "weight": 4,
+      "search_query": "Diethylcarbamazine",
+      "expected_drug_ids": [
+        "drug_080"
+      ],
+      "expected_guideline_ids": [
+        "guide_068"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_069",
+      "name": "Leprosy",
+      "weight": 4,
+      "search_query": "Rifampicin",
+      "expected_drug_ids": [
+        "drug_026",
+        "drug_081"
+      ],
+      "expected_guideline_ids": [
+        "guide_069"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_070",
+      "name": "Peptic ulcer bleeding risk",
+      "weight": 6,
+      "search_query": "Omeprazole",
+      "expected_drug_ids": [
+        "drug_032",
+        "drug_055"
+      ],
+      "expected_guideline_ids": [
+        "guide_070"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_071",
+      "name": "Heart failure edema",
+      "weight": 6,
+      "search_query": "Furosemide",
+      "expected_drug_ids": [
+        "drug_020",
+        "drug_017"
+      ],
+      "expected_guideline_ids": [
+        "guide_071"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_072",
+      "name": "Atrial fibrillation anticoag",
+      "weight": 5,
+      "search_query": "Warfarin Atrial",
+      "expected_drug_ids": [
+        "drug_023",
+        "drug_019"
+      ],
+      "expected_guideline_ids": [
+        "guide_072"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_073",
+      "name": "ACS antiplatelet",
+      "weight": 5,
+      "search_query": "Aspirin ACS",
+      "expected_drug_ids": [
+        "drug_021",
+        "drug_022"
+      ],
+      "expected_guideline_ids": [
+        "guide_073"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_074",
+      "name": "Dyslipidemia",
+      "weight": 7,
+      "search_query": "Atorvastatin",
+      "expected_drug_ids": [
+        "drug_082"
+      ],
+      "expected_guideline_ids": [
+        "guide_074"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_075",
+      "name": "Chronic kidney disease HTN",
+      "weight": 6,
+      "search_query": "Enalapril Chronic",
+      "expected_drug_ids": [
+        "drug_017",
+        "drug_018"
+      ],
+      "expected_guideline_ids": [
+        "guide_075"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_076",
+      "name": "Constipation",
+      "weight": 6,
+      "search_query": "Lactulose Constipation",
+      "expected_drug_ids": [
+        "drug_083",
+        "drug_084"
+      ],
+      "expected_guideline_ids": [
+        "guide_076"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_077",
+      "name": "Travelers diarrhea adult",
+      "weight": 5,
+      "search_query": "Loperamide",
+      "expected_drug_ids": [
+        "drug_085",
+        "drug_011"
+      ],
+      "expected_guideline_ids": [
+        "guide_077"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_078",
+      "name": "Heat exhaustion",
+      "weight": 5,
+      "search_query": "Oral Rehydration Salts",
+      "expected_drug_ids": [
+        "drug_011",
+        "drug_059"
+      ],
+      "expected_guideline_ids": [
+        "guide_078"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_079",
+      "name": "Impacted ear wax",
+      "weight": 5,
+      "search_query": "Cerumenolytic Drops",
+      "expected_drug_ids": [
+        "drug_086"
+      ],
+      "expected_guideline_ids": [
+        "guide_079"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_080",
+      "name": "Allergic rhinitis",
+      "weight": 7,
+      "search_query": "Cetirizine",
+      "expected_drug_ids": [
+        "drug_050"
+      ],
+      "expected_guideline_ids": [
+        "guide_080"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_081",
+      "name": "Urticaria",
+      "weight": 6,
+      "search_query": "Cetirizine",
+      "expected_drug_ids": [
+        "drug_050",
+        "drug_051"
+      ],
+      "expected_guideline_ids": [
+        "guide_081"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_082",
+      "name": "Pneumonia child IMCI",
+      "weight": 8,
+      "search_query": "Amoxicillin",
+      "expected_drug_ids": [
+        "drug_003"
+      ],
+      "expected_guideline_ids": [
+        "guide_082"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_083",
+      "name": "Severe malaria",
+      "weight": 5,
+      "search_query": "Artesunate",
+      "expected_drug_ids": [
+        "drug_087"
+      ],
+      "expected_guideline_ids": [
+        "guide_083"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_084",
+      "name": "P vivax radical cure",
+      "weight": 5,
+      "search_query": "Chloroquine",
+      "expected_drug_ids": [
+        "drug_031",
+        "drug_088"
+      ],
+      "expected_guideline_ids": [
+        "guide_084"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_085",
+      "name": "Status epilepticus",
+      "weight": 5,
+      "search_query": "Diazepam Status",
+      "expected_drug_ids": [
+        "drug_048"
+      ],
+      "expected_guideline_ids": [
+        "guide_085"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_086",
+      "name": "Diabetic foot infection",
+      "weight": 5,
+      "search_query": "Amoxicillin-Clavulanate",
+      "expected_drug_ids": [
+        "drug_004",
+        "drug_008"
+      ],
+      "expected_guideline_ids": [
+        "guide_086"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_087",
+      "name": "Tobacco cessation",
+      "weight": 6,
+      "search_query": "Nicotine Replacement Gum",
+      "expected_drug_ids": [
+        "drug_089"
+      ],
+      "expected_guideline_ids": [
+        "guide_087"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_088",
+      "name": "Postnatal care",
+      "weight": 8,
+      "search_query": "Ferrous Sulfate",
+      "expected_drug_ids": [
+        "drug_038",
+        "drug_039"
+      ],
+      "expected_guideline_ids": [
+        "guide_088"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_089",
+      "name": "Adult dehydration",
+      "weight": 7,
+      "search_query": "Oral Rehydration Salts",
+      "expected_drug_ids": [
+        "drug_011"
+      ],
+      "expected_guideline_ids": [
+        "guide_089"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_090",
+      "name": "Worm infestation child",
+      "weight": 6,
+      "search_query": "Mebendazole",
+      "expected_drug_ids": [
+        "drug_090"
+      ],
+      "expected_guideline_ids": [
+        "guide_090"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_091",
+      "name": "Sinusitis bacterial",
+      "weight": 6,
+      "search_query": "Amoxicillin-Clavulanate",
+      "expected_drug_ids": [
+        "drug_004"
+      ],
+      "expected_guideline_ids": [
+        "guide_091"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_092",
+      "name": "Acute bronchitis",
+      "weight": 7,
+      "search_query": "Paracetamol",
+      "expected_drug_ids": [
+        "drug_001"
+      ],
+      "expected_guideline_ids": [
+        "guide_092"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_093",
+      "name": "Pelvic inflammatory disease",
+      "weight": 4,
+      "search_query": "Ceftriaxone",
+      "expected_drug_ids": [
+        "drug_007",
+        "drug_056",
+        "drug_008"
+      ],
+      "expected_guideline_ids": [
+        "guide_093"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_094",
+      "name": "Hepatitis E pregnancy",
+      "weight": 4,
+      "search_query": "Paracetamol",
+      "expected_drug_ids": [
+        "drug_001"
+      ],
+      "expected_guideline_ids": [
+        "guide_094"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_095",
+      "name": "Iodine deficiency goiter",
+      "weight": 5,
+      "search_query": "Potassium Iodide",
+      "expected_drug_ids": [
+        "drug_091"
+      ],
+      "expected_guideline_ids": [
+        "guide_095"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_096",
+      "name": "Glaucoma initial",
+      "weight": 4,
+      "search_query": "Timolol Eye Drops",
+      "expected_drug_ids": [
+        "drug_092"
+      ],
+      "expected_guideline_ids": [
+        "guide_096"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_097",
+      "name": "Trachoma",
+      "weight": 4,
+      "search_query": "Azithromycin",
+      "expected_drug_ids": [
+        "drug_005"
+      ],
+      "expected_guideline_ids": [
+        "guide_097"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_098",
+      "name": "Acute pain ladder",
+      "weight": 8,
+      "search_query": "Paracetamol",
+      "expected_drug_ids": [
+        "drug_001",
+        "drug_093"
+      ],
+      "expected_guideline_ids": [
+        "guide_098"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_099",
+      "name": "Insulin initiation",
+      "weight": 6,
+      "search_query": "Insulin Human",
+      "expected_drug_ids": [
+        "drug_015"
+      ],
+      "expected_guideline_ids": [
+        "guide_099"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_100",
+      "name": "Drug-resistant TB refer",
+      "weight": 3,
+      "search_query": "Rifampicin",
+      "expected_drug_ids": [
+        "drug_026"
+      ],
+      "expected_guideline_ids": [
+        "guide_100"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_101",
+      "name": "Hypertension ACE inhibitor",
+      "weight": 10,
+      "search_query": "Lisinopril",
+      "expected_drug_ids": [
+        "drug_094",
+        "drug_017",
+        "drug_016",
+        "drug_097"
+      ],
+      "expected_guideline_ids": [
+        "guide_007"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_102",
+      "name": "Resistant hypertension",
+      "weight": 7,
+      "search_query": "Spironolactone",
+      "expected_drug_ids": [
+        "drug_099",
+        "drug_097",
+        "drug_016"
+      ],
+      "expected_guideline_ids": [
+        "guide_101"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_103",
+      "name": "Heart failure reduced EF",
+      "weight": 8,
+      "search_query": "Bisoprolol",
+      "expected_drug_ids": [
+        "drug_100",
+        "drug_017",
+        "drug_020",
+        "drug_099"
+      ],
+      "expected_guideline_ids": [
+        "guide_102"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_104",
+      "name": "Stable angina",
+      "weight": 7,
+      "search_query": "Glyceryl Trinitrate",
+      "expected_drug_ids": [
+        "drug_111",
+        "drug_110",
+        "drug_082"
+      ],
+      "expected_guideline_ids": [
+        "guide_103"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_105",
+      "name": "Atrial fibrillation",
+      "weight": 7,
+      "search_query": "Metoprolol",
+      "expected_drug_ids": [
+        "drug_101",
+        "drug_112",
+        "drug_023",
+        "drug_114"
+      ],
+      "expected_guideline_ids": [
+        "guide_104"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_106",
+      "name": "Hyperlipidemia statin therapy",
+      "weight": 9,
+      "search_query": "Atorvastatin",
+      "expected_drug_ids": [
+        "drug_082",
+        "drug_107",
+        "drug_108"
+      ],
+      "expected_guideline_ids": [
+        "guide_074",
+        "guide_105"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_107",
+      "name": "Gestational hypertension",
+      "weight": 8,
+      "search_query": "Methyldopa",
+      "expected_drug_ids": [
+        "drug_144",
+        "drug_145",
+        "drug_106"
+      ],
+      "expected_guideline_ids": [
+        "guide_106"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_108",
+      "name": "Insulin therapy T2DM",
+      "weight": 8,
+      "search_query": "Insulin Glargine",
+      "expected_drug_ids": [
+        "drug_136",
+        "drug_015",
+        "drug_013"
+      ],
+      "expected_guideline_ids": [
+        "guide_099",
+        "guide_107"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_109",
+      "name": "Diabetic neuropathy",
+      "weight": 6,
+      "search_query": "Pregabalin",
+      "expected_drug_ids": [
+        "drug_140",
+        "drug_126"
+      ],
+      "expected_guideline_ids": [
+        "guide_108"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_110",
+      "name": "Vulvovaginal candidiasis",
+      "weight": 7,
+      "search_query": "Fluconazole",
+      "expected_drug_ids": [
+        "drug_120",
+        "drug_121"
+      ],
+      "expected_guideline_ids": [
+        "guide_109"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_111",
+      "name": "H pylori clarithromycin",
+      "weight": 7,
+      "search_query": "Clarithromycin",
+      "expected_drug_ids": [
+        "drug_115",
+        "drug_003",
+        "drug_032"
+      ],
+      "expected_guideline_ids": [
+        "guide_014"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_112",
+      "name": "Typhoid cefixime",
+      "weight": 7,
+      "search_query": "Cefixime Typhoid",
+      "expected_drug_ids": [
+        "drug_116",
+        "drug_007",
+        "drug_005"
+      ],
+      "expected_guideline_ids": [
+        "guide_001"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_113",
+      "name": "Scabies ivermectin",
+      "weight": 6,
+      "search_query": "Ivermectin",
+      "expected_drug_ids": [
+        "drug_146",
+        "drug_064"
+      ],
+      "expected_guideline_ids": [
+        "guide_040"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_114",
+      "name": "Asthma montelukast",
+      "weight": 7,
+      "search_query": "Montelukast",
+      "expected_drug_ids": [
+        "drug_129",
+        "drug_024",
+        "drug_131"
+      ],
+      "expected_guideline_ids": [
+        "guide_009"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_115",
+      "name": "COPD bronchodilator",
+      "weight": 7,
+      "search_query": "Ipratropium Bromide",
+      "expected_drug_ids": [
+        "drug_130",
+        "drug_024",
+        "drug_034"
+      ],
+      "expected_guideline_ids": [
+        "guide_021"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_116",
+      "name": "Epilepsy valproate",
+      "weight": 6,
+      "search_query": "Sodium Valproate",
+      "expected_drug_ids": [
+        "drug_122",
+        "drug_037",
+        "drug_123"
+      ],
+      "expected_guideline_ids": [
+        "guide_015"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_117",
+      "name": "Depression SSRI",
+      "weight": 6,
+      "search_query": "Sertraline",
+      "expected_drug_ids": [
+        "drug_125",
+        "drug_068"
+      ],
+      "expected_guideline_ids": [
+        "guide_046"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_118",
+      "name": "Acute psychosis",
+      "weight": 5,
+      "search_query": "Haloperidol",
+      "expected_drug_ids": [
+        "drug_127",
+        "drug_128"
+      ],
+      "expected_guideline_ids": [
+        "guide_110"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_119",
+      "name": "Gout allopurinol",
+      "weight": 5,
+      "search_query": "Allopurinol",
+      "expected_drug_ids": [
+        "drug_137",
+        "drug_063"
+      ],
+      "expected_guideline_ids": [
+        "guide_035"
+      ],
+      "covered": true
+    },
+    {
+      "id": "opd_120",
+      "name": "B12 deficiency",
+      "weight": 6,
+      "search_query": "Vitamin B12",
+      "expected_drug_ids": [
+        "drug_141",
+        "drug_013"
+      ],
+      "expected_guideline_ids": [
+        "guide_112"
+      ],
+      "covered": true
+    }
+  ]
+}

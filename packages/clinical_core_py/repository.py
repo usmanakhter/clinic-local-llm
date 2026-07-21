@@ -121,6 +121,15 @@ class ClinicalRepository:
         except sqlite3.Error:
             return False
 
+    def guidelines_fts_available(self) -> bool:
+        try:
+            n = self._conn.execute(
+                "SELECT COUNT(*) AS n FROM guidelines_fts"
+            ).fetchone()["n"]
+            return int(n) > 0
+        except sqlite3.Error:
+            return False
+
     def get_drug(self, drug_id: str) -> Drug | None:
         row = self._conn.execute(
             "SELECT * FROM drugs WHERE id = ?", (drug_id,)

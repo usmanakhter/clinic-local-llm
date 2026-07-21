@@ -20,6 +20,8 @@ class AppDatabase {
   static final List<Map<String, dynamic>> _webSessions = [];
   static final List<Map<String, dynamic>> _webPatients = [];
   static ConsentTemplate? consentTemplate;
+  static int drugCorpusCount = 0;
+  static String? drugCorpusVersion;
 
   static bool get isWebMemory => _webMemory;
 
@@ -59,7 +61,7 @@ class AppDatabase {
     final path = p.join(dir.path, 'nepal_mvp.db');
     _db = await openDatabase(
       path,
-      version: 4,
+      version: 7,
       onConfigure: (database) async {
         await database.execute('PRAGMA foreign_keys = ON');
       },
@@ -76,13 +78,24 @@ class AppDatabase {
         if (oldVersion < 4) {
           await _ensurePatients(database);
         }
+        if (oldVersion < 5) {
+          await _migrateV5(database);
+        }
+        if (oldVersion < 6) {
+          await _migrateV6(database);
+        }
+        if (oldVersion < 7) {
+          await _migrateV7(database);
+        }
       },
     );
 
     await _seedIfEmpty(_db!);
     await _ensureSessionsAndGuidelineFts(_db!);
+    await _ensureClinicalSessionColumns(_db!);
     await _ensureSyncQueue(_db!);
     await _ensurePatients(_db!);
+    await _ensurePatientContactColumns(_db!);
   }
 
   static Future<void> _migrateV3(Database database) async {
@@ -98,6 +111,52 @@ class AppDatabase {
       );
     } catch (_) {}
     await _ensureSyncQueue(database);
+  }
+
+  static Future<void> _migrateV5(Database database) async {
+    await _ensureSyncQueue(database);
+    try {
+      await database.execute(
+        'ALTER TABLE sync_queue ADD COLUMN scrub_note TEXT',
+      );
+    } catch (_) {}
+  }
+
+  static Future<void> _migrateV6(Database database) async {
+    await _ensureClinicalSessionColumns(database);
+  }
+
+  static Future<void> _migrateV7(Database database) async {
+    await _ensurePatients(database);
+    await _ensurePatientContactColumns(database);
+  }
+
+  /// Idempotent column adds for sessions created before feedback_reason existed.
+  static Future<void> _ensureClinicalSessionColumns(Database database) async {
+    const alters = [
+      'ALTER TABLE clinical_sessions ADD COLUMN feedback_reason TEXT',
+      'ALTER TABLE clinical_sessions ADD COLUMN payload_json TEXT',
+      "ALTER TABLE clinical_sessions ADD COLUMN sync_status TEXT "
+          "NOT NULL DEFAULT 'pending_sync'",
+    ];
+    for (final sql in alters) {
+      try {
+        await database.execute(sql);
+      } catch (_) {}
+    }
+  }
+
+  static Future<void> _ensurePatientContactColumns(Database database) async {
+    const alters = [
+      'ALTER TABLE patients ADD COLUMN phone TEXT',
+      'ALTER TABLE patients ADD COLUMN whatsapp TEXT',
+      'ALTER TABLE patients ADD COLUMN email TEXT',
+    ];
+    for (final sql in alters) {
+      try {
+        await database.execute(sql);
+      } catch (_) {}
+    }
   }
 
   static Future<ConsentTemplate> _loadConsentTemplate() async {
@@ -249,10 +308,12 @@ CREATE TABLE IF NOT EXISTS clinical_sessions (
     payload_json    TEXT,
     sync_status     TEXT NOT NULL DEFAULT 'pending_sync',
     feedback        TEXT,
+    feedback_reason TEXT,
     patient_id      TEXT,
     device_id       TEXT
 )
 ''');
+    await _ensureClinicalSessionColumns(database);
     await _ensureSyncQueue(database);
     try {
       await database.execute('''
@@ -280,9 +341,15 @@ CREATE TABLE IF NOT EXISTS sync_queue (
     payload_json    TEXT NOT NULL,
     scrubbed_at     TEXT NOT NULL,
     status          TEXT NOT NULL DEFAULT 'pending',
+    scrub_note      TEXT,
     created_at      TEXT
 )
 ''');
+    try {
+      await database.execute(
+        'ALTER TABLE sync_queue ADD COLUMN scrub_note TEXT',
+      );
+    } catch (_) {}
   }
 
   /// Plain-text local patient cards (not encrypted EMR stubs).
@@ -293,6 +360,9 @@ CREATE TABLE IF NOT EXISTS patients (
     display_name        TEXT NOT NULL,
     age                 TEXT,
     sex                 TEXT,
+    phone               TEXT,
+    whatsapp            TEXT,
+    email               TEXT,
     clinical_condition  TEXT,
     relevant_notes      TEXT,
     history             TEXT,
@@ -303,6 +373,7 @@ CREATE TABLE IF NOT EXISTS patients (
     await database.execute(
       'CREATE INDEX IF NOT EXISTS idx_patients_name ON patients(display_name)',
     );
+    await _ensurePatientContactColumns(database);
   }
 
   static Future<void> _seedIfEmpty(Database database) async {
@@ -374,6 +445,8 @@ SELECT rowid, title, title_ne, topic, chunk_text, chunk_text_ne, source FROM gui
     final raw = await rootBundle.loadString('assets/nepal/drugs.json');
     final json = jsonDecode(raw) as Map<String, dynamic>;
     final list = json['drugs'] as List<dynamic>? ?? [];
+    drugCorpusVersion = json['version'] as String?;
+    drugCorpusCount = json['drug_count'] as int? ?? list.length;
     return list
         .whereType<Map>()
         .map((e) => Drug.fromMap(Map<String, dynamic>.from(e)))

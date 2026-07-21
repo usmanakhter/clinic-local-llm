@@ -51,14 +51,16 @@ Device policy (production): WiFi-only by default; no cellular upload unless a fu
 
 | Mode | Behavior |
 |---|---|
-| **Dev / POC** | Local `services/ingest-api` on `127.0.0.1:8787`; Flutter `SyncWorker.debugFlushPending()` only; no background WorkManager; HMAC optional / stubbed |
-| **Prod** | ap-south-1 endpoints; TLS + cert pinning; HMAC required; WiFi-only; **upload gated on scrubber >99% recall** on held-out PII fixtures |
+| **Dev / POC** | Local `services/ingest-api` on `127.0.0.1:8787`; Flutter `SyncWorker.flushPending()` after Terms (auto on home open + Sync transparency); HMAC optional / stubbed |
+| **Prod** | ap-south-1 endpoints; TLS + cert pinning; HMAC required; WiFi-preferred; **upload gated on scrubber >99% recall** on held-out PII fixtures |
+
+After Terms acceptance (`np-terms-1.2`), sync is **always on** — no in-app off switch. Queuing is continuous; upload attempts run when an ingest endpoint is reachable.
 
 Regex scrub (~30% name/place recall) is **demo-only**. Production network sync must not ship until the production scrubber clears the recall gate.
 
-### Transparency UI (future)
+### Transparency UI (shipped)
 
-Clinicians must be able to see **what left the device and when** (batch ids, scrub timestamps, destination region). Not in this stub; tracked under Sync & data flywheel in `docs/STATUS.md`.
+Clinicians can open **Sync transparency** (app-bar cloud icon) to see scrubbed `sync_queue` rows: status (`pending` / `synced` / `blocked_residual_pii` / …), scrub timestamps, and `scrub_note`. Debug flush to local ingest-api is available from that screen; destination region / batch ids for production ap-south-1 remain post-MVP.
 
 ---
 
@@ -72,14 +74,15 @@ Clinicians must be able to see **what left the device and when** (batch ids, scr
 
 ## Non-goals (this ADR)
 
-Production deployment, WorkManager WiFi jobs, real HMAC key management, transparency UI, Firebase, uploading patient registry rows.
+Production deployment, WorkManager WiFi jobs, real HMAC key management, Firebase, uploading patient registry rows.
 
 ---
 
 ## References
 
 - `docs/STATUS.md`
-- `docs/security/threat-model-v0.1.md`
+- `docs/security/threat-model-v0.2.md`
 - `services/ingest-api/` (local stub)
 - `apps/clinical_assistant/lib/data/sync_worker.dart`
+- `apps/clinical_assistant/lib/screens/sync_transparency_screen.dart`
 - `clinical-llm-technical-architecture.md` §2.7 Backend MVP

@@ -15,6 +15,7 @@ class PatientsScreen extends StatefulWidget {
 }
 
 class _PatientsScreenState extends State<PatientsScreen> {
+  final _search = TextEditingController();
   List<Patient> _patients = [];
   bool _loading = true;
   String? _error;
@@ -23,6 +24,17 @@ class _PatientsScreenState extends State<PatientsScreen> {
   void initState() {
     super.initState();
     _reload();
+  }
+
+  @override
+  void dispose() {
+    _search.dispose();
+    super.dispose();
+  }
+
+  List<Patient> get _filtered {
+    final q = _search.text;
+    return _patients.where((p) => p.matchesQuery(q)).toList();
   }
 
   Future<void> _reload() async {
@@ -91,6 +103,8 @@ class _PatientsScreenState extends State<PatientsScreen> {
       return const Center(child: CircularProgressIndicator());
     }
 
+    final shown = _filtered;
+
     return RefreshIndicator(
       onRefresh: _reload,
       child: ListView(
@@ -104,12 +118,31 @@ class _PatientsScreenState extends State<PatientsScreen> {
           ),
           const SizedBox(height: 6),
           Text(
-            'Store ID, name, age, condition, notes, and history on this device. '
-            'This is not a full EMR — use your facility record as source of truth.',
+            'Store ID, name, contacts (phone / WhatsApp / email), condition, '
+            'notes, and history on this device. Not a full EMR.',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: AppColors.slate500,
                   height: 1.35,
                 ),
+          ),
+          const SizedBox(height: 12),
+          TextField(
+            controller: _search,
+            decoration: InputDecoration(
+              labelText: 'Search patients',
+              hintText: 'Name, ID, phone, WhatsApp, condition…',
+              prefixIcon: const Icon(Icons.search),
+              suffixIcon: _search.text.isEmpty
+                  ? null
+                  : IconButton(
+                      onPressed: () {
+                        _search.clear();
+                        setState(() {});
+                      },
+                      icon: const Icon(Icons.clear),
+                    ),
+            ),
+            onChanged: (_) => setState(() {}),
           ),
           const SizedBox(height: 12),
           FilledButton.icon(
@@ -134,8 +167,17 @@ class _PatientsScreenState extends State<PatientsScreen> {
                 'when saving a clinical note.',
               ),
             )
+          else if (shown.isEmpty)
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: AppColors.slate100,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text('No patients match "${_search.text.trim()}".'),
+            )
           else
-            ..._patients.map(
+            ...shown.map(
               (p) => Card(
                 margin: const EdgeInsets.only(bottom: 10),
                 child: Padding(
@@ -168,7 +210,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                       ),
                       Text(
                         'ID: ${p.id}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: AppColors.slate500,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -176,6 +218,13 @@ class _PatientsScreenState extends State<PatientsScreen> {
                       ),
                       const SizedBox(height: 4),
                       Text(p.subtitle),
+                      if (p.email != null && p.email!.isNotEmpty) ...[
+                        const SizedBox(height: 4),
+                        Text(
+                          'Email: ${p.email}',
+                          style: const TextStyle(fontSize: 13),
+                        ),
+                      ],
                       if (p.relevantNotes != null &&
                           p.relevantNotes!.isNotEmpty) ...[
                         const SizedBox(height: 8),
@@ -228,6 +277,9 @@ class _PatientEditorSheetState extends State<_PatientEditorSheet> {
   late final TextEditingController _name;
   late final TextEditingController _age;
   late final TextEditingController _sex;
+  late final TextEditingController _phone;
+  late final TextEditingController _whatsapp;
+  late final TextEditingController _email;
   late final TextEditingController _condition;
   late final TextEditingController _notes;
   late final TextEditingController _history;
@@ -242,6 +294,9 @@ class _PatientEditorSheetState extends State<_PatientEditorSheet> {
     _name = TextEditingController(text: e?.displayName ?? '');
     _age = TextEditingController(text: e?.age ?? '');
     _sex = TextEditingController(text: e?.sex ?? '');
+    _phone = TextEditingController(text: e?.phone ?? '');
+    _whatsapp = TextEditingController(text: e?.whatsapp ?? '');
+    _email = TextEditingController(text: e?.email ?? '');
     _condition = TextEditingController(text: e?.clinicalCondition ?? '');
     _notes = TextEditingController(text: e?.relevantNotes ?? '');
     _history = TextEditingController(text: e?.history ?? '');
@@ -253,6 +308,9 @@ class _PatientEditorSheetState extends State<_PatientEditorSheet> {
     _name.dispose();
     _age.dispose();
     _sex.dispose();
+    _phone.dispose();
+    _whatsapp.dispose();
+    _email.dispose();
     _condition.dispose();
     _notes.dispose();
     _history.dispose();
@@ -272,6 +330,9 @@ class _PatientEditorSheetState extends State<_PatientEditorSheet> {
         displayName: _name.text,
         age: _age.text,
         sex: _sex.text,
+        phone: _phone.text,
+        whatsapp: _whatsapp.text,
+        email: _email.text,
         clinicalCondition: _condition.text,
         relevantNotes: _notes.text,
         history: _history.text,
@@ -334,6 +395,30 @@ class _PatientEditorSheetState extends State<_PatientEditorSheet> {
                   ),
                 ),
               ],
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              controller: _phone,
+              decoration: const InputDecoration(
+                labelText: 'Phone',
+                hintText: '+977…',
+              ),
+              keyboardType: TextInputType.phone,
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              controller: _whatsapp,
+              decoration: const InputDecoration(
+                labelText: 'WhatsApp',
+                hintText: 'Number used on WhatsApp',
+              ),
+              keyboardType: TextInputType.phone,
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              controller: _email,
+              decoration: const InputDecoration(labelText: 'Email'),
+              keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 10),
             TextField(

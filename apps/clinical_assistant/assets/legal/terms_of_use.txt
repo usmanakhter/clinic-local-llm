@@ -1,6 +1,6 @@
 Nepal Clinical Assistant — Terms, Conditions, and Data Consent
-Version: np-terms-1.1
-Last updated: 2026-07-20
+Version: np-terms-1.2
+Last updated: 2026-07-21
 
 IMPORTANT — READ BEFORE USING THIS APPLICATION
 
@@ -10,7 +10,8 @@ bound by these Terms and Conditions AND the data-sync consent in Section 4.
 If you do not agree, do not use the App.
 
 This single acceptance is required to open the App. There is no separate
-in-app consent screen afterward.
+in-app consent screen afterward. Sync is ON after acceptance and cannot be
+turned off in the App — declining sync means you must not use the App.
 
 ──────────────────────────────────────────────────────────────────────────────
 1. NATURE OF THE APPLICATION
@@ -61,10 +62,11 @@ in-app consent screen afterward.
 3. PATIENT DATA STORED ON YOUR DEVICE
 ──────────────────────────────────────────────────────────────────────────────
 
-3.1 The App allows you to store patient identifiers (such as ID, name, age),
-    clinical conditions, notes, and related history LOCALLY on your device.
-    This is a lightweight local registry — NOT a full electronic medical record
-    (EMR) system and NOT a substitute for facility medical records.
+3.1 The App allows you to store patient identifiers (such as ID, name, age,
+    phone, WhatsApp, email), clinical conditions, notes, and related history
+    LOCALLY on your device. This is a lightweight local registry — NOT a full
+    electronic medical record (EMR) system and NOT a substitute for facility
+    medical records.
 
 3.2 You are responsible for complying with applicable privacy, professional,
     and facility policies when entering patient information into the App.
@@ -74,37 +76,42 @@ in-app consent screen afterward.
     against loss, theft, and unauthorized access.
 
 ──────────────────────────────────────────────────────────────────────────────
-4. DATA SYNC CONSENT (REQUIRED WITH THESE TERMS)
+4. DATA SYNC CONSENT (REQUIRED — CANNOT BE DISABLED IN-APP)
 ──────────────────────────────────────────────────────────────────────────────
 
-4.1 By accepting these Terms you CONSENT to the App queuing and, when
-    connectivity and product sync features are available, transmitting
-    scrubbed copies of your App activity to servers operated for this project.
-    Purposes include: backup of consented activity, improving the Nepal
+4.1 By accepting these Terms you CONSENT to the App ALWAYS queuing and, when
+    connectivity and ingest endpoints are available, transmitting scrubbed
+    copies of your App activity to servers operated for this project.
+    Sync is a condition of use. There is NO in-app setting to turn sync off.
+    If you do not want sync, do not accept these Terms and do not use the App.
+
+4.2 Purposes include: backup of consented activity, improving the Nepal
     clinical knowledge base / retrieval corpus, evaluating quality, anonymous
     product analytics, and (later) model or adapter improvement.
 
-4.2 Activity that may be synced includes drug searches, interaction checks,
+4.3 Activity that may be synced includes drug searches, interaction checks,
     guideline lookups, chat turns, clinical note drafts, and related metadata.
-    Local on-device history remains readable to you; only the outbound sync
-    queue is scrubbed.
+    Local patient registry cards (names, phones, WhatsApp, etc.) are NOT
+    uploaded. Local on-device history remains readable to you; only the
+    outbound sync queue is scrubbed.
 
-4.3 The App will make a BEST EFFORT to scrub personally identifiable
+4.4 The App will make a BEST EFFORT to scrub personally identifiable
     information (PII) — such as phone numbers, emails, and certain structural
     IDs — from payloads before they are queued for transmission. Best effort
     does NOT guarantee complete removal of all identifiers (for example,
     free-text names and place names may remain). Do not rely solely on
-    automated scrubbing.
+    automated scrubbing. Payloads that fail the residual-PII gate stay on
+    device and are not uploaded.
 
-4.4 Even after scrubbing, de-identified or partially de-identified data may
+4.5 Even after scrubbing, de-identified or partially de-identified data may
     still carry residual re-identification risk. By accepting, you understand
-    and accept that risk for the purposes listed in 4.1.
+    and accept that risk for the purposes listed in 4.1–4.2.
 
-4.5 Sync may prefer Wi-Fi when the product implements network controls.
-    Actual server upload is not guaranteed in every build; consent authorizes
-    queuing and future upload when those features are enabled.
+4.6 Sync may prefer Wi-Fi when the product implements network controls.
+    Upload attempts run automatically after Terms acceptance when an ingest
+    endpoint is reachable; items remain queued until successfully accepted.
 
-4.6 Creators do not sell identifiable clinical content to life insurers or
+4.7 Creators do not sell identifiable clinical content to life insurers or
     employers and do not use data for automated diagnosis of individuals.
 
 ──────────────────────────────────────────────────────────────────────────────
@@ -137,7 +144,8 @@ in-app consent screen afterward.
     before continued use.
 
 7.2 You may stop using the App at any time. Creators may discontinue the App
-    or pilot features without liability.
+    or pilot features without liability. Stopping use is the only way to stop
+    future sync of new activity.
 
 ──────────────────────────────────────────────────────────────────────────────
 8. ACKNOWLEDGEMENT
@@ -149,10 +157,9 @@ that:
   • You understand the App is reference / draft assistance only;
   • Creators take no responsibility or liability for clinical outcomes;
   • Patient data you enter is your responsibility on-device;
+  • Sync of scrubbed activity is REQUIRED and cannot be turned off in the App;
   • You consent to scrubbed activity being queued and synced to servers for
-    corpus/model quality improvement (Section 4);
+    backup, corpus/model quality improvement, and analytics (Section 4);
   • You understand PII scrubbing is best-effort and not perfect;
   • You will not treat absence of interaction data as safety clearance;
-  • You will verify all clinically relevant information independently.
-
-If you do not agree, close the App and do not proceed.
+  • You will not use the App if you disagree with any of the above.

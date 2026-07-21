@@ -21,6 +21,7 @@ class _DrugSearchScreenState extends State<DrugSearchScreen> {
   Timer? _debounce;
   List<Drug> _results = [];
   List<Drug> _featured = [];
+  int _corpusCount = 0;
   bool _loading = false;
   String? _error;
 
@@ -32,8 +33,13 @@ class _DrugSearchScreenState extends State<DrugSearchScreen> {
 
   Future<void> _loadFeatured() async {
     try {
-      final drugs = await widget.repository.listDrugs(limit: 12);
-      if (mounted) setState(() => _featured = drugs);
+      final drugs = await widget.repository.listDrugs(limit: 20);
+      if (mounted) {
+        setState(() {
+          _featured = drugs;
+          _corpusCount = widget.repository.drugCorpusCount;
+        });
+      }
     } catch (e) {
       if (mounted) setState(() => _error = e.toString());
     }
@@ -126,11 +132,22 @@ class _DrugSearchScreenState extends State<DrugSearchScreen> {
                 ? (_loading
                     ? 'Searching…'
                     : '${_results.length} result${_results.length == 1 ? '' : 's'}')
-                : 'Essential medicines (sample)',
+                : _corpusCount > 0
+                    ? '$_corpusCount medicines loaded — search any generic (e.g. Lisinopril, Simvastatin)'
+                    : 'Search generic, नेपाली नाम, or brand…',
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color: AppColors.slate500,
                 ),
           ),
+          if (!showingSearch && _corpusCount > 0) ...[
+            const SizedBox(height: 4),
+            Text(
+              'Showing ${_featured.length} of $_corpusCount (A–Z)',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppColors.slate500,
+                  ),
+            ),
+          ],
           if (_error != null) ...[
             const SizedBox(height: 8),
             Text(_error!, style: const TextStyle(color: AppColors.danger)),

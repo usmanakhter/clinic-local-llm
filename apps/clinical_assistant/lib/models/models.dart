@@ -263,6 +263,9 @@ class Patient {
     required this.displayName,
     this.age,
     this.sex,
+    this.phone,
+    this.whatsapp,
+    this.email,
     this.clinicalCondition,
     this.relevantNotes,
     this.history,
@@ -274,6 +277,9 @@ class Patient {
   final String displayName;
   final String? age;
   final String? sex;
+  final String? phone;
+  final String? whatsapp;
+  final String? email;
   final String? clinicalCondition;
   final String? relevantNotes;
   final String? history;
@@ -286,6 +292,9 @@ class Patient {
       displayName: map['display_name'] as String? ?? '',
       age: map['age'] as String?,
       sex: map['sex'] as String?,
+      phone: map['phone'] as String?,
+      whatsapp: map['whatsapp'] as String?,
+      email: map['email'] as String?,
       clinicalCondition: map['clinical_condition'] as String?,
       relevantNotes: map['relevant_notes'] as String?,
       history: map['history'] as String?,
@@ -302,6 +311,9 @@ class Patient {
       'display_name': displayName,
       'age': age,
       'sex': sex,
+      'phone': phone,
+      'whatsapp': whatsapp,
+      'email': email,
       'clinical_condition': clinicalCondition,
       'relevant_notes': relevantNotes,
       'history': history,
@@ -314,10 +326,31 @@ class Patient {
     final parts = <String>[
       if (age != null && age!.trim().isNotEmpty) 'Age $age',
       if (sex != null && sex!.trim().isNotEmpty) sex!,
+      if (phone != null && phone!.trim().isNotEmpty) 'Tel $phone',
+      if (whatsapp != null && whatsapp!.trim().isNotEmpty) 'WA $whatsapp',
       if (clinicalCondition != null && clinicalCondition!.trim().isNotEmpty)
         clinicalCondition!,
     ];
     return parts.isEmpty ? 'No condition listed' : parts.join(' · ');
+  }
+
+  /// Case-insensitive match across id, name, contacts, and clinical text.
+  bool matchesQuery(String rawQuery) {
+    final q = rawQuery.trim().toLowerCase();
+    if (q.isEmpty) return true;
+    final hay = [
+      id,
+      displayName,
+      age,
+      sex,
+      phone,
+      whatsapp,
+      email,
+      clinicalCondition,
+      relevantNotes,
+      history,
+    ].whereType<String>().map((s) => s.toLowerCase()).join(' ');
+    return hay.contains(q);
   }
 }
 
@@ -333,6 +366,8 @@ class ClinicalSession {
     this.syncStatus = 'local_only',
     this.deviceId = 'local',
     this.patientId,
+    this.feedback,
+    this.feedbackReason,
   });
 
   final String id;
@@ -344,6 +379,8 @@ class ClinicalSession {
   final String syncStatus;
   final String? deviceId;
   final String? patientId;
+  final String? feedback;
+  final String? feedbackReason;
 
   factory ClinicalSession.fromMap(Map<String, dynamic> map) {
     return ClinicalSession(
@@ -357,6 +394,8 @@ class ClinicalSession {
       syncStatus: map['sync_status'] as String? ?? 'local_only',
       deviceId: map['device_id'] as String?,
       patientId: map['patient_id'] as String?,
+      feedback: map['feedback'] as String?,
+      feedbackReason: map['feedback_reason'] as String?,
     );
   }
 
@@ -370,7 +409,8 @@ class ClinicalSession {
       'payload_json': payloadJson,
       'sync_status': syncStatus,
       'device_id': deviceId,
-      'feedback': null,
+      'feedback': feedback,
+      'feedback_reason': feedbackReason,
       'patient_id': patientId,
     };
   }

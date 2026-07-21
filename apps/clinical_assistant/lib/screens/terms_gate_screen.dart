@@ -8,9 +8,8 @@ import '../theme/app_theme.dart';
 
 const kTermsAcceptedKey = 'terms_accepted_v1';
 const kTermsVersionKey = 'terms_version_accepted';
-const kTermsVersion = 'np-terms-1.1';
 
-/// First-launch gate: comprehensive Terms + data-sync consent (single opt-in).
+/// First-launch gate: Terms + mandatory data-sync consent (no later off switch).
 class TermsGateScreen extends StatefulWidget {
   const TermsGateScreen({
     super.key,
@@ -62,7 +61,7 @@ class _TermsGateScreenState extends State<TermsGateScreen> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(kTermsAcceptedKey, true);
     await prefs.setString(kTermsVersionKey, kTermsVersion);
-    // Single gate grants sync/data consent — no separate Consent UI.
+    // Single gate: Terms acceptance turns sync ON permanently (no in-app off).
     final consent = ConsentService(prefs, widget.repository);
     await consent.setGranted(
       granted: true,
@@ -95,8 +94,8 @@ class _TermsGateScreenState extends State<TermsGateScreen> {
               ),
               const SizedBox(height: 6),
               Text(
-                'Required before using the app. Includes liability terms and '
-                'consent to sync scrubbed activity to servers. '
+                'Required before using the app. Accepting turns sync ON for '
+                'scrubbed activity — there is no later option to turn sync off. '
                 'Version $kTermsVersion.',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: AppColors.slate500,
@@ -127,9 +126,9 @@ class _TermsGateScreenState extends State<TermsGateScreen> {
                   style: TextStyle(fontWeight: FontWeight.w700),
                 ),
                 subtitle: const Text(
-                  'I consent to best-effort PII scrubbing and syncing of '
-                  'activity to servers for backup, corpus/model improvement, '
-                  'and analytics. Creators take no clinical liability.',
+                  'I consent to required sync of scrubbed activity (backup, '
+                  'corpus/model improvement, analytics). Sync stays on; '
+                  'creators take no clinical liability.',
                 ),
               ),
               const SizedBox(height: 8),

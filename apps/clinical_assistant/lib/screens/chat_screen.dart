@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../data/session_store.dart';
 import '../data/repositories.dart';
 import '../data/retriever.dart';
 import '../llm/gguf_runtime.dart';
@@ -28,6 +29,8 @@ class _ChatMessage {
     this.bundle,
     this.fromModel = false,
     this.isError = false,
+    this.sessionId,
+    this.feedback,
   });
 
   final String role;
@@ -35,6 +38,8 @@ class _ChatMessage {
   final RetrieveBundle? bundle;
   final bool fromModel;
   final bool isError;
+  final String? sessionId;
+  final String? feedback;
 }
 
 class _ChatScreenState extends State<ChatScreen> {
@@ -91,7 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
     final bundle = await _retriever.retrieve(q);
 
     if (bundle.refused) {
-      await widget.repository.logSession(
+      final sess = await widget.repository.logSession(
         queryType: 'chat',
         inputSummary: q,
         outputSummary: 'refused',
@@ -109,6 +114,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 'Save a note, search a drug, or open a guideline first — '
                 'then ask again.',
             bundle: bundle,
+            sessionId: sess.id,
           ),
         );
         _busy = false;
@@ -141,7 +147,7 @@ class _ChatScreenState extends State<ChatScreen> {
       }
     }
 
-    await widget.repository.logSession(
+    final sess = await widget.repository.logSession(
       queryType: 'chat',
       inputSummary: q,
       outputSummary:
@@ -166,9 +172,29 @@ class _ChatScreenState extends State<ChatScreen> {
           bundle: isError ? null : bundle,
           fromModel: fromModel,
           isError: isError,
+          sessionId: sess.id,
         ),
       );
       _busy = false;
+    });
+  }
+
+  Future<void> _submitFeedback(int index, String vote) async {
+    final m = _messages[index];
+    final sid = m.sessionId;
+    if (sid == null || m.role != 'assistant' || m.isError) return;
+    await SessionStore.updateFeedback(sessionId: sid, feedback: vote);
+    if (!mounted) return;
+    setState(() {
+      _messages[index] = _ChatMessage(
+        role: m.role,
+        text: m.text,
+        bundle: m.bundle,
+        fromModel: m.fromModel,
+        isError: m.isError,
+        sessionId: m.sessionId,
+        feedback: vote,
+      );
     });
   }
 
@@ -242,6 +268,49 @@ class _ChatScreenState extends State<ChatScreen> {
                                 .textTheme
                                 .labelSmall
                                 ?.copyWith(color: AppColors.warningText),
+                          ),
+                        ),
+                      if (m.sessionId != null && !m.isError && m.role == 'assistant')
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Row(
+                            children: [
+                              IconButton(
+                                visualDensity: VisualDensity.compact,
+                                icon: Icon(
+                                  m.feedback == 'up'
+                                      ? Icons.thumb_up
+                                      : Icons.thumb_up_outlined,
+                                  size: 18,
+                                  color: m.feedback == 'up'
+                                      ? AppColors.tealDark
+                                      : AppColors.slate500,
+                                ),
+                                onPressed: m.feedback == null
+                                    ? () => _submitFeedback(i, 'up')
+                                    : null,
+                              ),
+                              IconButton(
+                                visualDensity: VisualDensity.compact,
+                                icon: Icon(
+                                  m.feedback == 'down'
+                                      ? Icons.thumb_down
+                                      : Icons.thumb_down_outlined,
+                                  size: 18,
+                                  color: m.feedback == 'down'
+                                      ? AppColors.warningText
+                                      : AppColors.slate500,
+                                ),
+                                onPressed: m.feedback == null
+                                    ? () => _submitFeedback(i, 'down')
+                                    : null,
+                              ),
+                              if (m.feedback != null)
+                                Text(
+                                  'Feedback recorded',
+                                  style: Theme.of(context).textTheme.labelSmall,
+                                ),
+                            ],
                           ),
                         ),
                       if (b != null && !b.refused) ...[

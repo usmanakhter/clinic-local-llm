@@ -1,4 +1,4 @@
-"""Guideline search: multi-token LIKE + ranking (FTS optional later in app)."""
+"""Guideline search: FTS5 when available + multi-token LIKE hybrid."""
 
 from __future__ import annotations
 
@@ -31,6 +31,10 @@ _STOP = frozenset(
         "give",
         "cold",
         "flu",
+        "nepal",
+        "opd",
+        "protocol",
+        "treatment",
     }
 )
 
@@ -44,6 +48,14 @@ def _tokens(query: str) -> list[str]:
             continue
         out.append(t)
     return out or raw or [query.strip()]
+
+
+def _fts_match_query(query: str) -> str:
+    tokens = _tokens(query)
+    if not tokens:
+        return query.strip()
+    parts = [f'"{t}"*' if t.isascii() else f'"{t}"' for t in tokens]
+    return " OR ".join(parts)
 
 
 def _score_chunk(chunk: GuidelineChunk, query: str) -> tuple[float, str]:
@@ -89,18 +101,23 @@ def _score_chunk(chunk: GuidelineChunk, query: str) -> tuple[float, str]:
     return best_s + min(bonus, 20.0), best_r
 
 
-def search_guidelines(
-    repo: ClinicalRepository,
-    query: str,
-    *,
-    limit: int = 20,
-) -> list[RankedGuideline]:
-    """Multi-token keyword search; ranked by portable heuristic + priority."""
-    q = query.strip()
-    if not q:
-        return []
+def _search_fts(repo: ClinicalRepository, query: str, limit: int) -> list[GuidelineChunk]:
+    match = _fts_match_query(query)
+    rows = repo.connection.execute(
+        """
+        SELECT guideline_chunks.*
+        FROM guidelines_fts
+        JOIN guideline_chunks ON guideline_chunks.rowid = guidelines_fts.rowid
+        WHERE guidelines_fts MATCH ?
+        LIMIT ?
+        """,
+        (match, limit * 5),
+    ).fetchall()
+    return [row_to_guideline(r) for r in rows]
 
-    tokens = _tokens(q)
+
+def _search_like(repo: ClinicalRepository, query: str, limit: int) -> list[GuidelineChunk]:
+    tokens = _tokens(query)
     seen: dict[str, GuidelineChunk] = {}
     for tok in tokens:
         pattern = f"%{tok}%"
@@ -121,9 +138,32 @@ def search_guidelines(
         for r in rows:
             chunk = row_to_guideline(r)
             seen[chunk.id] = chunk
+    return list(seen.values())
+
+
+def search_guidelines(
+    repo: ClinicalRepository,
+    query: str,
+    *,
+    limit: int = 20,
+) -> list[RankedGuideline]:
+    """Hybrid FTS + LIKE guideline search with heuristic re-rank."""
+    q = query.strip()
+    if not q:
+        return []
+
+    candidates: dict[str, GuidelineChunk] = {}
+    if repo.guidelines_fts_available():
+        try:
+            for c in _search_fts(repo, q, limit):
+                candidates[c.id] = c
+        except Exception:
+            pass
+    for c in _search_like(repo, q, limit):
+        candidates[c.id] = c
 
     ranked: list[RankedGuideline] = []
-    for chunk in seen.values():
+    for chunk in candidates.values():
         score, reason = _score_chunk(chunk, q)
         if score <= 0:
             continue

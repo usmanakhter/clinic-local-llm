@@ -22,7 +22,7 @@ GgufLlamaRuntime createPlatformGgufRuntime({
   );
 }
 
-/// On-device GGUF runtime (llama.cpp via llamadart) for Android / Windows.
+/// On-device GGUF runtime (llama.cpp via llamadart) for Linux / Android / Windows.
 class IoGgufLlamaRuntime implements GgufLlamaRuntime {
   IoGgufLlamaRuntime({
     required this.preferredFileNames,

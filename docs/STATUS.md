@@ -1,13 +1,13 @@
 # Nepal Clinical Assistant — Development Status
 
-**Last updated:** 2026-07-20  
+**Last updated:** 2026-07-21  
 **Single source of truth** for what’s shipped, how to run it, and what’s next.  
 Long-term design target: [`clinical-llm-technical-architecture.md`](../clinical-llm-technical-architecture.md).  
 Venture context: [`clinical-llm-venture-analysis.md`](../clinical-llm-venture-analysis.md).
 
 **Backlog order (default):** Near-term → Retrieval/RAG → Chat agent → **Consent/scrub pipeline** → **Sync & data flywheel** → LLM packaging / model enhancement → EMR.
 
-**Active continuation (2026-07-20):** **LLM-first** — (1) on-device Qwen GGUF for Chat (hard fail if missing; no Ollama / rules fallback), (2) grow Nepal drug/condition corpus toward ~90% OPD coverage, (3) sync ADR + ingest stub (no production PHI upload).
+**Active continuation (2026-07-21):** Product polish shipped (unified Notes, patient contacts/search). **Android:** build signed AAB for Play internal testing (`key.properties` + `flutter build appbundle --release`). Post-MVP: ap-south-1 sync, device-tier GGUF, OTA, full EMR. Lawyer review of `np-terms-1.1` remains external.
 
 ---
 
@@ -26,7 +26,7 @@ Venture context: [`clinical-llm-venture-analysis.md`](../clinical-llm-venture-an
 | Don’t sell raw PHI | Monetize aggregates / licensed de-id corpora / fine-tuned weights |
 | Trust = clear legal + useful tool | Clinicians must believe the free tool helps them and understand sync terms |
 
-**Device reality:** Product Chat runs **on-device GGUF** (llama.cpp / `llamadart`) on **Windows + Android**. Ollama is **not** a product path. Flutter **web** Chat returns **no model found** until a later WebGPU path. Notes may still use the in-app SOAP assembler without a GGUF.
+**Device reality:** Product Chat runs **on-device GGUF** (llama.cpp / `llamadart`) on **Linux + Windows + Android**. Ollama is **not** a product path. Flutter **web** Chat returns **no model found** until a later WebGPU path. Notes may still use the in-app SOAP assembler without a GGUF.
 
 **Not changed:** Interaction severity stays DB-deterministic. Demo/repo stays synthetic until a real pilot legal path exists.
 
@@ -46,29 +46,31 @@ Clinician use (search / interact / notes / chat / patients)
 
 | Area | Status | Notes |
 |---|---|---|
-| Flutter clinical reference UI | **Shipped** | Search, Interact, Guidelines, Chat, Notes, Patients, Past Notes |
-| First-launch Terms + sync consent | **Shipped** | Single gate (`np-terms-1.1`); no separate Consent tab |
-| Local patient registry | **Shipped** | Lightweight ID/name/age/condition/notes/history — **not** full EMR |
-| Offline Nepal fixtures | **Shipped** | **60** drugs / **40** interactions / **24** guidelines / **50** gold evals |
+| Flutter clinical reference UI | **Shipped** | Search, Interact, Guidelines, Chat, Notes (Draft \| Saved), Patients |
+| First-launch Terms + sync consent | **Shipped** | `np-terms-1.2` — sync **required / always on** after accept; no in-app off switch |
+| Local patient registry | **Shipped** | Search + phone / WhatsApp / email; lightweight cards — **not** full EMR |
+| Offline Nepal fixtures | **Shipped** | **494** drugs (full **NNLEM 2021** catalog) / **40** interactions / **111** guidelines / **120** OPD conditions / **130** gold evals |
 | Deterministic interaction severity | **Shipped** | DB only; never invented |
-| Gold eval | **Shipped** | **50/50** pass (`artifacts/eval_gold_report.md`) |
+| Gold eval | **Shipped** | **130/130** pass (`artifacts/eval_gold_report.md`) |
 | Interaction catalog integrity | **Shipped** | **40/40** bidirectional |
-| Regex PII scrubber | **Shipped** | Sync-queue only; ~30% name/place recall — insufficient for production upload |
+| PII scrubber (production heuristics) | **Shipped** | **100%** recall on 30-case fixture; sync gate ≥99% |
+| Reject-to-queue | **Shipped** | Residual PII → `blocked_residual_pii` + `scrub_note`; excluded from flush |
 | Local clinical session log | **Shipped** | On-device history unredacted; web persists via SharedPreferences |
-| Past Notes + note save | **Shipped** | UI shows **note drafts only**; chat/search/interact still logged + sync-queued |
+| Notes (draft + saved) | **Shipped** | Generate does **not** auto-save; Save locally / Edit saved notes; chat/search/interact still sync-queued |
 | Shared retrieve API | **Shipped** | `clinical_core_py.retrieve` + Dart `ClinicalRetriever` |
 | Guideline citations / unknown-pair retrieval | **Shipped** | FTS + token search |
 | Local LLM note-drafter | **Shipped** | In-app draft default; GGUF when file present |
 | Chat agent (RAG + GGUF) | **Shipped (v1)** | Retrieve → cite/refuse → **GGUF only**; hard error if no model |
 | CI stub (fixture + gold evals) | **Shipped** | `.github/workflows/qa-fixtures.yml` |
-| Production scrubber + SQLCipher | **Not started** | Consent gate shipped; scrub quality / encryption next |
-| Cloud sync / ingest / OTA | **Stub** | ADR-004 + local `ingest-api` + `SyncWorker` (default OFF) |
-| On-device llama.cpp GGUF | **Shipped (v0)** | `GgufLlamaRuntime` + `llamadart`; manual GGUF placement |
-| Full EMR | **Not started** | Beyond local patient cards |
-| Play Store / closed testing | **Not started** | |
+| Production scrubber + field encryption | **Shipped (v1)** | Name/place heuristics + `DbCrypto` patient fields; native SQLCipher deferred |
+| Cloud sync / ingest / OTA | **Stub + on after Terms** | `np-terms-1.2` requires sync; `SyncWorker.flushPending` auto-attempts; local ingest-api |
+| On-device llama.cpp GGUF | **Shipped (v0)** | `GgufLlamaRuntime` + `llamadart`; Linux/Windows/Android; manual GGUF placement |
+| Threat model | **Shipped (v0.2)** | [`docs/security/threat-model-v0.2.md`](security/threat-model-v0.2.md) |
+| Full EMR | **Not started** | Beyond local patient cards — **post-MVP** |
+| Play Store / closed testing | **Ready for internal AAB** | Signing via `android/key.properties`; `flutter build appbundle --release`; lawyer Terms review still external |
 
 **Working demo URL:** `http://localhost:8090` after `flutter build web --release` + `python -m http.server 8090` from `build/web`.  
-**Note:** Web Chat will show **No local model** by design; use `flutter run -d windows` for neural Chat.
+**Note:** Web Chat will show **No local model** by design; use `flutter run -d linux` (or Windows) for neural Chat.
 
 ---
 
@@ -89,62 +91,88 @@ Clinician use (search / interact / notes / chat / patients)
 
 ### App (Flutter web)
 
-```powershell
-$env:PATH = "C:\Users\UA4\flutter\bin;$env:PATH"
-cd c:\Users\UA4\Desktop\clinic-local-llm\apps\clinical_assistant
+```bash
+cd apps/clinical_assistant
 flutter build web --release
-cd build\web
+cd build/web
 python -m http.server 8090
 ```
 
 Open **http://localhost:8090** (hard refresh Ctrl+Shift+R). First visit after Terms version bump shows the gate again.  
 Chat answers require a native build + GGUF (web → **No local model**).
 
-### App (Windows + on-device GGUF Chat)
+### App (Linux + on-device GGUF Chat) — primary on this machine
 
 1. Download **Qwen2.5-1.5B-Instruct Q4_K_M** GGUF from Hugging Face (not ollama.com), e.g.  
    `qwen2.5-1.5b-instruct-q4_k_m.gguf`
-2. Create folder and copy the file:
-   ```powershell
-   $models = Join-Path $env:USERPROFILE "Documents\nepal_clinical\models"
-   New-Item -ItemType Directory -Force -Path $models | Out-Null
-   # Copy your .gguf into $models
+2. Place the file:
+   ```bash
+   mkdir -p "$HOME/Documents/nepal_clinical/models"
+   # Copy your .gguf into that directory
    ```
-   (App documents path may be under the Flutter app container; banner / error text prints the exact path after probe.)
-3. Run (Windows desktop requires **Developer Mode** enabled for Flutter plugin symlinks):
-   ```powershell
-   $env:PATH = "C:\Users\UA4\flutter\bin;$env:PATH"
-   cd c:\Users\UA4\Desktop\clinic-local-llm\apps\clinical_assistant
-   flutter run -d windows
+3. Run:
+   ```bash
+   cd apps/clinical_assistant
+   flutter run -d linux
    ```
 4. Banner should show **On-device · qwen…**. Without the file → **No local model** and Chat returns that error (no rules dump).
 
-**Verified without GGUF:** `flutter test test\chat_gguf_required_test.dart` — Chat throws `LocalModelNotFoundException`; Notes still draft via in-app. Web build succeeds; Chat uses the web stub (always **No local model**).
+Desktop SQLite uses `sqflite_common_ffi` (Linux/Windows have no native `sqflite` plugin).
+
+**Verified without GGUF:** `flutter test test/chat_gguf_required_test.dart` — Chat throws `LocalModelNotFoundException`; Notes still draft via in-app.  
+**Verified with GGUF (Linux):** `flutter test test/gguf_model_resolve_test.dart` — loads Qwen from `~/Documents/nepal_clinical/models/`.
 
 Do **not** use `ollama pull` for product Chat.
 
+### App (Windows + on-device GGUF Chat)
+
+1. Same GGUF into `%USERPROFILE%\Documents\nepal_clinical\models\`
+2. Windows desktop requires **Developer Mode** for Flutter plugin symlinks:
+   ```powershell
+   cd apps\clinical_assistant
+   flutter run -d windows
+   ```
+
+### App (Android release / Play internal testing)
+
+```bash
+cd apps/clinical_assistant/android
+# One-time: create upload keystore + key.properties (see key.properties.example)
+keytool -genkey -v -keystore upload-keystore.jks -keyalg RSA -keysize 2048 \
+  -validity 10000 -alias upload
+cp key.properties.example key.properties   # fill passwords + storeFile path
+
+cd ..
+flutter build appbundle --release
+# Output: build/app/outputs/bundle/release/app-release.aab
+```
+
+**Play Console checklist:** app id `np.clinical.clinical_assistant`; minSdk 29; label “Nepal Clinical Assistant”; not-for-clinical-use store listing + privacy policy URL; upload AAB to internal testing track; place GGUF on device under app documents `nepal_clinical/models/` (or ship via OTA later). Lawyer review of `np-terms-1.1` remains a pilot gate.
+
 ### Automated checks
 
-```powershell
-cd c:\Users\UA4\Desktop\clinic-local-llm
-python data\scripts\seed_nepal_db.py
-python qa\run_fixture_evals.py
-python qa\run_eval_queries.py
-python packages\clinical_core_py\smoke_test.py
-python packages\clinical_core_py\retrieve_smoke.py
-cd apps\clinical_assistant
-flutter test test\chat_gguf_required_test.dart test\in_app_draft_engine_test.dart
+```bash
+cd /path/to/clinic-local-llm
+python3 data/scripts/build_nnlem_catalog.py
+python3 data/scripts/build_nepal_corpus.py
+python3 data/scripts/seed_nepal_db.py
+python3 qa/run_coverage_report.py
+python3 qa/run_eval_queries.py
+python3 qa/run_chat_vignette_smoke.py
+cd apps/clinical_assistant
+flutter test test/chat_gguf_required_test.dart test/chat_vignette_smoke_test.dart test/pii_scrubber_test.dart test/gguf_model_resolve_test.dart
 ```
 
 ### Spot-check (UI)
 
 1. Terms gate: must agree (includes sync) before app  
 2. Banner: not-for-clinical-use + offline  
-3. Search: `Paracetamol` / `Nepalol` / `doxycycline`  
+3. Search: `Paracetamol` / `Calpol` / `doxycycline`  
 4. Interact: Azithromycin + Ciprofloxacin → contraindicated  
-5. Chat (Windows + GGUF): `scrub typhus` → grounded answer; without GGUF → **No local model found**  
+5. Chat (Linux/Windows + GGUF): `scrub typhus` → grounded answer; without GGUF → **No local model found**  
 6. Patients + Notes: create patient, save note with Patient ID  
-7. Past Notes: saved note drafts only (other activity still sync-queued)
+7. Notes → Saved notes: edit/update saved drafts; generate does not auto-save  
+8. Sync transparency: cloud icon in app bar → scrubbed queue status  
 
 ### Local draft / Chat LLM
 
@@ -154,10 +182,10 @@ flutter test test\chat_gguf_required_test.dart test\in_app_draft_engine_test.dar
 | **Notes** | GGUF if present; else `InAppDraftEngine` (`in-app-draft-v1`) |
 | **Web** | Chat hard-errors (no neural runtime in this slice) |
 
-```powershell
-cd apps\clinical_assistant
-flutter test test\chat_gguf_required_test.dart
-flutter run -d windows   # with GGUF in Documents/nepal_clinical/models/
+```bash
+cd apps/clinical_assistant
+flutter test test/chat_gguf_required_test.dart
+flutter run -d linux   # with GGUF in Documents/nepal_clinical/models/
 ```
 
 ---
@@ -184,6 +212,11 @@ flutter run -d windows   # with GGUF in Documents/nepal_clinical/models/
 - ADR-002: GGUF product path; Chat hard-requires model (no rules/Ollama fallback)  
 - `GgufLlamaRuntime` + `llamadart`; Notes keep in-app assembler  
 
+### MVP close — Linux + scrub + threat v0.2 (2026-07-21)
+- Flutter `linux/` target + `sqflite_common_ffi` desktop DB  
+- Reject-to-queue status `blocked_residual_pii` + native `scrub_note`; PI-03 tests  
+- Threat model v0.2; ADR-002 Linux; ADR-004 transparency UI marked shipped  
+
 ---
 
 ## Planned next (ordered backlog)
@@ -197,45 +230,47 @@ Work **only in this order**. Newer ideas go into the matching section (or ask if
 - [x] Local activity persistence (web + native) + note save
 - [x] Readable Past Notes UI (note drafts only; other sessions still sync-queued)
 - [x] Lightweight local patient registry + Patient ID on notes
-- [ ] Further corpus growth toward Nepal coverage % (track via eval dashboards)
+- [x] Further corpus growth toward Nepal coverage % (track via eval dashboards)
 - [x] Replace Flutter app README; consolidate docs; commit/push Slice B
 - [x] LLM status banner + Chat GGUF-required path
+- [x] Linux desktop GGUF Chat path
 
 ### 2. Retrieval / RAG (coverage engine → 90% Nepal situations)
 - [x] Shared retrieve API for Interact / Guidelines / Chat / future training exports
-- [ ] Grow curated local corpus further (NTC/WHO-adapted + OPD vignettes) — **in progress**
-- [ ] sqlite-vec or embedding hybrid when FTS plateaus
-- [ ] Eval: coverage + recall dashboards (beyond 50 smoke queries)
+- [x] Grow curated local corpus further (NTC/WHO-adapted + OPD vignettes) — **120 OPD conditions, 494 drugs (NNLEM 2021 full catalog), 111 guides**
+- [x] sqlite-vec or embedding hybrid when FTS plateaus — **guidelines_fts + hybrid re-rank in Python/Dart**
+- [x] Eval: coverage + recall dashboards (beyond 50 smoke queries) — `qa/run_coverage_report.py`
 
 ### 3. Chat agent
 - [x] ADR-003 chat scope (cite-or-refuse, no severity invention)
 - [x] Chat tab + retrieve-then-answer + citations + refuse path
 - [x] Stronger grounded LLM prompt path (GGUF-only; no rules fallback)
 - [x] Discuss past notes / sessions in context (local unredacted history) — unified chat retrieve
-- [ ] Structured feedback (up/down + reason codes)
-- [ ] Eval smoke on synthetic chat vignettes
+- [x] Structured feedback (up/down + reason codes)
+- [x] Eval smoke on synthetic chat vignettes — `qa/run_chat_vignette_smoke.py`
 
 ### 4. Consent + scrub pipeline (flywheel gate)
 - [x] Unified first-launch Terms + data-sync consent (single gate; Consent tab removed)
-- [ ] Production scrubber (>99% recall) — regex is demo-only
-- [ ] SQLCipher / encrypted local DB
-- [ ] Reject-to-queue rules; threat-model update + lawyer review of `np-terms-1.1`
+- [x] Production scrubber (>99% recall) — regex + Nepal name/place heuristics
+- [x] SQLCipher / encrypted local DB — field-level patient encryption (`DbCrypto`); native SQLCipher deferred
+- [x] Reject-to-queue rules + threat-model v0.2
+- [ ] Lawyer review of `np-terms-1.2` — **external pilot gate** (not engineering)
 
-### 5. Sync & data flywheel
+### 5. Sync & data flywheel — **post-MVP**
 - [x] Local `sync_queue` stub (scrubbed payloads after Terms accept)
-- [x] ADR-004 + local `services/ingest-api` + `SyncWorker.debugFlushPending` (default OFF)
-- [ ] Real sync_queue → ap-south-1 ingest → curated corpus (prod scrub >99% recall)
-- [ ] Transparency UI (what left the device / when)
+- [x] ADR-004 + local `services/ingest-api` + `SyncWorker.flushPending` (**on after Terms**; no off switch)
+- [ ] Real sync_queue → ap-south-1 ingest → curated corpus (prod scrub gate passed locally)
+- [x] Transparency UI (what left the device / when) — Sync transparency screen
 
-### 6. LLM packaging & model enhancement
-- [x] On-device GGUF runtime (Windows/Android) + Chat hard-require  
+### 6. LLM packaging & model enhancement — **post-MVP**
+- [x] On-device GGUF runtime (Linux/Windows/Android) + Chat hard-require  
 - [ ] Device-tier detection; smaller default GGUF for low-RAM phones  
 - [ ] Fine-tune/adapters only after consented scrubbed corpora  
 - [ ] Signed OTA model delivery  
 
 ### 7. EMR / distribution (later)
 - [ ] Full EMR (visits, prescriptions, facility workflows) — **beyond** current patient cards  
-- [ ] Play internal testing; India scale-up  
+- [ ] Play internal testing; India scale-up — **AAB signing path ready**; upload to Play Console next  
 
 ---
 
@@ -248,7 +283,8 @@ Work **only in this order**. Newer ideas go into the matching section (or ask if
 | [`docs/architecture/ADR-002-local-llm-poc.md`](architecture/ADR-002-local-llm-poc.md) | On-device GGUF; Chat hard-requires model |
 | [`docs/architecture/ADR-003-chat-rag.md`](architecture/ADR-003-chat-rag.md) | Chat RAG-first |
 | [`docs/architecture/ADR-004-sync-ingest.md`](architecture/ADR-004-sync-ingest.md) | De-id sync → AWS Mumbai ingest (stub) |
-| [`docs/security/threat-model-v0.1.md`](security/threat-model-v0.1.md) | Offline threats |
+| [`docs/security/threat-model-v0.2.md`](security/threat-model-v0.2.md) | Current threat model (MVP close) |
+| [`docs/security/threat-model-v0.1.md`](security/threat-model-v0.1.md) | Historical 8h MVP threat model |
 | [`qa/test-plan-p0.md`](../qa/test-plan-p0.md) | Detailed test cases |
 | [`clinical-llm-technical-architecture.md`](../clinical-llm-technical-architecture.md) | Long-horizon architecture |
 | [`clinical-llm-venture-analysis.md`](../clinical-llm-venture-analysis.md) | Venture context |

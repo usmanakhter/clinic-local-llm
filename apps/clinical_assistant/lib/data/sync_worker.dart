@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 import 'session_store.dart';
 
-/// Result of an explicit [SyncWorker.debugFlushPending] call.
+/// Result of an [SyncWorker.flushPending] call.
 class SyncFlushResult {
   const SyncFlushResult({
     required this.attempted,
@@ -21,22 +21,22 @@ class SyncFlushResult {
   bool get ok => failed == 0 && attempted == synced;
 }
 
-/// Phase 3 sync stub — **network OFF by default**.
+/// Scrubbed-queue upload worker.
 ///
-/// Does not run on app start or in background. Call [debugFlushPending]
-/// only from debug / developer tooling against a local ingest-api.
+/// After Terms acceptance, sync is **on** (no in-app off switch). The app
+/// queues scrubbed payloads continuously and [flushPending] attempts upload
+/// whenever an ingest endpoint is reachable (local stub or future prod URL).
 class SyncWorker {
   SyncWorker._();
 
+  /// Local ingest stub (ADR-004). Replace with ap-south-1 URL for production.
   static const defaultBaseUrl = 'http://127.0.0.1:8787';
 
   /// POSTs pending scrubbed queue items to [baseUrl]/v1/ingest/batch`.
-  ///
-  /// Feature is opt-in: this method is the only entry point in the stub.
-  static Future<SyncFlushResult> debugFlushPending({
+  static Future<SyncFlushResult> flushPending({
     String baseUrl = defaultBaseUrl,
     String deviceId = 'dev-device',
-    String consentVersion = 'np-terms-1.1',
+    String consentVersion = 'np-terms-1.2',
     int limit = 20,
     Duration timeout = const Duration(seconds: 15),
   }) async {
@@ -79,9 +79,7 @@ class SyncWorker {
       );
     }
 
-    final uri = Uri.parse(
-      '${baseUrl.replaceAll(RegExp(r'/+$'), '')}/v1/ingest/batch',
-    );
+    final uri = Uri.parse('$baseUrl/v1/ingest/batch');
     final body = jsonEncode({
       'device_id': deviceId,
       'consent_version': consentVersion,
@@ -89,7 +87,7 @@ class SyncWorker {
     });
 
     try {
-      final res = await http
+      final response = await http
           .post(
             uri,
             headers: {'Content-Type': 'application/json'},
@@ -97,7 +95,7 @@ class SyncWorker {
           )
           .timeout(timeout);
 
-      if (res.statusCode >= 200 && res.statusCode < 300) {
+      if (response.statusCode >= 200 && response.statusCode < 300) {
         for (final item in items) {
           await SessionStore.markSynced(item['id'] as String);
         }
@@ -105,37 +103,54 @@ class SyncWorker {
           attempted: items.length,
           synced: items.length,
           failed: 0,
-          message: 'Synced ${items.length} item(s) to $uri',
+          message: 'Synced ${items.length} item(s) to $baseUrl',
         );
       }
 
-      final err = 'HTTP ${res.statusCode}: ${res.body}';
+      final detail = response.body.length > 200
+          ? '${response.body.substring(0, 200)}…'
+          : response.body;
       for (final item in items) {
         await SessionStore.markSyncFailed(
           item['id'] as String,
-          note: err,
+          note: 'HTTP ${response.statusCode}: $detail',
         );
       }
       return SyncFlushResult(
         attempted: items.length,
         synced: 0,
         failed: items.length,
-        message: err,
+        message: 'Upload failed HTTP ${response.statusCode}',
       );
     } catch (e) {
-      final err = e.toString();
       for (final item in items) {
         await SessionStore.markSyncFailed(
           item['id'] as String,
-          note: err,
+          note: e.toString(),
         );
       }
       return SyncFlushResult(
         attempted: items.length,
         synced: 0,
         failed: items.length,
-        message: err,
+        message: 'Upload error: $e',
       );
     }
   }
+
+  /// Backward-compatible alias used by older call sites / docs.
+  static Future<SyncFlushResult> debugFlushPending({
+    String baseUrl = defaultBaseUrl,
+    String deviceId = 'dev-device',
+    String consentVersion = 'np-terms-1.2',
+    int limit = 20,
+    Duration timeout = const Duration(seconds: 15),
+  }) =>
+      flushPending(
+        baseUrl: baseUrl,
+        deviceId: deviceId,
+        consentVersion: consentVersion,
+        limit: limit,
+        timeout: timeout,
+      );
 }

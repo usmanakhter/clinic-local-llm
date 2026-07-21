@@ -91,4 +91,4 @@
 - [ ] Repo/fixtures contain no real PHI
 - [ ] Disclaimer visible on clinical screens
 
-**Next revision (v0.2):** SQLCipher + Keystore; Android backup exclusion; signed formulary hash; backend consent-api threat surface.
+**Next revision:** See [threat-model-v0.2.md](threat-model-v0.2.md) (MVP close — Terms, GGUF, scrub queue, transparency).

@@ -110,7 +110,8 @@
       "id": "sync_008",
       "session_id": "sess_013",
       "scrubbed_at": "2026-07-09T14:01:00+05:45",
-      "status": "rejected",
+      "status": "blocked_residual_pii",
+      "scrub_note": "Rejected — residual structural PII after scrub",
       "payload": {
         "query_type": "guideline_search",
         "input_deid": "diarrhea child ORS",

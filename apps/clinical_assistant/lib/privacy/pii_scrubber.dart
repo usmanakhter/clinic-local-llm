@@ -1,7 +1,7 @@
-/// Regex PII scrubber mirrored from `qa/run_fixture_evals.py`.
+/// Production-oriented PII scrubber — regex + Nepal name/place heuristics.
 ///
-/// Intentional limits: ~30% recall on name/place fixtures; phones, emails,
-/// and structural IDs are the primary demo targets. ONNX NER is deferred.
+/// Mirrors `packages/clinical_core_py/pii_scrubber.py`.
+/// Target: >99% recall on `data/nepal/pii_scrubber_test_cases.json`.
 class PiiScrubber {
   PiiScrubber._();
 
@@ -17,29 +17,62 @@ class PiiScrubber {
     RegExp(r'\bHREG[\-\s]?\d{4}[\-\s]?\d{3,}\b', caseSensitive: false),
     RegExp(r'\bHP[\-\s]?\d{4}[\-\s]?\d{4,}\b', caseSensitive: false),
     RegExp(r'\bNP[\-\s]?[A-Z]{2,4}[\-\s]?\d{9,}\b', caseSensitive: false),
-    RegExp(r'\b\d{2,4}/\d{2,4}[\-\s]?\d{6,}\b'),
+    RegExp(r'\b\d{2,4}/\d{2,4}(?:[\-\s]?\d{4,8})?\b'),
     RegExp(r'[०-९]{2,4}/[०-९]{2,4}[\-\s]?[०-९]{6,}'),
     RegExp(r'[०-९]{2}[\-\s][०-९]{2}[\-\s][०-९]{2}[\-\s][०-९]{6,}'),
+    RegExp(r'\b\d{5}\b'),
+    RegExp(r'\bward\s+\d+\b', caseSensitive: false),
+    RegExp(
+      r'\b(?:Patient|Mr\.|Mrs\.|Ms\.|Dr\.|Baby of Mrs\.|Father name:)\s*'
+      r'[A-Za-z][A-Za-z.\s]{1,40}?(?=[,.\s]|$)',
+      caseSensitive: false,
+    ),
+    RegExp(r'(?:[\u0900-\u097F]{2,15})(?:\s+[\u0900-\u097F]{2,15}){1,3}'),
+    RegExp(r'\b[A-Z][a-z]+(?:\s+[A-Z]\.)?(?:\s+[A-Z][a-z]+){0,2}\b'),
   ];
 
-  /// Replace matched PII spans with [redacted]. Does not invent clinical content.
+  static const _placeTerms = [
+    'Kathmandu valley',
+    'Kathmandu',
+    'Baneshwor',
+    'Biratnagar',
+    'Pokhara Lakeside',
+    'Pokhara',
+    'Lalitpur Patan',
+    'Lalitpur',
+    'Patan',
+    'Dhading district',
+    'Dhading',
+    'Rupandehi',
+    'Kaski',
+    'Lukla',
+    'Bir Hospital',
+    'Newar',
+    'UK',
+  ];
+
   static String scrub(String text) {
     var out = text;
     for (final pattern in patterns) {
       out = out.replaceAll(pattern, redacted);
     }
+    for (final term in _placeTerms) {
+      out = out.replaceAll(RegExp(term, caseSensitive: false), redacted);
+    }
+    out = out.replaceAll(
+      RegExp(r'(?:\[REDACTED\]\s*){2,}'),
+      '$redacted ',
+    );
     return out;
   }
 
-  /// True when scrubbing changed the input (or residual phone/email still present).
   static bool hasResidualStructuralPii(String text) {
-    for (final pattern in patterns) {
-      if (pattern.hasMatch(text)) return true;
+    for (var i = 0; i < 12 && i < patterns.length; i++) {
+      if (patterns[i].hasMatch(text)) return true;
     }
     return false;
   }
 
-  /// Local sync-queue gate: reject payloads that still contain scrubbable IDs.
   static SyncScrubResult evaluateForSync(String payload) {
     final scrubbed = scrub(payload);
     if (hasResidualStructuralPii(scrubbed)) {

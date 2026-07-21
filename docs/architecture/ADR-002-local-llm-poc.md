@@ -1,6 +1,6 @@
 # ADR-002 — On-device GGUF LLM (Chat hard-requires model)
 
-**Status:** Accepted (amended 2026-07-20)  
+**Status:** Accepted (amended 2026-07-21 — Linux desktop)  
 **Date:** 2026-07-15  
 **Owner:** Architecture (A5) + ML (A7)  
 **Supersedes:** ADR-001 “no on-device LLM in 8h MVP”; prior Ollama-sidecar / in-app-rules Chat path  
@@ -11,7 +11,7 @@
 
 | Concern | Choice |
 |---|---|
-| **Product Chat runtime** | **On-device Qwen GGUF** via **llama.cpp** (Dart FFI / `llamadart`) on **Android + Windows** |
+| **Product Chat runtime** | **On-device Qwen GGUF** via **llama.cpp** (Dart FFI / `llamadart`) on **Linux + Android + Windows** |
 | Chat if no GGUF | **Hard error** — e.g. “No local model found …” — **no** rules-engine, **no** Ollama, **no** fake paraphrase |
 | Notes runtime | In-app draft engine (`InAppDraftEngine`) allowed for structured SOAP; optional GGUF when present |
 | Model file | Manual placement under app documents `models/` (or optional bundled asset) — **never** `ollama pull` |

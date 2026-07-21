@@ -1,0 +1,13 @@
+# Copy to key.properties (never commit) and fill in upload-keystore paths.
+#
+#   cd apps/clinical_assistant/android
+#   keytool -genkey -v -keystore upload-keystore.jks -keyalg RSA -keysize 2048 \
+#     -validity 10000 -alias upload
+#   cp key.properties.example key.properties
+#
+# Then set storeFile to an absolute or project-relative path to upload-keystore.jks
+
+storePassword=CHANGE_ME
+keyPassword=CHANGE_ME
+keyAlias=upload
+storeFile=upload-keystore.jks

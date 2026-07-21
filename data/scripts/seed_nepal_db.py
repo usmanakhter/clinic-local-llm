@@ -111,6 +111,16 @@ def main(db_path: Path = DEFAULT_DB) -> None:
             ),
         )
 
+    # Rebuild FTS indexes
+    conn.execute("INSERT INTO drugs_fts(drugs_fts) VALUES('rebuild')")
+    conn.execute(
+        """
+        INSERT INTO guidelines_fts(rowid, title, title_ne, topic, chunk_text, chunk_text_ne, source)
+        SELECT rowid, title, title_ne, topic, chunk_text, chunk_text_ne, source
+        FROM guideline_chunks
+        """
+    )
+
     conn.commit()
     counts = {
         "drugs": conn.execute("SELECT COUNT(*) FROM drugs").fetchone()[0],

@@ -32,6 +32,17 @@ CREATE VIRTUAL TABLE IF NOT EXISTS drugs_fts USING fts5(
     content_rowid='rowid'
 );
 
+CREATE VIRTUAL TABLE IF NOT EXISTS guidelines_fts USING fts5(
+    title,
+    title_ne,
+    topic,
+    chunk_text,
+    chunk_text_ne,
+    source,
+    content='guideline_chunks',
+    content_rowid='rowid'
+);
+
 CREATE TABLE IF NOT EXISTS interactions (
     id              TEXT PRIMARY KEY,
     drug_a_id       TEXT NOT NULL REFERENCES drugs(id),
@@ -60,10 +71,13 @@ CREATE TABLE IF NOT EXISTS guideline_chunks (
 CREATE TABLE IF NOT EXISTS clinical_sessions (
     id              TEXT PRIMARY KEY,
     created_at      TEXT NOT NULL,
-    query_type      TEXT NOT NULL CHECK (query_type IN ('drug_lookup', 'interaction_check', 'note_draft', 'guideline_search')),
+    query_type      TEXT NOT NULL CHECK (query_type IN ('drug_lookup', 'interaction_check', 'note_draft', 'guideline_search', 'chat')),
     input_summary   TEXT,
     output_summary  TEXT,
+    payload_json    TEXT,
+    sync_status     TEXT NOT NULL DEFAULT 'pending_sync',
     feedback        TEXT CHECK (feedback IN ('up', 'down', NULL)),
+    feedback_reason TEXT,
     patient_id      TEXT,  -- nullable until EMR Phase 2
     device_id       TEXT
 );
@@ -83,7 +97,14 @@ CREATE TABLE IF NOT EXISTS sync_queue (
     session_id      TEXT REFERENCES clinical_sessions(id),
     payload_json    TEXT NOT NULL,
     scrubbed_at     TEXT NOT NULL,
-    status          TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'synced', 'failed', 'rejected')),
+    status          TEXT NOT NULL DEFAULT 'pending'
+                    CHECK (status IN (
+                        'pending',
+                        'synced',
+                        'failed',
+                        'blocked_residual_pii'
+                    )),
+    scrub_note      TEXT,
     created_at      TEXT DEFAULT (datetime('now'))
 );
 

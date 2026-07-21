@@ -41,12 +41,17 @@ class ClinicalRepository {
     return Drug.fromMap(rows.first);
   }
 
+  int get drugCorpusCount => AppDatabase.drugCorpusCount;
+
   Future<List<Drug>> listDrugs({int limit = 50}) async {
     if (AppDatabase.isWebMemory) {
-      return AppDatabase.webDrugs
-          .take(limit)
-          .map(Drug.fromMap)
-          .toList();
+      final drugs = AppDatabase.webDrugs.map(Drug.fromMap).toList()
+        ..sort(
+          (a, b) => a.genericName.toLowerCase().compareTo(
+                b.genericName.toLowerCase(),
+              ),
+        );
+      return drugs.take(limit).toList();
     }
     final rows = await AppDatabase.db.query(
       'drugs',
@@ -283,6 +288,7 @@ LIMIT ?
   }
 
   /// Persist a clinician-edited note draft (full structured fields + body).
+  /// Pass [sessionId] to update an existing saved note instead of inserting.
   Future<ClinicalSession> saveNoteDraft({
     required String chiefComplaint,
     required String history,
@@ -292,7 +298,21 @@ LIMIT ?
     required String draftText,
     bool fromModel = false,
     String? patientId,
+    String? sessionId,
   }) async {
+    if (sessionId != null && sessionId.isNotEmpty) {
+      return SessionStore.updateNoteDraft(
+        sessionId: sessionId,
+        chiefComplaint: chiefComplaint,
+        history: history,
+        examination: examination,
+        assessment: assessment,
+        plan: plan,
+        draftText: draftText,
+        fromModel: fromModel,
+        patientId: patientId,
+      );
+    }
     return SessionStore.insert(
       queryType: 'note_draft',
       inputSummary: chiefComplaint,
@@ -327,6 +347,9 @@ LIMIT ?
     required String displayName,
     String? age,
     String? sex,
+    String? phone,
+    String? whatsapp,
+    String? email,
     String? clinicalCondition,
     String? relevantNotes,
     String? history,
@@ -336,6 +359,9 @@ LIMIT ?
       displayName: displayName,
       age: age,
       sex: sex,
+      phone: phone,
+      whatsapp: whatsapp,
+      email: email,
       clinicalCondition: clinicalCondition,
       relevantNotes: relevantNotes,
       history: history,
