@@ -18,12 +18,16 @@ class AppDatabase {
   static final List<Map<String, dynamic>> _webInteractions = [];
   static final List<Map<String, dynamic>> _webGuidelines = [];
   static final List<Map<String, dynamic>> _webSessions = [];
+  static final List<Map<String, dynamic>> _webPatients = [];
   static ConsentTemplate? consentTemplate;
 
   static bool get isWebMemory => _webMemory;
 
   /// Mutable web session store — persisted via [SessionStore] + SharedPreferences.
   static List<Map<String, dynamic>> get webSessionsInternal => _webSessions;
+
+  /// Mutable web patient store — persisted via [PatientStore] + SharedPreferences.
+  static List<Map<String, dynamic>> get webPatientsInternal => _webPatients;
 
   static Database get db {
     final d = _db;
@@ -55,7 +59,7 @@ class AppDatabase {
     final path = p.join(dir.path, 'nepal_mvp.db');
     _db = await openDatabase(
       path,
-      version: 3,
+      version: 4,
       onConfigure: (database) async {
         await database.execute('PRAGMA foreign_keys = ON');
       },
@@ -69,12 +73,16 @@ class AppDatabase {
         if (oldVersion < 3) {
           await _migrateV3(database);
         }
+        if (oldVersion < 4) {
+          await _ensurePatients(database);
+        }
       },
     );
 
     await _seedIfEmpty(_db!);
     await _ensureSessionsAndGuidelineFts(_db!);
     await _ensureSyncQueue(_db!);
+    await _ensurePatients(_db!);
   }
 
   static Future<void> _migrateV3(Database database) async {
@@ -220,6 +228,7 @@ CREATE TABLE IF NOT EXISTS consent_records (
 ''');
 
     await _ensureSessionsAndGuidelineFts(database);
+    await _ensurePatients(database);
 
     await database.execute(
       'CREATE INDEX IF NOT EXISTS idx_drugs_generic ON drugs(generic_name)',
@@ -274,6 +283,26 @@ CREATE TABLE IF NOT EXISTS sync_queue (
     created_at      TEXT
 )
 ''');
+  }
+
+  /// Plain-text local patient cards (not encrypted EMR stubs).
+  static Future<void> _ensurePatients(Database database) async {
+    await database.execute('''
+CREATE TABLE IF NOT EXISTS patients (
+    id                  TEXT PRIMARY KEY,
+    display_name        TEXT NOT NULL,
+    age                 TEXT,
+    sex                 TEXT,
+    clinical_condition  TEXT,
+    relevant_notes      TEXT,
+    history             TEXT,
+    created_at          TEXT NOT NULL,
+    updated_at          TEXT NOT NULL
+)
+''');
+    await database.execute(
+      'CREATE INDEX IF NOT EXISTS idx_patients_name ON patients(display_name)',
+    );
   }
 
   static Future<void> _seedIfEmpty(Database database) async {

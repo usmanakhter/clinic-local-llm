@@ -24,30 +24,14 @@ def available() -> bool:
     return False
 
 
-def draft() -> str:
+def _complete(system: str, user: str, temperature: float = 0.2) -> str:
     payload = {
         "model": MODEL,
         "messages": [
-            {
-                "role": "system",
-                "content": (
-                    "Draft a short clinical note. Draft only. "
-                    "Do not invent interaction severity. "
-                    "End with: Draft only — not for clinical use."
-                ),
-            },
-            {
-                "role": "user",
-                "content": (
-                    "CC: Fever and cough 4 days\n"
-                    "Hx: Adult 30s, no chronic illness\n"
-                    "Exam: Temp 38.5C, throat erythema, chest clear\n"
-                    "Assessment: Likely viral URTI\n"
-                    "Plan: Paracetamol, fluids"
-                ),
-            },
+            {"role": "system", "content": system},
+            {"role": "user", "content": user},
         ],
-        "temperature": 0.2,
+        "temperature": temperature,
         "stream": False,
     }
     req = urllib.request.Request(
@@ -61,6 +45,41 @@ def draft() -> str:
     return data["choices"][0]["message"]["content"]
 
 
+def draft() -> str:
+    return _complete(
+        (
+            "Draft a short clinical note. Draft only. "
+            "Do not invent interaction severity. "
+            "End with: Draft only — not for clinical use."
+        ),
+        (
+            "CC: Fever and cough 4 days\n"
+            "Hx: Adult 30s, no chronic illness\n"
+            "Exam: Temp 38.5C, throat erythema, chest clear\n"
+            "Assessment: Likely viral URTI\n"
+            "Plan: Paracetamol, fluids"
+        ),
+    )
+
+
+def grounded() -> str:
+    return _complete(
+        (
+            "Answer ONLY from RETRIEVED CONTEXT. Cite ids. "
+            "Do not invent interaction severity. "
+            "End with: Draft only — not for clinical use."
+        ),
+        (
+            "QUESTION: scrub typhus treatment\n\n"
+            "RETRIEVED CONTEXT:\n"
+            "- [drug_056] Doxycycline: first-line for scrub typhus in Nepal; "
+            "100mg BD; avoid in pregnancy.\n"
+            "- [guide_019] Scrub Typhus: empiric doxycycline when suspected.\n"
+        ),
+        temperature=0.1,
+    )
+
+
 def main() -> int:
     if not available():
         print(f"SKIP: local LLM not reachable at {BASE}")
@@ -68,11 +87,15 @@ def main() -> int:
         return 0
     try:
         text = draft()
+        grounded_text = grounded()
     except urllib.error.URLError as e:
         print(f"SKIP: LLM call failed: {e}")
         return 0
-    print(f"OK model={MODEL}")
-    print(text[:500])
+    print(f"OK model={MODEL} note_draft")
+    print(text[:400])
+    print("---")
+    print(f"OK model={MODEL} grounded_chat")
+    print(grounded_text[:400])
     return 0
 
 

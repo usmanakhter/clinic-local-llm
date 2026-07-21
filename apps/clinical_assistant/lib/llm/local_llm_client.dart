@@ -1,50 +1,101 @@
-import 'dart:convert';
+import 'gguf_runtime.dart';
+import 'in_app_draft_engine.dart';
 
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:http/http.dart' as http;
+enum LlmBackend {
+  /// On-device Qwen GGUF via llama.cpp (product Chat path).
+  gguf,
 
-/// Local OpenAI-compatible sidecar (Ollama / llama.cpp). Never sends traffic
-/// outside localhost for this POC.
+  /// Structured SOAP assembler for Notes only — never used as Chat fallback.
+  inApp,
+}
+
+/// Health / reachability of the active draft / chat backend.
+class LlmStatus {
+  const LlmStatus({
+    required this.reachable,
+    required this.backend,
+    this.model,
+    this.models = const [],
+    this.message,
+    this.baseUrl,
+  });
+
+  final bool reachable;
+  final LlmBackend backend;
+  final String? model;
+  final List<String> models;
+  final String? message;
+  final String? baseUrl;
+
+  String get shortLabel {
+    switch (backend) {
+      case LlmBackend.gguf:
+        if (!reachable) return 'No local model';
+        return 'On-device · ${model ?? 'gguf'}';
+      case LlmBackend.inApp:
+        return 'In-app · ${model ?? InAppDraftEngine.modelId}';
+    }
+  }
+}
+
+/// Local draft / grounded-chat client.
+///
+/// **Chat:** [groundedChatAnswer] requires a loaded GGUF — throws
+/// [LocalModelNotFoundException] otherwise (no rules / Ollama fallback).
+/// **Notes:** [draftNote] uses GGUF when ready, else [InAppDraftEngine].
+///
+/// Pass [gguf] from [createNativeGgufRuntime] in product screens.
 class LocalLlmClient {
   LocalLlmClient({
-    String? baseUrl,
-    this.model = 'qwen2.5:1.5b',
-    this.timeout = const Duration(seconds: 90),
-  }) : baseUrl = baseUrl ??
-            (kIsWeb
-                // Web needs CORS proxy (tools/ollama_cors_proxy.py) on :8765
-                ? 'http://127.0.0.1:8765'
-                : 'http://127.0.0.1:11434');
+    GgufLlamaRuntime? gguf,
+    this.inApp = const InAppDraftEngine(),
+    this.requireGgufForChat = true,
+  }) : gguf = gguf ?? UnloadedGgufRuntime();
 
-  final String baseUrl;
-  final String model;
-  final Duration timeout;
+  final GgufLlamaRuntime gguf;
+  final InAppDraftEngine inApp;
 
-  static const systemPrompt = '''
-You are a clinical note drafting assistant for a Nepal pilot demo.
-Write a concise SOAP-style clinical note from structured fields.
-Rules:
-- Draft only — not a diagnosis or prescription authority.
-- Do not invent drug-drug interaction severity.
-- Do not invent lab values or findings not provided.
-- Prefer English. Keep synthetic / training tone.
-- End with: "Draft only — clinician must review. Not for clinical use."
-''';
+  /// When true (product default), Chat never falls back to [inApp].
+  final bool requireGgufForChat;
 
   Future<bool> isAvailable() async {
-    try {
-      final uri = Uri.parse('$baseUrl/api/tags');
-      final res = await http.get(uri).timeout(const Duration(seconds: 3));
-      return res.statusCode == 200;
-    } catch (_) {
-      try {
-        final uri = Uri.parse('$baseUrl/v1/models');
-        final res = await http.get(uri).timeout(const Duration(seconds: 3));
-        return res.statusCode == 200;
-      } catch (_) {
-        return false;
-      }
+    final s = await probe();
+    return s.reachable && s.backend == LlmBackend.gguf;
+  }
+
+  /// Prefer GGUF when loadable; otherwise report missing model for Chat.
+  Future<LlmStatus> probe() async {
+    final ready = await gguf.ensureLoaded();
+    if (ready) {
+      return LlmStatus(
+        reachable: true,
+        backend: LlmBackend.gguf,
+        model: gguf.modelLabel,
+        models: gguf.modelLabel != null ? [gguf.modelLabel!] : const [],
+        message: null,
+      );
     }
+
+    return LlmStatus(
+      reachable: false,
+      backend: LlmBackend.gguf,
+      message: gguf.lastError ?? LocalModelNotFoundException.defaultMessage,
+    );
+  }
+
+  /// Notes-only status when GGUF is absent (in-app draft still works).
+  Future<LlmStatus> probeNotes() async {
+    final ggufStatus = await probe();
+    if (ggufStatus.reachable && ggufStatus.backend == LlmBackend.gguf) {
+      return ggufStatus;
+    }
+    return LlmStatus(
+      reachable: true,
+      backend: LlmBackend.inApp,
+      model: InAppDraftEngine.modelId,
+      message:
+          'Notes use in-app draft (no GGUF). Chat still requires a local model.',
+    );
   }
 
   Future<String> draftNote({
@@ -54,7 +105,21 @@ Rules:
     required String assessment,
     required String plan,
   }) async {
-    final user = '''
+    final status = await probe();
+    if (status.backend == LlmBackend.gguf && status.reachable) {
+      try {
+        return await gguf.complete(
+          system: '''
+You are a clinical note drafting assistant for a Nepal pilot demo.
+Write a concise SOAP-style clinical note from structured fields.
+Rules:
+- Draft only — not a diagnosis or prescription authority.
+- Do not invent drug-drug interaction severity.
+- Do not invent lab values or findings not provided.
+- Prefer English. Keep synthetic / training tone.
+- End with: "Draft only — clinician must review. Not for clinical use."
+''',
+          user: '''
 Chief complaint: $chiefComplaint
 History: $history
 Examination: $examination
@@ -62,41 +127,62 @@ Assessment: $assessment
 Plan: $plan
 
 Write the draft clinical note now.
-''';
-
-    final uri = Uri.parse('$baseUrl/v1/chat/completions');
-    final body = jsonEncode({
-      'model': model,
-      'messages': [
-        {'role': 'system', 'content': systemPrompt},
-        {'role': 'user', 'content': user},
-      ],
-      'temperature': 0.2,
-      'stream': false,
-    });
-
-    final res = await http
-        .post(
-          uri,
-          headers: {'Content-Type': 'application/json'},
-          body: body,
-        )
-        .timeout(timeout);
-
-    if (res.statusCode < 200 || res.statusCode >= 300) {
-      throw StateError('LLM HTTP ${res.statusCode}: ${res.body}');
+''',
+          maxTokens: 640,
+          temperature: 0.2,
+        );
+      } catch (_) {
+        // Notes may fall back to structured assembler.
+      }
     }
-    final json = jsonDecode(res.body) as Map<String, dynamic>;
-    final choices = json['choices'] as List<dynamic>?;
-    if (choices == null || choices.isEmpty) {
-      throw StateError('LLM returned no choices');
+    return inApp.draftNote(
+      chiefComplaint: chiefComplaint,
+      history: history,
+      examination: examination,
+      assessment: assessment,
+      plan: plan,
+    );
+  }
+
+  /// Paraphrase retrieved context with **GGUF only**.
+  /// Caller must refuse if context empty. Never uses [InAppDraftEngine].
+  Future<String> groundedChatAnswer({
+    required String question,
+    required String retrievedContext,
+    String? modelOverride,
+  }) async {
+    if (retrievedContext.trim().isEmpty) {
+      throw StateError('groundedChatAnswer requires non-empty retrieved context');
     }
-    final msg = choices.first as Map<String, dynamic>;
-    final content = (msg['message'] as Map<String, dynamic>?)?['content'];
-    if (content is! String || content.trim().isEmpty) {
-      throw StateError('LLM returned empty content');
+
+    final status = await probe();
+    if (requireGgufForChat &&
+        (status.backend != LlmBackend.gguf || !status.reachable)) {
+      throw LocalModelNotFoundException(status.message);
     }
-    return content.trim();
+
+    return gguf.complete(
+      system: '''
+You are a grounded clinical reference assistant for a Nepal pilot demo.
+You may ONLY paraphrase or organize the retrieved local snippets provided.
+Rules:
+- Answer only from the RETRIEVED CONTEXT block. Do not add outside medical facts.
+- Cite drug and guideline ids that appear in the context.
+- Never invent drug-drug interaction severity.
+- End with: "Draft only — not for clinical use."
+''',
+      user: '''
+QUESTION:
+$question
+
+RETRIEVED CONTEXT:
+$retrievedContext
+
+Write a short grounded answer with citations to ids from context.
+''',
+      maxTokens: 512,
+      temperature: 0.1,
+    );
   }
 }
 

@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../models/models.dart';
 import 'db.dart';
+import 'patient_store.dart';
 import 'session_store.dart';
 
 /// Mirrors packages/clinical_core_py repository + search + interactions rules.
@@ -264,18 +265,20 @@ LIMIT ?
     }
   }
 
-  /// Scrub structural PII then persist locally; queued for future consent-gated sync.
+  /// Persist locally as entered (unredacted). Sync queue gets a scrubbed copy.
   Future<ClinicalSession> logSession({
     required String queryType,
     required String inputSummary,
     String? outputSummary,
     Map<String, dynamic>? metadata,
+    String? patientId,
   }) async {
     return SessionStore.insert(
       queryType: queryType,
       inputSummary: inputSummary,
       outputSummary: outputSummary,
       metadata: metadata,
+      patientId: patientId,
     );
   }
 
@@ -288,13 +291,16 @@ LIMIT ?
     required String plan,
     required String draftText,
     bool fromModel = false,
+    String? patientId,
   }) async {
     return SessionStore.insert(
       queryType: 'note_draft',
       inputSummary: chiefComplaint,
       outputSummary: 'saved_locally',
+      patientId: patientId,
       metadata: {
         'action': 'save',
+        'patient_id': patientId,
         'chief_complaint': chiefComplaint,
         'history': history,
         'examination': examination,
@@ -311,6 +317,32 @@ LIMIT ?
   }
 
   Future<int> pendingSyncCount() => SessionStore.pendingSyncCount();
+
+  Future<List<Patient>> listPatients() => PatientStore.list();
+
+  Future<Patient?> getPatient(String id) => PatientStore.get(id);
+
+  Future<Patient> upsertPatient({
+    String? id,
+    required String displayName,
+    String? age,
+    String? sex,
+    String? clinicalCondition,
+    String? relevantNotes,
+    String? history,
+  }) {
+    return PatientStore.upsert(
+      id: id,
+      displayName: displayName,
+      age: age,
+      sex: sex,
+      clinicalCondition: clinicalCondition,
+      relevantNotes: relevantNotes,
+      history: history,
+    );
+  }
+
+  Future<void> deletePatient(String id) => PatientStore.delete(id);
 
   Future<void> upsertConsentRecord({
     required bool granted,

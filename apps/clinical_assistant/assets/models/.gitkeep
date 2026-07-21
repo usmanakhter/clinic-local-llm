@@ -1,0 +1,4 @@
+# Place Qwen2.5 Instruct Q4 GGUF files here if bundling with the app
+# (optional; prefer Documents/nepal_clinical/models/ for large weights).
+# Example filename: qwen2.5-1.5b-instruct-q4_k_m.gguf
+# Do not commit *.gguf — see repo .gitignore.

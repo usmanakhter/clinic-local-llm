@@ -14,16 +14,17 @@
 | Retrieval | Shared `retrieve()` over drugs + guidelines (+ later sessions) **before** LLM |
 | Empty retrieval | **Refuse** — do not invent clinical content |
 | Interaction severity | **Never from chat LLM** — explain only if Interact/DB row was retrieved |
-| Runtime (POC) | Same localhost Ollama sidecar as Notes (PC demo) |
-| Runtime (field phones) | Progressive: RAG-only / templates on weak devices; optional on-device GGUF later |
+| Runtime (product Chat) | **On-device Qwen GGUF** (llama.cpp) — **hard error** if no model (no rules/Ollama fallback) |
+| Runtime (Notes) | In-app draft engine; optional GGUF when present |
+| Runtime (Flutter web Chat) | Hard error in this slice (native Windows/Android for neural Chat) |
 | Consent | Chat transcripts stay local until scoped opt-in sync |
 
 ---
 
 ## Consequences
 
-- Chat depends on corpus quality more than model brand.
-- South Asia majority phones: chat UX must degrade gracefully without a local LLM.
+- Chat depends on corpus quality **and** a present on-device GGUF file.
+- Missing model → explicit error (no silent rules/Ollama answers).
 - Captured chats (with feedback) feed the consented data flywheel after scrubbing.
 
 ---

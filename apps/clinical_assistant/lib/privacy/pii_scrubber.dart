@@ -53,7 +53,7 @@ class PiiScrubber {
       return SyncScrubResult(
         allowed: true,
         scrubbed: scrubbed,
-        reason: 'Scrubbed — ready for queue (consent still required)',
+        reason: 'Scrubbed — ready for queue (authorized by Terms acceptance)',
       );
     }
     return SyncScrubResult(

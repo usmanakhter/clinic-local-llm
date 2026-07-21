@@ -1,0 +1,4 @@
+# Prefer wheels (Python 3.14+ may lack source builds for pydantic-core).
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.0.0

@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../data/repositories.dart';
 import '../data/retriever.dart';
+import '../llm/gguf_runtime.dart';
+import '../llm/gguf_runtime_factory.dart';
 import '../llm/local_llm_client.dart';
 import '../theme/app_theme.dart';
 import '../widgets/citation_card.dart';
+import '../widgets/llm_status_banner.dart';
 import '../models/models.dart';
 
-/// RAG-first chat: retrieve locally, then optional local LLM; refuse if empty.
+/// Unified local chat: notes + history + past chats + drugs + guidelines.
+/// Answers only via on-device GGUF — no rules/Ollama fallback.
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key, required this.repository});
 
@@ -23,20 +27,24 @@ class _ChatMessage {
     required this.text,
     this.bundle,
     this.fromModel = false,
+    this.isError = false,
   });
 
-  final String role; // user | assistant
+  final String role;
   final String text;
   final RetrieveBundle? bundle;
   final bool fromModel;
+  final bool isError;
 }
 
 class _ChatScreenState extends State<ChatScreen> {
   final _controller = TextEditingController();
   final _messages = <_ChatMessage>[];
   late final ClinicalRetriever _retriever;
-  final _llm = LocalLlmClient();
+  final _llm = LocalLlmClient(gguf: createNativeGgufRuntime());
   bool _busy = false;
+  LlmStatus? _llmStatus;
+  bool _probing = false;
 
   @override
   void initState() {
@@ -46,11 +54,23 @@ class _ChatScreenState extends State<ChatScreen> {
       _ChatMessage(
         role: 'assistant',
         text:
-            'Ask a clinical reference question. I retrieve from the local Nepal '
-            'formulary and guidelines first. If nothing matches, I refuse — '
-            'I will not invent interaction severity. Not for clinical use.',
+            'I search local notes, history, chats, drugs, and guidelines on this '
+            'device, then answer with the on-device Qwen GGUF only. If no model '
+            'file is present, you will see an error — there is no rules-engine '
+            'fallback. I will not invent interaction severity. Not for clinical use.',
       ),
     );
+    _probeLlm();
+  }
+
+  Future<void> _probeLlm() async {
+    setState(() => _probing = true);
+    final s = await _llm.probe();
+    if (!mounted) return;
+    setState(() {
+      _llmStatus = s;
+      _probing = false;
+    });
   }
 
   @override
@@ -85,10 +105,9 @@ class _ChatScreenState extends State<ChatScreen> {
         _messages.add(
           _ChatMessage(
             role: 'assistant',
-            text:
-                'I could not find matching local drugs or guidelines for that '
-                'query.\n\n${bundle.refuseReason}\n\n'
-                'Try a formulary name, brand, or topic like dengue, TB, scrub typhus.',
+            text: '${bundle.refuseReason}\n\n'
+                'Save a note, search a drug, or open a guideline first — '
+                'then ask again.',
             bundle: bundle,
           ),
         );
@@ -97,35 +116,44 @@ class _ChatScreenState extends State<ChatScreen> {
       return;
     }
 
-    var answer = _deterministicAnswer(bundle);
+    String answer;
     var fromModel = false;
+    var isError = false;
     try {
-      if (await _llm.isAvailable()) {
-        final ctx = _retriever.formatContext(bundle);
-        final drafted = await _llm.draftNote(
-          chiefComplaint: q,
-          history: ctx,
-          examination: 'N/A — chat retrieve-then-answer',
-          assessment:
-              'Grounded assistant reply only from retrieved snippets; cite ids.',
-          plan: 'Do not invent interaction severity. Draft only.',
-        );
-        answer = drafted;
-        fromModel = true;
+      final status = await _llm.probe();
+      if (mounted) setState(() => _llmStatus = status);
+      if (!status.reachable || status.backend != LlmBackend.gguf) {
+        throw LocalModelNotFoundException(status.message);
       }
-    } catch (_) {
-      // keep deterministic answer
+      answer = await _llm.groundedChatAnswer(
+        question: q,
+        retrievedContext: _retriever.formatContext(bundle),
+        modelOverride: status.model,
+      );
+      fromModel = true;
+    } catch (e) {
+      isError = true;
+      fromModel = false;
+      if (e is LocalModelNotFoundException) {
+        answer = e.message;
+      } else {
+        answer = 'Local model error: $e';
+      }
     }
 
     await widget.repository.logSession(
       queryType: 'chat',
       inputSummary: q,
-      outputSummary: answer.length > 200 ? '${answer.substring(0, 200)}…' : answer,
+      outputSummary:
+          answer.length > 200 ? '${answer.substring(0, 200)}…' : answer,
       metadata: {
         'refused': false,
         'from_model': fromModel,
+        'model_error': isError,
+        'backend': _llmStatus?.backend.name,
         'drug_ids': bundle.drugs.map((d) => d.id).toList(),
         'guideline_ids': bundle.guidelines.map((g) => g.id).toList(),
+        'session_ids': bundle.sessions.map((s) => s.sessionId).toList(),
       },
     );
 
@@ -135,50 +163,32 @@ class _ChatScreenState extends State<ChatScreen> {
         _ChatMessage(
           role: 'assistant',
           text: answer,
-          bundle: bundle,
+          bundle: isError ? null : bundle,
           fromModel: fromModel,
+          isError: isError,
         ),
       );
       _busy = false;
     });
   }
 
-  String _deterministicAnswer(RetrieveBundle bundle) {
-    final buf = StringBuffer(
-      'Retrieved from local Nepal fixtures (no invented severity):\n\n',
-    );
-    if (bundle.drugs.isNotEmpty) {
-      buf.writeln('**Drugs**');
-      for (final d in bundle.drugs.take(3)) {
-        buf.writeln('- ${d.genericName} (`${d.id}`): ${d.excerpt}');
-      }
-      buf.writeln();
-    }
-    if (bundle.guidelines.isNotEmpty) {
-      buf.writeln('**Guidelines**');
-      for (final g in bundle.guidelines.take(3)) {
-        buf.writeln('- ${g.title} (`${g.id}`, ${g.source}): ${g.excerpt}');
-      }
-    }
-    buf.writeln(
-      '\n_Draft assist only — not for clinical use. Open citations below for full text._',
-    );
-    return buf.toString();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        LlmStatusBanner(
+          status: _llmStatus,
+          checking: _probing,
+          onRefresh: _probeLlm,
+        ),
         Material(
-          color: AppColors.tealSoft,
+          color: AppColors.slate100,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             child: Text(
-              'RAG-first chat · local retrieve · LLM optional (PC/Ollama). '
-              'Majority phones stay retrieve-only.',
+              'Retrieve → on-device GGUF only (error if no local model)',
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: AppColors.tealDark,
+                    color: AppColors.slate700,
                     fontWeight: FontWeight.w600,
                   ),
             ),
@@ -191,6 +201,7 @@ class _ChatScreenState extends State<ChatScreen> {
             itemBuilder: (context, i) {
               final m = _messages[i];
               final isUser = m.role == 'user';
+              final b = m.bundle;
               return Align(
                 alignment:
                     isUser ? Alignment.centerRight : Alignment.centerLeft,
@@ -201,7 +212,9 @@ class _ChatScreenState extends State<ChatScreen> {
                     maxWidth: MediaQuery.of(context).size.width * 0.92,
                   ),
                   decoration: BoxDecoration(
-                    color: isUser ? AppColors.tealSoft : Colors.white,
+                    color: isUser
+                        ? AppColors.tealSoft
+                        : (m.isError ? AppColors.warningStrip : Colors.white),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: AppColors.slate200),
                   ),
@@ -213,40 +226,67 @@ class _ChatScreenState extends State<ChatScreen> {
                         Padding(
                           padding: const EdgeInsets.only(top: 6),
                           child: Text(
-                            'Local model reply',
+                            'On-device GGUF',
                             style: Theme.of(context)
                                 .textTheme
                                 .labelSmall
                                 ?.copyWith(color: AppColors.tealDark),
                           ),
                         ),
-                      if (m.bundle != null &&
-                          !m.bundle!.refused &&
-                          m.bundle!.guidelines.isNotEmpty) ...[
-                        const SizedBox(height: 10),
-                        Text(
-                          'Citations',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge
-                              ?.copyWith(fontWeight: FontWeight.w700),
+                      if (m.isError)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 6),
+                          child: Text(
+                            'No model fallback',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall
+                                ?.copyWith(color: AppColors.warningText),
+                          ),
                         ),
-                        const SizedBox(height: 6),
-                        ...m.bundle!.guidelines.take(3).map(
-                              (g) => Padding(
-                                padding: const EdgeInsets.only(bottom: 8),
-                                child: CitationCard(
-                                  chunk: GuidelineChunk(
-                                    id: g.id,
-                                    title: g.title,
-                                    source: g.source,
-                                    topic: g.topic,
-                                    chunkText: g.excerpt,
-                                    priority: g.score.round(),
+                      if (b != null && !b.refused) ...[
+                        if (b.notes.isNotEmpty) ...[
+                          const SizedBox(height: 10),
+                          Text(
+                            'Notes used',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(fontWeight: FontWeight.w700),
+                          ),
+                          ...b.notes.take(4).map(
+                                (n) => Text(
+                                  '• ${n.title} (${n.patientName ?? n.patientId ?? "no patient"})',
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              ),
+                        ],
+                        if (b.guidelines.isNotEmpty) ...[
+                          const SizedBox(height: 10),
+                          Text(
+                            'Guideline citations',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(fontWeight: FontWeight.w700),
+                          ),
+                          const SizedBox(height: 6),
+                          ...b.guidelines.take(3).map(
+                                (g) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 8),
+                                  child: CitationCard(
+                                    chunk: GuidelineChunk(
+                                      id: g.id,
+                                      title: g.title,
+                                      source: g.source,
+                                      topic: g.topic,
+                                      chunkText: g.excerpt,
+                                      priority: g.score.round(),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                        ],
                       ],
                     ],
                   ),
@@ -266,7 +306,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     enabled: !_busy,
                     onSubmitted: (_) => _send(),
                     decoration: const InputDecoration(
-                      hintText: 'e.g. scrub typhus doxycycline',
+                      hintText: 'e.g. review my fever notes; or scrub typhus',
                     ),
                   ),
                 ),

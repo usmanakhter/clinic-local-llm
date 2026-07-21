@@ -256,7 +256,72 @@ class ConsentTemplate {
   }
 }
 
-/// Local activity log row — scrubbed before persist; queued for future sync.
+/// Lightweight local patient card — not a full EMR chart.
+class Patient {
+  const Patient({
+    required this.id,
+    required this.displayName,
+    this.age,
+    this.sex,
+    this.clinicalCondition,
+    this.relevantNotes,
+    this.history,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  final String id;
+  final String displayName;
+  final String? age;
+  final String? sex;
+  final String? clinicalCondition;
+  final String? relevantNotes;
+  final String? history;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  factory Patient.fromMap(Map<String, dynamic> map) {
+    return Patient(
+      id: map['id'] as String,
+      displayName: map['display_name'] as String? ?? '',
+      age: map['age'] as String?,
+      sex: map['sex'] as String?,
+      clinicalCondition: map['clinical_condition'] as String?,
+      relevantNotes: map['relevant_notes'] as String?,
+      history: map['history'] as String?,
+      createdAt: DateTime.tryParse(map['created_at'] as String? ?? '') ??
+          DateTime.now(),
+      updatedAt: DateTime.tryParse(map['updated_at'] as String? ?? '') ??
+          DateTime.now(),
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'display_name': displayName,
+      'age': age,
+      'sex': sex,
+      'clinical_condition': clinicalCondition,
+      'relevant_notes': relevantNotes,
+      'history': history,
+      'created_at': createdAt.toIso8601String(),
+      'updated_at': updatedAt.toIso8601String(),
+    };
+  }
+
+  String get subtitle {
+    final parts = <String>[
+      if (age != null && age!.trim().isNotEmpty) 'Age $age',
+      if (sex != null && sex!.trim().isNotEmpty) sex!,
+      if (clinicalCondition != null && clinicalCondition!.trim().isNotEmpty)
+        clinicalCondition!,
+    ];
+    return parts.isEmpty ? 'No condition listed' : parts.join(' · ');
+  }
+}
+
+/// Local activity log row — unredacted on device; sync queue is scrubbed separately.
 class ClinicalSession {
   const ClinicalSession({
     required this.id,
@@ -267,6 +332,7 @@ class ClinicalSession {
     this.payloadJson,
     this.syncStatus = 'local_only',
     this.deviceId = 'local',
+    this.patientId,
   });
 
   final String id;
@@ -277,6 +343,7 @@ class ClinicalSession {
   final String? payloadJson;
   final String syncStatus;
   final String? deviceId;
+  final String? patientId;
 
   factory ClinicalSession.fromMap(Map<String, dynamic> map) {
     return ClinicalSession(
@@ -289,6 +356,7 @@ class ClinicalSession {
       payloadJson: map['payload_json'] as String?,
       syncStatus: map['sync_status'] as String? ?? 'local_only',
       deviceId: map['device_id'] as String?,
+      patientId: map['patient_id'] as String?,
     );
   }
 
@@ -303,8 +371,17 @@ class ClinicalSession {
       'sync_status': syncStatus,
       'device_id': deviceId,
       'feedback': null,
-      'patient_id': null,
+      'patient_id': patientId,
     };
+  }
+
+  Map<String, dynamic>? get payload {
+    if (payloadJson == null || payloadJson!.isEmpty) return null;
+    try {
+      final decoded = jsonDecode(payloadJson!);
+      if (decoded is Map) return Map<String, dynamic>.from(decoded);
+    } catch (_) {}
+    return null;
   }
 
   String get typeLabel {

@@ -7,7 +7,8 @@ import '../models/models.dart';
 const kConsentGrantedKey = 'consent_granted';
 const kConsentScopesKey = 'consent_scopes';
 
-/// Consent defaults OFF. Sync is blocked when false.
+/// Records first-launch Terms acceptance as sync/data consent.
+/// There is no separate Consent UI — grant happens only via TermsGateScreen.
 class ConsentService {
   ConsentService(this._prefs, this._repo);
 
@@ -24,7 +25,7 @@ class ConsentService {
       const ConsentTemplate(consentVersion: 'np-pilot-1.0', templates: {});
 
   String get syncStatusText =>
-      granted ? 'Allowed — consent on' : 'Blocked — consent off';
+      granted ? 'Terms accepted · sync allowed' : 'Blocked — terms not accepted';
 
   Future<void> setGranted({
     required bool granted,
@@ -38,7 +39,9 @@ class ConsentService {
     await _repo.upsertConsentRecord(
       granted: granted,
       scopes: granted ? scopes : const [],
-      consentVersion: template.consentVersion,
+      consentVersion: kTermsVersionLabel,
     );
   }
 }
+
+const kTermsVersionLabel = 'np-terms-1.1';

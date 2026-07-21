@@ -8,8 +8,10 @@ import '../models/models.dart';
 import '../privacy/pii_scrubber.dart';
 import 'db.dart';
 
-/// Persists scrubbed clinical activity locally (device DB or web prefs).
-/// Rows are queued for future consent-gated sync — no backend upload yet.
+/// Local-first activity store.
+///
+/// Device history keeps clinician-readable (unredacted) text.
+/// PII scrubbing applies only to [sync_queue] payloads destined for cloud backup.
 class SessionStore {
   SessionStore._();
 
@@ -43,24 +45,23 @@ class SessionStore {
     required String inputSummary,
     String? outputSummary,
     Map<String, dynamic>? metadata,
+    String? patientId,
   }) async {
-    final scrubbedIn = PiiScrubber.scrub(inputSummary);
-    final scrubbedOut =
-        outputSummary == null ? null : PiiScrubber.scrub(outputSummary);
-    Map<String, dynamic>? scrubbedMeta;
-    if (metadata != null && metadata.isNotEmpty) {
-      scrubbedMeta = _scrubMetadata(metadata);
-    }
-
     final id = 'sess_${DateTime.now().millisecondsSinceEpoch}';
+    // Local history: keep full clinician-readable content (no scrub).
     final row = ClinicalSession(
       id: id,
       createdAt: DateTime.now(),
       queryType: queryType,
-      inputSummary: scrubbedIn,
-      outputSummary: scrubbedOut,
-      payloadJson: scrubbedMeta == null ? null : jsonEncode(scrubbedMeta),
+      inputSummary: inputSummary,
+      outputSummary: outputSummary,
+      payloadJson: metadata == null || metadata.isEmpty
+          ? null
+          : jsonEncode(metadata),
       syncStatus: 'pending_sync',
+      patientId: (patientId == null || patientId.trim().isEmpty)
+          ? null
+          : patientId.trim(),
     ).toMap();
 
     if (kIsWeb || AppDatabase.isWebMemory) {
@@ -123,6 +124,79 @@ class SessionStore {
     return n;
   }
 
+  /// Pending [sync_queue] rows for an explicit debug flush (network OFF by default).
+  static Future<List<Map<String, dynamic>>> listPendingSync({
+    int limit = 50,
+  }) async {
+    if (kIsWeb || AppDatabase.isWebMemory) {
+      final raw = _prefs?.getString(_webSyncQueueKey);
+      if (raw == null || raw.isEmpty) return [];
+      try {
+        final list = jsonDecode(raw) as List<dynamic>;
+        return list
+            .whereType<Map>()
+            .map((e) => Map<String, dynamic>.from(e))
+            .where((m) => m['status'] == 'pending')
+            .take(limit)
+            .toList();
+      } catch (_) {
+        return [];
+      }
+    }
+    final rows = await AppDatabase.db.query(
+      'sync_queue',
+      where: "status = ?",
+      whereArgs: ['pending'],
+      orderBy: 'created_at ASC',
+      limit: limit,
+    );
+    return rows.map((e) => Map<String, dynamic>.from(e)).toList();
+  }
+
+  static Future<void> markSynced(String syncId) =>
+      markSyncStatus(syncId, 'synced');
+
+  static Future<void> markSyncFailed(String syncId, {String? note}) =>
+      markSyncStatus(syncId, 'failed', note: note);
+
+  static Future<void> markSyncStatus(
+    String syncId,
+    String status, {
+    String? note,
+  }) async {
+    if (kIsWeb || AppDatabase.isWebMemory) {
+      final prefs = _prefs;
+      if (prefs == null) return;
+      final raw = prefs.getString(_webSyncQueueKey);
+      if (raw == null || raw.isEmpty) return;
+      try {
+        final list = (jsonDecode(raw) as List<dynamic>)
+            .whereType<Map>()
+            .map((e) => Map<String, dynamic>.from(e))
+            .toList();
+        for (final row in list) {
+          if (row['id'] == syncId) {
+            row['status'] = status;
+            if (note != null) row['scrub_note'] = note;
+            row['updated_at'] = DateTime.now().toIso8601String();
+            break;
+          }
+        }
+        await prefs.setString(_webSyncQueueKey, jsonEncode(list));
+      } catch (_) {
+        // Corrupt queue — leave unchanged
+      }
+      return;
+    }
+    // Native schema has no note column; status is enough for the stub.
+    await AppDatabase.db.update(
+      'sync_queue',
+      {'status': status},
+      where: 'id = ?',
+      whereArgs: [syncId],
+    );
+  }
+
   static Future<void> _persistWeb() async {
     final prefs = _prefs;
     if (prefs == null) return;
@@ -130,7 +204,39 @@ class SessionStore {
     await prefs.setString(_webSessionsKey, encoded);
   }
 
-  static Future<void> _enqueueWeb(String sessionId, Map<String, dynamic> row) async {
+  /// Scrub only the outbound sync payload — never overwrite local history.
+  static Map<String, dynamic> _scrubbedSyncPayload(Map<String, dynamic> row) {
+    final out = Map<String, dynamic>.from(row);
+    final input = out['input_summary'];
+    if (input is String) {
+      out['input_summary'] = PiiScrubber.scrub(input);
+    }
+    final output = out['output_summary'];
+    if (output is String) {
+      out['output_summary'] = PiiScrubber.scrub(output);
+    }
+    final payload = out['payload_json'];
+    if (payload is String && payload.isNotEmpty) {
+      try {
+        final meta = jsonDecode(payload);
+        if (meta is Map) {
+          out['payload_json'] = jsonEncode(
+            _scrubMetadata(Map<String, dynamic>.from(meta)),
+          );
+        } else {
+          out['payload_json'] = PiiScrubber.scrub(payload);
+        }
+      } catch (_) {
+        out['payload_json'] = PiiScrubber.scrub(payload);
+      }
+    }
+    return out;
+  }
+
+  static Future<void> _enqueueWeb(
+    String sessionId,
+    Map<String, dynamic> row,
+  ) async {
     final prefs = _prefs;
     if (prefs == null) return;
     List<dynamic> queue = [];
@@ -142,12 +248,15 @@ class SessionStore {
         queue = [];
       }
     }
+    final scrubbed = _scrubbedSyncPayload(row);
+    final gate = PiiScrubber.evaluateForSync(jsonEncode(scrubbed));
     queue.insert(0, {
       'id': 'sync_$sessionId',
       'session_id': sessionId,
-      'payload_json': jsonEncode(row),
+      'payload_json': jsonEncode(scrubbed),
       'scrubbed_at': DateTime.now().toIso8601String(),
-      'status': 'pending',
+      'status': gate.allowed ? 'pending' : 'blocked_residual_pii',
+      'scrub_note': gate.reason,
       'created_at': DateTime.now().toIso8601String(),
     });
     if (queue.length > _maxSessions) {
@@ -161,14 +270,16 @@ class SessionStore {
     Map<String, dynamic> row,
   ) async {
     try {
+      final scrubbed = _scrubbedSyncPayload(row);
+      final gate = PiiScrubber.evaluateForSync(jsonEncode(scrubbed));
       await AppDatabase.db.insert(
         'sync_queue',
         {
           'id': 'sync_$sessionId',
           'session_id': sessionId,
-          'payload_json': jsonEncode(row),
+          'payload_json': jsonEncode(scrubbed),
           'scrubbed_at': DateTime.now().toIso8601String(),
-          'status': 'pending',
+          'status': gate.allowed ? 'pending' : 'blocked_residual_pii',
           'created_at': DateTime.now().toIso8601String(),
         },
         conflictAlgorithm: ConflictAlgorithm.replace,

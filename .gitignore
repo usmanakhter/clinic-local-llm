@@ -37,3 +37,7 @@ Thumbs.db
 *.pem
 *.key
 credentials.json
+
+# On-device GGUF weights (place manually under Documents or assets/models)
+*.gguf
+!**/assets/models/.gitkeep

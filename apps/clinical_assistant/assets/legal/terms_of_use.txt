@@ -1,0 +1,158 @@
+Nepal Clinical Assistant — Terms, Conditions, and Data Consent
+Version: np-terms-1.1
+Last updated: 2026-07-20
+
+IMPORTANT — READ BEFORE USING THIS APPLICATION
+
+By downloading, installing, accessing, or using the Nepal Clinical Assistant
+("the App"), you acknowledge that you have read, understood, and agree to be
+bound by these Terms and Conditions AND the data-sync consent in Section 4.
+If you do not agree, do not use the App.
+
+This single acceptance is required to open the App. There is no separate
+in-app consent screen afterward.
+
+──────────────────────────────────────────────────────────────────────────────
+1. NATURE OF THE APPLICATION
+──────────────────────────────────────────────────────────────────────────────
+
+1.1 The App is a clinical REFERENCE and DRAFTING ASSISTANCE tool intended for
+    licensed or otherwise authorized clinicians. It is NOT a medical device for
+    diagnosis, treatment decisions, prescribing authority, or emergency care.
+
+1.2 Drug interaction severity and formulary facts shown in the App come from a
+    local curated database when available. Absence of an interaction row is NOT
+    an all-clear. The App must not invent interaction severity.
+
+1.3 Chat replies and clinical note drafts are DRAFTS ONLY. You remain solely
+    responsible for verifying accuracy against primary sources and your clinical
+    judgment before any patient care action.
+
+1.4 The App is provided for pilot / demonstration / research contexts unless
+    and until a different regulatory posture is formally established. Until then,
+    it is labeled "Not for clinical use" as a product disclaimer even when used
+    by clinicians for reference practice.
+
+──────────────────────────────────────────────────────────────────────────────
+2. NO WARRANTY; LIMITATION OF LIABILITY
+──────────────────────────────────────────────────────────────────────────────
+
+2.1 THE APP IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY
+    KIND, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A
+    PARTICULAR PURPOSE, ACCURACY, NON-INFRINGEMENT, OR UNINTERRUPTED OPERATION.
+
+2.2 TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE APP CREATORS,
+    CONTRIBUTORS, AFFILIATES, PARTNERS, AND DISTRIBUTORS SHALL HAVE NO
+    LIABILITY FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL,
+    EXEMPLARY, OR PUNITIVE DAMAGES ARISING FROM USE OF THE APP, INCLUDING BUT
+    NOT LIMITED TO PATIENT HARM, CLINICAL ERRORS, DATA LOSS, BUSINESS
+    INTERRUPTION, OR RELIANCE ON APP OUTPUTS.
+
+2.3 You agree that clinical decisions rest exclusively with the treating
+    clinician and the responsible health facility. The creators take NO
+    RESPONSIBILITY and NO LIABILITY for outcomes of care informed in any way by
+    the App.
+
+2.4 Nothing in these Terms excludes liability that cannot be excluded under
+    mandatory local law. Where liability cannot be fully excluded, it is
+    limited to the maximum extent permitted.
+
+──────────────────────────────────────────────────────────────────────────────
+3. PATIENT DATA STORED ON YOUR DEVICE
+──────────────────────────────────────────────────────────────────────────────
+
+3.1 The App allows you to store patient identifiers (such as ID, name, age),
+    clinical conditions, notes, and related history LOCALLY on your device.
+    This is a lightweight local registry — NOT a full electronic medical record
+    (EMR) system and NOT a substitute for facility medical records.
+
+3.2 You are responsible for complying with applicable privacy, professional,
+    and facility policies when entering patient information into the App.
+
+3.3 Local history (searches, interactions, notes, chat) is stored for your use
+    on the device in clinician-readable (unredacted) form. Protect the device
+    against loss, theft, and unauthorized access.
+
+──────────────────────────────────────────────────────────────────────────────
+4. DATA SYNC CONSENT (REQUIRED WITH THESE TERMS)
+──────────────────────────────────────────────────────────────────────────────
+
+4.1 By accepting these Terms you CONSENT to the App queuing and, when
+    connectivity and product sync features are available, transmitting
+    scrubbed copies of your App activity to servers operated for this project.
+    Purposes include: backup of consented activity, improving the Nepal
+    clinical knowledge base / retrieval corpus, evaluating quality, anonymous
+    product analytics, and (later) model or adapter improvement.
+
+4.2 Activity that may be synced includes drug searches, interaction checks,
+    guideline lookups, chat turns, clinical note drafts, and related metadata.
+    Local on-device history remains readable to you; only the outbound sync
+    queue is scrubbed.
+
+4.3 The App will make a BEST EFFORT to scrub personally identifiable
+    information (PII) — such as phone numbers, emails, and certain structural
+    IDs — from payloads before they are queued for transmission. Best effort
+    does NOT guarantee complete removal of all identifiers (for example,
+    free-text names and place names may remain). Do not rely solely on
+    automated scrubbing.
+
+4.4 Even after scrubbing, de-identified or partially de-identified data may
+    still carry residual re-identification risk. By accepting, you understand
+    and accept that risk for the purposes listed in 4.1.
+
+4.5 Sync may prefer Wi-Fi when the product implements network controls.
+    Actual server upload is not guaranteed in every build; consent authorizes
+    queuing and future upload when those features are enabled.
+
+4.6 Creators do not sell identifiable clinical content to life insurers or
+    employers and do not use data for automated diagnosis of individuals.
+
+──────────────────────────────────────────────────────────────────────────────
+5. INTELLECTUAL PROPERTY AND CONTENT
+──────────────────────────────────────────────────────────────────────────────
+
+5.1 The App software, branding, and bundled reference corpora remain the
+    property of their respective owners. Local laws may grant you limited rights
+    to use the App as licensed.
+
+5.2 You retain responsibility for content you enter. Do not enter content you
+    are not authorized to process.
+
+──────────────────────────────────────────────────────────────────────────────
+6. ACCEPTABLE USE
+──────────────────────────────────────────────────────────────────────────────
+
+6.1 You agree not to misuse the App, attempt unauthorized access to systems,
+    reverse-engineer where prohibited, or use outputs to make automated
+    diagnosis or employment/insurance decisions about individuals.
+
+6.2 You agree not to represent App drafts as certified medical advice from the
+    creators.
+
+──────────────────────────────────────────────────────────────────────────────
+7. CHANGES; TERMINATION
+──────────────────────────────────────────────────────────────────────────────
+
+7.1 Terms may be updated. Material changes require renewed in-app acceptance
+    before continued use.
+
+7.2 You may stop using the App at any time. Creators may discontinue the App
+    or pilot features without liability.
+
+──────────────────────────────────────────────────────────────────────────────
+8. ACKNOWLEDGEMENT
+──────────────────────────────────────────────────────────────────────────────
+
+By selecting "I have read and agree to the Terms and Conditions" you confirm
+that:
+
+  • You understand the App is reference / draft assistance only;
+  • Creators take no responsibility or liability for clinical outcomes;
+  • Patient data you enter is your responsibility on-device;
+  • You consent to scrubbed activity being queued and synced to servers for
+    corpus/model quality improvement (Section 4);
+  • You understand PII scrubbing is best-effort and not perfect;
+  • You will not treat absence of interaction data as safety clearance;
+  • You will verify all clinically relevant information independently.
+
+If you do not agree, close the App and do not proceed.

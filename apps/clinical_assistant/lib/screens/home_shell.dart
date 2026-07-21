@@ -3,27 +3,18 @@ import 'package:flutter/material.dart';
 import '../data/repositories.dart';
 import '../theme/app_theme.dart';
 import '../widgets/disclaimer_banner.dart';
+import 'activity_screen.dart';
 import 'chat_screen.dart';
-import 'consent_screen.dart';
 import 'drug_search_screen.dart';
 import 'guidelines_screen.dart';
 import 'interaction_screen.dart';
 import 'note_drafter_screen.dart';
-import 'activity_screen.dart';
+import 'patients_screen.dart';
 
 class HomeShell extends StatefulWidget {
-  const HomeShell({
-    super.key,
-    required this.repository,
-    required this.consentGranted,
-    required this.syncStatusText,
-    required this.onOpenConsent,
-  });
+  const HomeShell({super.key, required this.repository});
 
   final ClinicalRepository repository;
-  final bool consentGranted;
-  final String syncStatusText;
-  final VoidCallback onOpenConsent;
 
   @override
   State<HomeShell> createState() => _HomeShellState();
@@ -38,8 +29,8 @@ class _HomeShellState extends State<HomeShell> {
     'Guidelines',
     'Chat',
     'Note Draft',
-    'Activity',
-    'Consent',
+    'Patients',
+    'Past Notes',
   ];
 
   @override
@@ -50,11 +41,8 @@ class _HomeShellState extends State<HomeShell> {
       GuidelinesScreen(repository: widget.repository),
       ChatScreen(repository: widget.repository),
       NoteDrafterScreen(repository: widget.repository),
+      PatientsScreen(repository: widget.repository),
       ActivityScreen(repository: widget.repository),
-      ConsentScreen(
-        embedded: true,
-        onChanged: widget.onOpenConsent,
-      ),
     ];
 
     return Scaffold(
@@ -65,7 +53,7 @@ class _HomeShellState extends State<HomeShell> {
             padding: const EdgeInsets.only(right: 12),
             child: Center(
               child: Text(
-                widget.syncStatusText,
+                'Terms accepted · sync allowed',
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       color: Colors.white70,
                     ),
@@ -126,14 +114,14 @@ class _HomeShellState extends State<HomeShell> {
             label: 'Notes',
           ),
           NavigationDestination(
-            icon: Icon(Icons.history_outlined),
-            selectedIcon: Icon(Icons.history),
-            label: 'Activity',
+            icon: Icon(Icons.people_outline),
+            selectedIcon: Icon(Icons.people),
+            label: 'Patients',
           ),
           NavigationDestination(
-            icon: Icon(Icons.privacy_tip_outlined),
-            selectedIcon: Icon(Icons.privacy_tip),
-            label: 'Consent',
+            icon: Icon(Icons.notes_outlined),
+            selectedIcon: Icon(Icons.notes),
+            label: 'Past Notes',
           ),
         ],
       ),

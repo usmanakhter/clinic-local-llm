@@ -1,9 +1,9 @@
-# ADR-002 — Local LLM POC via HTTP Sidecar
+# ADR-002 — On-device GGUF LLM (Chat hard-requires model)
 
-**Status:** Accepted  
+**Status:** Accepted (amended 2026-07-20)  
 **Date:** 2026-07-15  
 **Owner:** Architecture (A5) + ML (A7)  
-**Supersedes for note-drafter only:** ADR-001 “no on-device LLM in 8h MVP”
+**Supersedes:** ADR-001 “no on-device LLM in 8h MVP”; prior Ollama-sidecar / in-app-rules Chat path  
 
 ---
 
@@ -11,24 +11,32 @@
 
 | Concern | Choice |
 |---|---|
-| Runtime | **Ollama** or **llama.cpp server** on localhost (OpenAI-compatible `/v1/chat/completions`) |
-| Flutter integration | HTTP client to `http://127.0.0.1:11434` (configurable) |
-| Default model preference | `qwen2.5:1.5b` (fast POC); `qwen2.5:3b` if machine allows |
-| Allowed LLM use | **Note drafting only** (+ optional grounded guideline paraphrase later) |
-| Forbidden LLM use | Inventing interaction **severity**; diagnosing; prescribing authority |
-| Fallback | Fixture drafts from `note_drafter_samples.json` when sidecar unavailable |
-| JNI / GGUF-in-APK | **Deferred** past this sprint |
+| **Product Chat runtime** | **On-device Qwen GGUF** via **llama.cpp** (Dart FFI / `llamadart`) on **Android + Windows** |
+| Chat if no GGUF | **Hard error** — e.g. “No local model found …” — **no** rules-engine, **no** Ollama, **no** fake paraphrase |
+| Notes runtime | In-app draft engine (`InAppDraftEngine`) allowed for structured SOAP; optional GGUF when present |
+| Model file | Manual placement under app documents `models/` (or optional bundled asset) — **never** `ollama pull` |
+| Default model target | **Qwen2.5-1.5B Instruct Q4_K_M** (or smaller Q4 if size forces it) |
+| Flutter web Chat | Same hard error in this slice (neural Chat is native-only until a later WebGPU path) |
+| Ollama sidecar | **Non-product** — may remain as dead/dev code; not a Chat fallback |
+
+---
+
+## Why GGUF (and not Ollama / rules Chat)
+
+- Phones will not run an Ollama sidecar; firewalls often block `ollama.com` pulls.
+- In-app rules are **not** a neural LLM — product Chat must not pretend they are.
+- A local GGUF file + in-process llama.cpp matches the field architecture (STATUS §6 / tech architecture).
 
 ---
 
 ## Consequences
 
-- Rapid Windows demo without Android NDK/JNI work.
-- Web (`localhost:8080`) may hit browser CORS; UI must show fixture fallback when the call fails.
-- Clinical reference paths (search, interactions) stay DB-deterministic.
+- Banner shows **On-device · qwen…** only when a GGUF is loaded; otherwise **No local model**.
+- Chat answers only when GGUF is ready; retrieval still cite-or-refuse first, then GGUF paraphrases context.
+- Model weights are not committed to git; operators copy GGUF via USB / own CDN / `ota-api` later.
 
 ---
 
 ## Non-goals
 
-SQLCipher note storage, model OTA, device-tier auto-download, cloud inference.
+SQLCipher, automatic model OTA, device-tier auto-download, cloud inference, WebGPU Chat (this amendment).

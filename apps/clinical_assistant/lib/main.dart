@@ -2,11 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'data/consent_service.dart';
 import 'data/db.dart';
+import 'data/patient_store.dart';
 import 'data/repositories.dart';
 import 'data/session_store.dart';
 import 'screens/home_shell.dart';
+import 'screens/terms_gate_screen.dart';
 import 'theme/app_theme.dart';
 
 Future<void> main() async {
@@ -21,7 +22,6 @@ Future<void> main() async {
     return true;
   };
 
-  // Paint immediately so web never sits on a blank canvas during init.
   runApp(const _BootApp());
 }
 
@@ -47,11 +47,15 @@ class _BootAppState extends State<_BootApp> {
       await AppDatabase.init();
       final prefs = await SharedPreferences.getInstance();
       await SessionStore.initWebPersistence(prefs);
+      await PatientStore.initWebPersistence(prefs);
       final repo = ClinicalRepository();
-      final consent = ConsentService(prefs, repo);
+      final termsOk = await hasAcceptedTerms(prefs);
       if (!mounted) return;
       setState(() {
-        _ready = ClinicalAssistantApp(consent: consent, repository: repo);
+        _ready = ClinicalAssistantApp(
+          repository: repo,
+          termsAccepted: termsOk,
+        );
       });
     } catch (e, st) {
       debugPrint('Startup failed: $e\n$st');
@@ -98,31 +102,24 @@ class _BootAppState extends State<_BootApp> {
 class ClinicalAssistantApp extends StatefulWidget {
   const ClinicalAssistantApp({
     super.key,
-    required this.consent,
     required this.repository,
+    required this.termsAccepted,
   });
 
-  final ConsentService consent;
   final ClinicalRepository repository;
+  final bool termsAccepted;
 
   @override
   State<ClinicalAssistantApp> createState() => _ClinicalAssistantAppState();
 }
 
 class _ClinicalAssistantAppState extends State<ClinicalAssistantApp> {
-  late ConsentService _consent;
+  late bool _termsAccepted;
 
   @override
   void initState() {
     super.initState();
-    _consent = widget.consent;
-  }
-
-  Future<void> _refreshConsent() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _consent = ConsentService(prefs, widget.repository);
-    });
+    _termsAccepted = widget.termsAccepted;
   }
 
   @override
@@ -131,12 +128,12 @@ class _ClinicalAssistantAppState extends State<ClinicalAssistantApp> {
       title: 'Nepal Clinical Assistant',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
-      home: HomeShell(
-        repository: widget.repository,
-        consentGranted: _consent.granted,
-        syncStatusText: _consent.syncStatusText,
-        onOpenConsent: _refreshConsent,
-      ),
+      home: _termsAccepted
+          ? HomeShell(repository: widget.repository)
+          : TermsGateScreen(
+              repository: widget.repository,
+              onAccepted: () => setState(() => _termsAccepted = true),
+            ),
     );
   }
 }
