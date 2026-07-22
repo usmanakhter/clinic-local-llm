@@ -1,0 +1,6 @@
+# Supabase local/CLI defaults. Project region: ap-south-1 (Mumbai).
+# Link with: supabase link --project-ref <ref>
+
+[functions.ingest-batch]
+# Devices are not Supabase Auth users; gate is PII validation (+ future HMAC).
+verify_jwt = false

@@ -7,7 +7,7 @@ Venture context: [`clinical-llm-venture-analysis.md`](../clinical-llm-venture-an
 
 **Backlog order (default):** Near-term → Retrieval/RAG → Chat agent → **Consent/scrub pipeline** → **Sync & data flywheel** → LLM packaging / model enhancement → EMR.
 
-**Active continuation (2026-07-21):** Product polish shipped (unified Notes, patient contacts/search). **Android:** build signed AAB for Play internal testing (`key.properties` + `flutter build appbundle --release`). Post-MVP: ap-south-1 sync, device-tier GGUF, OTA, full EMR. Lawyer review of `np-terms-1.1` remains external.
+**Active continuation (2026-07-21):** Product polish shipped (unified Notes, patient contacts/search). **Android:** build signed AAB for Play internal testing (`key.properties` + `flutter build appbundle --release`). Post-MVP: **Supabase Mumbai sync**, device-tier GGUF, OTA, full EMR. Lawyer review of `np-terms-1.1` remains external.
 
 ---
 
@@ -63,7 +63,7 @@ Clinician use (search / interact / notes / chat / patients)
 | Chat agent (RAG + GGUF) | **Shipped (v1)** | Retrieve → cite/refuse → **GGUF only**; hard error if no model |
 | CI stub (fixture + gold evals) | **Shipped** | `.github/workflows/qa-fixtures.yml` |
 | Production scrubber + field encryption | **Shipped (v1)** | Name/place heuristics + `DbCrypto` patient fields; native SQLCipher deferred |
-| Cloud sync / ingest / OTA | **Stub + on after Terms** | `np-terms-1.2` requires sync; `SyncWorker.flushPending` auto-attempts; local ingest-api |
+| Cloud sync / ingest / OTA | **Stub + Supabase path** | Local ingest-api; prod = Mumbai Supabase `ingest-batch` + `sync_ingest` (see `supabase/`) |
 | On-device llama.cpp GGUF | **Shipped (v0)** | `GgufLlamaRuntime` + `llamadart`; Linux/Windows/Android; manual GGUF placement |
 | Threat model | **Shipped (v0.2)** | [`docs/security/threat-model-v0.2.md`](security/threat-model-v0.2.md) |
 | Full EMR | **Not started** | Beyond local patient cards — **post-MVP** |
@@ -259,7 +259,9 @@ Work **only in this order**. Newer ideas go into the matching section (or ask if
 ### 5. Sync & data flywheel — **post-MVP**
 - [x] Local `sync_queue` stub (scrubbed payloads after Terms accept)
 - [x] ADR-004 + local `services/ingest-api` + `SyncWorker.flushPending` (**on after Terms**; no off switch)
-- [ ] Real sync_queue → ap-south-1 ingest → curated corpus (prod scrub gate passed locally)
+- [x] Supabase Mumbai scaffold (`sync_ingest` + Edge Function `ingest-batch`)
+- [x] Deploy linked Mumbai project + confirmed `sync_ingest` (app via `INGEST_BASE_URL` / `INGEST_ANON_KEY`)
+- [ ] Curated corpus pipeline from `sync_ingest`
 - [x] Transparency UI (what left the device / when) — Sync transparency screen
 
 ### 6. LLM packaging & model enhancement — **post-MVP**
@@ -282,7 +284,7 @@ Work **only in this order**. Newer ideas go into the matching section (or ask if
 | [`docs/architecture/ADR-001-stack.md`](architecture/ADR-001-stack.md) | Stack lock |
 | [`docs/architecture/ADR-002-local-llm-poc.md`](architecture/ADR-002-local-llm-poc.md) | On-device GGUF; Chat hard-requires model |
 | [`docs/architecture/ADR-003-chat-rag.md`](architecture/ADR-003-chat-rag.md) | Chat RAG-first |
-| [`docs/architecture/ADR-004-sync-ingest.md`](architecture/ADR-004-sync-ingest.md) | De-id sync → AWS Mumbai ingest (stub) |
+| [`docs/architecture/ADR-004-sync-ingest.md`](architecture/ADR-004-sync-ingest.md) | De-id sync → Supabase Mumbai (local stub retained) |
 | [`docs/security/threat-model-v0.2.md`](security/threat-model-v0.2.md) | Current threat model (MVP close) |
 | [`docs/security/threat-model-v0.1.md`](security/threat-model-v0.1.md) | Historical 8h MVP threat model |
 | [`qa/test-plan-p0.md`](../qa/test-plan-p0.md) | Detailed test cases |

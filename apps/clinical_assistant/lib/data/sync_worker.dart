@@ -25,21 +25,47 @@ class SyncFlushResult {
 ///
 /// After Terms acceptance, sync is **on** (no in-app off switch). The app
 /// queues scrubbed payloads continuously and [flushPending] attempts upload
-/// whenever an ingest endpoint is reachable (local stub or future prod URL).
+/// whenever an ingest endpoint is reachable (local stub or Supabase Mumbai).
 class SyncWorker {
   SyncWorker._();
 
-  /// Local ingest stub (ADR-004). Replace with ap-south-1 URL for production.
-  static const defaultBaseUrl = 'http://127.0.0.1:8787';
+  /// Local FastAPI stub. Override with Supabase function URL via
+  /// `--dart-define=INGEST_BASE_URL=https://<ref>.supabase.co/functions/v1/ingest-batch`.
+  static const defaultBaseUrl = String.fromEnvironment(
+    'INGEST_BASE_URL',
+    defaultValue: 'http://127.0.0.1:8787',
+  );
 
-  /// POSTs pending scrubbed queue items to [baseUrl]/v1/ingest/batch`.
+  /// Supabase anon/publishable key (required when posting to Edge Functions).
+  static const ingestAnonKey = String.fromEnvironment('INGEST_ANON_KEY');
+
+  /// Resolves local `/v1/ingest/batch` vs a full Supabase function URL.
+  static Uri ingestUri([String? baseUrl]) {
+    final trimmed = (baseUrl ?? defaultBaseUrl).replaceAll(RegExp(r'/+$'), '');
+    if (trimmed.contains('/functions/v1/')) {
+      return Uri.parse(trimmed);
+    }
+    return Uri.parse('$trimmed/v1/ingest/batch');
+  }
+
+  static Map<String, String> _headers() {
+    final headers = <String, String>{'Content-Type': 'application/json'};
+    if (ingestAnonKey.isNotEmpty) {
+      headers['apikey'] = ingestAnonKey;
+      headers['Authorization'] = 'Bearer $ingestAnonKey';
+    }
+    return headers;
+  }
+
+  /// POSTs pending scrubbed queue items to the ingest endpoint.
   static Future<SyncFlushResult> flushPending({
-    String baseUrl = defaultBaseUrl,
+    String? baseUrl,
     String deviceId = 'dev-device',
     String consentVersion = 'np-terms-1.2',
     int limit = 20,
     Duration timeout = const Duration(seconds: 15),
   }) async {
+    final resolvedBase = baseUrl ?? defaultBaseUrl;
     final pending = await SessionStore.listPendingSync(limit: limit);
     if (pending.isEmpty) {
       return const SyncFlushResult(
@@ -79,7 +105,7 @@ class SyncWorker {
       );
     }
 
-    final uri = Uri.parse('$baseUrl/v1/ingest/batch');
+    final uri = ingestUri(resolvedBase);
     final body = jsonEncode({
       'device_id': deviceId,
       'consent_version': consentVersion,
@@ -90,7 +116,7 @@ class SyncWorker {
       final response = await http
           .post(
             uri,
-            headers: {'Content-Type': 'application/json'},
+            headers: _headers(),
             body: body,
           )
           .timeout(timeout);
@@ -103,7 +129,7 @@ class SyncWorker {
           attempted: items.length,
           synced: items.length,
           failed: 0,
-          message: 'Synced ${items.length} item(s) to $baseUrl',
+          message: 'Synced ${items.length} item(s) to $uri',
         );
       }
 
@@ -140,7 +166,7 @@ class SyncWorker {
 
   /// Backward-compatible alias used by older call sites / docs.
   static Future<SyncFlushResult> debugFlushPending({
-    String baseUrl = defaultBaseUrl,
+    String? baseUrl,
     String deviceId = 'dev-device',
     String consentVersion = 'np-terms-1.2',
     int limit = 20,
