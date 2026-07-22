@@ -57,6 +57,17 @@ class LlmStatusBanner extends StatelessWidget {
                             color: fg,
                           ),
                     ),
+                  if (!checking && online && s?.backend == LlmBackend.gguf)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 2),
+                      child: Text(
+                        kGgufLatencyNote,
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                              color: fg,
+                              height: 1.3,
+                            ),
+                      ),
+                    ),
                 ],
               ),
             ),

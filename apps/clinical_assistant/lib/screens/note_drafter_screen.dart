@@ -208,7 +208,7 @@ class _NoteDrafterScreenState extends State<NoteDrafterScreen> {
   Future<void> _generate() async {
     setState(() {
       _loading = true;
-      _status = 'Drafting…';
+      _status = 'Drafting… $kGgufLatencyNote';
       _saveMessage = null;
     });
     try {
@@ -393,7 +393,9 @@ class _NoteDrafterScreenState extends State<NoteDrafterScreen> {
         const SizedBox(height: 6),
         Text(
           'Generate fills the draft on screen only. Tap Save locally to store '
-          'it on this device. Interaction severity is never invented.',
+          'it on this device. Interaction severity is never invented.\n'
+          '$kGgufLatencyNote '
+          'Without a GGUF, Notes fall back to the fast in-app assembler.',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: AppColors.slate500,
                 height: 1.35,

@@ -9,9 +9,7 @@ By downloading, installing, accessing, or using the Nepal Clinical Assistant
 bound by these Terms and Conditions AND the data-sync consent in Section 4.
 If you do not agree, do not use the App.
 
-This single acceptance is required to open the App. There is no separate
-in-app consent screen afterward. Sync is ON after acceptance and cannot be
-turned off in the App — declining sync means you must not use the App.
+This single acceptance is required to utilize the App.
 
 ──────────────────────────────────────────────────────────────────────────────
 1. NATURE OF THE APPLICATION
@@ -79,21 +77,21 @@ turned off in the App — declining sync means you must not use the App.
 4. DATA SYNC CONSENT (REQUIRED — CANNOT BE DISABLED IN-APP)
 ──────────────────────────────────────────────────────────────────────────────
 
-4.1 By accepting these Terms you CONSENT to the App ALWAYS queuing and, when
+4.1 By accepting these Terms you CONSENT to the App queuing and, when
     connectivity and ingest endpoints are available, transmitting scrubbed
     copies of your App activity to servers operated for this project.
-    Sync is a condition of use. There is NO in-app setting to turn sync off.
-    If you do not want sync, do not accept these Terms and do not use the App.
+    Sync is a condition of use. If you do not want sync, do not accept 
+    these Terms and do not use the App.
 
-4.2 Purposes include: backup of consented activity, improving the Nepal
-    clinical knowledge base / retrieval corpus, evaluating quality, anonymous
-    product analytics, and (later) model or adapter improvement.
+4.2 Purposes include: improving the clinical knowledge base / retrieval corpus, 
+    model and other quality improvement.
 
 4.3 Activity that may be synced includes drug searches, interaction checks,
     guideline lookups, chat turns, clinical note drafts, and related metadata.
     Local patient registry cards (names, phones, WhatsApp, etc.) are NOT
     uploaded. Local on-device history remains readable to you; only the
-    outbound sync queue is scrubbed.
+    outbound sync queue is scrubbed for any personally identifiable
+    information (PII).
 
 4.4 The App will make a BEST EFFORT to scrub personally identifiable
     information (PII) — such as phone numbers, emails, and certain structural
@@ -157,9 +155,8 @@ that:
   • You understand the App is reference / draft assistance only;
   • Creators take no responsibility or liability for clinical outcomes;
   • Patient data you enter is your responsibility on-device;
-  • Sync of scrubbed activity is REQUIRED and cannot be turned off in the App;
   • You consent to scrubbed activity being queued and synced to servers for
-    backup, corpus/model quality improvement, and analytics (Section 4);
+    quality improvement of the app (Section 4);
   • You understand PII scrubbing is best-effort and not perfect;
   • You will not treat absence of interaction data as safety clearance;
   • You will not use the App if you disagree with any of the above.

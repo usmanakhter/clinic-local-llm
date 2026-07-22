@@ -225,6 +225,44 @@ class GuidelineChunk {
   }
 }
 
+/// OPD condition coverage row (Nepal checklist — Guide browse catalogue).
+class OpdCondition {
+  const OpdCondition({
+    required this.id,
+    required this.name,
+    this.weight = 0,
+    this.searchQuery,
+    this.expectedDrugIds = const [],
+    this.expectedGuidelineIds = const [],
+    this.covered = false,
+  });
+
+  final String id;
+  final String name;
+  final int weight;
+  final String? searchQuery;
+  final List<String> expectedDrugIds;
+  final List<String> expectedGuidelineIds;
+  final bool covered;
+
+  factory OpdCondition.fromMap(Map<String, dynamic> map) {
+    return OpdCondition(
+      id: map['id'] as String? ?? '',
+      name: map['name'] as String? ?? '',
+      weight: (map['weight'] as num?)?.toInt() ?? 0,
+      searchQuery: map['search_query'] as String?,
+      expectedDrugIds: (map['expected_drug_ids'] as List<dynamic>? ?? [])
+          .map((e) => e.toString())
+          .toList(),
+      expectedGuidelineIds:
+          (map['expected_guideline_ids'] as List<dynamic>? ?? [])
+              .map((e) => e.toString())
+              .toList(),
+      covered: map['covered'] as bool? ?? false,
+    );
+  }
+}
+
 class ConsentTemplate {
   const ConsentTemplate({
     required this.consentVersion,

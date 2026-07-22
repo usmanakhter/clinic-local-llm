@@ -10,4 +10,5 @@
 storePassword=CHANGE_ME
 keyPassword=CHANGE_ME
 keyAlias=upload
-storeFile=upload-keystore.jks
+# Resolved relative to android/app/ — keep the keystore in android/
+storeFile=../upload-keystore.jks

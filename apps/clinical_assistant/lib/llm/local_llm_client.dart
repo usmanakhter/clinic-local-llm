@@ -9,6 +9,10 @@ enum LlmBackend {
   inApp,
 }
 
+/// Expected wall-clock for on-device Qwen GGUF on CPU (Chat / Notes generate).
+const kGgufLatencyNote =
+    'On-device Qwen may take ~30–60 seconds per reply on CPU (first answer can be longer).';
+
 /// Health / reachability of the active draft / chat backend.
 class LlmStatus {
   const LlmStatus({

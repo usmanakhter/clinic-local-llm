@@ -1,13 +1,13 @@
 # Nepal Clinical Assistant — Development Status
 
-**Last updated:** 2026-07-21  
+**Last updated:** 2026-07-22  
 **Single source of truth** for what’s shipped, how to run it, and what’s next.  
 Long-term design target: [`clinical-llm-technical-architecture.md`](../clinical-llm-technical-architecture.md).  
 Venture context: [`clinical-llm-venture-analysis.md`](../clinical-llm-venture-analysis.md).
 
 **Backlog order (default):** Near-term → Retrieval/RAG → Chat agent → **Consent/scrub pipeline** → **Sync & data flywheel** → LLM packaging / model enhancement → EMR.
 
-**Active continuation (2026-07-21):** Product polish shipped (unified Notes, patient contacts/search). **Android:** build signed AAB for Play internal testing (`key.properties` + `flutter build appbundle --release`). Post-MVP: **Supabase Mumbai sync**, device-tier GGUF, OTA, full EMR. Lawyer review of `np-terms-1.1` remains external.
+**MVP engineering: closed (2026-07-22).** Signed Play AAB **1.0.0+3** at `apps/clinical_assistant/build/app/outputs/bundle/release/app-release.aab`. Remaining MVP gate is **external** lawyer review of `np-terms-1.2`. Next: upload AAB to Play internal testing; post-MVP corpus pipeline / device-tier GGUF / OTA / full EMR.
 
 ---
 
@@ -63,11 +63,11 @@ Clinician use (search / interact / notes / chat / patients)
 | Chat agent (RAG + GGUF) | **Shipped (v1)** | Retrieve → cite/refuse → **GGUF only**; hard error if no model |
 | CI stub (fixture + gold evals) | **Shipped** | `.github/workflows/qa-fixtures.yml` |
 | Production scrubber + field encryption | **Shipped (v1)** | Name/place heuristics + `DbCrypto` patient fields; native SQLCipher deferred |
-| Cloud sync / ingest / OTA | **Stub + Supabase path** | Local ingest-api; prod = Mumbai Supabase `ingest-batch` + `sync_ingest` (see `supabase/`) |
+| Cloud sync / ingest / OTA | **Continuous (invisible)** | After Terms: `SyncCoordinator` flushes on enqueue / 30s / resume; no sync chrome; Supabase Mumbai or local ingest |
 | On-device llama.cpp GGUF | **Shipped (v0)** | `GgufLlamaRuntime` + `llamadart`; Linux/Windows/Android; manual GGUF placement |
 | Threat model | **Shipped (v0.2)** | [`docs/security/threat-model-v0.2.md`](security/threat-model-v0.2.md) |
 | Full EMR | **Not started** | Beyond local patient cards — **post-MVP** |
-| Play Store / closed testing | **Ready for internal AAB** | Signing via `android/key.properties`; `flutter build appbundle --release`; lawyer Terms review still external |
+| Play Store / closed testing | **AAB 1.0.0+3** | `build/app/outputs/bundle/release/app-release.aab` (signed upload keystore); upload to Play internal testing next; lawyer Terms review still external |
 
 **Working demo URL:** `http://localhost:8090` after `flutter build web --release` + `python -m http.server 8090` from `build/web`.  
 **Note:** Web Chat will show **No local model** by design; use `flutter run -d linux` (or Windows) for neural Chat.
@@ -136,20 +136,36 @@ Do **not** use `ollama pull` for product Chat.
 ### App (Android release / Play internal testing)
 
 ```bash
+export JAVA_HOME="${JAVA_HOME:-$HOME/.local/jdk}"
+export ANDROID_HOME="${ANDROID_HOME:-$HOME/Android/Sdk}"
+
 cd apps/clinical_assistant/android
 # One-time: create upload keystore + key.properties (see key.properties.example)
 keytool -genkey -v -keystore upload-keystore.jks -keyalg RSA -keysize 2048 \
   -validity 10000 -alias upload
-cp key.properties.example key.properties   # fill passwords + storeFile path
+cp key.properties.example key.properties   # fill passwords + storeFile=../upload-keystore.jks
 
 cd ..
+# Bump pubspec version build number before each Play upload (e.g. 1.0.0+3 → 1.0.0+4)
 flutter build appbundle --release
 # Output: build/app/outputs/bundle/release/app-release.aab
 ```
 
-**Play Console checklist:** app id `np.clinical.clinical_assistant`; minSdk 29; label “Nepal Clinical Assistant”; not-for-clinical-use store listing + privacy policy URL; upload AAB to internal testing track; place GGUF on device under app documents `nepal_clinical/models/` (or ship via OTA later). Lawyer review of `np-terms-1.1` remains a pilot gate.
+**Iterate on Play updates (repeat forever):**
 
-### Automated checks
+1. Ship Flutter code changes as usual  
+2. Bump **only** the `+build` in `pubspec.yaml` (`1.0.0+3` → `1.0.0+4`, …). Play requires a strictly increasing `versionCode`. Bump `1.0.x` when you want a new user-visible version name.  
+3. `flutter build appbundle --release` from `apps/clinical_assistant`  
+4. Upload the new AAB in Play Console → **Internal testing** (same app id `np.clinical.clinical_assistant`, same upload keystore)  
+5. Testers already on the internal track get the update via Play — no sideload needed  
+
+**Faster device-only loop (no Play):** `flutter run` / `flutter install --release` on USB — no version bump required until you upload to Play.
+
+**Prod sync in a binary:** pass `--dart-define=INGEST_BASE_URL=…` and `--dart-define=INGEST_ANON_KEY=…` on `flutter run` or `flutter build appbundle`.
+
+**Play Console checklist:** app id `np.clinical.clinical_assistant`; minSdk 29; label “Nepal Clinical Assistant”; not-for-clinical-use store listing + privacy policy URL; upload AAB to internal testing track; place GGUF on device under app documents `nepal_clinical/models/` (or ship via OTA later). Lawyer review of `np-terms-1.2` remains a pilot gate.
+
+**Upload keystore (local only, never commit):** `android/upload-keystore.jks` + `android/key.properties`. Back these up offline — losing them blocks updates to the same Play listing.### Automated checks
 
 ```bash
 cd /path/to/clinic-local-llm
@@ -167,12 +183,13 @@ flutter test test/chat_gguf_required_test.dart test/chat_vignette_smoke_test.dar
 
 1. Terms gate: must agree (includes sync) before app  
 2. Banner: not-for-clinical-use + offline  
-3. Search: `Paracetamol` / `Calpol` / `doxycycline`  
-4. Interact: Azithromycin + Ciprofloxacin → contraindicated  
-5. Chat (Linux/Windows + GGUF): `scrub typhus` → grounded answer; without GGUF → **No local model found**  
-6. Patients + Notes: create patient, save note with Patient ID  
-7. Notes → Saved notes: edit/update saved drafts; generate does not auto-save  
-8. Sync transparency: cloud icon in app bar → scrubbed queue status  
+3. Search: full A–Z formulary list; filter via search  
+4. Interact: tap Drug A/B → searchable full formulary picker; Azithromycin + Ciprofloxacin → contraindicated  
+5. Guides: full OPD condition list; tap condition for linked citations; keyword search also finds chunks  
+6. Chat (Linux/Windows + GGUF): `scrub typhus` → grounded answer; without GGUF → **No local model found**  
+7. Patients + Notes: create patient, save note with Patient ID  
+8. Notes → Saved notes: edit/update saved drafts; generate does not auto-save  
+9. Sync: invisible after Terms — interactions enqueue scrubbed rows; uploads run in background (no cloud button)  
 
 ### Local draft / Chat LLM
 
@@ -261,8 +278,9 @@ Work **only in this order**. Newer ideas go into the matching section (or ask if
 - [x] ADR-004 + local `services/ingest-api` + `SyncWorker.flushPending` (**on after Terms**; no off switch)
 - [x] Supabase Mumbai scaffold (`sync_ingest` + Edge Function `ingest-batch`)
 - [x] Deploy linked Mumbai project + confirmed `sync_ingest` (app via `INGEST_BASE_URL` / `INGEST_ANON_KEY`)
+- [x] Continuous invisible sync (`SyncCoordinator`: enqueue wake + 30s + resume; Terms-only disclosure)
+- [x] ~~Transparency UI~~ removed — disclosure via Terms only
 - [ ] Curated corpus pipeline from `sync_ingest`
-- [x] Transparency UI (what left the device / when) — Sync transparency screen
 
 ### 6. LLM packaging & model enhancement — **post-MVP**
 - [x] On-device GGUF runtime (Linux/Windows/Android) + Chat hard-require  
@@ -272,7 +290,9 @@ Work **only in this order**. Newer ideas go into the matching section (or ask if
 
 ### 7. EMR / distribution (later)
 - [ ] Full EMR (visits, prescriptions, facility workflows) — **beyond** current patient cards  
-- [ ] Play internal testing; India scale-up — **AAB signing path ready**; upload to Play Console next  
+- [x] Signed Play AAB `1.0.0+3` (`flutter build appbundle --release`) — artifact under `build/app/outputs/bundle/release/`  
+- [ ] Upload AAB to Play Console internal testing; India scale-up  
+
 
 ---
 

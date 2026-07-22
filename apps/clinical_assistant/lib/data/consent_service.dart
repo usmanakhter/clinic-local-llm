@@ -28,10 +28,6 @@ class ConsentService {
       AppDatabase.consentTemplate ??
       const ConsentTemplate(consentVersion: 'np-pilot-1.0', templates: {});
 
-  String get syncStatusText => granted
-      ? 'Terms accepted · sync on'
-      : 'Blocked — terms not accepted';
-
   /// Only called from [TermsGateScreen] on Agree. Never expose a revoke UI.
   Future<void> setGranted({
     required bool granted,

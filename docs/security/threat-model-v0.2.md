@@ -43,7 +43,7 @@
 | Boundary | Rule |
 |---|---|
 | UI → DB | Formulary/interactions DB-only for severity; sessions/patients as designed |
-| App → Network | No production clinical upload. `SyncWorker.debugFlushPending` → localhost stub only |
+| App → Network | Production: silent `SyncCoordinator` → ingest (local stub or Supabase); flush only `pending` |
 | Terms → Sync | First-launch Terms (`np-terms-1.2`) **requires** sync; no separate Consent tab; no in-app sync off |
 | Scrub → Queue | Residual structural PII → `blocked_residual_pii` + `scrub_note`; excluded from flush |
 | Repo → Device | Synthetic `data/nepal/` fixtures only |
@@ -73,8 +73,8 @@
 |---|---|---|
 | T1 | Field-level `DbCrypto` for patient fields; short-lived demos | Full SQLCipher deferred; unlocked device still exposes local history |
 | T2 | Interaction severity **DB-only**; Chat cite-or-refuse before GGUF | No signed formulary/GGUF hash yet |
-| T3 | Required Terms gate version `np-terms-1.2`; sync transparency UI | **Lawyer review of Terms still open** (external gate for pilot) |
-| T4 | Production heuristics scrubber; reject-to-queue; flush only `pending`; transparency screen | Regex/heuristic miss; Android/desktop backup may include DB |
+| T3 | Required Terms gate version `np-terms-1.2`; disclosure via Terms only (no sync chrome) | **Lawyer review of Terms still open** (external gate for pilot) |
+| T4 | Production heuristics scrubber; reject-to-queue; flush only `pending`; silent `SyncCoordinator` | Regex/heuristic miss; Android/desktop backup may include DB |
 | T5 | Seed scripts + gold evals + GGUF-required tests | Manual GGUF placement; device-tier packaging later |
 | T6 | Status vocabulary `blocked_residual_pii`; debug flush excludes blocked | Accidental prod endpoint wiring without HMAC/WiFi gates |
 | T7 | RAG cite-or-refuse; no severity invention by LLM | Model may still paraphrase poorly; disclaimer required |
@@ -96,7 +96,7 @@
 ## 6. Acceptance checks
 
 - [x] Fresh install shows Terms gate (`np-terms-1.2`) before home shell  
-- [x] Sync transparency UI lists scrubbed queue statuses including blocked  
+- [x] Sync disclosure via Terms only; background `SyncCoordinator` (no transparency UI)  
 - [x] Interaction checker: DB severity only  
 - [x] Scrubber recall gate on fixture suite (≥99% target; CI QA)  
 - [x] Reject-to-queue: residual → `blocked_residual_pii`; not in `listPendingSync`  

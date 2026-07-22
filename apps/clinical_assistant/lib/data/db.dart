@@ -22,6 +22,7 @@ class AppDatabase {
   static ConsentTemplate? consentTemplate;
   static int drugCorpusCount = 0;
   static String? drugCorpusVersion;
+  static List<OpdCondition>? _opdConditions;
 
   static bool get isWebMemory => _webMemory;
 
@@ -472,5 +473,22 @@ SELECT rowid, title, title_ne, topic, chunk_text, chunk_text_ne, source FROM gui
         .whereType<Map>()
         .map((e) => GuidelineChunk.fromMap(Map<String, dynamic>.from(e)))
         .toList();
+  }
+
+  /// Lazy-load OPD condition checklist (not SQLite — browse catalogue only).
+  static Future<List<OpdCondition>> loadOpdConditions() async {
+    final cached = _opdConditions;
+    if (cached != null) return cached;
+    final raw =
+        await rootBundle.loadString('assets/nepal/opd_condition_checklist.json');
+    final json = jsonDecode(raw) as Map<String, dynamic>;
+    final list = json['conditions'] as List<dynamic>? ?? [];
+    final conditions = list
+        .whereType<Map>()
+        .map((e) => OpdCondition.fromMap(Map<String, dynamic>.from(e)))
+        .toList()
+      ..sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+    _opdConditions = conditions;
+    return conditions;
   }
 }

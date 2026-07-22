@@ -1,7 +1,7 @@
 # ADR-004 — Sync ingest (Phase 3)
 
 **Status:** Accepted  
-**Date:** 2026-07-20 (amended 2026-07-22)  
+**Date:** 2026-07-20 (amended 2026-07-22 — Supabase Mumbai; invisible continuous sync)  
 **Owner:** Architecture (A5) + Security (A8) + Backend (A6)  
 **Context:** Local `sync_queue` holds scrubbed interaction copies after Terms accept. This ADR locks destination, payload boundary, and server gate.
 
@@ -39,26 +39,26 @@ Local session history stays clinician-readable and unredacted. Only the scrubbed
 Terms accept (np-terms-*)
   → local session insert (unredacted)
   → scrub copy → sync_queue (pending | blocked_residual_pii)
-  → WiFi-preferred worker
+  → SyncCoordinator (enqueue wake / ~30s / resume)
   → POST ingest-batch (Supabase) or local /v1/ingest/batch
   → server re-validates; reject residual PII
   → sync_ingest rows → curated corpus pipeline
 ```
 
-Device policy (production): WiFi-only by default; no cellular upload unless a future explicit setting overrides.
+Device policy (production): WiFi-only by default; no cellular upload unless a future explicit setting overrides. Current client is best-effort when the endpoint is reachable (WiFi gate still TODO).
 
 ### Dev vs prod
 
 | Mode | Behavior |
 |---|---|
-| **Dev / POC** | Local `services/ingest-api` on `127.0.0.1:8787`; Flutter `SyncWorker.flushPending()` after Terms; HMAC optional / stubbed |
+| **Dev / POC** | Local `services/ingest-api` on `127.0.0.1:8787`; `SyncCoordinator` background flush; HMAC optional / stubbed |
 | **Prod** | Supabase Mumbai Edge Function; TLS; `INGEST_BASE_URL` + `INGEST_ANON_KEY` dart-defines; HMAC still TODO; WiFi-preferred; **upload gated on scrubber >99% recall** on held-out PII fixtures |
 
-After Terms acceptance (`np-terms-1.2`), sync is **always on** — no in-app off switch. Queuing is continuous; upload attempts run when an ingest endpoint is reachable.
+After Terms acceptance (`np-terms-1.2`), sync is **always on** — no in-app off switch and no sync status chrome. Queuing is continuous; `SyncCoordinator` uploads when an ingest endpoint is reachable (enqueue-triggered, ~30s periodic, app resume).
 
-### Transparency UI (shipped)
+### Disclosure (no transparency UI)
 
-Clinicians can open **Sync transparency** (app-bar cloud icon) to see scrubbed `sync_queue` rows: status (`pending` / `synced` / `blocked_residual_pii` / …), scrub timestamps, and `scrub_note`.
+Sync/data consent is disclosed only in first-launch Terms. There is no app-bar cloud button or Sync transparency screen — uploads are invisible background work.
 
 ---
 
@@ -73,7 +73,7 @@ Clinicians can open **Sync transparency** (app-bar cloud icon) to see scrubbed `
 
 ## Non-goals (this ADR)
 
-WorkManager WiFi jobs, real HMAC key management, Firebase, uploading patient registry rows, multi-region failover.
+WorkManager WiFi jobs, real HMAC key management, Firebase, uploading patient registry rows, multi-region failover, in-app sync status UI.
 
 ---
 
@@ -84,4 +84,4 @@ WorkManager WiFi jobs, real HMAC key management, Firebase, uploading patient reg
 - `docs/security/threat-model-v0.2.md`
 - `services/ingest-api/` (local stub)
 - `apps/clinical_assistant/lib/data/sync_worker.dart`
-- `apps/clinical_assistant/lib/screens/sync_transparency_screen.dart`
+- `apps/clinical_assistant/lib/data/sync_coordinator.dart`

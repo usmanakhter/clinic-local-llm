@@ -23,9 +23,10 @@ class SyncFlushResult {
 
 /// Scrubbed-queue upload worker.
 ///
-/// After Terms acceptance, sync is **on** (no in-app off switch). The app
-/// queues scrubbed payloads continuously and [flushPending] attempts upload
-/// whenever an ingest endpoint is reachable (local stub or Supabase Mumbai).
+/// After Terms acceptance, sync is **on** (no in-app off switch or sync chrome).
+/// The app queues scrubbed payloads continuously; [SyncCoordinator] drives
+/// [flushPending] (enqueue wake, periodic, resume) when an ingest endpoint
+/// is reachable (local stub or Supabase Mumbai).
 class SyncWorker {
   SyncWorker._();
 

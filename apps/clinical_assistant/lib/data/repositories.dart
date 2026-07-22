@@ -43,7 +43,8 @@ class ClinicalRepository {
 
   int get drugCorpusCount => AppDatabase.drugCorpusCount;
 
-  Future<List<Drug>> listDrugs({int limit = 50}) async {
+  /// A–Z formulary browse. Omit [limit] (or pass null) for the full corpus.
+  Future<List<Drug>> listDrugs({int? limit}) async {
     if (AppDatabase.isWebMemory) {
       final drugs = AppDatabase.webDrugs.map(Drug.fromMap).toList()
         ..sort(
@@ -51,6 +52,7 @@ class ClinicalRepository {
                 b.genericName.toLowerCase(),
               ),
         );
+      if (limit == null) return drugs;
       return drugs.take(limit).toList();
     }
     final rows = await AppDatabase.db.query(
@@ -59,6 +61,48 @@ class ClinicalRepository {
       limit: limit,
     );
     return rows.map(Drug.fromMap).toList();
+  }
+
+  /// Full guideline corpus ordered by priority then title.
+  Future<List<GuidelineChunk>> listGuidelines({int? limit}) async {
+    if (AppDatabase.isWebMemory) {
+      final chunks = AppDatabase.webGuidelines.map(GuidelineChunk.fromMap).toList()
+        ..sort((a, b) {
+          final byPri = b.priority.compareTo(a.priority);
+          if (byPri != 0) return byPri;
+          return a.title.toLowerCase().compareTo(b.title.toLowerCase());
+        });
+      if (limit == null) return chunks;
+      return chunks.take(limit).toList();
+    }
+    final rows = await AppDatabase.db.query(
+      'guideline_chunks',
+      orderBy: 'priority DESC, title COLLATE NOCASE',
+      limit: limit,
+    );
+    return rows.map(GuidelineChunk.fromMap).toList();
+  }
+
+  Future<List<GuidelineChunk>> getGuidelinesByIds(List<String> ids) async {
+    if (ids.isEmpty) return [];
+    final uniq = <String>{...ids};
+    if (AppDatabase.isWebMemory) {
+      return AppDatabase.webGuidelines
+          .map(GuidelineChunk.fromMap)
+          .where((c) => uniq.contains(c.id))
+          .toList();
+    }
+    final placeholders = List.filled(uniq.length, '?').join(',');
+    final rows = await AppDatabase.db.rawQuery(
+      'SELECT * FROM guideline_chunks WHERE id IN ($placeholders)',
+      uniq.toList(),
+    );
+    return rows.map(GuidelineChunk.fromMap).toList();
+  }
+
+  /// Nepal OPD condition checklist (coverage catalogue).
+  Future<List<OpdCondition>> listOpdConditions() async {
+    return AppDatabase.loadOpdConditions();
   }
 
   /// Bidirectional lookup. Never invents severity — null means no curated row.

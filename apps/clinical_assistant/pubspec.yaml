@@ -1,7 +1,7 @@
 name: clinical_assistant
 description: Nepal clinical reference MVP — offline drug, interaction, and guideline lookup.
 publish_to: 'none'
-version: 1.0.0+2
+version: 1.0.0+3
 
 environment:
   sdk: ^3.12.2
@@ -29,6 +29,7 @@ flutter:
     - assets/nepal/drugs.json
     - assets/nepal/interactions.json
     - assets/nepal/guideline_chunks.json
+    - assets/nepal/opd_condition_checklist.json
     - assets/nepal/consent_templates.json
     - assets/nepal/note_drafter_samples.json
     - assets/legal/terms_of_use.txt

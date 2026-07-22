@@ -7,6 +7,7 @@ import 'package:sqflite/sqflite.dart';
 import '../models/models.dart';
 import '../privacy/pii_scrubber.dart';
 import 'db.dart';
+import 'sync_coordinator.dart';
 
 /// Local-first activity store.
 ///
@@ -160,7 +161,7 @@ class SessionStore {
     return rows.map((e) => Map<String, dynamic>.from(e)).toList();
   }
 
-  /// All sync_queue rows for transparency UI (any status).
+  /// All sync_queue rows (any status) — retained for diagnostics / future tooling.
   static Future<List<Map<String, dynamic>>> listSyncQueue({
     int limit = 100,
   }) async {
@@ -448,12 +449,13 @@ class SessionStore {
     }
     final scrubbed = _scrubbedSyncPayload(row);
     final gate = PiiScrubber.evaluateForSync(jsonEncode(scrubbed));
+    final status = statusForScrubGate(gate);
     queue.insert(0, {
       'id': 'sync_$sessionId',
       'session_id': sessionId,
       'payload_json': jsonEncode(scrubbed),
       'scrubbed_at': DateTime.now().toIso8601String(),
-      'status': statusForScrubGate(gate),
+      'status': status,
       'scrub_note': gate.reason,
       'created_at': DateTime.now().toIso8601String(),
     });
@@ -461,6 +463,9 @@ class SessionStore {
       queue = queue.sublist(0, _maxSessions);
     }
     await prefs.setString(_webSyncQueueKey, jsonEncode(queue));
+    if (status == statusPending) {
+      SyncCoordinator.instance.notifyEnqueue();
+    }
   }
 
   static Future<void> _enqueueNative(
@@ -470,6 +475,7 @@ class SessionStore {
     try {
       final scrubbed = _scrubbedSyncPayload(row);
       final gate = PiiScrubber.evaluateForSync(jsonEncode(scrubbed));
+      final status = statusForScrubGate(gate);
       await AppDatabase.db.insert(
         'sync_queue',
         {
@@ -477,12 +483,15 @@ class SessionStore {
           'session_id': sessionId,
           'payload_json': jsonEncode(scrubbed),
           'scrubbed_at': DateTime.now().toIso8601String(),
-          'status': statusForScrubGate(gate),
+          'status': status,
           'scrub_note': gate.reason,
           'created_at': DateTime.now().toIso8601String(),
         },
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
+      if (status == statusPending) {
+        SyncCoordinator.instance.notifyEnqueue();
+      }
     } catch (_) {
       // sync_queue table may be missing on very old DB — migration handles v3
     }

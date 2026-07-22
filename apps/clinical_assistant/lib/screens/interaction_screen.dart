@@ -4,6 +4,7 @@ import '../data/repositories.dart';
 import '../models/models.dart';
 import '../theme/app_theme.dart';
 import '../widgets/citation_card.dart';
+import '../widgets/drug_picker_field.dart';
 
 class InteractionScreen extends StatefulWidget {
   const InteractionScreen({super.key, required this.repository});
@@ -15,7 +16,6 @@ class InteractionScreen extends StatefulWidget {
 }
 
 class _InteractionScreenState extends State<InteractionScreen> {
-  List<Drug> _drugs = [];
   Drug? _drugA;
   Drug? _drugB;
   Interaction? _result;
@@ -23,17 +23,6 @@ class _InteractionScreenState extends State<InteractionScreen> {
   bool _checked = false;
   bool _loading = false;
   String? _error;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadDrugs();
-  }
-
-  Future<void> _loadDrugs() async {
-    final drugs = await widget.repository.listDrugs(limit: 200);
-    if (mounted) setState(() => _drugs = drugs);
-  }
 
   Future<void> _check() async {
     if (_drugA == null || _drugB == null) return;
@@ -108,6 +97,7 @@ class _InteractionScreenState extends State<InteractionScreen> {
         ),
         const SizedBox(height: 6),
         Text(
+          'Tap Drug A / Drug B to search the full formulary. '
           'Lookup uses the local interaction table in both orderings. '
           'Severity is never invented.',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -115,27 +105,29 @@ class _InteractionScreenState extends State<InteractionScreen> {
               ),
         ),
         const SizedBox(height: 16),
-        _DrugDropdown(
+        DrugPickerField(
           label: 'Drug A',
+          repository: widget.repository,
           value: _drugA,
-          drugs: _drugs,
           onChanged: (d) => setState(() {
             _drugA = d;
             _checked = false;
             _result = null;
             _suggestions = [];
+            _error = null;
           }),
         ),
         const SizedBox(height: 12),
-        _DrugDropdown(
+        DrugPickerField(
           label: 'Drug B',
+          repository: widget.repository,
           value: _drugB,
-          drugs: _drugs,
           onChanged: (d) => setState(() {
             _drugB = d;
             _checked = false;
             _result = null;
             _suggestions = [];
+            _error = null;
           }),
         ),
         const SizedBox(height: 16),
@@ -162,44 +154,6 @@ class _InteractionScreenState extends State<InteractionScreen> {
             _InteractionCard(interaction: _result!),
         ],
       ],
-    );
-  }
-}
-
-class _DrugDropdown extends StatelessWidget {
-  const _DrugDropdown({
-    required this.label,
-    required this.value,
-    required this.drugs,
-    required this.onChanged,
-  });
-
-  final String label;
-  final Drug? value;
-  final List<Drug> drugs;
-  final ValueChanged<Drug?> onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButtonFormField<Drug>(
-      // ignore: deprecated_member_use — value still valid across Flutter SDKs
-      value: value,
-      isExpanded: true,
-      decoration: InputDecoration(labelText: label),
-      items: drugs
-          .map(
-            (d) => DropdownMenuItem(
-              value: d,
-              child: Text(
-                d.genericNameNe == null
-                    ? d.genericName
-                    : '${d.genericName} (${d.genericNameNe})',
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          )
-          .toList(),
-      onChanged: onChanged,
     );
   }
 }

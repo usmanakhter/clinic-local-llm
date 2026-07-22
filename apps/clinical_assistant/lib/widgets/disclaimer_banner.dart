@@ -23,33 +23,11 @@ class DisclaimerBanner extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    'Not for clinical use — not a diagnosis tool. '
-                    'Synthetic Nepal pilot data only.',
+                    'Not for clinical use — not a diagnosis tool. ',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: AppColors.warningText,
                           fontWeight: FontWeight.w600,
                           height: 1.35,
-                        ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Material(
-          color: AppColors.offlineStrip,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            child: Row(
-              children: [
-                const Icon(Icons.cloud_off, size: 14, color: AppColors.offlineText),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    'Offline reference · Nepal pilot fixtures',
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: AppColors.offlineText,
-                          letterSpacing: 0.2,
                         ),
                   ),
                 ),

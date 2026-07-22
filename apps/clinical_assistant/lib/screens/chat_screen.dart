@@ -62,7 +62,8 @@ class _ChatScreenState extends State<ChatScreen> {
             'I search local notes, history, chats, drugs, and guidelines on this '
             'device, then answer with the on-device Qwen GGUF only. If no model '
             'file is present, you will see an error — there is no rules-engine '
-            'fallback. I will not invent interaction severity. Not for clinical use.',
+            'fallback. I will not invent interaction severity. Not for clinical use.\n\n'
+            '$kGgufLatencyNote',
       ),
     );
     _probeLlm();
@@ -212,7 +213,8 @@ class _ChatScreenState extends State<ChatScreen> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             child: Text(
-              'Retrieve → on-device GGUF only (error if no local model)',
+              'Retrieve → on-device GGUF only (error if no local model). '
+              'Expect ~30–60s per answer on CPU.',
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     color: AppColors.slate700,
                     fontWeight: FontWeight.w600,
@@ -367,28 +369,44 @@ class _ChatScreenState extends State<ChatScreen> {
         SafeArea(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    enabled: !_busy,
-                    onSubmitted: (_) => _send(),
-                    decoration: const InputDecoration(
-                      hintText: 'e.g. review my fever notes; or scrub typhus',
+                if (_busy)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      'Generating on-device… $kGgufLatencyNote',
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: AppColors.slate500,
+                          ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 8),
-                IconButton.filled(
-                  onPressed: _busy ? null : _send,
-                  icon: _busy
-                      ? const SizedBox(
-                          width: 18,
-                          height: 18,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Icon(Icons.send),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _controller,
+                        enabled: !_busy,
+                        onSubmitted: (_) => _send(),
+                        decoration: const InputDecoration(
+                          hintText:
+                              'e.g. review my fever notes; or scrub typhus',
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    IconButton.filled(
+                      onPressed: _busy ? null : _send,
+                      icon: _busy
+                          ? const SizedBox(
+                              width: 18,
+                              height: 18,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : const Icon(Icons.send),
+                    ),
+                  ],
                 ),
               ],
             ),
