@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy — Nepal Clinical Assistant</title>
+  <meta name="description" content="Privacy Policy for Nepal Clinical Assistant (np.clinical.clinical_assistant)." />
+  <style>
+    :root {
+      --ink: #1a1f1c;
+      --muted: #4a554e;
+      --line: #d5ddd7;
+      --bg: #f7f9f7;
+      --card: #ffffff;
+      --accent: #1f6b4a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #e8f3ec 0%, transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, #eef2f0 0%, transparent 50%),
+        var(--bg);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+    h1 {
+      font-size: 1.75rem;
+      margin: 0 0 0.35rem;
+      letter-spacing: -0.02em;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.75rem;
+    }
+    h2 {
+      font-size: 1.15rem;
+      margin: 1.75rem 0 0.5rem;
+      color: var(--accent);
+    }
+    p, li { color: var(--ink); }
+    ul { padding-left: 1.2rem; }
+    li { margin: 0.35rem 0; }
+    .notice {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      padding: 0.9rem 1rem;
+      margin: 1.25rem 0 1.75rem;
+      border-radius: 4px;
+    }
+    a { color: var(--accent); }
+    footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Privacy Policy</h1>
+    <p class="meta">
+      <strong>Nepal Clinical Assistant</strong>
+      · Android package <code>np.clinical.clinical_assistant</code><br />
+      Version aligned with in-app Terms <code>np-terms-1.2</code><br />
+      Last updated: 2026-08-05
+    </p>
+
+    <div class="notice">
+      This policy describes how the app handles information on your device and
+      what may be sent to project servers after you accept the in-app Terms.
+      It is not legal advice. Pilot / Play listing use may require counsel review.
+    </div>
+
+    <h2>1. Who this applies to</h2>
+    <p>
+      This policy applies to clinicians and other authorized users of the
+      Nepal Clinical Assistant app (“the App”). The App is a clinical
+      <em>reference and drafting assistance</em> tool — not a medical device for
+      diagnosis, treatment decisions, or emergency care.
+    </p>
+
+    <h2>2. Information stored on your device</h2>
+    <p>Depending on how you use the App, the following may be stored locally:</p>
+    <ul>
+      <li>Optional patient registry fields (e.g. name, age, phone, WhatsApp, email, notes)</li>
+      <li>Local history of searches, interaction checks, guideline lookups, chat turns, and note drafts</li>
+      <li>Terms acceptance / consent version records</li>
+      <li>Optional on-device language-model files you place on the device</li>
+    </ul>
+    <p>
+      Local history is kept in clinician-readable (unredacted) form for your use
+      on that device. You are responsible for protecting the device and for
+      complying with facility and professional privacy rules when entering
+      patient information.
+    </p>
+
+    <h2>3. Information we sync (after Terms acceptance)</h2>
+    <p>
+      Accepting the in-app Terms (<code>np-terms-1.2</code>) is required to use the
+      App. That acceptance turns <strong>scrubbed activity sync ON</strong>. There is
+      no in-app switch to turn sync off later. If you do not want sync, do not
+      accept the Terms and do not use the App.
+    </p>
+    <p><strong>May be synced</strong> (best-effort PII-scrubbed copies):</p>
+    <ul>
+      <li>Drug searches, interaction checks, guideline lookups</li>
+      <li>Chat turns and clinical note drafts (scrubbed summaries)</li>
+      <li>Related metadata (e.g. query type, scrub timestamps, device id, consent version)</li>
+    </ul>
+    <p><strong>Not synced:</strong></p>
+    <ul>
+      <li>Local patient registry cards (names, phones, WhatsApp, etc. as stored on device)</li>
+      <li>Unredacted on-device clinical history</li>
+      <li>Payloads that fail the residual-PII gate (they remain on device)</li>
+    </ul>
+    <p>
+      Production ingest is intended for project servers in the India region
+      (Supabase Mumbai / ap-south-1) when configured in a release build.
+    </p>
+
+    <h2>4. Purposes of sync</h2>
+    <p>Synced scrubbed activity may be used to:</p>
+    <ul>
+      <li>Improve the clinical knowledge base / retrieval corpus</li>
+      <li>Improve model and product quality</li>
+    </ul>
+    <p>
+      We do not sell identifiable clinical content to life insurers or employers,
+      and we do not use data for automated diagnosis of individuals.
+    </p>
+
+    <h2>5. PII scrubbing (best effort)</h2>
+    <p>
+      Before upload, the App attempts to scrub personally identifiable information
+      (such as phone numbers, emails, and certain structural IDs) from sync
+      payloads. Scrubbing is <strong>best effort</strong> and does not guarantee
+      removal of all identifiers (for example, free-text names or place names may
+      remain). Residual re-identification risk can remain after scrubbing.
+    </p>
+
+    <h2>6. Third parties and analytics</h2>
+    <p>
+      Sync uses cloud infrastructure operated for this project (currently planned
+      via Supabase in Mumbai when enabled). The App is not built on Firebase
+      Analytics for clinical session egress. Device OS services (e.g. Google Play
+      services for distribution/updates) may process standard install/update data
+      under their own policies.
+    </p>
+
+    <h2>7. Retention and your choices</h2>
+    <ul>
+      <li>On-device data remains until you clear app data or uninstall.</li>
+      <li>Stopping use of the App is the way to stop future sync of <em>new</em> activity.</li>
+      <li>Material Terms changes require renewed in-app acceptance.</li>
+    </ul>
+
+    <h2>8. Children</h2>
+    <p>
+      The App is intended for adult clinicians and authorized health workers, not
+      for children.
+    </p>
+
+    <h2>9. Changes</h2>
+    <p>
+      We may update this Privacy Policy. The “Last updated” date above will change
+      when we do. Material product changes to data practices are also reflected in
+      updated in-app Terms that require re-acceptance.
+    </p>
+
+    <h2>10. Contact</h2>
+    <p>
+      Questions about this policy or the App:
+      open an issue on the project repository
+      <a href="https://github.com/usmanakhter/clinic-local-llm/issues">usmanakhter/clinic-local-llm</a>.
+    </p>
+
+    <footer>
+      Related: in-app Terms version <code>np-terms-1.2</code>
+      · Package <code>np.clinical.clinical_assistant</code>
+    </footer>
+  </main>
+</body>
+</html>
