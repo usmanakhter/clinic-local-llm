@@ -84,7 +84,7 @@
 
     <h2>1. Who this applies to</h2>
     <p>
-      This policy applies to clinicians and other authorized users of the
+      This policy applies to researchers, students, and other authorized users of the
       Nepal Clinical Assistant app (“the App”). The App is a clinical
       <em>reference and drafting assistance</em> tool — not a medical device for
       diagnosis, treatment decisions, or emergency care.
@@ -93,13 +93,13 @@
     <h2>2. Information stored on your device</h2>
     <p>Depending on how you use the App, the following may be stored locally:</p>
     <ul>
-      <li>Optional patient registry fields (e.g. name, age, phone, WhatsApp, email, notes)</li>
       <li>Local history of searches, interaction checks, guideline lookups, chat turns, and note drafts</li>
       <li>Terms acceptance / consent version records</li>
       <li>Optional on-device language-model files you place on the device</li>
+      <li>Optional patient registry fields</li>
     </ul>
     <p>
-      Local history is kept in clinician-readable (unredacted) form for your use
+      Local history is kept in unredacted form for your use
       on that device. You are responsible for protecting the device and for
       complying with facility and professional privacy rules when entering
       patient information.
@@ -107,10 +107,8 @@
 
     <h2>3. Information we sync (after Terms acceptance)</h2>
     <p>
-      Accepting the in-app Terms (<code>np-terms-1.2</code>) is required to use the
-      App. That acceptance turns <strong>scrubbed activity sync ON</strong>. There is
-      no in-app switch to turn sync off later. If you do not want sync, do not
-      accept the Terms and do not use the App.
+      Accepting the in-app Terms (<code>np-terms-1.2</code>) turns <strong>scrubbed activity sync ON</strong>.
+      Scrubber removes any PII from data and may be used for quality improvement of the app and local llm.
     </p>
     <p><strong>May be synced</strong> (best-effort PII-scrubbed copies):</p>
     <ul>
@@ -136,8 +134,7 @@
       <li>Improve model and product quality</li>
     </ul>
     <p>
-      We do not sell identifiable clinical content to life insurers or employers,
-      and we do not use data for automated diagnosis of individuals.
+      We do not use data for automated diagnosis of individuals or other clinical purpose.
     </p>
 
     <h2>5. PII scrubbing (best effort)</h2>
