@@ -524,7 +524,8 @@ EXTRA_OPD_CONDITIONS: list[dict] = [
         "name": "Hyperlipidemia statin therapy",
         "query": "hyperlipidemia atorvastatin simvastatin",
         "drug_generics": ["Atorvastatin", "Simvastatin", "Rosuvastatin"],
-        "guides": ["guide_074", "guide_105"],
+        # Own guide id — do not overwrite guide_074 (owned by OPD Dyslipidemia).
+        "guides": ["guide_105"],
         "weight": 9,
     },
     {

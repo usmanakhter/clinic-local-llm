@@ -736,13 +736,13 @@
     },
     {
       "id": "guide_074",
-      "title": "Hyperlipidemia statin therapy — Nepal OPD",
-      "title_ne": "Hyperlipidemia statin therapy",
+      "title": "Dyslipidemia — Nepal OPD",
+      "title_ne": "Dyslipidemia",
       "source": "WHO SEARO / Nepal MoHP OPD protocol",
       "topic": "general_medicine",
-      "priority": 9,
-      "chunk_text": "Hyperlipidemia statin therapy Nepal OPD protocol. hyperlipidemia atorvastatin simvastatin. First-line: Atorvastatin, Simvastatin, Rosuvastatin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
-      "chunk_text_ne": "Hyperlipidemia statin therapy — नेपाल OPD उपचार सन्दर्भ।"
+      "priority": 7,
+      "chunk_text": "Dyslipidemia Nepal OPD protocol. statin atorvastatin cardiovascular nepal. First-line: Atorvastatin. Assess red flags and refer when severe. Counsel return if worsening. NNLEM/WHO/MoHP reference — not prescribing authority.",
+      "chunk_text_ne": "Dyslipidemia — नेपाल OPD उपचार सन्दर्भ।"
     },
     {
       "id": "guide_075",

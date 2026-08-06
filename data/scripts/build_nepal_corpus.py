@@ -272,6 +272,20 @@ def _build_opd_checklist(
     }
 
 
+def _condition_disambiguator(name: str) -> str:
+    """Condition keywords appended to drug queries so shared meds still hit the right guide."""
+    head = name.split("—")[0].strip()
+    words = [
+        w
+        for w in re.findall(r"[\w\u0900-\u097F]+", head, flags=re.UNICODE)
+        if len(w) >= 3
+    ]
+    weak = {"acute", "chronic", "mild", "severe", "type", "the", "and"}
+    strong = [w for w in words if w.lower() not in weak]
+    use = strong or words
+    return " ".join(use[:2]) if use else head
+
+
 def _build_eval_queries(checklist: dict, drug_by_id: dict[str, dict]) -> list[dict]:
     rows: list[dict] = []
     n = 0
@@ -283,11 +297,14 @@ def _build_eval_queries(checklist: dict, drug_by_id: dict[str, dict]) -> list[di
             gname = drug_by_id[exp_drugs[0]]["generic_name"]
             short = gname.split("(")[0].strip()
             if gname.startswith("Vitamin D"):
-                query = "Cholecalciferol"
-            elif len(short) >= 10 or "-" in gname or "vitamin" in gname.lower():
-                query = short
+                short = "Cholecalciferol"
+            # Always include condition tokens — bare long generics (Paracetamol,
+            # Amoxicillin, …) otherwise drown guideline top-k across many OPDs.
+            disambig = _condition_disambiguator(cond["name"])
+            if disambig and disambig.lower() not in short.lower():
+                query = f"{short} {disambig}"
             else:
-                query = f"{gname} {cond['name'].split('—')[0].split()[0]}"
+                query = short
         elif exp_guides:
             query = cond["search_query"]
         else:

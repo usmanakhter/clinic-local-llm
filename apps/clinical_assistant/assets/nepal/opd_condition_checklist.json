@@ -11,7 +11,7 @@
       "id": "opd_001",
       "name": "Typhoid fever",
       "weight": 9,
-      "search_query": "Ceftriaxone",
+      "search_query": "Ceftriaxone Typhoid fever",
       "expected_drug_ids": [
         "drug_007",
         "drug_005"
@@ -25,7 +25,7 @@
       "id": "opd_002",
       "name": "Dengue fever",
       "weight": 9,
-      "search_query": "Paracetamol",
+      "search_query": "Paracetamol Dengue fever",
       "expected_drug_ids": [
         "drug_001"
       ],
@@ -38,7 +38,7 @@
       "id": "opd_003",
       "name": "Pulmonary TB",
       "weight": 8,
-      "search_query": "Rifampicin",
+      "search_query": "Rifampicin Pulmonary",
       "expected_drug_ids": [
         "drug_026",
         "drug_027"
@@ -52,7 +52,7 @@
       "id": "opd_004",
       "name": "Snakebite envenomation",
       "weight": 7,
-      "search_query": "Snake Antivenom",
+      "search_query": "Snake Antivenom Snakebite envenomation",
       "expected_drug_ids": [
         "drug_049",
         "drug_046"
@@ -66,7 +66,7 @@
       "id": "opd_005",
       "name": "Acute diarrhea child",
       "weight": 10,
-      "search_query": "Oral Rehydration Salts",
+      "search_query": "Oral Rehydration Salts diarrhea child",
       "expected_drug_ids": [
         "drug_011",
         "drug_012"
@@ -80,7 +80,7 @@
       "id": "opd_006",
       "name": "Malaria falciparum",
       "weight": 7,
-      "search_query": "Artemether-Lumefantrine",
+      "search_query": "Artemether-Lumefantrine Malaria falciparum",
       "expected_drug_ids": [
         "drug_030"
       ],
@@ -93,7 +93,7 @@
       "id": "opd_007",
       "name": "Hypertension",
       "weight": 9,
-      "search_query": "Lisinopril",
+      "search_query": "Lisinopril Hypertension",
       "expected_drug_ids": [
         "drug_094",
         "drug_016",
@@ -110,7 +110,7 @@
       "id": "opd_008",
       "name": "Type 2 diabetes",
       "weight": 9,
-      "search_query": "Metformin Type",
+      "search_query": "Metformin diabetes",
       "expected_drug_ids": [
         "drug_013",
         "drug_014"
@@ -124,7 +124,7 @@
       "id": "opd_009",
       "name": "Asthma",
       "weight": 8,
-      "search_query": "Salbutamol",
+      "search_query": "Salbutamol Asthma",
       "expected_drug_ids": [
         "drug_024",
         "drug_025"
@@ -138,7 +138,7 @@
       "id": "opd_010",
       "name": "Antenatal care",
       "weight": 9,
-      "search_query": "Ferrous Sulfate",
+      "search_query": "Ferrous Sulfate Antenatal care",
       "expected_drug_ids": [
         "drug_038",
         "drug_039",
@@ -153,7 +153,7 @@
       "id": "opd_011",
       "name": "Altitude illness",
       "weight": 5,
-      "search_query": "Dexamethasone",
+      "search_query": "Dexamethasone Altitude illness",
       "expected_drug_ids": [
         "drug_035",
         "drug_059"
@@ -167,7 +167,7 @@
       "id": "opd_012",
       "name": "Anaphylaxis",
       "weight": 6,
-      "search_query": "Adrenaline",
+      "search_query": "Adrenaline Anaphylaxis",
       "expected_drug_ids": [
         "drug_046",
         "drug_058"
@@ -181,7 +181,7 @@
       "id": "opd_013",
       "name": "Soil-transmitted helminths",
       "weight": 7,
-      "search_query": "Albendazole",
+      "search_query": "Albendazole Soil transmitted",
       "expected_drug_ids": [
         "drug_009"
       ],
@@ -194,7 +194,7 @@
       "id": "opd_014",
       "name": "H pylori",
       "weight": 7,
-      "search_query": "Amoxicillin",
+      "search_query": "Amoxicillin pylori",
       "expected_drug_ids": [
         "drug_003",
         "drug_008",
@@ -209,7 +209,7 @@
       "id": "opd_015",
       "name": "Epilepsy",
       "weight": 6,
-      "search_query": "Phenobarbitone",
+      "search_query": "Phenobarbitone Epilepsy",
       "expected_drug_ids": [
         "drug_036",
         "drug_048"
@@ -223,7 +223,7 @@
       "id": "opd_016",
       "name": "Burns",
       "weight": 5,
-      "search_query": "Paracetamol",
+      "search_query": "Paracetamol Burns",
       "expected_drug_ids": [
         "drug_001"
       ],
@@ -236,7 +236,7 @@
       "id": "opd_017",
       "name": "Fever without focus child",
       "weight": 9,
-      "search_query": "Paracetamol",
+      "search_query": "Paracetamol Fever without",
       "expected_drug_ids": [
         "drug_001"
       ],
@@ -249,7 +249,7 @@
       "id": "opd_018",
       "name": "Antibiotic stewardship",
       "weight": 8,
-      "search_query": "Amoxicillin",
+      "search_query": "Amoxicillin Antibiotic stewardship",
       "expected_drug_ids": [
         "drug_003"
       ],
@@ -262,7 +262,7 @@
       "id": "opd_019",
       "name": "Scrub typhus",
       "weight": 8,
-      "search_query": "Hydrocortisone",
+      "search_query": "Hydrocortisone Scrub typhus",
       "expected_drug_ids": [
         "drug_056"
       ],
@@ -275,7 +275,7 @@
       "id": "opd_020",
       "name": "Leptospirosis",
       "weight": 6,
-      "search_query": "Hydrocortisone",
+      "search_query": "Hydrocortisone Leptospirosis",
       "expected_drug_ids": [
         "drug_056",
         "drug_003"
@@ -289,7 +289,7 @@
       "id": "opd_021",
       "name": "COPD exacerbation",
       "weight": 7,
-      "search_query": "Salbutamol",
+      "search_query": "Salbutamol COPD exacerbation",
       "expected_drug_ids": [
         "drug_024",
         "drug_034"
@@ -303,7 +303,7 @@
       "id": "opd_022",
       "name": "UTI uncomplicated",
       "weight": 8,
-      "search_query": "Nitrofurantoin",
+      "search_query": "Nitrofurantoin UTI uncomplicated",
       "expected_drug_ids": [
         "drug_060",
         "drug_003"
@@ -317,7 +317,7 @@
       "id": "opd_023",
       "name": "Neonatal danger signs",
       "weight": 8,
-      "search_query": "Ampicillin",
+      "search_query": "Ampicillin Neonatal danger",
       "expected_drug_ids": [
         "drug_061",
         "drug_057"
@@ -331,7 +331,7 @@
       "id": "opd_024",
       "name": "Postpartum hemorrhage",
       "weight": 7,
-      "search_query": "Oxytocin Postpartum",
+      "search_query": "Oxytocin Postpartum hemorrhage",
       "expected_drug_ids": [
         "drug_044",
         "drug_043"
@@ -345,7 +345,7 @@
       "id": "opd_025",
       "name": "Upper respiratory infection",
       "weight": 10,
-      "search_query": "Paracetamol",
+      "search_query": "Paracetamol Upper respiratory",
       "expected_drug_ids": [
         "drug_001",
         "drug_050"
@@ -359,7 +359,7 @@
       "id": "opd_026",
       "name": "Acute pharyngitis",
       "weight": 8,
-      "search_query": "Amoxicillin",
+      "search_query": "Amoxicillin pharyngitis",
       "expected_drug_ids": [
         "drug_003"
       ],
@@ -372,7 +372,7 @@
       "id": "opd_027",
       "name": "Acute otitis media",
       "weight": 7,
-      "search_query": "Amoxicillin",
+      "search_query": "Amoxicillin otitis media",
       "expected_drug_ids": [
         "drug_003",
         "drug_004"
@@ -386,7 +386,7 @@
       "id": "opd_028",
       "name": "Community pneumonia adult",
       "weight": 8,
-      "search_query": "Amoxicillin-Clavulanate",
+      "search_query": "Amoxicillin-Clavulanate Community pneumonia",
       "expected_drug_ids": [
         "drug_004",
         "drug_005"
@@ -400,7 +400,7 @@
       "id": "opd_029",
       "name": "Viral hepatitis A",
       "weight": 6,
-      "search_query": "Paracetamol",
+      "search_query": "Paracetamol Viral hepatitis",
       "expected_drug_ids": [
         "drug_001"
       ],
@@ -413,7 +413,7 @@
       "id": "opd_030",
       "name": "GERD dyspepsia",
       "weight": 8,
-      "search_query": "Omeprazole",
+      "search_query": "Omeprazole GERD dyspepsia",
       "expected_drug_ids": [
         "drug_032",
         "drug_055"
@@ -427,7 +427,7 @@
       "id": "opd_031",
       "name": "Iron deficiency anemia",
       "weight": 9,
-      "search_query": "Ferrous Sulfate",
+      "search_query": "Ferrous Sulfate Iron deficiency",
       "expected_drug_ids": [
         "drug_038",
         "drug_039"
@@ -441,7 +441,7 @@
       "id": "opd_032",
       "name": "Hypothyroidism",
       "weight": 7,
-      "search_query": "Levothyroxine",
+      "search_query": "Levothyroxine Hypothyroidism",
       "expected_drug_ids": [
         "drug_062"
       ],
@@ -454,7 +454,7 @@
       "id": "opd_033",
       "name": "Osteoarthritis",
       "weight": 8,
-      "search_query": "Paracetamol",
+      "search_query": "Paracetamol Osteoarthritis",
       "expected_drug_ids": [
         "drug_001",
         "drug_002"
@@ -468,7 +468,7 @@
       "id": "opd_034",
       "name": "Low back pain",
       "weight": 8,
-      "search_query": "Paracetamol",
+      "search_query": "Paracetamol Low back",
       "expected_drug_ids": [
         "drug_001",
         "drug_048"
@@ -482,7 +482,7 @@
       "id": "opd_035",
       "name": "Gout acute",
       "weight": 5,
-      "search_query": "Colchicine",
+      "search_query": "Colchicine Gout",
       "expected_drug_ids": [
         "drug_063",
         "drug_002"
@@ -496,7 +496,7 @@
       "id": "opd_036",
       "name": "Vitamin D deficiency",
       "weight": 7,
-      "search_query": "Cholecalciferol",
+      "search_query": "Cholecalciferol Vitamin deficiency",
       "expected_drug_ids": [
         "drug_041",
         "drug_040"
@@ -510,7 +510,7 @@
       "id": "opd_037",
       "name": "Cholera",
       "weight": 5,
-      "search_query": "Oral Rehydration Salts",
+      "search_query": "Oral Rehydration Salts Cholera",
       "expected_drug_ids": [
         "drug_011",
         "drug_059"
@@ -524,7 +524,7 @@
       "id": "opd_038",
       "name": "Shigella dysentery",
       "weight": 6,
-      "search_query": "Ciprofloxacin",
+      "search_query": "Ciprofloxacin Shigella dysentery",
       "expected_drug_ids": [
         "drug_006",
         "drug_008"
@@ -538,7 +538,7 @@
       "id": "opd_039",
       "name": "Giardiasis",
       "weight": 6,
-      "search_query": "Metronidazole",
+      "search_query": "Metronidazole Giardiasis",
       "expected_drug_ids": [
         "drug_008"
       ],
@@ -551,7 +551,7 @@
       "id": "opd_040",
       "name": "Scabies",
       "weight": 6,
-      "search_query": "Permethrin 5%",
+      "search_query": "Permethrin 5% Scabies",
       "expected_drug_ids": [
         "drug_064"
       ],
@@ -564,7 +564,7 @@
       "id": "opd_041",
       "name": "Fungal skin infection",
       "weight": 7,
-      "search_query": "Clotrimazole",
+      "search_query": "Clotrimazole Fungal skin",
       "expected_drug_ids": [
         "drug_065"
       ],
@@ -577,7 +577,7 @@
       "id": "opd_042",
       "name": "Cellulitis",
       "weight": 6,
-      "search_query": "Amoxicillin-Clavulanate",
+      "search_query": "Amoxicillin-Clavulanate Cellulitis",
       "expected_drug_ids": [
         "drug_004",
         "drug_066"
@@ -591,7 +591,7 @@
       "id": "opd_043",
       "name": "Conjunctivitis bacterial",
       "weight": 7,
-      "search_query": "Chloramphenicol Eye Drops",
+      "search_query": "Chloramphenicol Eye Drops Conjunctivitis bacterial",
       "expected_drug_ids": [
         "drug_067"
       ],
@@ -604,7 +604,7 @@
       "id": "opd_044",
       "name": "Dental abscess",
       "weight": 6,
-      "search_query": "Amoxicillin",
+      "search_query": "Amoxicillin Dental abscess",
       "expected_drug_ids": [
         "drug_003",
         "drug_008"
@@ -618,7 +618,7 @@
       "id": "opd_045",
       "name": "Migraine",
       "weight": 7,
-      "search_query": "Paracetamol",
+      "search_query": "Paracetamol Migraine",
       "expected_drug_ids": [
         "drug_001",
         "drug_002"
@@ -632,7 +632,7 @@
       "id": "opd_046",
       "name": "Depression mhGAP",
       "weight": 6,
-      "search_query": "Fluoxetine",
+      "search_query": "Fluoxetine Depression mhGAP",
       "expected_drug_ids": [
         "drug_068"
       ],
@@ -645,7 +645,7 @@
       "id": "opd_047",
       "name": "Anxiety disorder",
       "weight": 6,
-      "search_query": "Diazepam Anxiety",
+      "search_query": "Diazepam Anxiety disorder",
       "expected_drug_ids": [
         "drug_048"
       ],
@@ -658,7 +658,7 @@
       "id": "opd_048",
       "name": "STI syndromic",
       "weight": 5,
-      "search_query": "Azithromycin",
+      "search_query": "Azithromycin STI syndromic",
       "expected_drug_ids": [
         "drug_005",
         "drug_007"
@@ -672,7 +672,7 @@
       "id": "opd_049",
       "name": "Herpes zoster",
       "weight": 5,
-      "search_query": "Acyclovir Herpes",
+      "search_query": "Acyclovir Herpes zoster",
       "expected_drug_ids": [
         "drug_069"
       ],
@@ -685,7 +685,7 @@
       "id": "opd_050",
       "name": "Varicella",
       "weight": 6,
-      "search_query": "Paracetamol",
+      "search_query": "Paracetamol Varicella",
       "expected_drug_ids": [
         "drug_001"
       ],
@@ -698,7 +698,7 @@
       "id": "opd_051",
       "name": "Measles",
       "weight": 6,
-      "search_query": "Paracetamol",
+      "search_query": "Paracetamol Measles",
       "expected_drug_ids": [
         "drug_001",
         "drug_070"
@@ -712,7 +712,7 @@
       "id": "opd_052",
       "name": "Rabies PEP",
       "weight": 6,
-      "search_query": "Rabies Vaccine",
+      "search_query": "Rabies Vaccine Rabies PEP",
       "expected_drug_ids": [
         "drug_071"
       ],
@@ -725,7 +725,7 @@
       "id": "opd_053",
       "name": "Tetanus prophylaxis",
       "weight": 5,
-      "search_query": "Tetanus Toxoid Vaccine",
+      "search_query": "Tetanus Toxoid Vaccine Tetanus prophylaxis",
       "expected_drug_ids": [
         "drug_072"
       ],
@@ -738,7 +738,7 @@
       "id": "opd_054",
       "name": "Animal bite non-snake",
       "weight": 7,
-      "search_query": "Amoxicillin-Clavulanate",
+      "search_query": "Amoxicillin-Clavulanate Animal bite",
       "expected_drug_ids": [
         "drug_004",
         "drug_071"
@@ -752,7 +752,7 @@
       "id": "opd_055",
       "name": "Organophosphate poisoning",
       "weight": 4,
-      "search_query": "Atropine Organophosphate",
+      "search_query": "Atropine Organophosphate poisoning",
       "expected_drug_ids": [
         "drug_047",
         "drug_073"
@@ -766,7 +766,7 @@
       "id": "opd_056",
       "name": "Paracetamol overdose",
       "weight": 4,
-      "search_query": "N-Acetylcysteine",
+      "search_query": "N-Acetylcysteine Paracetamol overdose",
       "expected_drug_ids": [
         "drug_074"
       ],
@@ -779,7 +779,7 @@
       "id": "opd_057",
       "name": "Pre-eclampsia",
       "weight": 7,
-      "search_query": "Magnesium Sulfate",
+      "search_query": "Magnesium Sulfate Pre eclampsia",
       "expected_drug_ids": [
         "drug_045",
         "drug_016"
@@ -793,7 +793,7 @@
       "id": "opd_058",
       "name": "Eclampsia",
       "weight": 6,
-      "search_query": "Magnesium Sulfate",
+      "search_query": "Magnesium Sulfate Eclampsia",
       "expected_drug_ids": [
         "drug_045"
       ],
@@ -806,7 +806,7 @@
       "id": "opd_059",
       "name": "Family planning OCP",
       "weight": 7,
-      "search_query": "Ethinylestradiol-Levonorgestrel",
+      "search_query": "Ethinylestradiol-Levonorgestrel Family planning",
       "expected_drug_ids": [
         "drug_075"
       ],
@@ -819,7 +819,7 @@
       "id": "opd_060",
       "name": "Emergency contraception",
       "weight": 6,
-      "search_query": "Levonorgestrel",
+      "search_query": "Levonorgestrel Emergency contraception",
       "expected_drug_ids": [
         "drug_076"
       ],
@@ -832,7 +832,7 @@
       "id": "opd_061",
       "name": "Menorrhagia",
       "weight": 6,
-      "search_query": "Tranexamic Acid",
+      "search_query": "Tranexamic Acid Menorrhagia",
       "expected_drug_ids": [
         "drug_042"
       ],
@@ -845,7 +845,7 @@
       "id": "opd_062",
       "name": "Benign prostatic hyperplasia",
       "weight": 5,
-      "search_query": "Tamsulosin",
+      "search_query": "Tamsulosin Benign prostatic",
       "expected_drug_ids": [
         "drug_077",
         "drug_078"
@@ -859,7 +859,7 @@
       "id": "opd_063",
       "name": "Renal colic",
       "weight": 5,
-      "search_query": "Ibuprofen Renal",
+      "search_query": "Ibuprofen Renal colic",
       "expected_drug_ids": [
         "drug_002",
         "drug_001"
@@ -873,7 +873,7 @@
       "id": "opd_064",
       "name": "UTI pregnancy",
       "weight": 7,
-      "search_query": "Amoxicillin",
+      "search_query": "Amoxicillin UTI pregnancy",
       "expected_drug_ids": [
         "drug_003",
         "drug_061"
@@ -898,7 +898,7 @@
       "id": "opd_066",
       "name": "Acute malnutrition child",
       "weight": 7,
-      "search_query": "Oral Rehydration Salts",
+      "search_query": "Oral Rehydration Salts malnutrition child",
       "expected_drug_ids": [
         "drug_011"
       ],
@@ -911,7 +911,7 @@
       "id": "opd_067",
       "name": "Kala-azar visceral leishmaniasis",
       "weight": 4,
-      "search_query": "Liposomal Amphotericin B",
+      "search_query": "Liposomal Amphotericin B Kala azar",
       "expected_drug_ids": [
         "drug_079"
       ],
@@ -924,7 +924,7 @@
       "id": "opd_068",
       "name": "Filariasis",
       "weight": 4,
-      "search_query": "Diethylcarbamazine",
+      "search_query": "Diethylcarbamazine Filariasis",
       "expected_drug_ids": [
         "drug_080"
       ],
@@ -937,7 +937,7 @@
       "id": "opd_069",
       "name": "Leprosy",
       "weight": 4,
-      "search_query": "Rifampicin",
+      "search_query": "Rifampicin Leprosy",
       "expected_drug_ids": [
         "drug_026",
         "drug_081"
@@ -951,7 +951,7 @@
       "id": "opd_070",
       "name": "Peptic ulcer bleeding risk",
       "weight": 6,
-      "search_query": "Omeprazole",
+      "search_query": "Omeprazole Peptic ulcer",
       "expected_drug_ids": [
         "drug_032",
         "drug_055"
@@ -965,7 +965,7 @@
       "id": "opd_071",
       "name": "Heart failure edema",
       "weight": 6,
-      "search_query": "Furosemide",
+      "search_query": "Furosemide Heart failure",
       "expected_drug_ids": [
         "drug_020",
         "drug_017"
@@ -979,7 +979,7 @@
       "id": "opd_072",
       "name": "Atrial fibrillation anticoag",
       "weight": 5,
-      "search_query": "Warfarin Atrial",
+      "search_query": "Warfarin Atrial fibrillation",
       "expected_drug_ids": [
         "drug_023",
         "drug_019"
@@ -993,7 +993,7 @@
       "id": "opd_073",
       "name": "ACS antiplatelet",
       "weight": 5,
-      "search_query": "Aspirin ACS",
+      "search_query": "Aspirin ACS antiplatelet",
       "expected_drug_ids": [
         "drug_021",
         "drug_022"
@@ -1007,7 +1007,7 @@
       "id": "opd_074",
       "name": "Dyslipidemia",
       "weight": 7,
-      "search_query": "Atorvastatin",
+      "search_query": "Atorvastatin Dyslipidemia",
       "expected_drug_ids": [
         "drug_082"
       ],
@@ -1020,7 +1020,7 @@
       "id": "opd_075",
       "name": "Chronic kidney disease HTN",
       "weight": 6,
-      "search_query": "Enalapril Chronic",
+      "search_query": "Enalapril kidney disease",
       "expected_drug_ids": [
         "drug_017",
         "drug_018"
@@ -1048,7 +1048,7 @@
       "id": "opd_077",
       "name": "Travelers diarrhea adult",
       "weight": 5,
-      "search_query": "Loperamide",
+      "search_query": "Loperamide Travelers diarrhea",
       "expected_drug_ids": [
         "drug_085",
         "drug_011"
@@ -1062,7 +1062,7 @@
       "id": "opd_078",
       "name": "Heat exhaustion",
       "weight": 5,
-      "search_query": "Oral Rehydration Salts",
+      "search_query": "Oral Rehydration Salts Heat exhaustion",
       "expected_drug_ids": [
         "drug_011",
         "drug_059"
@@ -1076,7 +1076,7 @@
       "id": "opd_079",
       "name": "Impacted ear wax",
       "weight": 5,
-      "search_query": "Cerumenolytic Drops",
+      "search_query": "Cerumenolytic Drops Impacted ear",
       "expected_drug_ids": [
         "drug_086"
       ],
@@ -1089,7 +1089,7 @@
       "id": "opd_080",
       "name": "Allergic rhinitis",
       "weight": 7,
-      "search_query": "Cetirizine",
+      "search_query": "Cetirizine Allergic rhinitis",
       "expected_drug_ids": [
         "drug_050"
       ],
@@ -1102,7 +1102,7 @@
       "id": "opd_081",
       "name": "Urticaria",
       "weight": 6,
-      "search_query": "Cetirizine",
+      "search_query": "Cetirizine Urticaria",
       "expected_drug_ids": [
         "drug_050",
         "drug_051"
@@ -1116,7 +1116,7 @@
       "id": "opd_082",
       "name": "Pneumonia child IMCI",
       "weight": 8,
-      "search_query": "Amoxicillin",
+      "search_query": "Amoxicillin Pneumonia child",
       "expected_drug_ids": [
         "drug_003"
       ],
@@ -1129,7 +1129,7 @@
       "id": "opd_083",
       "name": "Severe malaria",
       "weight": 5,
-      "search_query": "Artesunate",
+      "search_query": "Artesunate malaria",
       "expected_drug_ids": [
         "drug_087"
       ],
@@ -1142,7 +1142,7 @@
       "id": "opd_084",
       "name": "P vivax radical cure",
       "weight": 5,
-      "search_query": "Chloroquine",
+      "search_query": "Chloroquine vivax radical",
       "expected_drug_ids": [
         "drug_031",
         "drug_088"
@@ -1156,7 +1156,7 @@
       "id": "opd_085",
       "name": "Status epilepticus",
       "weight": 5,
-      "search_query": "Diazepam Status",
+      "search_query": "Diazepam Status epilepticus",
       "expected_drug_ids": [
         "drug_048"
       ],
@@ -1169,7 +1169,7 @@
       "id": "opd_086",
       "name": "Diabetic foot infection",
       "weight": 5,
-      "search_query": "Amoxicillin-Clavulanate",
+      "search_query": "Amoxicillin-Clavulanate Diabetic foot",
       "expected_drug_ids": [
         "drug_004",
         "drug_008"
@@ -1183,7 +1183,7 @@
       "id": "opd_087",
       "name": "Tobacco cessation",
       "weight": 6,
-      "search_query": "Nicotine Replacement Gum",
+      "search_query": "Nicotine Replacement Gum Tobacco cessation",
       "expected_drug_ids": [
         "drug_089"
       ],
@@ -1196,7 +1196,7 @@
       "id": "opd_088",
       "name": "Postnatal care",
       "weight": 8,
-      "search_query": "Ferrous Sulfate",
+      "search_query": "Ferrous Sulfate Postnatal care",
       "expected_drug_ids": [
         "drug_038",
         "drug_039"
@@ -1210,7 +1210,7 @@
       "id": "opd_089",
       "name": "Adult dehydration",
       "weight": 7,
-      "search_query": "Oral Rehydration Salts",
+      "search_query": "Oral Rehydration Salts Adult dehydration",
       "expected_drug_ids": [
         "drug_011"
       ],
@@ -1223,7 +1223,7 @@
       "id": "opd_090",
       "name": "Worm infestation child",
       "weight": 6,
-      "search_query": "Mebendazole",
+      "search_query": "Mebendazole Worm infestation",
       "expected_drug_ids": [
         "drug_090"
       ],
@@ -1236,7 +1236,7 @@
       "id": "opd_091",
       "name": "Sinusitis bacterial",
       "weight": 6,
-      "search_query": "Amoxicillin-Clavulanate",
+      "search_query": "Amoxicillin-Clavulanate Sinusitis bacterial",
       "expected_drug_ids": [
         "drug_004"
       ],
@@ -1249,7 +1249,7 @@
       "id": "opd_092",
       "name": "Acute bronchitis",
       "weight": 7,
-      "search_query": "Paracetamol",
+      "search_query": "Paracetamol bronchitis",
       "expected_drug_ids": [
         "drug_001"
       ],
@@ -1262,7 +1262,7 @@
       "id": "opd_093",
       "name": "Pelvic inflammatory disease",
       "weight": 4,
-      "search_query": "Ceftriaxone",
+      "search_query": "Ceftriaxone Pelvic inflammatory",
       "expected_drug_ids": [
         "drug_007",
         "drug_056",
@@ -1277,7 +1277,7 @@
       "id": "opd_094",
       "name": "Hepatitis E pregnancy",
       "weight": 4,
-      "search_query": "Paracetamol",
+      "search_query": "Paracetamol Hepatitis pregnancy",
       "expected_drug_ids": [
         "drug_001"
       ],
@@ -1290,7 +1290,7 @@
       "id": "opd_095",
       "name": "Iodine deficiency goiter",
       "weight": 5,
-      "search_query": "Potassium Iodide",
+      "search_query": "Potassium Iodide Iodine deficiency",
       "expected_drug_ids": [
         "drug_091"
       ],
@@ -1303,7 +1303,7 @@
       "id": "opd_096",
       "name": "Glaucoma initial",
       "weight": 4,
-      "search_query": "Timolol Eye Drops",
+      "search_query": "Timolol Eye Drops Glaucoma initial",
       "expected_drug_ids": [
         "drug_092"
       ],
@@ -1316,7 +1316,7 @@
       "id": "opd_097",
       "name": "Trachoma",
       "weight": 4,
-      "search_query": "Azithromycin",
+      "search_query": "Azithromycin Trachoma",
       "expected_drug_ids": [
         "drug_005"
       ],
@@ -1329,7 +1329,7 @@
       "id": "opd_098",
       "name": "Acute pain ladder",
       "weight": 8,
-      "search_query": "Paracetamol",
+      "search_query": "Paracetamol pain ladder",
       "expected_drug_ids": [
         "drug_001",
         "drug_093"
@@ -1343,7 +1343,7 @@
       "id": "opd_099",
       "name": "Insulin initiation",
       "weight": 6,
-      "search_query": "Insulin Human",
+      "search_query": "Insulin Human Insulin initiation",
       "expected_drug_ids": [
         "drug_015"
       ],
@@ -1356,7 +1356,7 @@
       "id": "opd_100",
       "name": "Drug-resistant TB refer",
       "weight": 3,
-      "search_query": "Rifampicin",
+      "search_query": "Rifampicin Drug resistant",
       "expected_drug_ids": [
         "drug_026"
       ],
@@ -1369,7 +1369,7 @@
       "id": "opd_101",
       "name": "Hypertension ACE inhibitor",
       "weight": 10,
-      "search_query": "Lisinopril",
+      "search_query": "Lisinopril Hypertension ACE",
       "expected_drug_ids": [
         "drug_094",
         "drug_017",
@@ -1385,7 +1385,7 @@
       "id": "opd_102",
       "name": "Resistant hypertension",
       "weight": 7,
-      "search_query": "Spironolactone",
+      "search_query": "Spironolactone Resistant hypertension",
       "expected_drug_ids": [
         "drug_099",
         "drug_097",
@@ -1400,7 +1400,7 @@
       "id": "opd_103",
       "name": "Heart failure reduced EF",
       "weight": 8,
-      "search_query": "Bisoprolol",
+      "search_query": "Bisoprolol Heart failure",
       "expected_drug_ids": [
         "drug_100",
         "drug_017",
@@ -1416,7 +1416,7 @@
       "id": "opd_104",
       "name": "Stable angina",
       "weight": 7,
-      "search_query": "Glyceryl Trinitrate",
+      "search_query": "Glyceryl Trinitrate Stable angina",
       "expected_drug_ids": [
         "drug_111",
         "drug_110",
@@ -1431,7 +1431,7 @@
       "id": "opd_105",
       "name": "Atrial fibrillation",
       "weight": 7,
-      "search_query": "Metoprolol",
+      "search_query": "Metoprolol Atrial fibrillation",
       "expected_drug_ids": [
         "drug_101",
         "drug_112",
@@ -1447,14 +1447,13 @@
       "id": "opd_106",
       "name": "Hyperlipidemia statin therapy",
       "weight": 9,
-      "search_query": "Atorvastatin",
+      "search_query": "Atorvastatin Hyperlipidemia statin",
       "expected_drug_ids": [
         "drug_082",
         "drug_107",
         "drug_108"
       ],
       "expected_guideline_ids": [
-        "guide_074",
         "guide_105"
       ],
       "covered": true
@@ -1463,7 +1462,7 @@
       "id": "opd_107",
       "name": "Gestational hypertension",
       "weight": 8,
-      "search_query": "Methyldopa",
+      "search_query": "Methyldopa Gestational hypertension",
       "expected_drug_ids": [
         "drug_144",
         "drug_145",
@@ -1478,7 +1477,7 @@
       "id": "opd_108",
       "name": "Insulin therapy T2DM",
       "weight": 8,
-      "search_query": "Insulin Glargine",
+      "search_query": "Insulin Glargine Insulin therapy",
       "expected_drug_ids": [
         "drug_136",
         "drug_015",
@@ -1494,7 +1493,7 @@
       "id": "opd_109",
       "name": "Diabetic neuropathy",
       "weight": 6,
-      "search_query": "Pregabalin",
+      "search_query": "Pregabalin Diabetic neuropathy",
       "expected_drug_ids": [
         "drug_140",
         "drug_126"
@@ -1508,7 +1507,7 @@
       "id": "opd_110",
       "name": "Vulvovaginal candidiasis",
       "weight": 7,
-      "search_query": "Fluconazole",
+      "search_query": "Fluconazole Vulvovaginal candidiasis",
       "expected_drug_ids": [
         "drug_120",
         "drug_121"
@@ -1522,7 +1521,7 @@
       "id": "opd_111",
       "name": "H pylori clarithromycin",
       "weight": 7,
-      "search_query": "Clarithromycin",
+      "search_query": "Clarithromycin pylori clarithromycin",
       "expected_drug_ids": [
         "drug_115",
         "drug_003",
@@ -1537,7 +1536,7 @@
       "id": "opd_112",
       "name": "Typhoid cefixime",
       "weight": 7,
-      "search_query": "Cefixime Typhoid",
+      "search_query": "Cefixime Typhoid cefixime",
       "expected_drug_ids": [
         "drug_116",
         "drug_007",
@@ -1552,7 +1551,7 @@
       "id": "opd_113",
       "name": "Scabies ivermectin",
       "weight": 6,
-      "search_query": "Ivermectin",
+      "search_query": "Ivermectin Scabies ivermectin",
       "expected_drug_ids": [
         "drug_146",
         "drug_064"
@@ -1566,7 +1565,7 @@
       "id": "opd_114",
       "name": "Asthma montelukast",
       "weight": 7,
-      "search_query": "Montelukast",
+      "search_query": "Montelukast Asthma montelukast",
       "expected_drug_ids": [
         "drug_129",
         "drug_024",
@@ -1581,7 +1580,7 @@
       "id": "opd_115",
       "name": "COPD bronchodilator",
       "weight": 7,
-      "search_query": "Ipratropium Bromide",
+      "search_query": "Ipratropium Bromide COPD bronchodilator",
       "expected_drug_ids": [
         "drug_130",
         "drug_024",
@@ -1596,7 +1595,7 @@
       "id": "opd_116",
       "name": "Epilepsy valproate",
       "weight": 6,
-      "search_query": "Sodium Valproate",
+      "search_query": "Sodium Valproate Epilepsy valproate",
       "expected_drug_ids": [
         "drug_122",
         "drug_037",
@@ -1611,7 +1610,7 @@
       "id": "opd_117",
       "name": "Depression SSRI",
       "weight": 6,
-      "search_query": "Sertraline",
+      "search_query": "Sertraline Depression SSRI",
       "expected_drug_ids": [
         "drug_125",
         "drug_068"
@@ -1625,7 +1624,7 @@
       "id": "opd_118",
       "name": "Acute psychosis",
       "weight": 5,
-      "search_query": "Haloperidol",
+      "search_query": "Haloperidol psychosis",
       "expected_drug_ids": [
         "drug_127",
         "drug_128"
@@ -1639,7 +1638,7 @@
       "id": "opd_119",
       "name": "Gout allopurinol",
       "weight": 5,
-      "search_query": "Allopurinol",
+      "search_query": "Allopurinol Gout allopurinol",
       "expected_drug_ids": [
         "drug_137",
         "drug_063"
@@ -1653,7 +1652,7 @@
       "id": "opd_120",
       "name": "B12 deficiency",
       "weight": 6,
-      "search_query": "Vitamin B12",
+      "search_query": "Vitamin B12 B12 deficiency",
       "expected_drug_ids": [
         "drug_141",
         "drug_013"

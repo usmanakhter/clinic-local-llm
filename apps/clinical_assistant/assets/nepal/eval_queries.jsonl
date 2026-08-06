@@ -1,123 +1,123 @@
-{"id": "eval_001", "query": "Ceftriaxone", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_007", "drug_005"], "expected_guideline_ids": ["guide_001"]}
-{"id": "eval_002", "query": "Paracetamol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001"], "expected_guideline_ids": ["guide_002"]}
-{"id": "eval_003", "query": "Rifampicin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_026", "drug_027"], "expected_guideline_ids": ["guide_003"]}
-{"id": "eval_004", "query": "Snake Antivenom", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_049", "drug_046"], "expected_guideline_ids": ["guide_004"]}
-{"id": "eval_005", "query": "Oral Rehydration Salts", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_011", "drug_012"], "expected_guideline_ids": ["guide_005"]}
-{"id": "eval_006", "query": "Artemether-Lumefantrine", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_030"], "expected_guideline_ids": ["guide_006"]}
-{"id": "eval_007", "query": "Lisinopril", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_094", "drug_016", "drug_017", "drug_018", "drug_097"], "expected_guideline_ids": ["guide_007"]}
-{"id": "eval_008", "query": "Metformin Type", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_013", "drug_014"], "expected_guideline_ids": ["guide_008"]}
-{"id": "eval_009", "query": "Salbutamol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_024", "drug_025"], "expected_guideline_ids": ["guide_009"]}
-{"id": "eval_010", "query": "Ferrous Sulfate", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_038", "drug_039", "drug_040"], "expected_guideline_ids": ["guide_010"]}
-{"id": "eval_011", "query": "Dexamethasone", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_035", "drug_059"], "expected_guideline_ids": ["guide_011"]}
-{"id": "eval_012", "query": "Adrenaline", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_046", "drug_058"], "expected_guideline_ids": ["guide_012"]}
-{"id": "eval_013", "query": "Albendazole", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_009"], "expected_guideline_ids": ["guide_013"]}
-{"id": "eval_014", "query": "Amoxicillin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_003", "drug_008", "drug_032"], "expected_guideline_ids": ["guide_014"]}
-{"id": "eval_015", "query": "Phenobarbitone", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_036", "drug_048"], "expected_guideline_ids": ["guide_015"]}
-{"id": "eval_016", "query": "Paracetamol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001"], "expected_guideline_ids": ["guide_016"]}
-{"id": "eval_017", "query": "Paracetamol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001"], "expected_guideline_ids": ["guide_017"]}
-{"id": "eval_018", "query": "Amoxicillin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_003"], "expected_guideline_ids": ["guide_018"]}
-{"id": "eval_019", "query": "Hydrocortisone", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_056"], "expected_guideline_ids": ["guide_019"]}
-{"id": "eval_020", "query": "Hydrocortisone", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_056", "drug_003"], "expected_guideline_ids": ["guide_020"]}
-{"id": "eval_021", "query": "Salbutamol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_024", "drug_034"], "expected_guideline_ids": ["guide_021"]}
-{"id": "eval_022", "query": "Nitrofurantoin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_060", "drug_003"], "expected_guideline_ids": ["guide_022"]}
-{"id": "eval_023", "query": "Ampicillin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_061", "drug_057"], "expected_guideline_ids": ["guide_023"]}
-{"id": "eval_024", "query": "Oxytocin Postpartum", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_044", "drug_043"], "expected_guideline_ids": ["guide_024"]}
-{"id": "eval_025", "query": "Paracetamol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001", "drug_050"], "expected_guideline_ids": ["guide_025"]}
-{"id": "eval_026", "query": "Amoxicillin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_003"], "expected_guideline_ids": ["guide_026"]}
-{"id": "eval_027", "query": "Amoxicillin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_003", "drug_004"], "expected_guideline_ids": ["guide_027"]}
-{"id": "eval_028", "query": "Amoxicillin-Clavulanate", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_004", "drug_005"], "expected_guideline_ids": ["guide_028"]}
-{"id": "eval_029", "query": "Paracetamol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001"], "expected_guideline_ids": ["guide_029"]}
-{"id": "eval_030", "query": "Omeprazole", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_032", "drug_055"], "expected_guideline_ids": ["guide_030"]}
-{"id": "eval_031", "query": "Ferrous Sulfate", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_038", "drug_039"], "expected_guideline_ids": ["guide_031"]}
-{"id": "eval_032", "query": "Levothyroxine", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_062"], "expected_guideline_ids": ["guide_032"]}
-{"id": "eval_033", "query": "Paracetamol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001", "drug_002"], "expected_guideline_ids": ["guide_033"]}
-{"id": "eval_034", "query": "Paracetamol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001", "drug_048"], "expected_guideline_ids": ["guide_034"]}
-{"id": "eval_035", "query": "Colchicine", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_063", "drug_002"], "expected_guideline_ids": ["guide_035"]}
-{"id": "eval_036", "query": "Cholecalciferol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_041", "drug_040"], "expected_guideline_ids": ["guide_036"]}
-{"id": "eval_037", "query": "Oral Rehydration Salts", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_011", "drug_059"], "expected_guideline_ids": ["guide_037"]}
-{"id": "eval_038", "query": "Ciprofloxacin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_006", "drug_008"], "expected_guideline_ids": ["guide_038"]}
-{"id": "eval_039", "query": "Metronidazole", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_008"], "expected_guideline_ids": ["guide_039"]}
-{"id": "eval_040", "query": "Permethrin 5%", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_064"], "expected_guideline_ids": ["guide_040"]}
-{"id": "eval_041", "query": "Clotrimazole", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_065"], "expected_guideline_ids": ["guide_041"]}
-{"id": "eval_042", "query": "Amoxicillin-Clavulanate", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_004", "drug_066"], "expected_guideline_ids": ["guide_042"]}
-{"id": "eval_043", "query": "Chloramphenicol Eye Drops", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_067"], "expected_guideline_ids": ["guide_043"]}
-{"id": "eval_044", "query": "Amoxicillin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_003", "drug_008"], "expected_guideline_ids": ["guide_044"]}
-{"id": "eval_045", "query": "Paracetamol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001", "drug_002"], "expected_guideline_ids": ["guide_045"]}
-{"id": "eval_046", "query": "Fluoxetine", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_068"], "expected_guideline_ids": ["guide_046"]}
-{"id": "eval_047", "query": "Diazepam Anxiety", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_048"], "expected_guideline_ids": ["guide_047"]}
-{"id": "eval_048", "query": "Azithromycin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_005", "drug_007"], "expected_guideline_ids": ["guide_048"]}
-{"id": "eval_049", "query": "Acyclovir Herpes", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_069"], "expected_guideline_ids": ["guide_049"]}
-{"id": "eval_050", "query": "Paracetamol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001"], "expected_guideline_ids": ["guide_050"]}
-{"id": "eval_051", "query": "Paracetamol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001", "drug_070"], "expected_guideline_ids": ["guide_051"]}
-{"id": "eval_052", "query": "Rabies Vaccine", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_071"], "expected_guideline_ids": ["guide_052"]}
-{"id": "eval_053", "query": "Tetanus Toxoid Vaccine", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_072"], "expected_guideline_ids": ["guide_053"]}
-{"id": "eval_054", "query": "Amoxicillin-Clavulanate", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_004", "drug_071"], "expected_guideline_ids": ["guide_054"]}
-{"id": "eval_055", "query": "Atropine Organophosphate", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_047", "drug_073"], "expected_guideline_ids": ["guide_055"]}
-{"id": "eval_056", "query": "N-Acetylcysteine", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_074"], "expected_guideline_ids": ["guide_056"]}
-{"id": "eval_057", "query": "Magnesium Sulfate", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_045", "drug_016"], "expected_guideline_ids": ["guide_057"]}
-{"id": "eval_058", "query": "Magnesium Sulfate", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_045"], "expected_guideline_ids": ["guide_058"]}
-{"id": "eval_059", "query": "Ethinylestradiol-Levonorgestrel", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_075"], "expected_guideline_ids": ["guide_059"]}
-{"id": "eval_060", "query": "Levonorgestrel", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_076"], "expected_guideline_ids": ["guide_060"]}
-{"id": "eval_061", "query": "Tranexamic Acid", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_042"], "expected_guideline_ids": ["guide_061"]}
-{"id": "eval_062", "query": "Tamsulosin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_077", "drug_078"], "expected_guideline_ids": ["guide_062"]}
-{"id": "eval_063", "query": "Ibuprofen Renal", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_002", "drug_001"], "expected_guideline_ids": ["guide_063"]}
-{"id": "eval_064", "query": "Amoxicillin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_003", "drug_061"], "expected_guideline_ids": ["guide_064"]}
+{"id": "eval_001", "query": "Ceftriaxone Typhoid fever", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_007", "drug_005"], "expected_guideline_ids": ["guide_001"]}
+{"id": "eval_002", "query": "Paracetamol Dengue fever", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001"], "expected_guideline_ids": ["guide_002"]}
+{"id": "eval_003", "query": "Rifampicin Pulmonary", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_026", "drug_027"], "expected_guideline_ids": ["guide_003"]}
+{"id": "eval_004", "query": "Snake Antivenom Snakebite envenomation", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_049", "drug_046"], "expected_guideline_ids": ["guide_004"]}
+{"id": "eval_005", "query": "Oral Rehydration Salts diarrhea child", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_011", "drug_012"], "expected_guideline_ids": ["guide_005"]}
+{"id": "eval_006", "query": "Artemether-Lumefantrine Malaria falciparum", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_030"], "expected_guideline_ids": ["guide_006"]}
+{"id": "eval_007", "query": "Lisinopril Hypertension", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_094", "drug_016", "drug_017", "drug_018", "drug_097"], "expected_guideline_ids": ["guide_007"]}
+{"id": "eval_008", "query": "Metformin diabetes", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_013", "drug_014"], "expected_guideline_ids": ["guide_008"]}
+{"id": "eval_009", "query": "Salbutamol Asthma", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_024", "drug_025"], "expected_guideline_ids": ["guide_009"]}
+{"id": "eval_010", "query": "Ferrous Sulfate Antenatal care", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_038", "drug_039", "drug_040"], "expected_guideline_ids": ["guide_010"]}
+{"id": "eval_011", "query": "Dexamethasone Altitude illness", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_035", "drug_059"], "expected_guideline_ids": ["guide_011"]}
+{"id": "eval_012", "query": "Adrenaline Anaphylaxis", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_046", "drug_058"], "expected_guideline_ids": ["guide_012"]}
+{"id": "eval_013", "query": "Albendazole Soil transmitted", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_009"], "expected_guideline_ids": ["guide_013"]}
+{"id": "eval_014", "query": "Amoxicillin pylori", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_003", "drug_008", "drug_032"], "expected_guideline_ids": ["guide_014"]}
+{"id": "eval_015", "query": "Phenobarbitone Epilepsy", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_036", "drug_048"], "expected_guideline_ids": ["guide_015"]}
+{"id": "eval_016", "query": "Paracetamol Burns", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001"], "expected_guideline_ids": ["guide_016"]}
+{"id": "eval_017", "query": "Paracetamol Fever without", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001"], "expected_guideline_ids": ["guide_017"]}
+{"id": "eval_018", "query": "Amoxicillin Antibiotic stewardship", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_003"], "expected_guideline_ids": ["guide_018"]}
+{"id": "eval_019", "query": "Hydrocortisone Scrub typhus", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_056"], "expected_guideline_ids": ["guide_019"]}
+{"id": "eval_020", "query": "Hydrocortisone Leptospirosis", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_056", "drug_003"], "expected_guideline_ids": ["guide_020"]}
+{"id": "eval_021", "query": "Salbutamol COPD exacerbation", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_024", "drug_034"], "expected_guideline_ids": ["guide_021"]}
+{"id": "eval_022", "query": "Nitrofurantoin UTI uncomplicated", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_060", "drug_003"], "expected_guideline_ids": ["guide_022"]}
+{"id": "eval_023", "query": "Ampicillin Neonatal danger", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_061", "drug_057"], "expected_guideline_ids": ["guide_023"]}
+{"id": "eval_024", "query": "Oxytocin Postpartum hemorrhage", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_044", "drug_043"], "expected_guideline_ids": ["guide_024"]}
+{"id": "eval_025", "query": "Paracetamol Upper respiratory", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001", "drug_050"], "expected_guideline_ids": ["guide_025"]}
+{"id": "eval_026", "query": "Amoxicillin pharyngitis", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_003"], "expected_guideline_ids": ["guide_026"]}
+{"id": "eval_027", "query": "Amoxicillin otitis media", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_003", "drug_004"], "expected_guideline_ids": ["guide_027"]}
+{"id": "eval_028", "query": "Amoxicillin-Clavulanate Community pneumonia", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_004", "drug_005"], "expected_guideline_ids": ["guide_028"]}
+{"id": "eval_029", "query": "Paracetamol Viral hepatitis", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001"], "expected_guideline_ids": ["guide_029"]}
+{"id": "eval_030", "query": "Omeprazole GERD dyspepsia", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_032", "drug_055"], "expected_guideline_ids": ["guide_030"]}
+{"id": "eval_031", "query": "Ferrous Sulfate Iron deficiency", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_038", "drug_039"], "expected_guideline_ids": ["guide_031"]}
+{"id": "eval_032", "query": "Levothyroxine Hypothyroidism", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_062"], "expected_guideline_ids": ["guide_032"]}
+{"id": "eval_033", "query": "Paracetamol Osteoarthritis", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001", "drug_002"], "expected_guideline_ids": ["guide_033"]}
+{"id": "eval_034", "query": "Paracetamol Low back", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001", "drug_048"], "expected_guideline_ids": ["guide_034"]}
+{"id": "eval_035", "query": "Colchicine Gout", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_063", "drug_002"], "expected_guideline_ids": ["guide_035"]}
+{"id": "eval_036", "query": "Cholecalciferol Vitamin deficiency", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_041", "drug_040"], "expected_guideline_ids": ["guide_036"]}
+{"id": "eval_037", "query": "Oral Rehydration Salts Cholera", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_011", "drug_059"], "expected_guideline_ids": ["guide_037"]}
+{"id": "eval_038", "query": "Ciprofloxacin Shigella dysentery", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_006", "drug_008"], "expected_guideline_ids": ["guide_038"]}
+{"id": "eval_039", "query": "Metronidazole Giardiasis", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_008"], "expected_guideline_ids": ["guide_039"]}
+{"id": "eval_040", "query": "Permethrin 5% Scabies", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_064"], "expected_guideline_ids": ["guide_040"]}
+{"id": "eval_041", "query": "Clotrimazole Fungal skin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_065"], "expected_guideline_ids": ["guide_041"]}
+{"id": "eval_042", "query": "Amoxicillin-Clavulanate Cellulitis", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_004", "drug_066"], "expected_guideline_ids": ["guide_042"]}
+{"id": "eval_043", "query": "Chloramphenicol Eye Drops Conjunctivitis bacterial", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_067"], "expected_guideline_ids": ["guide_043"]}
+{"id": "eval_044", "query": "Amoxicillin Dental abscess", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_003", "drug_008"], "expected_guideline_ids": ["guide_044"]}
+{"id": "eval_045", "query": "Paracetamol Migraine", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001", "drug_002"], "expected_guideline_ids": ["guide_045"]}
+{"id": "eval_046", "query": "Fluoxetine Depression mhGAP", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_068"], "expected_guideline_ids": ["guide_046"]}
+{"id": "eval_047", "query": "Diazepam Anxiety disorder", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_048"], "expected_guideline_ids": ["guide_047"]}
+{"id": "eval_048", "query": "Azithromycin STI syndromic", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_005", "drug_007"], "expected_guideline_ids": ["guide_048"]}
+{"id": "eval_049", "query": "Acyclovir Herpes zoster", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_069"], "expected_guideline_ids": ["guide_049"]}
+{"id": "eval_050", "query": "Paracetamol Varicella", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001"], "expected_guideline_ids": ["guide_050"]}
+{"id": "eval_051", "query": "Paracetamol Measles", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001", "drug_070"], "expected_guideline_ids": ["guide_051"]}
+{"id": "eval_052", "query": "Rabies Vaccine Rabies PEP", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_071"], "expected_guideline_ids": ["guide_052"]}
+{"id": "eval_053", "query": "Tetanus Toxoid Vaccine Tetanus prophylaxis", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_072"], "expected_guideline_ids": ["guide_053"]}
+{"id": "eval_054", "query": "Amoxicillin-Clavulanate Animal bite", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_004", "drug_071"], "expected_guideline_ids": ["guide_054"]}
+{"id": "eval_055", "query": "Atropine Organophosphate poisoning", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_047", "drug_073"], "expected_guideline_ids": ["guide_055"]}
+{"id": "eval_056", "query": "N-Acetylcysteine Paracetamol overdose", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_074"], "expected_guideline_ids": ["guide_056"]}
+{"id": "eval_057", "query": "Magnesium Sulfate Pre eclampsia", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_045", "drug_016"], "expected_guideline_ids": ["guide_057"]}
+{"id": "eval_058", "query": "Magnesium Sulfate Eclampsia", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_045"], "expected_guideline_ids": ["guide_058"]}
+{"id": "eval_059", "query": "Ethinylestradiol-Levonorgestrel Family planning", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_075"], "expected_guideline_ids": ["guide_059"]}
+{"id": "eval_060", "query": "Levonorgestrel Emergency contraception", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_076"], "expected_guideline_ids": ["guide_060"]}
+{"id": "eval_061", "query": "Tranexamic Acid Menorrhagia", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_042"], "expected_guideline_ids": ["guide_061"]}
+{"id": "eval_062", "query": "Tamsulosin Benign prostatic", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_077", "drug_078"], "expected_guideline_ids": ["guide_062"]}
+{"id": "eval_063", "query": "Ibuprofen Renal colic", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_002", "drug_001"], "expected_guideline_ids": ["guide_063"]}
+{"id": "eval_064", "query": "Amoxicillin UTI pregnancy", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_003", "drug_061"], "expected_guideline_ids": ["guide_064"]}
 {"id": "eval_065", "query": "neonatal jaundice phototherapy refer", "type": "guideline_search", "locale": "en", "expected_drug_ids": [], "expected_guideline_ids": ["guide_065"]}
-{"id": "eval_066", "query": "Oral Rehydration Salts", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_011"], "expected_guideline_ids": ["guide_066"]}
-{"id": "eval_067", "query": "Liposomal Amphotericin B", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_079"], "expected_guideline_ids": ["guide_067"]}
-{"id": "eval_068", "query": "Diethylcarbamazine", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_080"], "expected_guideline_ids": ["guide_068"]}
-{"id": "eval_069", "query": "Rifampicin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_026", "drug_081"], "expected_guideline_ids": ["guide_069"]}
-{"id": "eval_070", "query": "Omeprazole", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_032", "drug_055"], "expected_guideline_ids": ["guide_070"]}
-{"id": "eval_071", "query": "Furosemide", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_020", "drug_017"], "expected_guideline_ids": ["guide_071"]}
-{"id": "eval_072", "query": "Warfarin Atrial", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_023", "drug_019"], "expected_guideline_ids": ["guide_072"]}
-{"id": "eval_073", "query": "Aspirin ACS", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_021", "drug_022"], "expected_guideline_ids": ["guide_073"]}
-{"id": "eval_074", "query": "Atorvastatin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_082"], "expected_guideline_ids": ["guide_074"]}
-{"id": "eval_075", "query": "Enalapril Chronic", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_017", "drug_018"], "expected_guideline_ids": ["guide_075"]}
+{"id": "eval_066", "query": "Oral Rehydration Salts malnutrition child", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_011"], "expected_guideline_ids": ["guide_066"]}
+{"id": "eval_067", "query": "Liposomal Amphotericin B Kala azar", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_079"], "expected_guideline_ids": ["guide_067"]}
+{"id": "eval_068", "query": "Diethylcarbamazine Filariasis", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_080"], "expected_guideline_ids": ["guide_068"]}
+{"id": "eval_069", "query": "Rifampicin Leprosy", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_026", "drug_081"], "expected_guideline_ids": ["guide_069"]}
+{"id": "eval_070", "query": "Omeprazole Peptic ulcer", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_032", "drug_055"], "expected_guideline_ids": ["guide_070"]}
+{"id": "eval_071", "query": "Furosemide Heart failure", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_020", "drug_017"], "expected_guideline_ids": ["guide_071"]}
+{"id": "eval_072", "query": "Warfarin Atrial fibrillation", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_023", "drug_019"], "expected_guideline_ids": ["guide_072"]}
+{"id": "eval_073", "query": "Aspirin ACS antiplatelet", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_021", "drug_022"], "expected_guideline_ids": ["guide_073"]}
+{"id": "eval_074", "query": "Atorvastatin Dyslipidemia", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_082"], "expected_guideline_ids": ["guide_074"]}
+{"id": "eval_075", "query": "Enalapril kidney disease", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_017", "drug_018"], "expected_guideline_ids": ["guide_075"]}
 {"id": "eval_076", "query": "Lactulose Constipation", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_083", "drug_084"], "expected_guideline_ids": ["guide_076"]}
-{"id": "eval_077", "query": "Loperamide", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_085", "drug_011"], "expected_guideline_ids": ["guide_077"]}
-{"id": "eval_078", "query": "Oral Rehydration Salts", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_011", "drug_059"], "expected_guideline_ids": ["guide_078"]}
-{"id": "eval_079", "query": "Cerumenolytic Drops", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_086"], "expected_guideline_ids": ["guide_079"]}
-{"id": "eval_080", "query": "Cetirizine", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_050"], "expected_guideline_ids": ["guide_080"]}
-{"id": "eval_081", "query": "Cetirizine", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_050", "drug_051"], "expected_guideline_ids": ["guide_081"]}
-{"id": "eval_082", "query": "Amoxicillin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_003"], "expected_guideline_ids": ["guide_082"]}
-{"id": "eval_083", "query": "Artesunate", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_087"], "expected_guideline_ids": ["guide_083"]}
-{"id": "eval_084", "query": "Chloroquine", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_031", "drug_088"], "expected_guideline_ids": ["guide_084"]}
-{"id": "eval_085", "query": "Diazepam Status", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_048"], "expected_guideline_ids": ["guide_085"]}
-{"id": "eval_086", "query": "Amoxicillin-Clavulanate", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_004", "drug_008"], "expected_guideline_ids": ["guide_086"]}
-{"id": "eval_087", "query": "Nicotine Replacement Gum", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_089"], "expected_guideline_ids": ["guide_087"]}
-{"id": "eval_088", "query": "Ferrous Sulfate", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_038", "drug_039"], "expected_guideline_ids": ["guide_088"]}
-{"id": "eval_089", "query": "Oral Rehydration Salts", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_011"], "expected_guideline_ids": ["guide_089"]}
-{"id": "eval_090", "query": "Mebendazole", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_090"], "expected_guideline_ids": ["guide_090"]}
-{"id": "eval_091", "query": "Amoxicillin-Clavulanate", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_004"], "expected_guideline_ids": ["guide_091"]}
-{"id": "eval_092", "query": "Paracetamol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001"], "expected_guideline_ids": ["guide_092"]}
-{"id": "eval_093", "query": "Ceftriaxone", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_007", "drug_056", "drug_008"], "expected_guideline_ids": ["guide_093"]}
-{"id": "eval_094", "query": "Paracetamol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001"], "expected_guideline_ids": ["guide_094"]}
-{"id": "eval_095", "query": "Potassium Iodide", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_091"], "expected_guideline_ids": ["guide_095"]}
-{"id": "eval_096", "query": "Timolol Eye Drops", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_092"], "expected_guideline_ids": ["guide_096"]}
-{"id": "eval_097", "query": "Azithromycin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_005"], "expected_guideline_ids": ["guide_097"]}
-{"id": "eval_098", "query": "Paracetamol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001", "drug_093"], "expected_guideline_ids": ["guide_098"]}
-{"id": "eval_099", "query": "Insulin Human", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_015"], "expected_guideline_ids": ["guide_099"]}
-{"id": "eval_100", "query": "Rifampicin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_026"], "expected_guideline_ids": ["guide_100"]}
-{"id": "eval_101", "query": "Lisinopril", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_094", "drug_017", "drug_016", "drug_097"], "expected_guideline_ids": ["guide_007"]}
-{"id": "eval_102", "query": "Spironolactone", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_099", "drug_097", "drug_016"], "expected_guideline_ids": ["guide_101"]}
-{"id": "eval_103", "query": "Bisoprolol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_100", "drug_017", "drug_020", "drug_099"], "expected_guideline_ids": ["guide_102"]}
-{"id": "eval_104", "query": "Glyceryl Trinitrate", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_111", "drug_110", "drug_082"], "expected_guideline_ids": ["guide_103"]}
-{"id": "eval_105", "query": "Metoprolol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_101", "drug_112", "drug_023", "drug_114"], "expected_guideline_ids": ["guide_104"]}
-{"id": "eval_106", "query": "Atorvastatin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_082", "drug_107", "drug_108"], "expected_guideline_ids": ["guide_074", "guide_105"]}
-{"id": "eval_107", "query": "Methyldopa", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_144", "drug_145", "drug_106"], "expected_guideline_ids": ["guide_106"]}
-{"id": "eval_108", "query": "Insulin Glargine", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_136", "drug_015", "drug_013"], "expected_guideline_ids": ["guide_099", "guide_107"]}
-{"id": "eval_109", "query": "Pregabalin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_140", "drug_126"], "expected_guideline_ids": ["guide_108"]}
-{"id": "eval_110", "query": "Fluconazole", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_120", "drug_121"], "expected_guideline_ids": ["guide_109"]}
-{"id": "eval_111", "query": "Clarithromycin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_115", "drug_003", "drug_032"], "expected_guideline_ids": ["guide_014"]}
-{"id": "eval_112", "query": "Cefixime Typhoid", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_116", "drug_007", "drug_005"], "expected_guideline_ids": ["guide_001"]}
-{"id": "eval_113", "query": "Ivermectin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_146", "drug_064"], "expected_guideline_ids": ["guide_040"]}
-{"id": "eval_114", "query": "Montelukast", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_129", "drug_024", "drug_131"], "expected_guideline_ids": ["guide_009"]}
-{"id": "eval_115", "query": "Ipratropium Bromide", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_130", "drug_024", "drug_034"], "expected_guideline_ids": ["guide_021"]}
-{"id": "eval_116", "query": "Sodium Valproate", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_122", "drug_037", "drug_123"], "expected_guideline_ids": ["guide_015"]}
-{"id": "eval_117", "query": "Sertraline", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_125", "drug_068"], "expected_guideline_ids": ["guide_046"]}
-{"id": "eval_118", "query": "Haloperidol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_127", "drug_128"], "expected_guideline_ids": ["guide_110"]}
-{"id": "eval_119", "query": "Allopurinol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_137", "drug_063"], "expected_guideline_ids": ["guide_035"]}
-{"id": "eval_120", "query": "Vitamin B12", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_141", "drug_013"], "expected_guideline_ids": ["guide_112"]}
+{"id": "eval_077", "query": "Loperamide Travelers diarrhea", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_085", "drug_011"], "expected_guideline_ids": ["guide_077"]}
+{"id": "eval_078", "query": "Oral Rehydration Salts Heat exhaustion", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_011", "drug_059"], "expected_guideline_ids": ["guide_078"]}
+{"id": "eval_079", "query": "Cerumenolytic Drops Impacted ear", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_086"], "expected_guideline_ids": ["guide_079"]}
+{"id": "eval_080", "query": "Cetirizine Allergic rhinitis", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_050"], "expected_guideline_ids": ["guide_080"]}
+{"id": "eval_081", "query": "Cetirizine Urticaria", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_050", "drug_051"], "expected_guideline_ids": ["guide_081"]}
+{"id": "eval_082", "query": "Amoxicillin Pneumonia child", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_003"], "expected_guideline_ids": ["guide_082"]}
+{"id": "eval_083", "query": "Artesunate malaria", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_087"], "expected_guideline_ids": ["guide_083"]}
+{"id": "eval_084", "query": "Chloroquine vivax radical", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_031", "drug_088"], "expected_guideline_ids": ["guide_084"]}
+{"id": "eval_085", "query": "Diazepam Status epilepticus", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_048"], "expected_guideline_ids": ["guide_085"]}
+{"id": "eval_086", "query": "Amoxicillin-Clavulanate Diabetic foot", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_004", "drug_008"], "expected_guideline_ids": ["guide_086"]}
+{"id": "eval_087", "query": "Nicotine Replacement Gum Tobacco cessation", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_089"], "expected_guideline_ids": ["guide_087"]}
+{"id": "eval_088", "query": "Ferrous Sulfate Postnatal care", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_038", "drug_039"], "expected_guideline_ids": ["guide_088"]}
+{"id": "eval_089", "query": "Oral Rehydration Salts Adult dehydration", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_011"], "expected_guideline_ids": ["guide_089"]}
+{"id": "eval_090", "query": "Mebendazole Worm infestation", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_090"], "expected_guideline_ids": ["guide_090"]}
+{"id": "eval_091", "query": "Amoxicillin-Clavulanate Sinusitis bacterial", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_004"], "expected_guideline_ids": ["guide_091"]}
+{"id": "eval_092", "query": "Paracetamol bronchitis", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001"], "expected_guideline_ids": ["guide_092"]}
+{"id": "eval_093", "query": "Ceftriaxone Pelvic inflammatory", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_007", "drug_056", "drug_008"], "expected_guideline_ids": ["guide_093"]}
+{"id": "eval_094", "query": "Paracetamol Hepatitis pregnancy", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001"], "expected_guideline_ids": ["guide_094"]}
+{"id": "eval_095", "query": "Potassium Iodide Iodine deficiency", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_091"], "expected_guideline_ids": ["guide_095"]}
+{"id": "eval_096", "query": "Timolol Eye Drops Glaucoma initial", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_092"], "expected_guideline_ids": ["guide_096"]}
+{"id": "eval_097", "query": "Azithromycin Trachoma", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_005"], "expected_guideline_ids": ["guide_097"]}
+{"id": "eval_098", "query": "Paracetamol pain ladder", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_001", "drug_093"], "expected_guideline_ids": ["guide_098"]}
+{"id": "eval_099", "query": "Insulin Human Insulin initiation", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_015"], "expected_guideline_ids": ["guide_099"]}
+{"id": "eval_100", "query": "Rifampicin Drug resistant", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_026"], "expected_guideline_ids": ["guide_100"]}
+{"id": "eval_101", "query": "Lisinopril Hypertension ACE", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_094", "drug_017", "drug_016", "drug_097"], "expected_guideline_ids": ["guide_007"]}
+{"id": "eval_102", "query": "Spironolactone Resistant hypertension", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_099", "drug_097", "drug_016"], "expected_guideline_ids": ["guide_101"]}
+{"id": "eval_103", "query": "Bisoprolol Heart failure", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_100", "drug_017", "drug_020", "drug_099"], "expected_guideline_ids": ["guide_102"]}
+{"id": "eval_104", "query": "Glyceryl Trinitrate Stable angina", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_111", "drug_110", "drug_082"], "expected_guideline_ids": ["guide_103"]}
+{"id": "eval_105", "query": "Metoprolol Atrial fibrillation", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_101", "drug_112", "drug_023", "drug_114"], "expected_guideline_ids": ["guide_104"]}
+{"id": "eval_106", "query": "Atorvastatin Hyperlipidemia statin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_082", "drug_107", "drug_108"], "expected_guideline_ids": ["guide_105"]}
+{"id": "eval_107", "query": "Methyldopa Gestational hypertension", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_144", "drug_145", "drug_106"], "expected_guideline_ids": ["guide_106"]}
+{"id": "eval_108", "query": "Insulin Glargine Insulin therapy", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_136", "drug_015", "drug_013"], "expected_guideline_ids": ["guide_099", "guide_107"]}
+{"id": "eval_109", "query": "Pregabalin Diabetic neuropathy", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_140", "drug_126"], "expected_guideline_ids": ["guide_108"]}
+{"id": "eval_110", "query": "Fluconazole Vulvovaginal candidiasis", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_120", "drug_121"], "expected_guideline_ids": ["guide_109"]}
+{"id": "eval_111", "query": "Clarithromycin pylori clarithromycin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_115", "drug_003", "drug_032"], "expected_guideline_ids": ["guide_014"]}
+{"id": "eval_112", "query": "Cefixime Typhoid cefixime", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_116", "drug_007", "drug_005"], "expected_guideline_ids": ["guide_001"]}
+{"id": "eval_113", "query": "Ivermectin Scabies ivermectin", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_146", "drug_064"], "expected_guideline_ids": ["guide_040"]}
+{"id": "eval_114", "query": "Montelukast Asthma montelukast", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_129", "drug_024", "drug_131"], "expected_guideline_ids": ["guide_009"]}
+{"id": "eval_115", "query": "Ipratropium Bromide COPD bronchodilator", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_130", "drug_024", "drug_034"], "expected_guideline_ids": ["guide_021"]}
+{"id": "eval_116", "query": "Sodium Valproate Epilepsy valproate", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_122", "drug_037", "drug_123"], "expected_guideline_ids": ["guide_015"]}
+{"id": "eval_117", "query": "Sertraline Depression SSRI", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_125", "drug_068"], "expected_guideline_ids": ["guide_046"]}
+{"id": "eval_118", "query": "Haloperidol psychosis", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_127", "drug_128"], "expected_guideline_ids": ["guide_110"]}
+{"id": "eval_119", "query": "Allopurinol Gout allopurinol", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_137", "drug_063"], "expected_guideline_ids": ["guide_035"]}
+{"id": "eval_120", "query": "Vitamin B12 B12 deficiency", "type": "drug_lookup", "locale": "en", "expected_drug_ids": ["drug_141", "drug_013"], "expected_guideline_ids": ["guide_112"]}
 {"id": "eval_121", "query": "ibuprofen aspirin together stomach bleed", "type": "interaction_check", "locale": "en", "expected_interaction_ids": ["int_001"]}
 {"id": "eval_122", "query": "rifampicin warfarin INR", "type": "interaction_check", "locale": "en", "expected_interaction_ids": ["int_004"]}
 {"id": "eval_123", "query": "azithromycin ciprofloxacin QT", "type": "interaction_check", "locale": "en", "expected_interaction_ids": ["int_022"]}
