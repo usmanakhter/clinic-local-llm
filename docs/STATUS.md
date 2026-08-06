@@ -163,7 +163,7 @@ flutter build appbundle --release
 
 **Prod sync in a binary:** pass `--dart-define=INGEST_BASE_URL=…` and `--dart-define=INGEST_ANON_KEY=…` on `flutter run` or `flutter build appbundle`.
 
-**Play Console checklist:** app id `np.clinical.clinical_assistant`; minSdk 29; label “Nepal Clinical Assistant”; not-for-clinical-use store listing + privacy policy URL **https://usmanakhter.github.io/clinic-local-llm/privacy/** (`docs/privacy/index.html` via GitHub Pages); upload AAB to internal testing track; place GGUF on device under app documents `nepal_clinical/models/` (or ship via OTA later). Lawyer review of `np-terms-1.2` remains a pilot gate.
+**Play Console checklist:** app id `np.clinical.clinical_assistant`; minSdk 29; label “Nepal Clinical Assistant”; not-for-clinical-use store listing + privacy policy URL **https://usmanakhter.github.io/clinic-local-llm/privacy/** (`docs/privacy/index.html` via GitHub Pages); store graphics in [`docs/store/`](store/) — icon + feature graphic + phone/7″/10″ screenshots under `screenshots/`; upload AAB to internal testing track; place GGUF on device under app documents `nepal_clinical/models/` (or ship via OTA later). Lawyer review of `np-terms-1.2` remains a pilot gate.
 
 **Upload keystore (local only, never commit):** `android/upload-keystore.jks` + `android/key.properties`. Back these up offline — losing them blocks updates to the same Play listing.### Automated checks
 
