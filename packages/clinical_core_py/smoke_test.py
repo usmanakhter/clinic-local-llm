@@ -23,10 +23,10 @@ def main() -> None:
             f"expected drug_001 first, got {para[0].drug.id}"
         )
 
-        nepalol = search_drugs(repo, "Nepalol")
-        assert nepalol, "search(Nepalol) returned no hits"
-        ids = {r.drug.id for r in nepalol}
-        assert "drug_001" in ids, f"Nepalol should resolve to Paracetamol, got {ids}"
+        calpol = search_drugs(repo, "Calpol")
+        assert calpol, "search(Calpol) returned no hits"
+        ids = {r.drug.id for r in calpol}
+        assert "drug_001" in ids, f"Calpol should resolve to Paracetamol, got {ids}"
 
         pair = lookup(repo, "drug_005", "drug_006")
         assert pair is not None, "expected interaction for drug_005 + drug_006"
