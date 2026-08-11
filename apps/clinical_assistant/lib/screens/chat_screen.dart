@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../data/chat_memory.dart';
 import '../data/session_store.dart';
 import '../data/repositories.dart';
 import '../data/retriever.dart';
 import '../llm/gguf_runtime.dart';
 import '../llm/gguf_runtime_factory.dart';
 import '../llm/local_llm_client.dart';
+import '../llm/model_download_manager.dart';
 import '../theme/app_theme.dart';
 import '../widgets/citation_card.dart';
 import '../widgets/llm_status_banner.dart';
+import '../widgets/model_download_card.dart';
 import '../models/models.dart';
 
 /// Unified local chat: notes + history + past chats + drugs + guidelines.
@@ -40,6 +43,24 @@ class _ChatMessage {
   final bool isError;
   final String? sessionId;
   final String? feedback;
+
+  ChatMemoryMessage toMemory() => ChatMemoryMessage(
+        role: role,
+        text: text,
+        fromModel: fromModel,
+        isError: isError,
+        sessionId: sessionId,
+        feedback: feedback,
+      );
+
+  factory _ChatMessage.fromMemory(ChatMemoryMessage m) => _ChatMessage(
+        role: m.role,
+        text: m.text,
+        fromModel: m.fromModel,
+        isError: m.isError,
+        sessionId: m.sessionId,
+        feedback: m.feedback,
+      );
 }
 
 class _ChatScreenState extends State<ChatScreen> {
@@ -47,41 +68,84 @@ class _ChatScreenState extends State<ChatScreen> {
   final _messages = <_ChatMessage>[];
   late final ClinicalRetriever _retriever;
   final _llm = LocalLlmClient(gguf: createNativeGgufRuntime());
+  late final ModelDownloadManager _modelDownload;
   bool _busy = false;
   LlmStatus? _llmStatus;
   bool _probing = false;
+  bool _modelReadyOnDisk = false;
+
+  static _ChatMessage get _welcome => _ChatMessage(
+        role: 'assistant',
+        text:
+            'I search local notes, history, chats, drugs, and guidelines on this '
+            'device, then answer with the on-device Qwen GGUF only. If no model '
+            'is installed yet, use Download clinical model (~1.1 GB, Wi‑Fi '
+            'recommended) — there is no rules-engine fallback. I will not invent '
+            'interaction severity. Not for clinical use.\n\n'
+            '$kGgufLatencyNote',
+      );
 
   @override
   void initState() {
     super.initState();
     _retriever = ClinicalRetriever(widget.repository);
-    _messages.add(
-      _ChatMessage(
-        role: 'assistant',
-        text:
-            'I search local notes, history, chats, drugs, and guidelines on this '
-            'device, then answer with the on-device Qwen GGUF only. If no model '
-            'file is present, you will see an error — there is no rules-engine '
-            'fallback. I will not invent interaction severity. Not for clinical use.\n\n'
-            '$kGgufLatencyNote',
-      ),
-    );
+    _modelDownload = createModelDownloadManager();
+    _restoreMessages();
     _probeLlm();
+  }
+
+  Future<void> _restoreMessages() async {
+    await ChatMemory.instance.ensureLoaded();
+    if (!mounted) return;
+    setState(() {
+      _messages
+        ..clear()
+        ..addAll(
+          ChatMemory.instance.messages.map(_ChatMessage.fromMemory),
+        );
+      if (_messages.isEmpty) {
+        _messages.add(_welcome);
+        _persistMessages();
+      }
+    });
+  }
+
+  void _persistMessages() {
+    ChatMemory.instance.replaceAll(_messages.map((m) => m.toMemory()).toList());
+  }
+
+  Future<void> _clearChat() async {
+    await ChatMemory.instance.clear();
+    if (!mounted) return;
+    setState(() {
+      _messages
+        ..clear()
+        ..add(_welcome);
+      _busy = false;
+    });
+    _persistMessages();
   }
 
   Future<void> _probeLlm() async {
     setState(() => _probing = true);
+    final readyOnDisk = await _modelDownload.isModelReady();
     final s = await _llm.probe();
     if (!mounted) return;
     setState(() {
+      _modelReadyOnDisk = readyOnDisk || s.reachable;
       _llmStatus = s;
       _probing = false;
     });
   }
 
+  Future<void> _onModelDownloaded() async {
+    await _probeLlm();
+  }
+
   @override
   void dispose() {
     _controller.dispose();
+    _modelDownload.dispose();
     super.dispose();
   }
 
@@ -94,7 +158,13 @@ class _ChatScreenState extends State<ChatScreen> {
       _controller.clear();
     });
 
-    final bundle = await _retriever.retrieve(q);
+    // Compact retrieve → shorter prompt eval on CPU.
+    final bundle = await _retriever.retrieve(
+      q,
+      drugLimit: 3,
+      guidelineLimit: 3,
+      sessionLimit: 4,
+    );
 
     if (bundle.refused) {
       final sess = await widget.repository.logSession(
@@ -120,22 +190,67 @@ class _ChatScreenState extends State<ChatScreen> {
         );
         _busy = false;
       });
+      _persistMessages();
       return;
     }
 
     String answer;
     var fromModel = false;
     var isError = false;
+    final streamingIndex = _messages.length;
     try {
-      final status = await _llm.probe();
-      if (mounted) setState(() => _llmStatus = status);
-      if (!status.reachable || status.backend != LlmBackend.gguf) {
-        throw LocalModelNotFoundException(status.message);
+      if (!_llm.gguf.isReady) {
+        final status = await _llm.probe();
+        if (mounted) setState(() => _llmStatus = status);
+        if (!status.reachable || status.backend != LlmBackend.gguf) {
+          throw LocalModelNotFoundException(status.message);
+        }
+      } else if (mounted && _llmStatus?.reachable != true) {
+        setState(() {
+          _llmStatus = LlmStatus(
+            reachable: true,
+            backend: LlmBackend.gguf,
+            model: _llm.gguf.modelLabel,
+            models: _llm.gguf.modelLabel != null
+                ? [_llm.gguf.modelLabel!]
+                : const [],
+          );
+        });
       }
+
+      // Placeholder bubble — stream tokens into it for perceived speed.
+      if (mounted) {
+        setState(() {
+          _messages.add(
+            _ChatMessage(
+              role: 'assistant',
+              text: '',
+              bundle: bundle,
+              fromModel: true,
+            ),
+          );
+        });
+      }
+
       answer = await _llm.groundedChatAnswer(
         question: q,
-        retrievedContext: _retriever.formatContext(bundle),
-        modelOverride: status.model,
+        retrievedContext: _retriever.formatContext(bundle, compact: true),
+        modelOverride: _llmStatus?.model,
+        onToken: (tok) {
+          if (!mounted) return;
+          setState(() {
+            final cur = _messages[streamingIndex];
+            _messages[streamingIndex] = _ChatMessage(
+              role: cur.role,
+              text: cur.text + tok,
+              bundle: cur.bundle,
+              fromModel: true,
+              isError: false,
+              sessionId: cur.sessionId,
+              feedback: cur.feedback,
+            );
+          });
+        },
       );
       fromModel = true;
     } catch (e) {
@@ -145,6 +260,19 @@ class _ChatScreenState extends State<ChatScreen> {
         answer = e.message;
       } else {
         answer = 'Local model error: $e';
+      }
+      // Replace streaming placeholder (if any) with error text.
+      if (mounted &&
+          streamingIndex < _messages.length &&
+          _messages[streamingIndex].role == 'assistant' &&
+          _messages[streamingIndex].fromModel) {
+        setState(() {
+          _messages[streamingIndex] = _ChatMessage(
+            role: 'assistant',
+            text: answer,
+            isError: true,
+          );
+        });
       }
     }
 
@@ -166,18 +294,33 @@ class _ChatScreenState extends State<ChatScreen> {
 
     if (!mounted) return;
     setState(() {
-      _messages.add(
-        _ChatMessage(
+      if (streamingIndex < _messages.length &&
+          _messages[streamingIndex].role == 'assistant') {
+        final cur = _messages[streamingIndex];
+        _messages[streamingIndex] = _ChatMessage(
           role: 'assistant',
           text: answer,
           bundle: isError ? null : bundle,
           fromModel: fromModel,
           isError: isError,
           sessionId: sess.id,
-        ),
-      );
+          feedback: cur.feedback,
+        );
+      } else {
+        _messages.add(
+          _ChatMessage(
+            role: 'assistant',
+            text: answer,
+            bundle: isError ? null : bundle,
+            fromModel: fromModel,
+            isError: isError,
+            sessionId: sess.id,
+          ),
+        );
+      }
       _busy = false;
     });
+    _persistMessages();
   }
 
   Future<void> _submitFeedback(int index, String vote) async {
@@ -197,10 +340,16 @@ class _ChatScreenState extends State<ChatScreen> {
         feedback: vote,
       );
     });
+    _persistMessages();
   }
 
   @override
   Widget build(BuildContext context) {
+    final showDownload = !_probing &&
+        _llmStatus != null &&
+        !_llmStatus!.reachable &&
+        !_modelReadyOnDisk;
+
     return Column(
       children: [
         LlmStatusBanner(
@@ -208,17 +357,31 @@ class _ChatScreenState extends State<ChatScreen> {
           checking: _probing,
           onRefresh: _probeLlm,
         ),
+        if (showDownload)
+          ModelDownloadCard(
+            manager: _modelDownload,
+            onComplete: _onModelDownloaded,
+          ),
         Material(
           color: AppColors.slate100,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            child: Text(
-              'Retrieve → on-device GGUF only (error if no local model). '
-              'Expect ~30–60s per answer on CPU.',
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: AppColors.slate700,
-                    fontWeight: FontWeight.w600,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'Retrieve → on-device GGUF. $kGgufLatencyNote',
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                          color: AppColors.slate700,
+                          fontWeight: FontWeight.w600,
+                        ),
                   ),
+                ),
+                TextButton(
+                  onPressed: _busy ? null : _clearChat,
+                  child: const Text('Clear'),
+                ),
+              ],
             ),
           ),
         ),

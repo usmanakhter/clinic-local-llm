@@ -9,9 +9,10 @@ enum LlmBackend {
   inApp,
 }
 
-/// Expected wall-clock for on-device Qwen GGUF on CPU (Chat / Notes generate).
+/// Expected wall-clock for on-device Qwen GGUF on mid-range CPU after warm load.
 const kGgufLatencyNote =
-    'On-device Qwen may take ~30–60 seconds per reply on CPU (first answer can be longer).';
+    'On-device Qwen runs on CPU: first reply ~20–45s (model load); later ~10–30s. GPU/Vulkan offload is disabled for stability.';
+
 
 /// Health / reachability of the active draft / chat backend.
 class LlmStatus {
@@ -154,38 +155,39 @@ Write the draft clinical note now.
     required String question,
     required String retrievedContext,
     String? modelOverride,
+    void Function(String token)? onToken,
   }) async {
     if (retrievedContext.trim().isEmpty) {
       throw StateError('groundedChatAnswer requires non-empty retrieved context');
     }
 
-    final status = await probe();
-    if (requireGgufForChat &&
-        (status.backend != LlmBackend.gguf || !status.reachable)) {
-      throw LocalModelNotFoundException(status.message);
+    // Prefer already-warmed runtime — avoid a second full probe on every send.
+    if (!gguf.isReady) {
+      final status = await probe();
+      if (requireGgufForChat &&
+          (status.backend != LlmBackend.gguf || !status.reachable)) {
+        throw LocalModelNotFoundException(status.message);
+      }
     }
 
     return gguf.complete(
       system: '''
-You are a grounded clinical reference assistant for a Nepal pilot demo.
-You may ONLY paraphrase or organize the retrieved local snippets provided.
-Rules:
-- Answer only from the RETRIEVED CONTEXT block. Do not add outside medical facts.
-- Cite drug and guideline ids that appear in the context.
-- Never invent drug-drug interaction severity.
-- End with: "Draft only — not for clinical use."
+Grounded Nepal clinical reference assistant.
+ONLY use RETRIEVED CONTEXT. Cite ids. No invented interaction severity.
+End with: Draft only — not for clinical use.
 ''',
       user: '''
-QUESTION:
-$question
+Q: $question
 
-RETRIEVED CONTEXT:
+CONTEXT:
 $retrievedContext
 
-Write a short grounded answer with citations to ids from context.
+Short answer with citations.
 ''',
-      maxTokens: 512,
-      temperature: 0.1,
+      // Cap decode length — biggest CPU latency lever after tok/s.
+      maxTokens: 192,
+      temperature: 0.0,
+      onToken: onToken,
     );
   }
 }

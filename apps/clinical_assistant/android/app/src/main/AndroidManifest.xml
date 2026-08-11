@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Optional: local ingest debug flush / future WiFi sync. Core app is offline-first. -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:label="Nepal Clinical Assistant"
         android:name="${applicationName}"

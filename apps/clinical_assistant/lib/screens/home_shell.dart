@@ -22,6 +22,7 @@ class HomeShell extends StatefulWidget {
 
 class _HomeShellState extends State<HomeShell> {
   int _index = 0;
+  late final List<Widget> _pages;
 
   static const _titles = [
     'Drug Search',
@@ -37,6 +38,15 @@ class _HomeShellState extends State<HomeShell> {
     super.initState();
     // Terms accepted — continuous invisible sync (no chrome).
     SyncCoordinator.instance.start();
+    // Build once so tab State (esp. Chat transcript + GGUF) stays alive.
+    _pages = [
+      DrugSearchScreen(repository: widget.repository),
+      InteractionScreen(repository: widget.repository),
+      GuidelinesScreen(repository: widget.repository),
+      ChatScreen(repository: widget.repository),
+      NoteDrafterScreen(repository: widget.repository),
+      PatientsScreen(repository: widget.repository),
+    ];
   }
 
   @override
@@ -47,15 +57,6 @@ class _HomeShellState extends State<HomeShell> {
 
   @override
   Widget build(BuildContext context) {
-    final pages = [
-      DrugSearchScreen(repository: widget.repository),
-      InteractionScreen(repository: widget.repository),
-      GuidelinesScreen(repository: widget.repository),
-      ChatScreen(repository: widget.repository),
-      NoteDrafterScreen(repository: widget.repository),
-      PatientsScreen(repository: widget.repository),
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: Text(_titles[_index]),
@@ -79,7 +80,12 @@ class _HomeShellState extends State<HomeShell> {
                 ),
               ),
             ),
-          Expanded(child: pages[_index]),
+          Expanded(
+            child: IndexedStack(
+              index: _index,
+              children: _pages,
+            ),
+          ),
         ],
       ),
       bottomNavigationBar: NavigationBar(

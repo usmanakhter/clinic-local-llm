@@ -1,6 +1,6 @@
 # Coverage Dashboard — Nepal Clinical AI
 
-- Generated: `2026-08-06 00:24:00 UTC`
+- Generated: `2026-08-06 00:25:37 UTC`
 - OPD checklist: `opd_condition_checklist.json` (120 conditions)
 - Gold eval: `eval_queries.jsonl` (130 queries)
 

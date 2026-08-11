@@ -1,13 +1,13 @@
 # Nepal Clinical Assistant — Development Status
 
-**Last updated:** 2026-07-22  
+**Last updated:** 2026-08-11  
 **Single source of truth** for what’s shipped, how to run it, and what’s next.  
 Long-term design target: [`clinical-llm-technical-architecture.md`](../clinical-llm-technical-architecture.md).  
 Venture context: [`clinical-llm-venture-analysis.md`](../clinical-llm-venture-analysis.md).
 
 **Backlog order (default):** Near-term → Retrieval/RAG → Chat agent → **Consent/scrub pipeline** → **Sync & data flywheel** → LLM packaging / model enhancement → EMR.
 
-**MVP engineering: closed (2026-07-22).** Signed Play AAB **1.0.0+3** at `apps/clinical_assistant/build/app/outputs/bundle/release/app-release.aab`. Remaining MVP gate is **external** lawyer review of `np-terms-1.2`. Next: upload AAB to Play internal testing; post-MVP corpus pipeline / device-tier GGUF / OTA / full EMR.
+**MVP engineering: closed (2026-07-22).** Signed Play AAB **1.0.0+6** at `apps/clinical_assistant/build/app/outputs/bundle/release/app-release.aab` (arm64-v8a). Remaining MVP gate is **external** lawyer review of `np-terms-1.2`. Next: upload AAB to Play internal testing; post-MVP corpus pipeline / device-tier GGUF / OTA / full EMR.
 
 ---
 
@@ -64,10 +64,10 @@ Clinician use (search / interact / notes / chat / patients)
 | CI stub (fixture + gold evals) | **Shipped** | `.github/workflows/qa-fixtures.yml` |
 | Production scrubber + field encryption | **Shipped (v1)** | Name/place heuristics + `DbCrypto` patient fields; native SQLCipher deferred |
 | Cloud sync / ingest / OTA | **Continuous (invisible)** | After Terms: `SyncCoordinator` flushes on enqueue / 30s / resume; no sync chrome; Supabase Mumbai or local ingest |
-| On-device llama.cpp GGUF | **Shipped (v0)** | `GgufLlamaRuntime` + `llamadart`; Linux/Windows/Android; manual GGUF placement |
+| On-device llama.cpp GGUF | **Shipped (v0)** | `GgufLlamaRuntime` + `llamadart`; Linux/Windows/Android; in-app HF download + manual placement |
 | Threat model | **Shipped (v0.2)** | [`docs/security/threat-model-v0.2.md`](security/threat-model-v0.2.md) |
 | Full EMR | **Not started** | Beyond local patient cards — **post-MVP** |
-| Play Store / closed testing | **AAB 1.0.0+3** | `build/app/outputs/bundle/release/app-release.aab` (signed upload keystore); upload to Play internal testing next; lawyer Terms review still external |
+| Play Store / closed testing | **AAB 1.0.0+6** | `build/app/outputs/bundle/release/app-release.aab` (signed upload keystore); upload to Play internal testing next; lawyer Terms review still external |
 
 **Working demo URL:** `http://localhost:8090` after `flutter build web --release` + `python -m http.server 8090` from `build/web`.  
 **Note:** Web Chat will show **No local model** by design; use `flutter run -d linux` (or Windows) for neural Chat.
@@ -104,8 +104,9 @@ Chat answers require a native build + GGUF (web → **No local model**).
 ### App (Linux + on-device GGUF Chat) — primary on this machine
 
 1. Download **Qwen2.5-1.5B-Instruct Q4_K_M** GGUF from Hugging Face (not ollama.com), e.g.  
-   `qwen2.5-1.5b-instruct-q4_k_m.gguf`
-2. Place the file:
+   `qwen2.5-1.5b-instruct-q4_k_m.gguf`  
+   **Or** run the app and use Chat → **Download clinical model** (same file, resumable).
+2. Place the file (if not using in-app download):
    ```bash
    mkdir -p "$HOME/Documents/nepal_clinical/models"
    # Copy your .gguf into that directory
@@ -115,12 +116,14 @@ Chat answers require a native build + GGUF (web → **No local model**).
    cd apps/clinical_assistant
    flutter run -d linux
    ```
+   Linux runner forces `GDK_BACKEND=x11` + scale 1 (fixes Surface HiDPI OpenGL / Wayland kill). Override via env if needed.
 4. Banner should show **On-device · qwen…**. Without the file → **No local model** and Chat returns that error (no rules dump).
 
 Desktop SQLite uses `sqflite_common_ffi` (Linux/Windows have no native `sqflite` plugin).
 
 **Verified without GGUF:** `flutter test test/chat_gguf_required_test.dart` — Chat throws `LocalModelNotFoundException`; Notes still draft via in-app.  
-**Verified with GGUF (Linux):** `flutter test test/gguf_model_resolve_test.dart` — loads Qwen from `~/Documents/nepal_clinical/models/`.
+**Verified with GGUF (Linux):** `flutter test test/gguf_model_resolve_test.dart` — loads Qwen from `~/Documents/nepal_clinical/models/`.  
+**Chat latency (2026-08-11):** CPU-only GGUF (Vulkan disabled — Surface GPU stacks can hard-crash); ctx 1024; chat `maxTokens` 192 + greedy; compact retrieve; stream tokens. Expect ~20–45s first (load), ~10–30s later on CPU.
 
 Do **not** use `ollama pull` for product Chat.
 
@@ -151,6 +154,16 @@ flutter build appbundle --release
 # Output: build/app/outputs/bundle/release/app-release.aab
 ```
 
+**Phone Chat model (self-contained for end users):** the Play AAB does **not** embed the ~1.1GB GGUF. After install + Terms:
+
+1. Open **Chat**
+2. Tap **Download clinical model** (~1.1 GB from Hugging Face `Qwen/Qwen2.5-1.5B-Instruct-GGUF`)
+3. Prefer **Wi‑Fi**; check **Use mobile data** only if needed
+4. Wait for download + checksum; banner becomes **On-device · qwen…**
+5. Chat works **offline** afterward (file under app Documents `nepal_clinical/models/`)
+
+Need ≥~1.2 GB free storage. Dev shortcut: copy the same GGUF into that folder (or Linux `~/Documents/nepal_clinical/models/`) to skip the download. v1 delivery = HTTPS + SHA-256; signed OTA remains a later backlog item.
+
 **Iterate on Play updates (repeat forever):**
 
 1. Ship Flutter code changes as usual  
@@ -163,7 +176,7 @@ flutter build appbundle --release
 
 **Prod sync in a binary:** pass `--dart-define=INGEST_BASE_URL=…` and `--dart-define=INGEST_ANON_KEY=…` on `flutter run` or `flutter build appbundle`.
 
-**Play Console checklist:** app id `np.clinical.clinical_assistant`; minSdk 29; label “Nepal Clinical Assistant”; not-for-clinical-use store listing + privacy policy URL **https://usmanakhter.github.io/clinic-local-llm/privacy/** (`docs/privacy/index.html` via GitHub Pages); store graphics in [`docs/store/`](store/) — icon + feature graphic + phone/7″/10″ screenshots under `screenshots/`; upload AAB to internal testing track; place GGUF on device under app documents `nepal_clinical/models/` (or ship via OTA later). Lawyer review of `np-terms-1.2` remains a pilot gate.
+**Play Console checklist:** app id `np.clinical.clinical_assistant`; minSdk 29; label “Nepal Clinical Assistant”; not-for-clinical-use store listing + privacy policy URL **https://usmanakhter.github.io/clinic-local-llm/privacy/** (`docs/privacy/index.html` via GitHub Pages); store graphics in [`docs/store/`](store/) — icon + feature graphic + phone/7″/10″ screenshots under `screenshots/`; upload AAB to internal testing track; Chat installs Qwen via in-app **Download clinical model** (or place GGUF under app documents `nepal_clinical/models/`). Lawyer review of `np-terms-1.2` remains a pilot gate.
 
 **Upload keystore (local only, never commit):** `android/upload-keystore.jks` + `android/key.properties`. Back these up offline — losing them blocks updates to the same Play listing.### Automated checks
 
@@ -176,7 +189,7 @@ python3 qa/run_coverage_report.py
 python3 qa/run_eval_queries.py
 python3 qa/run_chat_vignette_smoke.py
 cd apps/clinical_assistant
-flutter test test/chat_gguf_required_test.dart test/chat_vignette_smoke_test.dart test/pii_scrubber_test.dart test/gguf_model_resolve_test.dart
+flutter test test/chat_gguf_required_test.dart test/chat_vignette_smoke_test.dart test/pii_scrubber_test.dart test/gguf_model_resolve_test.dart test/model_download_manager_test.dart test/model_download_card_test.dart
 ```
 
 ### Spot-check (UI)
@@ -186,7 +199,7 @@ flutter test test/chat_gguf_required_test.dart test/chat_vignette_smoke_test.dar
 3. Search: full A–Z formulary list; filter via search  
 4. Interact: tap Drug A/B → searchable full formulary picker; Azithromycin + Ciprofloxacin → contraindicated  
 5. Guides: full OPD condition list; tap condition for linked citations; keyword search also finds chunks  
-6. Chat (Linux/Windows + GGUF): `scrub typhus` → grounded answer; without GGUF → **No local model found**  
+6. Chat (Linux/Windows/Android + GGUF): download via Chat CTA or place file → `scrub typhus` grounded answer; without GGUF → **No local model** + download card  
 7. Patients + Notes: create patient, save note with Patient ID  
 8. Notes → Saved notes: edit/update saved drafts; generate does not auto-save  
 9. Sync: invisible after Terms — interactions enqueue scrubbed rows; uploads run in background (no cloud button)  
@@ -284,13 +297,14 @@ Work **only in this order**. Newer ideas go into the matching section (or ask if
 
 ### 6. LLM packaging & model enhancement — **post-MVP**
 - [x] On-device GGUF runtime (Linux/Windows/Android) + Chat hard-require  
+- [x] First-run / Chat HTTPS download of Qwen2.5-1.5B Q4_K_M (HF) + SHA-256 (v1 OTA)  
 - [ ] Device-tier detection; smaller default GGUF for low-RAM phones  
 - [ ] Fine-tune/adapters only after consented scrubbed corpora  
-- [ ] Signed OTA model delivery  
+- [ ] Signed OTA model delivery (beyond HTTPS + checksum)  
 
 ### 7. EMR / distribution (later)
 - [ ] Full EMR (visits, prescriptions, facility workflows) — **beyond** current patient cards  
-- [x] Signed Play AAB `1.0.0+3` (`flutter build appbundle --release`) — artifact under `build/app/outputs/bundle/release/`  
+- [x] Signed Play AAB `1.0.0+6` (`flutter build appbundle --release`) — artifact under `build/app/outputs/bundle/release/`  
 - [ ] Upload AAB to Play Console internal testing; India scale-up  
 
 

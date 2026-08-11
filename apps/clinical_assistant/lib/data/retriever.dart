@@ -406,18 +406,23 @@ class ClinicalRetriever {
         .toList();
   }
 
-  String formatContext(RetrieveBundle bundle) {
+  String formatContext(RetrieveBundle bundle, {bool compact = true}) {
     if (bundle.refused) {
       return '[RETRIEVAL REFUSED] ${bundle.refuseReason}';
     }
+    final excerptMax = compact ? 160 : 240;
     final buf = StringBuffer('Query: ${bundle.query}\n');
     if (bundle.patientFilterLabel != null) {
       buf.writeln('Patient filter: ${bundle.patientFilterLabel}');
     }
 
-    final notes = bundle.notes;
-    final chats = bundle.pastChats;
-    final other = bundle.otherHistory;
+    final notes = compact ? bundle.notes.take(4).toList() : bundle.notes;
+    final chats = compact ? bundle.pastChats.take(3).toList() : bundle.pastChats;
+    final other =
+        compact ? const <RetrievedSessionHit>[] : bundle.otherHistory;
+    final drugs = compact ? bundle.drugs.take(3).toList() : bundle.drugs;
+    final guides =
+        compact ? bundle.guidelines.take(3).toList() : bundle.guidelines;
 
     if (notes.isNotEmpty) {
       buf.writeln('\n### Local notes');
@@ -428,7 +433,7 @@ class ClinicalRetriever {
           'patient=$who · ${n.title}',
         );
         if (n.excerpt != null && n.excerpt!.isNotEmpty) {
-          buf.writeln('  ${n.excerpt}');
+          buf.writeln('  ${_excerpt(n.excerpt!, excerptMax)}');
         }
       }
     }
@@ -439,7 +444,7 @@ class ClinicalRetriever {
           '- [${c.sessionId}] ${c.createdAt.toIso8601String()} · ${c.title}',
         );
         if (c.excerpt != null && c.excerpt!.isNotEmpty) {
-          buf.writeln('  ${c.excerpt}');
+          buf.writeln('  ${_excerpt(c.excerpt!, excerptMax)}');
         }
       }
     }
@@ -450,20 +455,25 @@ class ClinicalRetriever {
           '- [${h.sessionId}] ${h.queryType} · ${h.title}',
         );
         if (h.excerpt != null && h.excerpt!.isNotEmpty) {
-          buf.writeln('  ${h.excerpt}');
+          buf.writeln('  ${_excerpt(h.excerpt!, excerptMax)}');
         }
       }
     }
-    if (bundle.drugs.isNotEmpty) {
+    if (drugs.isNotEmpty) {
       buf.writeln('\n### Drugs');
-      for (final d in bundle.drugs) {
-        buf.writeln('- [${d.id}] ${d.genericName}: ${d.excerpt}');
+      for (final d in drugs) {
+        buf.writeln(
+          '- [${d.id}] ${d.genericName}: ${_excerpt(d.excerpt, excerptMax)}',
+        );
       }
     }
-    if (bundle.guidelines.isNotEmpty) {
+    if (guides.isNotEmpty) {
       buf.writeln('\n### Guidelines');
-      for (final g in bundle.guidelines) {
-        buf.writeln('- [${g.id}] ${g.title} (${g.source}): ${g.excerpt}');
+      for (final g in guides) {
+        buf.writeln(
+          '- [${g.id}] ${g.title} (${g.source}): '
+          '${_excerpt(g.excerpt, excerptMax)}',
+        );
       }
     }
     buf.writeln(

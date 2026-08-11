@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math' as math;
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:llamadart/llamadart.dart';
@@ -23,6 +24,9 @@ GgufLlamaRuntime createPlatformGgufRuntime({
 }
 
 /// On-device GGUF runtime (llama.cpp via llamadart) for Linux / Android / Windows.
+///
+/// Tuned for chat latency on mid-range devices (Surface / phones):
+/// smaller context, greedy decode, capped output, Vulkan when available.
 class IoGgufLlamaRuntime implements GgufLlamaRuntime {
   IoGgufLlamaRuntime({
     required this.preferredFileNames,
@@ -32,11 +36,15 @@ class IoGgufLlamaRuntime implements GgufLlamaRuntime {
   final List<String> preferredFileNames;
   final String relativeModelsDir;
 
+  /// Enough for short grounded answers + compact retrieve context.
+  static const int chatContextSize = 1024;
+
   LlamaEngine? _engine;
   String? _modelPath;
   String? _modelLabel;
   String? _lastError;
   Future<bool>? _loadInFlight;
+  String _accelLabel = 'cpu';
 
   @override
   bool get isReady => _engine?.isReady == true;
@@ -45,7 +53,11 @@ class IoGgufLlamaRuntime implements GgufLlamaRuntime {
   String? get modelPath => _modelPath;
 
   @override
-  String? get modelLabel => _modelLabel;
+  String? get modelLabel {
+    final base = _modelLabel;
+    if (base == null) return null;
+    return '$base ($_accelLabel)';
+  }
 
   @override
   String? get lastError => _lastError;
@@ -101,53 +113,89 @@ class IoGgufLlamaRuntime implements GgufLlamaRuntime {
     });
   }
 
+  int get _threadCount {
+    final n = Platform.numberOfProcessors;
+    // Leave one core for UI / compositor; keep at least 2.
+    return math.max(2, math.min(n - 1, 8));
+  }
+
+  List<({String label, ModelParams params})> _loadAttempts() {
+    final threads = _threadCount;
+    // CPU-only by default. Vulkan/GPU offload can hard-crash flaky Surface /
+    // Mesa stacks; re-enable behind an explicit opt-in later if needed.
+    return [
+      (
+        label: 'cpu',
+        params: ModelParams(
+          contextSize: chatContextSize,
+          gpuLayers: 0,
+          preferredBackend: GpuBackend.cpu,
+          numberOfThreads: threads,
+          numberOfThreadsBatch: threads,
+          batchSize: 512,
+          microBatchSize: 512,
+          useMmap: true,
+        ),
+      ),
+    ];
+  }
+
   Future<bool> _ensureLoadedBody() async {
     final path = await resolveModelPath();
     if (path == null) {
       final hint = await expectedModelsPathHint();
       _lastError =
-          'No local model found. Place Qwen2.5 Instruct Q4 GGUF at:\n$hint\n'
+          'No local model found. Open Chat and tap Download clinical model '
+          '(~1.1 GB, Wi‑Fi recommended), or place Qwen2.5 Instruct Q4 GGUF at:\n'
+          '$hint\n'
           'Expected filename e.g. qwen2.5-1.5b-instruct-q4_k_m.gguf. '
           'Chat will not fall back to rules or Ollama.';
       return false;
     }
 
-    try {
-      final engine = LlamaEngine(LlamaBackend());
-      await engine.loadModel(
-        path,
-        modelParams: const ModelParams(
-          contextSize: 2048,
-          gpuLayers: 0,
-        ),
-      );
-      _engine = engine;
-      _modelPath = path;
-      _modelLabel = p.basename(path);
-      _lastError = null;
-      return true;
-    } catch (e) {
-      await dispose();
-      final hint = await expectedModelsPathHint();
-      _lastError =
-          'Failed to load local GGUF (${p.basename(path)}): $e\n'
-          'Fix or replace the file under:\n$hint';
-      return false;
+    Object? lastLoadError;
+    for (final attempt in _loadAttempts()) {
+      LlamaEngine? engine;
+      try {
+        engine = LlamaEngine(LlamaBackend());
+        await engine.loadModel(path, modelParams: attempt.params);
+        _engine = engine;
+        _modelPath = path;
+        _modelLabel = p.basename(path);
+        _accelLabel = attempt.label;
+        _lastError = null;
+        return true;
+      } catch (e) {
+        lastLoadError = e;
+        try {
+          await engine?.dispose();
+        } catch (_) {}
+      }
     }
+
+    await dispose();
+    final hint = await expectedModelsPathHint();
+    _lastError =
+        'Failed to load local GGUF (${p.basename(path)}): $lastLoadError\n'
+        'Fix or replace the file under:\n$hint';
+    return false;
   }
 
   @override
   Future<String> complete({
     required String system,
     required String user,
-    int maxTokens = 512,
+    int maxTokens = 192,
     double temperature = 0.1,
+    void Function(String token)? onToken,
   }) async {
     final ok = await ensureLoaded();
     if (!ok || _engine == null) {
       throw LocalModelNotFoundException(_lastError);
     }
 
+    // Greedy for grounded chat (temp≈0) — faster sampling, more deterministic.
+    final greedy = temperature <= 0.05;
     final buf = StringBuffer();
     await for (final chunk in _engine!.create(
       [
@@ -156,17 +204,38 @@ class IoGgufLlamaRuntime implements GgufLlamaRuntime {
       ],
       params: GenerationParams(
         maxTokens: maxTokens,
-        temp: temperature,
+        temp: greedy ? 0.0 : temperature,
+        topK: greedy ? 1 : 40,
+        topP: greedy ? 1.0 : 0.9,
+        penalty: 1.0,
+        // Emit sooner so the UI can stream.
+        streamBatchTokenThreshold: 1,
+        streamBatchByteThreshold: 16,
+        stopSequences: const [
+          'Draft only — not for clinical use.',
+          'Draft only - not for clinical use.',
+          '\n\n\n',
+        ],
+        reusePromptPrefix: true,
       ),
       enableThinking: false,
     )) {
       final text = chunk.choices.isEmpty
           ? null
           : chunk.choices.first.delta.content;
-      if (text != null) buf.write(text);
+      if (text != null && text.isNotEmpty) {
+        buf.write(text);
+        onToken?.call(text);
+      }
     }
 
-    final out = buf.toString().trim();
+    var out = buf.toString().trim();
+    // Stop sequences are often omitted from the stream — restore disclaimer.
+    if (out.isNotEmpty &&
+        !out.toLowerCase().contains('not for clinical use')) {
+      out = '$out\n\nDraft only — not for clinical use.';
+      onToken?.call('\n\nDraft only — not for clinical use.');
+    }
     if (out.isEmpty) {
       throw StateError('Local GGUF returned empty content');
     }
@@ -179,6 +248,7 @@ class IoGgufLlamaRuntime implements GgufLlamaRuntime {
     _engine = null;
     _modelPath = null;
     _modelLabel = null;
+    _accelLabel = 'cpu';
     if (engine != null) {
       try {
         await engine.dispose();

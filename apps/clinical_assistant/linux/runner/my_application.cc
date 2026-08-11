@@ -67,8 +67,9 @@ static void my_application_activate(GApplication* application) {
   gtk_widget_show(GTK_WIDGET(view));
   gtk_container_add(GTK_CONTAINER(window), GTK_WIDGET(view));
 
-  // Show the window when Flutter renders.
-  // Requires the view to be realized so we can start rendering.
+  // Show immediately — waiting for first-frame OpenGL size match times out on
+  // HiDPI / fractional scale (e.g. Surface: expect 1228x668, have 2190x1425).
+  gtk_widget_show(GTK_WIDGET(window));
   g_signal_connect_swapped(view, "first-frame", G_CALLBACK(first_frame_cb),
                            self);
   gtk_widget_realize(GTK_WIDGET(view));

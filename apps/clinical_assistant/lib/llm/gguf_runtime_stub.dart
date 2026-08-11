@@ -41,8 +41,9 @@ class _WebGgufRuntime implements GgufLlamaRuntime {
   Future<String> complete({
     required String system,
     required String user,
-    int maxTokens = 512,
+    int maxTokens = 192,
     double temperature = 0.1,
+    void Function(String token)? onToken,
   }) async {
     throw LocalModelNotFoundException(lastError);
   }

@@ -1,6 +1,6 @@
 # QA Fixture Report — Nepal Clinical AI MVP
 
-- Generated: `2026-07-21 22:14:36 UTC`
+- Generated: `2026-08-06 00:25:48 UTC`
 - Agent: A9
 - Fixtures: `data/nepal/`
 - Runner: `qa/run_fixture_evals.py`

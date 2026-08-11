@@ -4,10 +4,11 @@ class LocalModelNotFoundException implements Exception {
       : message = message ?? defaultMessage;
 
   static const defaultMessage =
-      'No local model found. Place a Qwen2.5 Instruct GGUF at '
-      'Documents/nepal_clinical/models/ (Linux/Windows/Android), then refresh. '
-      'Chat does not use a rules-engine fallback. Flutter web has no neural '
-      'Chat in this build.';
+      'No local model found. On Android/Linux/Windows open Chat and tap '
+      '“Download clinical model” (~1.1 GB from Hugging Face, Wi‑Fi '
+      'recommended), or place a Qwen2.5 Instruct GGUF at '
+      'Documents/nepal_clinical/models/. Chat does not use a rules-engine '
+      'fallback. Flutter web has no neural Chat in this build.';
 
   final String message;
 
